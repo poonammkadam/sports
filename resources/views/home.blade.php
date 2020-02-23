@@ -2,22 +2,26 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <section class="jumbotron text-center">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="container">
 
-                    You are logged in!
-                </div>
-            </div>
+            <h1 class="jumbotron-heading">Album example</h1>
+
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sIet, but not too short so folks don't simply skip over it entirely.</p>
+
+            <p>
+
+                <a href="#" class="btn btn-primary">Main call to action</a>
+
+                <a href="#" class="btn btn-secondary">Secondary action</a>
+
+            </p>
+
         </div>
-    </div>
+
+    </section>
+
 </div>
 @endsection
+
