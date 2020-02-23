@@ -17,8 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/registration', function () {
     return view('layouts.forms.registation');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
+    Route::get('/', 'UserController@index');
+    Route::get('/events', 'EventController@index');
+    Route::get('/events/store', 'EventController@store');
+
 });
