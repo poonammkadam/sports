@@ -32,7 +32,7 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
 
 });
 Route::group(['namespace'=>'User'], function() {
-    Route::get('/', 'UserController@index');
+    Route::get('/registration', 'UserController@index');
     Route::post('/profile/update', 'UserController@update');
-
+    Route::post('/event/store', 'UserController@eventStore');
 });

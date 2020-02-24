@@ -5,7 +5,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Update User</div>
-
                     <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">

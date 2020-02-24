@@ -2,10 +2,10 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Users</h3>
+            <h3 class="card-title">Organisations</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/organisation/create') }}" class="btn btn-info">Add Organisation</a>
         </div>
         <!-- /.card-header -->
          <div class="card-body">
@@ -25,12 +25,24 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 160px;">User ID
+                                    style="width: 160px;">Organisation ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 207px;">
-                                    User Name
+                                    Organisation Name
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Browser: activate to sort column ascending" style="width: 207px;">
+                                Organisation Address
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Browser: activate to sort column ascending" style="width: 207px;">
+                                Email
+                        </th>
+                                {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending" style="width: 183px;">
+                                  Activation Status
+                                </th> --}}
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
@@ -39,7 +51,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
                                 @if($arrObjUsers->count() > 0)
                                      @foreach($arrObjUsers as $objUser)
                                      <tr role="row" class="odd">
@@ -57,14 +68,14 @@
                                 </tr>
                             @endforeach
                             @else
-                                <tr> <td>No Records found</td> </tr>
+                                <tr> No Records found </tr>
                             @endif
                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- /.card-body -->
     </div>
 
