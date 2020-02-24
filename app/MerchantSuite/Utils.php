@@ -1,5 +1,8 @@
 <?php
     namespace App\MerchantSuite {
+
+
+
         class RequestSender {
             private static $userAgent = "Premier.Billpay.API.MerchantSuite.PHP-V1.0";
             private static $timeout = 100000;
@@ -18,16 +21,16 @@
 
                 switch ($method) {
                     case "POST":
-                        $request = \Illuminate\Support\Facades\Request::post($url);
+                        $request = \Httpful\Request::post($url);
                         break;
                     case "GET":
-                        $request = \http\Client\Request::get($url);
+                        $request =  \Httpful\Request::get($url);
                         break;
                     case "PUT":
-                        $request = \http\Client\Request::put($url);
+                        $request =  \Httpful\Request::put($url);
                         break;
                     case "DELETE":
-                        $request = \http\Client\Request::delete($url);
+                        $request =  \Httpful\Request::delete($url);
                         break;
                 }
 

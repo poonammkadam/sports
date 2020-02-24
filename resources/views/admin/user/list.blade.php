@@ -8,7 +8,7 @@
             <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New</a>
         </div>
         <!-- /.card-header -->
-        {{-- <div class="card-body">
+         <div class="card-body">
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}

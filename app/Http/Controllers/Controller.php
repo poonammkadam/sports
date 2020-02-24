@@ -17,6 +17,7 @@ use App\MerchantSuite\OrderRecipient;
 use App\MerchantSuite\PersonalDetails;
 use App\MerchantSuite\StatementDescriptor;
 use App\MerchantSuite\Transaction;
+use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -58,7 +59,7 @@ class Controller extends BaseController
         $txn->setReference3("Large");
         $txn->setStoreCard(FALSE);
         $txn->setSubType("single");
-//        $txn->setType(Transaction::);
+        $txn->setType(TransactionType::Internet);
 
         $cardDetails->setCardHolderName("MR C CARDHOLDER");
         $cardDetails->setCardNumber("4444333322221111");
