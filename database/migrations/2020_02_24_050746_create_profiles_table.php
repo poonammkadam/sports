@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             $table->text('last_name')->nullable();
             $table->text('gender')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->text('nationality')->nullable();
+            $table->text('')->nullable();
             $table->text('local_id')->nullable();
             $table->text('passport')->nullable();
             $table->text('address')->nullable();

@@ -19,16 +19,13 @@ class UserController extends Controller
        $objProfile->last_name = $request->last_name;
        $objProfile->gender = $request->gender;
        $objProfile->date_of_birth = $request->dob;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->first_name = $request->first_name;
-        $objProfile->first_name = $request->first_name;
-    $objProfile->save();
+       $objProfile->nationality = $request->nationality;
+       $objProfile->local_id = $request->local_id;
+       $objProfile->passport = $request->passport_no;
+       $objProfile->address = $request->address;
+       $objProfile->country = $request->country;
+       $objProfile->mobile_no_primary = $request->mobile_no;
+       $objProfile->save();
     return view('layouts.forms.event');
    }
 }
