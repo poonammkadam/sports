@@ -16,9 +16,9 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="/admin/event/create">
+                        <form method="POST" autocomplete="off" action="{{url('/admin/event/create}}">
                             @csrf
-
+                            <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Event title</label>
 
@@ -37,7 +37,8 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Event Description</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description"  class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
+                                    <textarea id="description"  class="form-control @error('description') is-invalid @enderror" name="description"  required autocomplete="description">
+                                    </textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">

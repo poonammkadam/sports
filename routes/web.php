@@ -21,6 +21,8 @@ Route::get('/registration', function () {
     return view('layouts.forms.registation');
 });
 
+Route::get('/payment','Controller@index');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
