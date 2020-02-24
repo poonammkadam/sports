@@ -22,6 +22,7 @@ class UserController extends Controller
        $objProfile->nationality = $request->nationality;
        $objProfile->local_id = $request->local_id;
        $objProfile->passport = $request->passport_no;
+       
        $objProfile->address = $request->address;
        $objProfile->country = $request->country;
        $objProfile->mobile_no_primary = $request->mobile_no;

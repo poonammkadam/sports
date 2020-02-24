@@ -36,3 +36,6 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/profile/update', 'UserController@update');
     Route::post('/event/store', 'UserController@eventStore');
 });
+Route::get('/event', function () {
+    return view('layouts.forms.event');
+});
