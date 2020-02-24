@@ -29,3 +29,8 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/events/store', 'EventController@store');
 
 });
+Route::group(['namespace'=>'User'], function() {
+    Route::get('/', 'UserController@index');
+    Route::post('/profile/update', 'UserController@update');
+
+});
