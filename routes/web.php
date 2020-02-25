@@ -29,14 +29,13 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/', 'UserController@index');
     Route::get('/events', 'EventController@index');
     Route::get('/event/create', 'EventController@eventCreate');
-    Route::get('/events/store', 'EventController@store');
+    Route::post('/events/store', 'EventController@store');
 
 });
 Route::group(['namespace'=>'User'], function() {
     Route::get('/registration', 'UserController@index');
+    Route::get('/events', 'UserController@eventList');
+    Route::get('/event/register/{id}', 'UserController@eventCreate');
     Route::post('/profile/update', 'UserController@update');
     Route::post('/event/store', 'UserController@eventStore');
-});
-Route::get('/event', function () {
-    return view('layouts.forms.event');
 });

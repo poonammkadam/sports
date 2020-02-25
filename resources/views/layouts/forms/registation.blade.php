@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container form-body">
-        <div>
+    <div class="container main-body">
+        <div class="form-body">
             <div class="text-center">
                 <h3>Basic Information</h3>
             </div>

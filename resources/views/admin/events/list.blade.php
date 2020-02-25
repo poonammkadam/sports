@@ -44,25 +44,25 @@
         </thead>
         <tbody>
 
-{{--        @if($arrObjUsers->count() > 0)--}}
-{{--            @foreach($arrObjUsers as $objUser)--}}
-{{--                <tr role="row" class="odd">--}}
-{{--                    <td class="sorting_1">{{$objUser->id}}</td>--}}
-{{--                    <td>--}}
-{{--                        {{$objUser->name}}--}}
-{{--                    </td>--}}
-{{--                    --}}{{-- <td>--}}
+        @if($arrObjEvents->count() > 0)
+            @foreach($arrObjEvents as $objUser)
+                <tr role="row" class="odd">
+                    <td class="sorting_1">{{$objUser->id}}</td>
+                    <td>
+                        {{$objUser->name}}
+                    </td>
+                     <td>
 {{--                        {{$objUser->activation_status}}</td>--}}
-{{--                    --}}
-{{--                    <td>--}}
-{{--                        <a href="{{url('admin/user/edit/'.$objUser->id)}}"--}}
-{{--                           class="btn btn-primary">Edit</a>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--        @else--}}
-{{--            <tr> No Records found </tr>--}}
-{{--        @endif--}}
+
+                    <td>
+                        <a href="{{url('admin/event/edit/'.$objUser->id)}}"
+                           class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            @endforeach
+        @else
+            <tr> No Records found </tr>
+        @endif
         </tbody>
         </table>
     </div>

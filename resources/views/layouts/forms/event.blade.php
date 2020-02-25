@@ -7,15 +7,17 @@
             </div>
             <form method="POST" autocomplete="off" action="/profile/update">
                 @csrf
-                <div class="form-row">
+                {{$objEvent->name}}
+                <br>
+                {{$objEvent->event_type}}
+                  <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Select Event</label>
-                        <select class="form-control custom-select" name="event_id">
-                            <option selected>Open this select menu</option>
-                            <option value="1">a</option>
-                            <option value="2">b</option>
-                            <option value="3">c</option>
-                        </select>
+{{--                        <select class="form-control custom-select" name="event_name">--}}
+{{--                            @foreach($objEvent-> as $objEvent)--}}
+{{--                                <option value="{{$objEvent->id}}">{{$objEvent->name}}</option>--}}
+{{--                           @endforeach--}}
+{{--                        </select>--}}
                     </div>
 
                 </div>

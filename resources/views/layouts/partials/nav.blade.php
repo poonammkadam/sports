@@ -26,14 +26,17 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand btn btn-dark btn-sm" href="{{ url('/home') }}">
                 My Account
             </a>
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand btn btn-dark btn-sm" href="{{ url('/home') }}">
                Home
             </a>
-            <a class="navbar-brand" href="{{ url('/registration') }}">
+            <a class="navbar-brand btn btn-dark btn-sm" href="{{ url('/registration') }}">
                Registration
+            </a>
+            <a class="navbar-brand btn btn-dark btn-sm" href="{{ url('/events') }}">
+                Events
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>

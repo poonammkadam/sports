@@ -17,16 +17,15 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->text('name')->nullable();
             $table->text('description')->nullable();
-            $table->text('organiser')->nullable();
+            $table->text('event_type')->nullable();
+            $table->text('organiser_name')->nullable();
             $table->text('organiser_contact_number')->nullable();
-            $table->text('address')->nullable();
-            $table->string('address_address')->nullable();
+            $table->text('venue')->nullable();
+            $table->text('organiser_address')->nullable();
             $table->double('address_latitude')->nullable();
             $table->double('address_longitude')->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->dateTime('event_date')->nullable();
             $table->dateTime('registration_end_date')->nullable();
-            $table->intger('status')->default(0);
             $table->timestamps();
         });
     }

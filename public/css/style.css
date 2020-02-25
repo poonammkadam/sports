@@ -1,7 +1,19 @@
 .form-body{
-    background-color: rgba(12, 12, 12, 0.8);
-    color: #f0f0f0;
+    background-color: rgba(203, 203, 203, 0.8);
+    color: #212121;
     padding: 50px;
     opacity: 0.8;
     margin-top: 30px;
+}
+.navbar-brand.btn{
+    color: #fff !important;
+}
+.navbar.navbar-expand-md{
+    background-color: rgba(66, 66, 66, 0.8) !important;
+}
+.container.main-body{
+
+}
+.events-item{
+    background-color: rgba(87, 87, 87, 0.8) !important;
 }

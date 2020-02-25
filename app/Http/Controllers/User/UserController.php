@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\Events;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
 use App\MerchantSuite\Address;
@@ -47,11 +48,24 @@ class UserController extends Controller
        $objProfile->save();
        auth()->user()->name=$request->local_name;
        auth()->user()->email=$request->email;
-    return view('layouts.forms.event');
+
+      return view('layouts.forms.event');
    }
+
+    public function eventList(){
+         $arrObjEvents = Events::all();
+
+        return view('layouts.view.event_list', ['arrObjEvents'=>$arrObjEvents]);
+    }
+
    public function eventStore(){
+
     return view('home');
    }
+    public function eventCreate($id){
+        $objEvent = Events::findOrFail($id);
+        return view('layouts.forms.event',['objEvent'=>$objEvent]);
+    }
 
 public function makePayment($arrMixExtraData){
     $arrMixExtraData['amount']=20;
