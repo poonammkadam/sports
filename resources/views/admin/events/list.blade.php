@@ -5,7 +5,7 @@
             <h3 class="card-title">Complaints</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/event/create') }}" class="btn btn-info">Add New</a>
         </div>
         <!-- /.card-header -->
        <div class="card-body">
@@ -35,7 +35,7 @@
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 183px;">
                                   Activation Status
                                 </th> --}}
-        
+
         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
             aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
             Action
@@ -43,26 +43,26 @@
         </tr>
         </thead>
         <tbody>
-        
-        @if($arrObjUsers->count() > 0)
-            @foreach($arrObjUsers as $objUser)
-                <tr role="row" class="odd">
-                    <td class="sorting_1">{{$objUser->id}}</td>
-                    <td>
-                        {{$objUser->name}}
-                    </td>
-                    {{-- <td>
-                        {{$objUser->activation_status}}</td>
-                    --}}
-                    <td>
-                        <a href="{{url('admin/user/edit/'.$objUser->id)}}"
-                           class="btn btn-primary">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-        @else
-            <tr> No Records found </tr>
-        @endif
+
+{{--        @if($arrObjUsers->count() > 0)--}}
+{{--            @foreach($arrObjUsers as $objUser)--}}
+{{--                <tr role="row" class="odd">--}}
+{{--                    <td class="sorting_1">{{$objUser->id}}</td>--}}
+{{--                    <td>--}}
+{{--                        {{$objUser->name}}--}}
+{{--                    </td>--}}
+{{--                    --}}{{-- <td>--}}
+{{--                        {{$objUser->activation_status}}</td>--}}
+{{--                    --}}
+{{--                    <td>--}}
+{{--                        <a href="{{url('admin/user/edit/'.$objUser->id)}}"--}}
+{{--                           class="btn btn-primary">Edit</a>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
+{{--        @else--}}
+{{--            <tr> No Records found </tr>--}}
+{{--        @endif--}}
         </tbody>
         </table>
     </div>
