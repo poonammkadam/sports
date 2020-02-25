@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Submit Events</div>
+                    <div class="card-header">Organisation</div>
 
                     <div class="card-body">
                         @if ($errors->any())
@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="/admin/event/create">
+                        <form method="POST" autocomplete="off" action="/admin/organisation/create">
                             @csrf
 
                             <div class="form-group row">
@@ -30,6 +30,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus>
                                 </div>
                             </div>
 
@@ -48,40 +56,16 @@
                             </div>
 
                             <div class="form-group row">
-                                    <label for="startdate">Start Date</label>
-                                    <input class="form-control" id="startdate" name="startdate" placeholder="" type="datetime"
-                                           >
-                            </div>
-
-                            <div class="form-group row">
-                                    <label for="enddate">End Date</label>
-                                    <input class="form-control" id="enddate" name="enddate" placeholder="" type="datetime"
-                                           >
-                            </div>
-                            <div class="form-group row">
-                                <label for="regenddate">Registration End Date</label>
-                                <input class="form-control" id="regenddate" name="regenddate" placeholder="" type="datetime"
-                                       >
-                            </div>
-
-                            <div class="form-group row">
-                                    <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
+                                    <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
                                     <div class="col-md-6">
-                                        <input id="venue" type="text" class="form-control @error('venue') is-invalid @enderror" name="venue" required autocomplete="venue" autofocus>
+                                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address" autofocus>
                                     </div>
                             </div>
 
                             <div class="form-group row">
-                                    <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
-                                    <div class="col-md-6">
-                                        <input id="orgname" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
-                                    </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
+                                <label for="contact_no" class="col-md-4 col-form-label text-md-right">Organization Name</label>
                                 <div class="col-md-6">
-                                    <input id="orgname" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
+                                    <input id="contact_no" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" required autocomplete="contact_no" autofocus>
                                 </div>
                             </div>
 
@@ -92,11 +76,18 @@
                                     </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
+                                <div class="col-md-6">
+                                    <input id="banner" type="text" class="form-control @error('banner') is-invalid @enderror" name="banner" required autocomplete="banner" autofocus>
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Submit
-                                </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit
+                                    </button>
                                 </div>
                             </div>
                         </form>

@@ -5,72 +5,76 @@
             <div class="text-center">
                 <h3>Basic Information</h3>
             </div>
-            <form method="POST" autocomplete="off" action="/profile/update">
+            <form method="POST" autocomplete="off" action="/event/store">
                 @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+
+                <div class="form-group row">
+                    <label for="name" class="col-md-4 col-form-label text-md-right">Event title</label>
+
+                    <div class="col-md-6">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
-                <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputAddress">First Name</label>
-                    <input type="text" name="first_name" class="form-control" id="inputAddress" placeholder="">
+
+                <div class="form-group row">
+                    <label for="description" class="col-md-4 col-form-label text-md-right">Event Description</label>
+
+                    <div class="col-md-6">
+                        <textarea id="description"  class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
+
+                        @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                 </div>
+
+                <div class="form-group">
+                        <label for="startdate">Start Date</label>
+                        <input class="form-control" id="startdate" name="startdate" placeholder="" type="datetime">
                 </div>
-                <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputAddress2">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" id="inputAddress2"
-                           placeholder="">
+
+                <div class="form-group">
+                        <label for="enddate">End Date</label>
+                        <input class="form-control" id="enddate" name="enddate" placeholder="" type="datetime"
+                               >
                 </div>
-                </div>
-                <div class="form-group col-md-6">
-                        <label for="inputAddress2">Gender</label>
-                <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                      </div>
-                <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="option3">
-                        <label class="form-check-label" for="inlineRadio3">other</label>
-                </div>
-            </div>
-                <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputAddress">DOB</label>
-                            <input type="date" class="form-control" name="dob" id="inputAddress" placeholder="">
+
+                <div class="form-group row">
+                        <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
+                        <div class="col-md-6">
+                            <input id="venue" type="text" class="form-control @error('venue') is-invalid @enderror" name="venue" required autocomplete="venue" autofocus>
                         </div>
                 </div>
-                <div class="form-row">
-                        <label for="inputAddress">Nationality</label>
-                        <select class="form-control custom-select" name="nationality">
-                                <option selected>Open this select menu</option>
-                                <option value="1">a</option>
-                                <option value="2">b</option>
-                                <option value="3">c</option>
-                        </select>
-                 </div>
-                 <div class="form-row">
-                         <div class="form-group col-md-6">
-                            <label for="inputAddress2">Local ID</label>
-                            <input type="text" class="form-control" id="inputAddress2"
-                                           placeholder="">
-                     </div>
-                 </div>
-                 <div class="form-row">
-                        <div class="form-group col-md-6">
-                           <label for="inputAddress2">Passport</label>
-                           <input type="text" class="form-control" id="inputAddress2"
-                                          placeholder="Passport ID">
+
+                <div class="form-group row">
+                        <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
+                        <div class="col-md-6">
+                            <input id="orgname" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                        <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
+                        <div class="col-md-6">
+                            <input id="banner" type="text" class="form-control @error('banner') is-invalid @enderror" name="banner" required autocomplete="banner" autofocus>
+                        </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

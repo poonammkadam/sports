@@ -31,4 +31,8 @@ class UserController extends Controller
     $objProfile->save();
     return view('layouts.forms.event');
    }
+   public function eventStore(){
+    return view('home');
+   }
+
 }
