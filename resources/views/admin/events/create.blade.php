@@ -79,13 +79,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
-                                <div class="col-md-6">
-                                    <input id="orgname" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                     <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
                                     <div class="col-md-6">
                                         <input id="banner" type="text" class="form-control @error('banner') is-invalid @enderror" name="banner" required autocomplete="banner" autofocus>
