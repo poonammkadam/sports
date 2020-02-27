@@ -15,17 +15,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 </head>
 <body>
-    <div id="app">
         @include('layouts.partials.nav')
         @yield('content')
         @include('layouts.partials.footer')
         @include('layouts.partials.footer-scripts')
-    </div>
 </body>
 </html>

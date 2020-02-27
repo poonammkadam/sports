@@ -7,15 +7,15 @@
                     <div class="card-header">Submit Events</div>
 
                     <div class="card-body">
-{{--                        @if ($errors->any())--}}
-{{--                            <div class="alert alert-danger">--}}
-{{--                                <ul>--}}
-{{--                                    @foreach ($errors->all() as $error)--}}
-{{--                                        <li>{{ $error }}</li>--}}
-{{--                                    @endforeach--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" autocomplete="off" action="{{url('admin/events/store')}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
@@ -23,17 +23,16 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Event title</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control " name="name" value="" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control " name="name" value=""  autocomplete="name" autofocus>
 
                                 </div>
                             </div>
 
-                            <div class="form-group row"
-                            >
+                            <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Event Description</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description"  class="form-control " name="description"  required autocomplete="description">
+                                    <textarea id="description"  class="form-control " name="description"   autocomplete="description">
                                     </textarea>
                                 </div>
                             </div>
@@ -56,32 +55,32 @@
                             <div class="form-group row">
                                     <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
                                     <div class="col-md-6">
-                                        <input id="venue" type="text" class="form-control" name="venue" required autocomplete="venue" autofocus>
+                                        <input id="venue" type="text" class="form-control" name="venue"  autocomplete="venue" autofocus>
                                     </div>
                             </div>
 
                             <div class="form-group row">
                                     <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
                                     <div class="col-md-6">
-                                        <input id="orgname" type="text" class="form-control " name="orgname" required autocomplete="orgname" autofocus>
+                                        <input id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
                                     </div>
                             </div>
                             <div class="form-group row">
                                 <label for="org_contact_no" class="col-md-4 col-form-label text-md-right">Organization Contact No.</label>
                                 <div class="col-md-6">
-                                    <input id="org_contact_no" type="text" class="form-control " name="org_contact_no" required autocomplete="org_contact_no" autofocus>
+                                    <input id="org_contact_no" type="text" class="form-control " name="org_contact_no"  autocomplete="org_contact_no" autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="org_address" class="col-md-4 col-form-label text-md-right">Organization Address</label>
                                 <div class="col-md-6">
-                                    <textarea  id="org_address" type="text" class="form-control " name="org_address" required autocomplete="org_address" autofocus rows="3"></textarea>
+                                    <textarea  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
                                 </div>
                             </div>
 {{--                            <div class="form-group row">--}}
 {{--                                    <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>--}}
 {{--                                    <div class="col-md-6">--}}
-{{--                                        <input id="banner" type="text" class="form-control" name="banner" required autocomplete="banner" autofocus>--}}
+{{--                                        <input id="banner" type="text" class="form-control" name="banner"  autocomplete="banner" autofocus>--}}
 {{--                                    </div>--}}
 {{--                            </div>--}}
                             <div class="form-group row mb-0">
@@ -103,17 +102,25 @@
         var input = document.createElement("input");
         var intIndex = $(document).find("#dynamic_field .event-type").length;
         input.type = "text";
-        input.name = "event_type["+intIndex+"][name]";
-        input.placeholder = 'Type of event';
+        input.name = "category["+intIndex+"][type]";
+        input.placeholder = 'Enter Gender';
         var div = document.createElement("div");
         div.className = 'event-type form-group';
-        div.innerHTML = 'Add Event type :';
+        div.innerHTML = 'Add Event Gender:';
         div.appendChild(input);
+
+        var input2 = document.createElement("input");
+        input2.type = "text";
+        input2.placeholder = 'Event Distance';
+        input2.name = "category["+intIndex+"][subtype]";
+        div.appendChild(input2);
+
         var input3 = document.createElement("input");
         input3.type = "text";
         input3.placeholder = 'Event fee';
-        input3.name = "event_type["+intIndex+"][fee]";
+        input3.name = "category["+intIndex+"][fee]";
         div.appendChild(input3);
+
         var input4 = document.createElement("input");
         input4.type = "button";
         input4.name = "remove_type";

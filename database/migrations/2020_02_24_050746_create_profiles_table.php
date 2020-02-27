@@ -24,6 +24,7 @@ class CreateProfilesTable extends Migration
             $table->text('passport')->nullable();
             $table->text('address')->nullable();
             $table->text('country')->nullable();
+            $table->text('country')->nullable();
             $table->text('mobile_no_primary')->nullable();
             $table->text('mobile_no_second')->nullable();
             $table->text('emergency_contact_name')->nullable();

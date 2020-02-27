@@ -37,5 +37,5 @@ Route::group(['namespace'=>'User'], function() {
     Route::get('/events', 'UserController@eventList');
     Route::get('/event/register/{id}', 'UserController@eventCreate');
     Route::post('/profile/update', 'UserController@update');
-    Route::post('/event/store', 'UserController@eventStore');
+    Route::post('/event/register', 'UserController@eventStore');
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\Category;
+use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
@@ -23,6 +25,7 @@ use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -33,39 +36,50 @@ class UserController extends Controller
 
    public function update(Request $request){
        $objProfile = new Profile();
+       $objProfile->user_id =  Auth::user()->id;
        $objProfile->first_name = $request->first_name;
        $objProfile->last_name = $request->last_name;
-       $objProfile->local_name = $request->local_name;
        $objProfile->gender = $request->gender;
        $objProfile->date_of_birth = $request->dob;
-       $objProfile->nationality = $request->nationality;
+//       $objProfile->nationality = $request->nationality;
        $objProfile->local_id = $request->local_id;
        $objProfile->passport = $request->passport_no;
-
        $objProfile->address = $request->address;
        $objProfile->country = $request->country;
        $objProfile->mobile_no_primary = $request->mobile_no;
        $objProfile->save();
+
        auth()->user()->name=$request->local_name;
        auth()->user()->email=$request->email;
 
-      return view('layouts.forms.event');
+       return redirect('events')->with('success', 'Data Added successfully.');
    }
 
     public function eventList(){
          $arrObjEvents = Events::all();
 
+
         return view('layouts.view.event_list', ['arrObjEvents'=>$arrObjEvents]);
     }
 
-   public function eventStore(){
-
-    return view('home');
+   public function eventStore(Request $request){
+     $objEvent = new EventParticipants();
+//     dd(auth()->user()->id);
+     $objProfile = Profile::where('user_id', auth()->user()->id)->first();
+       $objEvent->category_id = $request->event_category;
+       $objEvent->profile_id = $objProfile->id;
+//       $objEvent->payment_status = $request->event_category;
+//       $objEvent->payment_type = $request->event_category;
+       $objEvent->save();
+       return redirect('events')->with('success', 'Data Added successfully.');
    }
-    public function eventCreate($id){
+
+   public function eventCreate($id){
         $objEvent = Events::findOrFail($id);
+        $objEvent->load('category');
         return view('layouts.forms.event',['objEvent'=>$objEvent]);
     }
+
 
 public function makePayment($arrMixExtraData){
     $arrMixExtraData['amount']=20;
