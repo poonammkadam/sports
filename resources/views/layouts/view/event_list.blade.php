@@ -7,19 +7,16 @@
             </div>
             <div class="row">
                 @foreach($arrObjEvents as $objEvent)
-                <div class="col-md-3 item-inner">
-                    <div class="events-item">
-                        <div class="events-image">
-                            <img src="" alt="">
-                            <div class="overlay"><a class="btn btn-success btn-block" href="{{url('/event/register').'/'.$objEvent->id}}">Register</a>
+                <div class="shadow card col-md-3 item-inner">
+                     <img src="" class="card-img-top" alt="">
+                    <div class="card-body">
+                            <div class="overlay">
                                 <br><br>
                             </div>
-                        </div>
-                        <p></p>
-                        <h5><strong>{{$objEvent->name}}</strong></h5>
-                            <br><br>
-                      </div>
-                </div><!--/.col-md-3-->
+                                  <h5 class="card-title"><strong>{{$objEvent->name}}</strong></h5>
+                    <a class="btn btn-success btn-block" href="{{url('/event/register').'/'.$objEvent->id}}">Register</a>
+                    </div>
+                </div>
                 @endforeach
               </div>
         </div>
