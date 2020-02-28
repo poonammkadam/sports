@@ -67,10 +67,11 @@ class UserController extends Controller
 //     dd(auth()->user()->id);
      $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEvent->category_id = $request->event_category;
-       $objEvent->profile_id = $objProfile->id;
+       $objEvent->profile_id = 1;
 //       $objEvent->payment_status = $request->event_category;
 //       $objEvent->payment_type = $request->event_category;
        $objEvent->save();
+       $this->makePayment();
        return redirect('events')->with('success', 'Data Added successfully.');
    }
 
@@ -81,10 +82,9 @@ class UserController extends Controller
     }
 
 
-public function makePayment($arrMixExtraData){
-    $arrMixExtraData['amount']=20;
+public function makePayment(){
     URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
-    $credentials = new Credentials("api.ms641829.rx", 'Aft02_\^CYLyc18,', "MS123456", Mode::Live);
+    $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456",Mode::Live);
 
     $txn = new Transaction();
     $cardDetails = new CardDetails();
@@ -102,20 +102,20 @@ public function makePayment($arrMixExtraData){
 
     $txn->setAction(Actions::Payment);
     $txn->setCredentials($credentials);
-    $txn->setAmount($arrMixExtraData['amount']);
+    $txn->setAmount(200000);
     $txn->setCurrency("AUD");
     $txn->setInternalNote("Internal Note");
     $txn->setReference1("My Customer Reference");
     $txn->setReference2("Medium");
     $txn->setReference3("Large");
-    $txn->setStoreCard(FALSE);
+    $txn->setStoreCard(TRUE);
     $txn->setSubType("single");
     $txn->setType(TransactionType::Internet);
 
-    $cardDetails->setCardHolderName($arrMixExtraData['cardholder_name']);
-    $cardDetails->setCardNumber($arrMixExtraData['card_number']);
-    $cardDetails->setCVN($arrMixExtraData['card_cvn']);
-    $cardDetails->setExpiryDate($arrMixExtraData['card_expiry_date']);
+    $cardDetails->setCardHolderName("MR C CARDHOLDER");
+    $cardDetails->setCardNumber("5123456789012346");
+    $cardDetails->setCVN("678");
+    $cardDetails->setExpiryDate("9900");
 
     $txn->setCardDetails($cardDetails);
 
@@ -140,23 +140,58 @@ public function makePayment($arrMixExtraData){
     $shippingAddress->setContactDetails($contactDetails);
     $shippingAddress->setPersonalDetails($personalDetails);
 
+    $order_item_1->setDescription("an item");
+    $order_item_1->setQuantity(1);
+    $order_item_1->setUnitPrice(1000);
+
+    $orderItems = array($order_item_1);
+
+    $order_recipient_1->setAddress($address);
+    $order_recipient_1->setContactDetails($contactDetails);
+    $order_recipient_1->setPersonalDetails($personalDetails);
+
     $orderRecipients = array($order_recipient_1);
 
     $order->setBillingAddress($billingAddress);
+    $order->setOrderItems($orderItems);
     $order->setOrderRecipients($orderRecipients);
     $order->setShippingAddress($shippingAddress);
     $order->setShippingMethod("boat");
 
+    $txn->setOrder($order);
+
+    $customer->setCustomerNumber("1234");
+    $customer->setAddress($address);
+    $customer->setExistingCustomer(false);
+    $customer->setContactDetails($contactDetails);
+    $customer->setPersonalDetails($personalDetails);
+    $customer->setCustomerNumber("1");
+    $customer->setDaysOnFile(1);
+
     $txn->setCustomer($customer);
 
-    $fraudScreening->setPerformFraudScreening(true);
+    $fraudScreening->setPerformFraudScreening(false);
+    $fraudScreening->setDeviceFingerprint("ExampleDeviceFingerprint");
 
+//    $txn->setFraudScreeningRequest($fraudScreening);
 
-    $txn->setFraudScreeningRequest($fraudScreening);
+    $statementDescriptor->setAddressLine1("123 Drive Street");
+    $statementDescriptor->setAddressLine2("");
+    $statementDescriptor->setCity("Melbourne");
+    $statementDescriptor->setCompanyName("A Company Name");
+    $statementDescriptor->setCountryCode("AUS");
+    $statementDescriptor->setMerchantName("A Merchant Name");
+    $statementDescriptor->setPhoneNumber("0123456789");
+    $statementDescriptor->setPostCode("3000");
+    $statementDescriptor->setState("Victoria");
+
+    $txn->setStatementDescriptor($statementDescriptor);
+
     $txn->setTokenisationMode(3);
     $txn->setTimeout(93121);
+
     $response = $txn->submit();
-    dd($response);
+    dd($response->getTxnNumber());
     return view('payment');
 }
 }

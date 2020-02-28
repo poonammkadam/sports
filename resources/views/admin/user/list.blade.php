@@ -5,7 +5,7 @@
             <h3 class="card-title">Users</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New User</a>
         </div>
         <!-- /.card-header -->
          <div class="card-body">
@@ -43,19 +43,19 @@
                                 @if($arrObjUsers->count() > 0)
                                      @foreach($arrObjUsers as $objUser)
                                      <tr role="row" class="odd">
-                                    <td class="sorting_1">{{$objUser->id}}</td>
-                                    <td>
-                                        {{$objUser->name}}
-                                    </td>
-                                    {{-- <td>
-                                        {{$objUser->activation_status}}</td>
-                                    --}}
-                                    <td>
-                                        <a href="{{url('admin/user/edit/'.$objUser->id)}}"
-                                           class="btn btn-primary">Edit</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        <td class="sorting_1">{{$objUser->id}}</td>
+                                        <td>
+                                            {{$objUser->name}}
+                                        </td>
+                                        {{-- <td>
+                                            {{$objUser->activation_status}}</td>
+                                        --}}
+                                        <td>
+                                            <a href="{{url('admin/user/edit/'.$objUser->id)}}"
+                                               class="btn btn-primary">Edit</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                             @else
                                 <tr> <td>No Records found</td> </tr>
                             @endif

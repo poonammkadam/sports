@@ -36,13 +36,15 @@
                                     </textarea>
                                 </div>
                             </div>
+                            
                             <div class="form-group">
                                 <label>Add Event Type</label>
                                 <button type="button" name="add" id="add" class="btn btn-outline-dark" onclick="addEventType()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 <div id="dynamic_field"></div>
                             </div>
+                            
                             <div class="form-group">
-                                    <label for="register_expire_date">Registertion Expire Date</label>
+                                    <label for="register_expire_date">Registration Expire Date</label>
                                     <input type="datetime-local" class="form-control" id="register_expire_date" name="register_expire_date" placeholder="">
                             </div>
 

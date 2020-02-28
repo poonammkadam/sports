@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Complaints</h3>
+            <h3 class="card-title">Events</h3>
         </div>
         <div align="left">
             <a href="{{ url('admin/event/create') }}" class="btn btn-info">Add New</a>
@@ -45,23 +45,23 @@
         <tbody>
 
         @if($arrObjEvents->count() > 0)
-            @foreach($arrObjEvents as $objUser)
+            @foreach($arrObjEvents as $objEvents )
                 <tr role="row" class="odd">
-                    <td class="sorting_1">{{$objUser->id}}</td>
+                    <td class="sorting_1">{{$objEvents->id}}</td>
                     <td>
-                        {{$objUser->name}}
+                        {{$objEvents->name}}
                     </td>
                      <td>
-{{--                        {{$objUser->activation_status}}</td>--}}
+{{--                        {{$objUser ?? '' ?? ''->activation_status}}</td>--}}
 
                     <td>
-                        <a href="{{url('admin/event/edit/'.$objUser->id)}}"
+                        <a href="{{url('admin/event/edit/'.$objEvents->id)}}"
                            class="btn btn-primary">Edit</a>
                     </td>
                 </tr>
             @endforeach
         @else
-            <tr> No Records found </tr>
+            <tr> <td>No Records found </td></tr>
         @endif
         </tbody>
         </table>

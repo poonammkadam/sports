@@ -15,8 +15,7 @@
         "khsing/world": "^0.8.0",
         "laravel/framework": "6.0.*",
         "laravel/tinker": "^2.0",
-        "nategood/httpful": "0.2.2",
-        "voku/httpful": "^2.2"
+        "nategood/httpful": "0.2.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

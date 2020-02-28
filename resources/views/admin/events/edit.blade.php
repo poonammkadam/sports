@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="{{url('/admin/event/create}}">
+                        <form method="POST" autocomplete="off" action="{{url('/admin/event/edit'}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
