@@ -17,6 +17,7 @@ class CreateEventParticipantsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('category_id')->nullable();
             $table->integer('profile_id')->nullable();
+            $table->integer('event_id')->nullable();
             $table->boolean('payment_status')->default(0);
             $table->text('payment_type')->nullable();
             $table->timestamps();
