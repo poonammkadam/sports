@@ -15,13 +15,11 @@ class EventController extends Controller
        }
 
     public function eventCreate(){
-        // $arrObjEvents = Events::all();
-        // return view('admin.user.list', ['arrObjEvents'=>$arrObjEvents]);
+
         return view('admin.events.create');
     }
 
     public function store(Request $request){
-
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
@@ -31,25 +29,22 @@ class EventController extends Controller
         $objEvent->organiser_name = $request->orgname;
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
-        $objEvent->save();
+        $objEvent->banner = $request->file('banner')->store('banner');
+        $objEvent->save(); 
 
         $intEventkey = $objEvent->getKey();
+        if($request->category){
         foreach ($request->category as $category){
-
                 $objCategory = new Category();
                 $objCategory->category_type  = $category['type'];
                 $objCategory->category_subtype  = $category['subtype'];
                 $objCategory->amount  = $category['fee'];
                 $objCategory->event_id = $intEventkey;
                 $objCategory->save();
-
         }
-
-        return redirect('admin/events')->with('success', 'Data Added successfully.');
-
-
     }
-
+        return redirect('admin/events')->with('success', 'Events Created Successfully.');
+    }
 }
 
 

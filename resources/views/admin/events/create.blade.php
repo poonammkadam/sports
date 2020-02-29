@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="{{url('admin/events/store')}}">
+                        <form method="POST" enctype="multipart/form-data" autocomplete="off" action="{{url('admin/events/store')}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
@@ -79,18 +79,18 @@
                                     <textarea  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
                                 </div>
                             </div>
-{{--                            <div class="form-group row">--}}
-{{--                                    <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>--}}
-{{--                                    <div class="col-md-6">--}}
-{{--                                        <input id="banner" type="text" class="form-control" name="banner"  autocomplete="banner" autofocus>--}}
-{{--                                    </div>--}}
-{{--                            </div>--}}
+                           <div class="form-group row">
+                                    <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
+                                    <div class="col-md-6">
+                                        <input id="banner" type="file" class="form-control" name="banner" >
+                                    </div>
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         Submit
                                     </button>
-                                </div>
+                                </div> 
                             </div>
                         </form>
                     </div>
@@ -137,7 +137,4 @@
             });
         });
     }
-
-
-
 </script>
