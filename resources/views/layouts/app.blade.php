@@ -27,7 +27,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
         body {
-            font: 400 15px/1.8 Lato, sans-serif;
+            font-family: Arial, Helvetica, sans-serif !important;
             color: #777;
         }
         h3, h4 {
@@ -118,7 +118,7 @@
             /*filter: grayscale(100%);*/
         }
         .navbar {
-            font-family: Montserrat, sans-serif;
+            font-family: Arial, Helvetica, sans-serif !important;
             margin-bottom: 0;
             background-color: #2d2d30;
             border: 0;

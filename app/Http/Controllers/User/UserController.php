@@ -34,15 +34,15 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-   public function index(){
-    return view('layouts.forms.registation');
+   public function getRegister(){
+       $objProfile =  auth()->user();
+    return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
    }
 
    public function getProfile(){
        $objProfile =  auth()->user();
-       $objUserProfile = Profile::where('user_id',$objProfile->id)->get();
-       $objUserProfile->load('eventParticipants');
-       dd($objUserProfile);
+       $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
+       dd( $objUserProfile->eventParticipants()->load('events'));
     return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfile'=> $objUserProfile]);
    }
 
@@ -85,7 +85,7 @@ class UserController extends Controller
 //       $objEvent->payment_type = $request->event_category;
        $objEventParticipants->save();
        $arrMixExtraData=[];
-       $this->makePayment($arrMixExtraData);
+//       $this->makePayment($arrMixExtraData);
 
        return redirect('events')->with('success', 'Data Added successfully.');
    }

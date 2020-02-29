@@ -9,6 +9,6 @@ class Profile extends Model
     protected $guarded = [];
 
     public function eventParticipants(){
-        return $this->hasMany(new EventParticipants(), 'profile_id', 'id');
+       return EventParticipants::where('profile_id',$this->id)->groupBy('event_id')->get();
     }
 }

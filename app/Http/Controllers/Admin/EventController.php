@@ -29,8 +29,9 @@ class EventController extends Controller
         $objEvent->organiser_name = $request->orgname;
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
-        $objEvent->banner = $request->file('banner')->store('banner');
-        $objEvent->save(); 
+
+//        $objEvent->banner = $request->file('banner')->store('banner');
+        $objEvent->save();
 
         $intEventkey = $objEvent->getKey();
         if($request->category){

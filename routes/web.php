@@ -34,7 +34,7 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
 
 });
 Route::group(['namespace'=>'User'], function() {
-    Route::get('/registration', 'UserController@index');
+    Route::get('/registration', 'UserController@getRegister');
     Route::get('/myprofile', 'UserController@getProfile');
     Route::get('/events', 'UserController@eventList');
     Route::get('/event/register/{id}', 'UserController@eventCreate');
