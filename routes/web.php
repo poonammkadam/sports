@@ -33,10 +33,17 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
     Route::get('/user/create', 'UserController@create');
+    Route::post('/user/store', 'UserController@create');
+    Route::get('/user/edit/{id}', 'UserController@edit');
+    Route::get('/user/events/{id}', 'UserController@getParticipatedEvents');
+    Route::post('/user/edit/{id}', 'UserController@update');
+
+
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@eventCreate');
     Route::post('/events/store', 'EventController@store');
     Route::get('/events/edit/{id}', 'EventController@edit');
+    Route::get('/events/view/{id}', 'EventController@view');
     Route::post('/events/edit/{id}', 'EventController@update');
 
 });

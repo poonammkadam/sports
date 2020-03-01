@@ -20,6 +20,11 @@ class EventController extends Controller
         return view('admin.events.create');
     }
 
+    public function view($id){
+       $objEvent=Events::where('id', $id)->first();
+       return view('admin.events.view', ['objEvent'=>$objEvent ]);
+    }
+
     public function store(Request $request){
         $objEvent = new Events();
         $objEvent->name = $request->name;
@@ -31,7 +36,7 @@ class EventController extends Controller
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
 
-        $objEvent->banner = $request->file('banner')->store('banner');
+//        $objEvent->banner = $request->file('banner')->store('banner');
         $objEvent->save();
 
         $intEventkey = $objEvent->getKey();

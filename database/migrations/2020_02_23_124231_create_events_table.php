@@ -21,6 +21,8 @@ class CreateEventsTable extends Migration
             $table->text('organiser_contact_number')->nullable();
             $table->text('venue')->nullable();
             $table->text('organiser_address')->nullable();
+            $table->boolean('is_pickup_drop_available')->nullable();
+            $table->text('pickup_drop_location')->nullable();
             $table->double('address_latitude')->nullable();
             $table->double('address_longitude')->nullable();
             $table->dateTime('event_date')->nullable();

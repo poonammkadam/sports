@@ -14,7 +14,7 @@ class Profile extends Model
     }
 
     public function user(){
-        return $this->belongsTo(new User(), 'profile_id', id);
+        return $this->belongsTo(new User(), 'user_id', 'id');
     }
 
 }

@@ -46,18 +46,20 @@
                             <tbody>
 
                                 @if($arrObjUsers->count() > 0)
-                                     @foreach($arrObjUsers as $objUser)
+                                     @foreach($arrObjUsers as $objProfile)
                                      <tr role="row" class="odd">
-                                        <td class="sorting_1">{{$objUser->id}}</td>
+                                        <td class="sorting_1">{{$objProfile->id}}</td>
                                         <td>
-                                            {{$objUser->name}}
+                                            {{$objProfile->user->name}}
                                         </td>
-                                         <td>
-                                            {{$objUser->email}}
-                                         </td>
+
                                         <td>
-                                            <a href="{{url('admin/user/edit/'.$objUser->id)}}"
-                                               class="btn btn-primary">Edit</a>
+                                            {{$objProfile->user->email}}
+                                         </td>
+
+                                        <td>
+                                            <a href="{{url('admin/user/edit/'.$objProfile->id)}}"  class="btn m-1 btn-primary">Edit</a>
+                                            <a href="{{url('admin/user/events/'.$objProfile->id)}}"  class="btn m-1 btn-primary"> Events</a>
                                         </td>
                                     </tr>
                                     @endforeach

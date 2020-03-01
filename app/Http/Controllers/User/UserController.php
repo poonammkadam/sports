@@ -42,7 +42,6 @@ class UserController extends Controller
    public function getProfile(){
        $objProfile =  auth()->user();
        $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
-       dd( $objUserProfile->eventParticipants()->load('events'));
     return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfile'=> $objUserProfile]);
    }
 
@@ -80,7 +79,7 @@ class UserController extends Controller
      $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEventParticipants->category_id = $request->event_category;
        $objEventParticipants->event_id = $request->event_id;
-       $objEventParticipants->profile_id = 1;
+       $objEventParticipants->profile_id = $objProfile->id;
 //       $objEvent->payment_status = $request->event_category;
 //       $objEvent->payment_type = $request->event_category;
        $objEventParticipants->save();

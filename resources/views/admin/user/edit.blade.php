@@ -15,7 +15,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="{{url('/admin/user/update/'.$objUser->id)}}">
+                        <form method="POST" autocomplete="off" action="{{url('/admin/user/update/'.$objProfile->id)}}">
                             @csrf
 
                             <div class="form-row">
@@ -36,45 +36,46 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Last Name</label>
-                                    <input required  type="text" name="last_name" value="{{$objProfile->first_name}}"  class="form-control" id="inputAddress2"
+                                    <input required  type="text" name="last_name" value="{{$objProfile->last_name}}"  class="form-control" id="inputAddress2"
                                            placeholder="">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress">DOB</label>
-                                    <input required  type="date" value="{{$objProfile->first_name}}"  class="form-control" name="dob" id="inputAddress" placeholder="">
+                                    <input required  type="date"  value="{{\Carbon\Carbon::parse($objProfile->dob)->format('Y-m-d')}}" class="form-control" name="dob" id="inputAddress" placeholder="">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Gender</label>
-                                    <br>
+                                    <div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio1"
+                                        <input class="form-check-input" required {{$objProfile->gender && $objProfile->gender=='male' ? 'checked': ''}}  type="radio" name="gender" id="inlineRadio1"
                                                value="male">
                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio2"
+                                        <input class="form-check-input" required {{$objProfile->gender && $objProfile->gender=='female' ?  'checked': ''}}  type="radio" name="gender" id="inlineRadio2"
                                                value="female">
                                         <label class="form-check-label" for="inlineRadio2">Female</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio3"
+                                        <input class="form-check-input" required {{$objProfile->gender && $objProfile->gender=='other' ? 'checked': ''}}  type="radio" name="gender" id="inlineRadio3"
                                                value="other">
                                         <label class="form-check-label" for="inlineRadio3">other</label>
+                                    </div>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputAddress">Nationality</label>
-                                    <select class="form-control custom-select" name="nationality">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">a</option>
-                                        <option value="2">b</option>
-                                        <option value="3">c</option>
-                                    </select>
+                                    <label for="nationality">Nationality</label>
+                                        <select id="nationality" class="form-control custom-select" name="nationality">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1">a</option>
+                                            <option value="2">b</option>
+                                            <option value="3">c</option>
+                                        </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Local ID</label>
@@ -85,16 +86,16 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Passport</label>
-                                    <input required  type="text" class="form-control" name="passport_no" id="inputAddress2" placeholder="Passport ID">
+                                    <input required  type="text" class="form-control" value="{{$objProfile->passport_no}}" name="passport_no" id="inputAddress2" placeholder="Passport ID">
                                 </div>
                             </div>
                             <h3>Contact Information</h3>
                             <div class="form-group">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="exampleFormControlTextarea1">Address</label>
-                                    <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control"  name="address" id="exampleFormControlTextarea1" rows="3"> {{$objProfile->address}}"</textarea>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="inputAddress">Country</label>
                                     <select class="form-control custom-select" name="country">
                                         <option selected>Open this select menu</option>
@@ -103,9 +104,9 @@
                                         <option value="3">c</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="inputAddress2">Mobile phone</label>
-                                    <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
+                                    <input required  type="text" value="{{$objProfile->mobile_no}}"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
                                 </div>
                             </div>
                             <button required  type="submit" class="btn btn-primary">Submit</button>

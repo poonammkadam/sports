@@ -1,5 +1,15 @@
 @extends('admin.admin_template')
 @section('content')
+    <script>
+        $(document).on('click', '.pick_up_yes', function () {
+            $('#pickup_drop_available').css('display', 'block');
+        });
+
+        $(document).on('click', '.pick_up_no', function () {
+            $('#pickup_drop_available').css('display', 'none');
+        });
+
+    </script>
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -66,6 +76,22 @@
                                 <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
                                 <div class="col-md-6">
                                     <input id="orgname" value="{{$objEvent->orgname}}" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right">Is pickup and drop available</label>
+
+                                <div class="col-md-6">
+                                    <input type="radio" required class="pick_up_yes" name="pickup_drop"  value="yes">Yes
+                                    <input type="radio" required class="pick_up_no" name="pickup_drop" value="no">No
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="pickup_drop_available" style="display: none">
+                                <label for="pickup_drop" class="col-md-4 col-form-label text-md-right">Is pickup and drop Location</label>
+                                <div class="col-md-6">
+                                    <textarea required  id="pickup_drop" type="text" class="form-control"  name="pickup_drop"  autocomplete="pickup_drop" autofocus rows="3"></textarea>
                                 </div>
                             </div>
 

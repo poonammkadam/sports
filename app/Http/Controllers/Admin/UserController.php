@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
    public function index(){
-    $arrObjUsers = User::all();
+    $arrObjUsers = Profile::all();
     return view('admin.user.list', ['arrObjUsers'=>$arrObjUsers]);
    }
 
@@ -21,7 +21,13 @@ class UserController extends Controller
     public function edit($id){
        $objProfile = Profile::where('id', $id)->first();
        $objProfile->load('user');
-        return view('admin.user.edit', ['objProfile' => $objProfile]);
+       return view('admin.user.edit', ['objProfile' => $objProfile]);
+    }
+
+    public function getParticipatedEvents($id){
+        $objUserProfile = Profile::where('id', $id)->first();
+        $objUserProfileEvents=$objUserProfile->eventParticipants()->load('events');
+        return view('admin.user.participated.list', ['objUserProfile' => $objUserProfile, 'objUserProfileEvents'=>$objUserProfileEvents]);
     }
 
     public function update($id, Request $request){

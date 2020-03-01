@@ -2,11 +2,9 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Events</h3>
+            <h3 class="card-title">Events Participated by {{$objUserProfile->first_name}}{{$objUserProfile->last_name}}</h3>
         </div>
-        <div align="left">
-            <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New</a>
-        </div>
+       
         <!-- /.card-header -->
         <div class="card-body">
             @if(session()->has('message'))
@@ -15,7 +13,6 @@
                 </div>
             @endif
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
@@ -25,51 +22,46 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 160px;">Event ID
+                                    style="width: 160px;">User ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                    aria-label="Browser: activate to sort column ascending" style="width: 207px;">
                                     Event Name
                                 </th>
+
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                    Organiser Name
+                                    aria-label="Browser: activate to sort column ascending" style="width: 207px;">
+                                    Event Description
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                    Event Date
-                                </th>
+
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                    Action
+                                    Organisers name
                                 </th>
                             </tr>
                             </thead>
+
                             <tbody>
 
-                            @if($arrObjEvents->count() > 0)
-                                @foreach($arrObjEvents as $objEvents )
+                            @if($objUserProfileEvents->count() > 0)
+                                @foreach($objUserProfileEvents as $objEvent)
                                     <tr role="row" class="odd">
-                                        <td class="sorting_1">{{$objEvents->id}}</td>
+                                        <td class="sorting_1">{{$objEvent->id}}</td>
                                         <td>
-                                            {{$objEvents->name}}
+                                            {{$objEvent->events->name}}
                                         </td>
+
                                         <td>
-                                            {{$objEvents->organiser_name}}
+                                            {{$objEvent->events->description}}
                                         </td>
+
                                         <td>
-                                            {{$objEvents->event_date}}
-                                        </td>
-                                        <td>
-                                            <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
-                                               class="btn btn-primary m-1">Edit</a>
-                                            <a href="{{url('admin/events/view/'.$objEvents->id)}}"
-                                               class="btn btn-primary m-1">View</a>
+                                            {{$objEvent->events->organiser_name}}
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <tr> No Records found </tr>
+                                <tr> <td>No Records found</td> </tr>
                             @endif
                             </tbody>
                         </table>
