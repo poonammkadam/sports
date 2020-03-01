@@ -17,7 +17,6 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->text('name')->nullable();
             $table->text('description')->nullable();
-            $table->text('event_type')->nullable();
             $table->text('organiser_name')->nullable();
             $table->text('organiser_contact_number')->nullable();
             $table->text('venue')->nullable();
@@ -26,6 +25,7 @@ class CreateEventsTable extends Migration
             $table->double('address_longitude')->nullable();
             $table->dateTime('event_date')->nullable();
             $table->dateTime('registration_end_date')->nullable();
+            $table->text('banner')->nullable();
             $table->timestamps();
         });
     }

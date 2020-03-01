@@ -19,6 +19,7 @@ class CreateEventParticipantsTable extends Migration
             $table->integer('profile_id')->nullable();
             $table->boolean('payment_status')->default(0);
             $table->text('payment_type')->nullable();
+            $table->text('payment_transaction_number')->nullable();
             $table->timestamps();
         });
     }
