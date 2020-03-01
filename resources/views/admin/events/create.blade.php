@@ -36,13 +36,13 @@
                                     </textarea>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Add Event Type</label>
                                 <button type="button" name="add" id="add" class="btn btn-outline-dark" onclick="addEventType()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 <div id="dynamic_field"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                     <label for="register_expire_date">Registration Expire Date</label>
                                     <input required type="datetime-local" class="form-control" id="register_expire_date" name="register_expire_date" placeholder="">
@@ -67,22 +67,25 @@
                                         <input required id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
                                     </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="org_contact_no" class="col-md-4 col-form-label text-md-right">Organization Contact No.</label>
                                 <div class="col-md-6">
                                     <input required id="org_contact_no" type="text" class="form-control " name="org_contact_no"  autocomplete="org_contact_no" autofocus>
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="org_address" class="col-md-4 col-form-label text-md-right">Organization Address</label>
                                 <div class="col-md-6">
                                     <textarea required  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
                                 </div>
                             </div>
-                           <div class="form-group row">
+
+                            <div class="form-group row">
                                     <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
                                     <div class="col-md-6">
-                                        <input required id="banner" type="file" class="form-control" name="banner" >
+                                        <input required id="banner" type="file" class="" name="banner" >
                                     </div>
                             </div>
                             <div class="form-group row mb-0">
@@ -90,7 +93,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Submit
                                     </button>
-                                </div> 
+                                </div>
                             </div>
                         </form>
                     </div>

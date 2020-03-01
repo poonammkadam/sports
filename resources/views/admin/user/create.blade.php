@@ -19,74 +19,98 @@
                         <form method="POST" autocomplete="off" action="/admin/user/create">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Email</label>
+                                    <input required  type="email" name="email" value="Email...."  class="form-control" id="inputEmail4" placeholder="Email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">Local Name</label>
+                                    <input required  type="text" name="local_name" value="" class="form-control" id="inputAddress" placeholder="">
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">First Name</label>
+                                    <input required  type="text" name="first_name" class="form-control" id="inputAddress" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress2">Last Name</label>
+                                    <input required  type="text" name="last_name" class="form-control" id="inputAddress2"
+                                           placeholder="">
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">DOB</label>
+                                    <input required  type="date" class="form-control" name="dob" id="inputAddress" placeholder="">
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress2">Gender</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio1"
+                                               value="male">
+                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio2"
+                                               value="female">
+                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio3"
+                                               value="other">
+                                        <label class="form-check-label" for="inlineRadio3">other</label>
+                                    </div>
                                 </div>
+
                             </div>
-
-                            <div class="form-group row">
-                                <label for="activation-status" class="col-md-4 col-form-label text-md-right">Activation Status</label>
-
-                                <div class="col-md-6">
-                                    <select id="activation-status"  class="form-control" name="activation_status" required>
-                                        <option value="0">Deactivate</option>
-                                        <option value="1">Activate</option>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">Nationality</label>
+                                    <select class="form-control custom-select" name="nationality">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">a</option>
+                                        <option value="2">b</option>
+                                        <option value="3">c</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress2">Local ID</label>
+                                    <input required  type="text" class="form-control" name="local_id" id="inputAddress2"
+                                           placeholder="" >
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress2">Passport</label>
+                                    <input required  type="text" class="form-control" name="passport_no" id="inputAddress2" placeholder="Passport ID">
+                                </div>
+                            </div>
+                            <h3>Contact Information</h3>
+                            <div class="form-group">
+                                <div class="form-group col-md-6">
+                                    <label for="exampleFormControlTextarea1">Address</label>
+                                    <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputAddress">Country</label>
+                                    <select class="form-control custom-select" name="country">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">a</option>
+                                        <option value="2">b</option>
+                                        <option value="3">c</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputAddress2">Mobile phone</label>
+                                    <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
+                                </div>
+                            </div>
+                            <button required  type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>

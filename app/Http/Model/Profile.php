@@ -2,6 +2,7 @@
 
 namespace App\Http\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
@@ -11,4 +12,9 @@ class Profile extends Model
     public function eventParticipants(){
        return EventParticipants::where('profile_id',$this->id)->groupBy('event_id')->get();
     }
+
+    public function user(){
+        return $this->belongsTo(new User(), 'profile_id', id);
+    }
+
 }

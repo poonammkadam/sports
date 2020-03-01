@@ -31,6 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/', 'UserController@index');
+    Route::get('/user', 'UserController@index');
+    Route::get('/user/create', 'UserController@create');
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@eventCreate');
     Route::post('/events/store', 'EventController@store');
