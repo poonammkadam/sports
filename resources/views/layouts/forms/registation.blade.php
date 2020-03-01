@@ -10,11 +10,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
-                        <input required  type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+                        <input required  type="email" name="email" value="{{$objProfile->email}}"  class="form-control" id="inputEmail4" placeholder="Email">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Local Name</label>
-                        <input required  type="text" name="local_name" class="form-control" id="inputAddress" placeholder="">
+                        <input required  type="text" name="local_name" value="{{$objProfile->name}}" class="form-control" id="inputAddress" placeholder="">
                     </div>
                 </div>
                 <div class="form-row">

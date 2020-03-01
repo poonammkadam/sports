@@ -9,11 +9,14 @@ use App\Http\Model\Events;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
 use App\MerchantSuite\Address;
+use App\MerchantSuite\AuthKeyTransaction;
 use App\MerchantSuite\CardDetails;
 use App\MerchantSuite\ContactDetails;
 use App\MerchantSuite\Credentials;
 use App\MerchantSuite\Customer;
 use App\MerchantSuite\FraudScreeningRequest;
+use App\MerchantSuite\HppTxnFlowParameters;
+use App\MerchantSuite\IframeParameters;
 use App\MerchantSuite\Mode;
 use App\MerchantSuite\Order;
 use App\MerchantSuite\OrderAddress;
@@ -24,14 +27,23 @@ use App\MerchantSuite\StatementDescriptor;
 use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
+use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
 {
-   public function index(){
-    return view('layouts.forms.registation');
+   public function getRegister(){
+       $objProfile =  auth()->user();
+    return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+   }
+
+   public function getProfile(){
+       $objProfile =  auth()->user();
+       $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
+       dd( $objUserProfile->eventParticipants()->load('events'));
+    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfile'=> $objUserProfile]);
    }
 
    public function update(Request $request){
@@ -63,15 +75,18 @@ class UserController extends Controller
     }
 
    public function eventStore(Request $request){
-     $objEvent = new EventParticipants();
+     $objEventParticipants = new EventParticipants();
 //     dd(auth()->user()->id);
      $objProfile = Profile::where('user_id', auth()->user()->id)->first();
-       $objEvent->category_id = $request->event_category;
-       $objEvent->profile_id = 1;
+       $objEventParticipants->category_id = $request->event_category;
+       $objEventParticipants->event_id = $request->event_id;
+       $objEventParticipants->profile_id = 1;
 //       $objEvent->payment_status = $request->event_category;
 //       $objEvent->payment_type = $request->event_category;
-       $objEvent->save();
-       $this->makePayment();
+       $objEventParticipants->save();
+       $arrMixExtraData=[];
+//       $this->makePayment($arrMixExtraData);
+
        return redirect('events')->with('success', 'Data Added successfully.');
    }
 
@@ -82,7 +97,7 @@ class UserController extends Controller
     }
 
 
-public function makePayment(){
+public function makePayment($arrMixExtraData){
     URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
     $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456",Mode::Live);
 
@@ -191,7 +206,9 @@ public function makePayment(){
     $txn->setTimeout(93121);
 
     $response = $txn->submit();
-    dd($response->getTxnNumber());
+    dd($response);
     return view('payment');
 }
+
+
 }

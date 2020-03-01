@@ -1,17 +1,7 @@
-<footer class="text-muted">
-
-{{--    <div class="container">--}}
-
-{{--        <p class="float-right">--}}
-
-{{--            <a href="#">Back to top</a>--}}
-
-{{--        </p>--}}
-
-{{--        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>--}}
-
-{{--        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>--}}
-
-{{--    </div>--}}
-
+<!-- Footer -->
+<footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>
 </footer>
