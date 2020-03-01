@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,8 +32,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/', 'UserController@index');
     Route::get('/events', 'EventController@index');
-    Route::get('/event/create', 'EventController@eventCreate');
+    Route::get('/events/create', 'EventController@eventCreate');
     Route::post('/events/store', 'EventController@store');
+    Route::get('/events/edit/{id}', 'EventController@edit');
+    Route::post('/events/edit/{id}', 'EventController@update');
 
 });
 Route::group(['namespace'=>'User'], function() {

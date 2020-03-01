@@ -23,7 +23,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Event title</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control " name="name" value=""  autocomplete="name" autofocus>
+                                    <input id="name" required type="text" class="form-control " name="name" value=""  autocomplete="name" autofocus>
 
                                 </div>
                             </div>
@@ -45,44 +45,44 @@
                             
                             <div class="form-group">
                                     <label for="register_expire_date">Registration Expire Date</label>
-                                    <input type="datetime-local" class="form-control" id="register_expire_date" name="register_expire_date" placeholder="">
+                                    <input required type="datetime-local" class="form-control" id="register_expire_date" name="register_expire_date" placeholder="">
                             </div>
 
                             <div class="form-group">
                                     <label for="eventdate">Event Date</label>
-                                    <input type="datetime-local" class="form-control" id="eventdate" name="eventdate" placeholder="" >
+                                    <input required type="datetime-local" class="form-control" id="eventdate" name="eventdate" placeholder="" >
                             </div>
 
 
                             <div class="form-group row">
                                     <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
                                     <div class="col-md-6">
-                                        <input id="venue" type="text" class="form-control" name="venue"  autocomplete="venue" autofocus>
+                                        <input required id="venue" type="text" class="form-control" name="venue"  autocomplete="venue" autofocus>
                                     </div>
                             </div>
 
                             <div class="form-group row">
                                     <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
                                     <div class="col-md-6">
-                                        <input id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
+                                        <input required id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
                                     </div>
                             </div>
                             <div class="form-group row">
                                 <label for="org_contact_no" class="col-md-4 col-form-label text-md-right">Organization Contact No.</label>
                                 <div class="col-md-6">
-                                    <input id="org_contact_no" type="text" class="form-control " name="org_contact_no"  autocomplete="org_contact_no" autofocus>
+                                    <input required id="org_contact_no" type="text" class="form-control " name="org_contact_no"  autocomplete="org_contact_no" autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="org_address" class="col-md-4 col-form-label text-md-right">Organization Address</label>
                                 <div class="col-md-6">
-                                    <textarea  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
+                                    <textarea required  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
                                 </div>
                             </div>
                            <div class="form-group row">
                                     <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
                                     <div class="col-md-6">
-                                        <input id="banner" type="file" class="form-control" name="banner" >
+                                        <input required id="banner" type="file" class="form-control" name="banner" >
                                     </div>
                             </div>
                             <div class="form-group row mb-0">

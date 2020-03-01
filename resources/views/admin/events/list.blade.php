@@ -5,7 +5,7 @@
             <h3 class="card-title">Events</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/event/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New</a>
         </div>
         <!-- /.card-header -->
        <div class="card-body">
@@ -31,17 +31,14 @@
                                     aria-label="Browser: activate to sort column ascending" style="width: 207px;">
                                     Event Name
                                 </th>
-                                {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 183px;">
-                                  Activation Status
-                                </th> --}}
+                            
 
-        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-            aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-            Action
-        </th>
-        </tr>
-        </thead>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                    Action
+                                </th>
+                            </tr>
+                            </thead>
         <tbody>
 
         @if($arrObjEvents->count() > 0)
@@ -51,17 +48,14 @@
                     <td>
                         {{$objEvents->name}}
                     </td>
-                     <td>
-{{--                        {{$objUser ?? '' ?? ''->activation_status}}</td>--}}
-
                     <td>
-                        <a href="{{url('admin/event/edit/'.$objEvents->id)}}"
+                        <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
                            class="btn btn-primary">Edit</a>
                     </td>
                 </tr>
             @endforeach
         @else
-            <tr> <td>No Records found </td></tr>
+            <tr> No Records found </tr>
         @endif
         </tbody>
         </table>

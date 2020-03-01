@@ -16,20 +16,14 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="{{url('/admin/event/edit'}}">
+                   
+                        <form method="POST" autocomplete="off" action="{{url('/admin/event/edit')}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Event title</label>
-                                
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input id="name" value="{{$objEvent->name}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  required autocomplete="name" autofocus>
                                 </div>
                             </div>
                             
@@ -38,20 +32,17 @@
                                 
                                 <div class="col-md-6">
                                     <textarea id="description"  class="form-control @error('description') is-invalid @enderror" name="description"  required autocomplete="description">
+                                        {{$objEvent->description}}
                                     </textarea>
-                                    
-                                    @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="startdate">Start Date</label>
+                                <label for="startdate" class="col-md-4 col-form-label text-md-right">>Start Date</label>
+                                <div class="col-md-6">
                                 <input class="form-control" id="startdate" name="startdate" placeholder="" type="datetime"
                                 >
+                                </div>
                             </div>
                             
                             <div class="form-group">
