@@ -42,7 +42,10 @@ class UserController extends Controller
    public function getProfile(){
        $objProfile =  auth()->user();
        $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
-    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfile'=> $objUserProfile]);
+       $objUserProfilEvents=  $objUserProfile->eventParticipants()->load('events');
+
+    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfilEvents, 'objUserProfile'=> $objUserProfile]);
+
    }
 
    public function update(Request $request){

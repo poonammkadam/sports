@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 @foreach($arrObjEvents as $objEvent)
-                <div class="shadow card col-md-3 item-inner">
+                <div class="shadow card col-md-2 item-inner">
                      <img src="" class="card-img-top" alt="">
                     <div class="card-body">
                             <div class="overlay">
