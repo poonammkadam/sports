@@ -1,8 +1,8 @@
 @extends('admin.admin_template')
 @section('content')
-    <div class="container ">
+    <div class="">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Events View</div>
 
@@ -60,7 +60,7 @@
         </div>
 
         <div class="row mt-2 justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Participants</div>
 
@@ -76,46 +76,72 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 160px;">Event ID
+                                                style="width: 160px;"> ID
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                                Event Name
+                                                User Name
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                                Organiser Name
+                                                Category
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                                Event Date
+                                                Gender
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                                Payment Status
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                                Team/Sponsor
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                                Payment Type
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                                Action
+                                               Registration Status
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
-                                        @if($arrObjEvents->count() > 0)
-                                            @foreach($arrObjEvents as $objEvents )
+                                        @if($objEvent->eventParticipants->count() > 0)
+                                            @foreach($objEvent->eventParticipants as $objParticipants )
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1">{{$objEvents->id}}</td>
+                                                    <td class="sorting_1">{{$objParticipants->id}}</td>
                                                     <td>
-                                                        {{$objEvents->name}}
+                                                        {{$objParticipants->profile->first_name}} {{$objParticipants->profile->last_name}}
                                                     </td>
                                                     <td>
-                                                        {{$objEvents->organiser_name}}
+                                                        {{$objParticipants->category->category_subtype}}
                                                     </td>
                                                     <td>
-                                                        {{$objEvents->event_date}}
+                                                        {{($objParticipants->category->type)}}
                                                     </td>
                                                     <td>
-                                                        <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
-                                                           class="btn btn-primary m-1">Edit</a>
-                                                        <a href="{{url('admin/events/view/'.$objEvents->id)}}"
-                                                           class="btn btn-primary m-1">View</a>
+                                                        @if($objParticipants->payment_status)
+                                                            <span>Completed</span>
+                                                        @else
+                                                            <span>Pending</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        --
+                                                    </td>
+                                                    <td>
+                                                        @if($objParticipants->payment_type=='online')
+                                                            <span>Online</span>
+                                                        @else
+                                                            <span>Offline</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        --
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -11,4 +11,11 @@ class EventParticipants extends Model
     public function events(){
         return $this->belongsTo(new Events(),  'event_id', 'id');
     }
+    public function category(){
+        return $this->hasOne(new Category(), 'id','category_id' );
+    }
+
+    public function profile(){
+        return $this->hasOne(new Profile(), 'id','profile_id' );
+    }
 }

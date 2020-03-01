@@ -22,6 +22,7 @@ class EventController extends Controller
 
     public function view($id){
        $objEvent=Events::where('id', $id)->first();
+        ($objEvent->eventParticipants->load('category', 'profile'));
        return view('admin.events.view', ['objEvent'=>$objEvent ]);
     }
 

@@ -69,7 +69,7 @@ class UserController extends Controller
        return redirect('events')->with('success', 'Data Added successfully.');
    }
 
-    public function eventList(){
+   public function eventList(){
          $arrObjEvents = Events::all();
 
 
@@ -98,119 +98,117 @@ class UserController extends Controller
         return view('layouts.forms.event',['objEvent'=>$objEvent]);
     }
 
+   public function makePayment($arrMixExtraData){
+        URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
+        $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456",Mode::Live);
 
-public function makePayment($arrMixExtraData){
-    URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
-    $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456",Mode::Live);
+        $txn = new Transaction();
+        $cardDetails = new CardDetails();
+        $order = new Order();
+        $shippingAddress = new OrderAddress();
+        $billingAddress = new OrderAddress();
+        $address = new Address();
+        $customer = new Customer();
+        $personalDetails = new PersonalDetails();
+        $contactDetails = new ContactDetails();
+        $order_item_1 = new OrderItem();
+        $order_recipient_1 = new OrderRecipient();
+        $fraudScreening = new FraudScreeningRequest();
+        $statementDescriptor = new StatementDescriptor();
 
-    $txn = new Transaction();
-    $cardDetails = new CardDetails();
-    $order = new Order();
-    $shippingAddress = new OrderAddress();
-    $billingAddress = new OrderAddress();
-    $address = new Address();
-    $customer = new Customer();
-    $personalDetails = new PersonalDetails();
-    $contactDetails = new ContactDetails();
-    $order_item_1 = new OrderItem();
-    $order_recipient_1 = new OrderRecipient();
-    $fraudScreening = new FraudScreeningRequest();
-    $statementDescriptor = new StatementDescriptor();
+        $txn->setAction(Actions::Payment);
+        $txn->setCredentials($credentials);
+        $txn->setAmount(200000);
+        $txn->setCurrency("AUD");
+        $txn->setInternalNote("Internal Note");
+        $txn->setReference1("My Customer Reference");
+        $txn->setReference2("Medium");
+        $txn->setReference3("Large");
+        $txn->setStoreCard(TRUE);
+        $txn->setSubType("single");
+        $txn->setType(TransactionType::Internet);
 
-    $txn->setAction(Actions::Payment);
-    $txn->setCredentials($credentials);
-    $txn->setAmount(200000);
-    $txn->setCurrency("AUD");
-    $txn->setInternalNote("Internal Note");
-    $txn->setReference1("My Customer Reference");
-    $txn->setReference2("Medium");
-    $txn->setReference3("Large");
-    $txn->setStoreCard(TRUE);
-    $txn->setSubType("single");
-    $txn->setType(TransactionType::Internet);
+        $cardDetails->setCardHolderName("MR C CARDHOLDER");
+        $cardDetails->setCardNumber("5123456789012346");
+        $cardDetails->setCVN("678");
+        $cardDetails->setExpiryDate("9900");
 
-    $cardDetails->setCardHolderName("MR C CARDHOLDER");
-    $cardDetails->setCardNumber("5123456789012346");
-    $cardDetails->setCVN("678");
-    $cardDetails->setExpiryDate("9900");
+        $txn->setCardDetails($cardDetails);
 
-    $txn->setCardDetails($cardDetails);
+        $address->setAddressLine1("123 Fake Street");
+        $address->setCity("Melbourne");
+        $address->setCountryCode("AUS");
+        $address->setPostCode("3000");
+        $address->setState("Vic");
 
-    $address->setAddressLine1("123 Fake Street");
-    $address->setCity("Melbourne");
-    $address->setCountryCode("AUS");
-    $address->setPostCode("3000");
-    $address->setState("Vic");
+        $contactDetails->setEmailAddress("example@email.com");
 
-    $contactDetails->setEmailAddress("example@email.com");
+        $personalDetails->setDateOfBirth("1900-01-01");
+        $personalDetails->setFirstName("John");
+        $personalDetails->setLastName("Smith");
+        $personalDetails->setSalutation("Mr");
 
-    $personalDetails->setDateOfBirth("1900-01-01");
-    $personalDetails->setFirstName("John");
-    $personalDetails->setLastName("Smith");
-    $personalDetails->setSalutation("Mr");
+        $billingAddress->setAddress($address);
+        $billingAddress->setContactDetails($contactDetails);
+        $billingAddress->setPersonalDetails($personalDetails);
 
-    $billingAddress->setAddress($address);
-    $billingAddress->setContactDetails($contactDetails);
-    $billingAddress->setPersonalDetails($personalDetails);
+        $shippingAddress->setAddress($address);
+        $shippingAddress->setContactDetails($contactDetails);
+        $shippingAddress->setPersonalDetails($personalDetails);
 
-    $shippingAddress->setAddress($address);
-    $shippingAddress->setContactDetails($contactDetails);
-    $shippingAddress->setPersonalDetails($personalDetails);
+        $order_item_1->setDescription("an item");
+        $order_item_1->setQuantity(1);
+        $order_item_1->setUnitPrice(1000);
 
-    $order_item_1->setDescription("an item");
-    $order_item_1->setQuantity(1);
-    $order_item_1->setUnitPrice(1000);
+        $orderItems = array($order_item_1);
 
-    $orderItems = array($order_item_1);
+        $order_recipient_1->setAddress($address);
+        $order_recipient_1->setContactDetails($contactDetails);
+        $order_recipient_1->setPersonalDetails($personalDetails);
 
-    $order_recipient_1->setAddress($address);
-    $order_recipient_1->setContactDetails($contactDetails);
-    $order_recipient_1->setPersonalDetails($personalDetails);
+        $orderRecipients = array($order_recipient_1);
 
-    $orderRecipients = array($order_recipient_1);
+        $order->setBillingAddress($billingAddress);
+        $order->setOrderItems($orderItems);
+        $order->setOrderRecipients($orderRecipients);
+        $order->setShippingAddress($shippingAddress);
+        $order->setShippingMethod("boat");
 
-    $order->setBillingAddress($billingAddress);
-    $order->setOrderItems($orderItems);
-    $order->setOrderRecipients($orderRecipients);
-    $order->setShippingAddress($shippingAddress);
-    $order->setShippingMethod("boat");
+        $txn->setOrder($order);
 
-    $txn->setOrder($order);
+        $customer->setCustomerNumber("1234");
+        $customer->setAddress($address);
+        $customer->setExistingCustomer(false);
+        $customer->setContactDetails($contactDetails);
+        $customer->setPersonalDetails($personalDetails);
+        $customer->setCustomerNumber("1");
+        $customer->setDaysOnFile(1);
 
-    $customer->setCustomerNumber("1234");
-    $customer->setAddress($address);
-    $customer->setExistingCustomer(false);
-    $customer->setContactDetails($contactDetails);
-    $customer->setPersonalDetails($personalDetails);
-    $customer->setCustomerNumber("1");
-    $customer->setDaysOnFile(1);
+        $txn->setCustomer($customer);
 
-    $txn->setCustomer($customer);
+        $fraudScreening->setPerformFraudScreening(false);
+        $fraudScreening->setDeviceFingerprint("ExampleDeviceFingerprint");
 
-    $fraudScreening->setPerformFraudScreening(false);
-    $fraudScreening->setDeviceFingerprint("ExampleDeviceFingerprint");
+    //    $txn->setFraudScreeningRequest($fraudScreening);
 
-//    $txn->setFraudScreeningRequest($fraudScreening);
+        $statementDescriptor->setAddressLine1("123 Drive Street");
+        $statementDescriptor->setAddressLine2("");
+        $statementDescriptor->setCity("Melbourne");
+        $statementDescriptor->setCompanyName("A Company Name");
+        $statementDescriptor->setCountryCode("AUS");
+        $statementDescriptor->setMerchantName("A Merchant Name");
+        $statementDescriptor->setPhoneNumber("0123456789");
+        $statementDescriptor->setPostCode("3000");
+        $statementDescriptor->setState("Victoria");
 
-    $statementDescriptor->setAddressLine1("123 Drive Street");
-    $statementDescriptor->setAddressLine2("");
-    $statementDescriptor->setCity("Melbourne");
-    $statementDescriptor->setCompanyName("A Company Name");
-    $statementDescriptor->setCountryCode("AUS");
-    $statementDescriptor->setMerchantName("A Merchant Name");
-    $statementDescriptor->setPhoneNumber("0123456789");
-    $statementDescriptor->setPostCode("3000");
-    $statementDescriptor->setState("Victoria");
+        $txn->setStatementDescriptor($statementDescriptor);
 
-    $txn->setStatementDescriptor($statementDescriptor);
+        $txn->setTokenisationMode(3);
+        $txn->setTimeout(93121);
 
-    $txn->setTokenisationMode(3);
-    $txn->setTimeout(93121);
-
-    $response = $txn->submit();
-    dd($response);
-    return view('payment');
-}
-
+        $response = $txn->submit();
+        dd($response);
+        return view('payment');
+    }
 
 }

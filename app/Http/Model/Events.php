@@ -11,4 +11,8 @@ class Events extends Model
     public function category(){
         return $this->hasMany(new Category(), 'event_id', 'id');
     }
+
+    public function eventParticipants(){
+        return $this->hasMany(new EventParticipants(), 'event_id', 'id');
+    }
 }
