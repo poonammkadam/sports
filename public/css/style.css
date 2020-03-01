@@ -25,3 +25,14 @@
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 12px !important;
 }
+.item-inner{
+    margin: 5px !important;
+    align-items: center;
+}
+.event-img{
+    width: 200px !important;
+    height: 200px !important;
+}
+.my-event{
+    margin-left: 160px !important;
+}
