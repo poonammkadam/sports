@@ -33,6 +33,11 @@
                                 </th>
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Browser: activate to sort column ascending" style="width: 207px;">
+                                    User Email
+                                </th>
+
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Action
                                 </th>
@@ -47,9 +52,9 @@
                                         <td>
                                             {{$objUser->name}}
                                         </td>
-                                        {{-- <td>
-                                            {{$objUser->activation_status}}</td>
-                                        --}}
+                                         <td>
+                                            {{$objUser->email}}
+                                         </td>
                                         <td>
                                             <a href="{{url('admin/user/edit/'.$objUser->id)}}"
                                                class="btn btn-primary">Edit</a>

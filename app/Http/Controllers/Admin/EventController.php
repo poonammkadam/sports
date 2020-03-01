@@ -30,6 +30,10 @@ class EventController extends Controller
         $objEvent->organiser_name = $request->orgname;
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9273a49b2b2cf6b87ffbf3a1ec4221004ea5dbcb
         $objEvent->banner = $request->file('banner')->store('banner');
         $objEvent->save();
 
@@ -47,7 +51,7 @@ class EventController extends Controller
         return redirect('admin/events')->with('success', 'Events Created Successfully.');
     }
 
- 
+
     public function edit($id){
         $objEvent=Events::where('id', $id)->first();
     return view('admin.events.edit', ['objEvent'=>$objEvent]);

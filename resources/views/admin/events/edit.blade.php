@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Submit Events</div>
-                    
+
                     <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                   
+
                         <form method="POST" autocomplete="off" action="{{url('/admin/event/edit')}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
@@ -26,52 +26,57 @@
                                     <input id="name" value="{{$objEvent->name}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  required autocomplete="name" autofocus>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Event Description</label>
-                                
+
                                 <div class="col-md-6">
                                     <textarea id="description"  class="form-control @error('description') is-invalid @enderror" name="description"  required autocomplete="description">
                                         {{$objEvent->description}}
                                     </textarea>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="startdate" class="col-md-4 col-form-label text-md-right">>Start Date</label>
+
+                            <div class="form-group row ">
+                                <label for="startdate" class="col-md-4 col-form-label text-md-right">Start Date</label>
                                 <div class="col-md-6">
-                                <input class="form-control" id="startdate" name="startdate" placeholder="" type="datetime"
-                                >
+                                    <input type="datetime-local" class="form-control" id="startdate" name="startdate"
+                                           value="{{\Carbon\Carbon::parse($objEvent->startdate)->format('Y-m-d\TH:i')}}"
+                                           placeholder="">
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="enddate">End Date</label>
-                                <input class="form-control" id="enddate" name="enddate" placeholder="" type="datetime"
-                                >
+
+                            <div class="form-group row">
+                                <label for="enddate" class="col-md-4 col-form-label text-md-right">End Date</label>
+                                <div class="col-md-6">
+                                <input type="datetime-local" class="form-control" id="enddate" name="enddate"
+                                       value="{{\Carbon\Carbon::parse($objEvent->enddate)->format('Y-m-d\TH:i')}}"
+                                        placeholder="">
+                                </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
                                 <div class="col-md-6">
-                                    <input id="venue" type="text" class="form-control @error('venue') is-invalid @enderror" name="venue" required autocomplete="venue" autofocus>
+                                    <input value="{{$objEvent->venue}}" id="venue" type="text" class="form-control @error('venue') is-invalid @enderror" name="venue" required autocomplete="venue" autofocus>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
                                 <div class="col-md-6">
-                                    <input id="orgname" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
+                                    <input id="orgname" value="{{$objEvent->orgname}}" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <label for="banner" class="col-md-4 col-form-label text-md-right">Upload Banner</label>
                                 <div class="col-md-6">
-                                    <input id="banner" type="text" class="form-control @error('banner') is-invalid @enderror" name="banner" required autocomplete="banner" autofocus>
+                                    <input id="banner" value="{{$objEvent->banner}}" class="btn btn-primary" type="file"  name="banner" required autocomplete="banner" autofocus>
+                                {{$objEvent->banner}}
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
