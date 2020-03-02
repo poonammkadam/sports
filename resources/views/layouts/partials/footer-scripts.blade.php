@@ -7,13 +7,21 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="{{asset('dist/js/jquery.cccheck.js')}}"></script>
+
+<script src="{{asset('js/card.js')}}></script>
 <script>
     $(document).ready(function(){
+		$('form').card({
+			container: '.card-wrapper',
+			width: 280,
+		
+			formSelectors: {
+				nameInput: 'input[name="first-name"], input[name="last-name"]'
+			}
+		});
         // Initialize Tooltip
         $('[data-toggle="tooltip"]').tooltip();
-        $.cccheck();
+        
         // Add smooth scrolling to all links in navbar + footer link
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
 

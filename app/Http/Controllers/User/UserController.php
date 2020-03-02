@@ -42,7 +42,7 @@ class UserController extends Controller
        else{
         return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
        }
-    
+
    }
 
    public function getProfile(){
@@ -101,13 +101,13 @@ class UserController extends Controller
    public function eventCreate($id){
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
-        if('complete' == auth()->user()->registration_status){
+//        if('complete' == auth()->user()->registration_status){
             return view('layouts.forms.event',['objEvent'=>$objEvent]);
-        }
-        else{
-            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you complete your profile');
-        }
-       
+//        }
+//        else{
+//            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you complete your profile');
+//        }
+
     }
 
    public function makePayment($arrMixExtraData){

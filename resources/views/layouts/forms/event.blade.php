@@ -39,27 +39,24 @@
                 </div>
 
                 <div class="payment-online">
-
-                    <div class="row">
-                        <div>
-                            <input type="text" id="cc-number" required="required" placeholder="CARD NUMBER">
-                            <span id="show-cc-label"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <input type="text" id='cc-expiration' required="required" placeholder="VALID THRU">
-                        </div>
-                        <div class="col-2">
-                            <input type="text" id="cc-cvv" required="required" placeholder="CVV">
-                            <i class="i-icon-payment i-icon-cvv2"></i>
-                        </div>
-                    </div>
-                    <div class="last-row">
-                        <div>
-                            <input type="text" id="cc-name" required="required" placeholder="NAME">
-                        </div>
-                    </div>
+                    <div class="form-container">
+                        <div class="personal-information">
+                            <h1>Payment Information</h1>
+                        </div> <!-- end of personal-information -->
+        
+                        <input id="column-left" type="text" name="first-name" placeholder="First Name"/>
+                        <input id="column-right" type="text" name="last-name" placeholder="Surname"/>
+                        <input id="input-field" type="text" name="number" placeholder="Card Number"/>
+                        <input id="column-left" type="text" name="expiry" placeholder="MM / YY"/>
+                        <input id="column-right" type="text" name="cvc" placeholder="CCV"/>
+        
+                        <div class="card-wrapper"></div>
+        
+                        <input id="input-field" type="text" name="streetaddress" required="required" autocomplete="on" maxlength="45" placeholder="Streed Address"/>
+                        <input id="column-left" type="text" name="city" required="required" autocomplete="on" maxlength="20" placeholder="City"/>
+                        <input id="column-right" type="text" name="zipcode" required="required" autocomplete="on" pattern="[0-9]*" maxlength="5" placeholder="ZIP code"/>
+                        <input id="input-field" type="email" name="email" required="required" autocomplete="on" maxlength="40" placeholder="Email"/>
+                        <input id="input-button" type="submit" value="Submit"/>
                 </div>
 
                 <div class="payment-offline">
@@ -85,59 +82,124 @@
     </script>
 
 <style>
-    #credit-card label{margin-right:5px;}
-    #credit-card input {
-        padding:8px 11px;
-        border:1px solid #d5d9da;
-        box-shadow: 0 0 5px #e8e9eb inset;
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
+    
+    body {
+        padding: 60px 0;
+        background-color: rgba(178,209,229,0.7);
+        margin: 0 auto;
+        width: 600px;
+    }
+    .body-text {
+        padding: 0 20px 30px 20px;
+        font-family: "Roboto";
+        font-size: 1em;
+        color: #333;
+        text-align: center;
+        line-height: 1.2em;
+    }
+    .form-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-wrapper {
+        background-color: #6FB7E9;
         width: 100%;
-        font-size:1em;
-        margin-right: 5px;
-    }
-    #cc-number {
-        width: 330px !important;
-    }
-    #cc-name {
-        width: 330px !important;
-    }
-    #result{margin-left:5px;}
-    .row {
         display: flex;
-        margin-bottom: 15px;
+        
     }
-    .last-row {
-        display: flex;
+    .personal-information {
+        background-color: #3C8DC5;
+        color: #fff;
+        padding: 1px 0;
+        text-align: center;
     }
-    .col-1 {
-        width: 47%;
+    h1 {
+        font-size: 1.3em;
+        font-family: "Roboto"
     }
-    .col-2 {
-        width: 45%;
+    input {
+        margin: 1px 0;
+        padding-left: 3%;
+        font-size: 14px;
     }
-    .full-width {
+    input[type="text"]{
+        display: block;
+        height: 50px;
+        width: 97%;
+        border: none;
+    }
+    input[type="email"]{
+        display: block;
+        height: 50px;
+        width: 97%;
+        border: none;
+    }
+    input[type="submit"]{
+        display: block;
+        height: 60px;
         width: 100%;
-    }
-    #cc-expiration {
-        width: 80% !important;
-    }
-    .i-icon-cvv2 {
-        position: absolute;
-        right: 30px;
-        margin-top: -33px;
-    }
-    .i-icon-card-num{
-        width: 49px;
-        height: 30px;
-        background-position: 6px -69px;
-        position: absolute;
-        right: 32px;
-        top: 23px;
-    }
-
-    #show-cc-label {
-        position: absolute;
-        right: 30px;
+        border: none;
+        background-color: #3C8DC5;
+        color: #fff;
         margin-top: 2px;
+        curson: pointer;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover{
+        background-color: #6FB7E9;
+        transition: 0.3s ease;
+    }
+    #column-left {
+        width: 46.8%;
+        float: left;
+        margin-bottom: 2px;
+    }
+    #column-right {
+        width: 46.8%;
+        float: right;
+    }
+    
+    @media only screen and (max-width: 480px){
+        body {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .form-container {
+            margin: 0 2%;
+        }
+        input {
+            font-size: 1em;
+        }
+        #input-button {
+            width: 100%;
+        }
+        #input-field {
+            width: 96.5%;
+        }
+        h1 {
+            font-size: 1.2em;
+        }
+        input {
+            margin: 2px 0;
+        }
+        input[type="submit"]{
+            height: 50px;
+        }
+        #column-left {
+            width: 96.5%;
+            display: block;
+            float: none;
+        }
+        #column-right {
+            width: 96.5%;
+            display: block;
+            float: none;
+        }
     }
 </style>
 @endsection
