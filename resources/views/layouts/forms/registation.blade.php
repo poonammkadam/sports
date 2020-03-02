@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container main-body">
+        @if (session('alert'))
+        <div class="alert alert-info">
+            {{ session('alert') }}
+        </div>
+       @endif
         <div class="form-body">
             <div class="text-center">
                 <h3>Basic Information</h3>

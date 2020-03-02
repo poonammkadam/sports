@@ -3,6 +3,11 @@
     <div class="container">
         <div>
             <div class="text-center">
+                @if (session('alert'))
+    <div class="alert alert-success">
+        {{ session('alert') }}
+    </div>
+@endif
                 <h3>Events</h3>
             </div>
             <div class="row">
