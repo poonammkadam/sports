@@ -36,7 +36,13 @@ class UserController extends Controller
 {
    public function getRegister(){
        $objProfile =  auth()->user();
-    return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+       if('complete' == $objProfile->registration_status){
+        return view('layouts.view.profile_complite', ['objProfile'=>$objProfile]);
+       }
+       else{
+        return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+       }
+    
    }
 
    public function getProfile(){
@@ -61,18 +67,18 @@ class UserController extends Controller
        $objProfile->address = $request->address;
        $objProfile->country = $request->country;
        $objProfile->mobile_no_primary = $request->mobile_no;
+
        $objProfile->save();
 
        auth()->user()->name=$request->local_name;
        auth()->user()->email=$request->email;
-
-       return redirect('events')->with('success', 'Data Added successfully.');
+       auth()->user()->registration_status= 'complete';
+       auth()->user()->save();
+       return redirect('profile_update')->with('alert', 'Your Profile Added successfully.!');
    }
 
    public function eventList(){
          $arrObjEvents = Events::all();
-
-
         return view('layouts.view.event_list', ['arrObjEvents'=>$arrObjEvents]);
     }
 
@@ -95,7 +101,13 @@ class UserController extends Controller
    public function eventCreate($id){
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
-        return view('layouts.forms.event',['objEvent'=>$objEvent]);
+        if('complete' == auth()->user()->registration_status){
+            return view('layouts.forms.event',['objEvent'=>$objEvent]);
+        }
+        else{
+            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you complete your profile');
+        }
+       
     }
 
    public function makePayment($arrMixExtraData){
