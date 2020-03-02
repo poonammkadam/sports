@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container">
         <div>
             <div class="text-center">
                 <h3>Event Participation</h3>
             </div>
-            <form method="POST" action="{{url('event/register')}}" autocomplete="off" >
+            <form method="POST" id="credit-card" action="{{url('event/register')}}" autocomplete="off" >
                 @csrf
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                 <h2>{{$objEvent->name}}</h2>
@@ -39,80 +40,25 @@
 
                 <div class="payment-online">
 
-                    <div class="form-group owner">
-                        <label for="owner">Owner</label>
-                        <input type="text" name="cc_owner" class="form-control" id="owner">
+                    <div class="row">
+                        <div>
+                            <input type="text" id="cc-number" required="required" placeholder="CARD NUMBER">
+                            <span id="show-cc-label"></span>
+                        </div>
                     </div>
-                    <div class="form-group CVV">
-                        <label for="cvv">CVV</label>
-                        <input type="text" name="cc_cvv" class="form-control" id="cvv">
+                    <div class="row">
+                        <div class="col-1">
+                            <input type="text" id='cc-expiration' required="required" placeholder="VALID THRU">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" id="cc-cvv" required="required" placeholder="CVV">
+                            <i class="i-icon-payment i-icon-cvv2"></i>
+                        </div>
                     </div>
-                    <div class="form-group" id="card-number-field">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" name="cc_cardnumber" class="form-control" id="cardNumber">
-                    </div>
-                    <div class="form-group" id="expiration-date">
-                        <label for="expdate">Expiration Date</label>
-                        <select id="expdate" class="form-control" name="cc_month">
-                            <option value="01">January</option>
-                            <option value="02">February </option>
-                            <option value="03">March</option>
-                            <option value="04">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                        <label>
-                            <select class="form-control" name="cc_year">
-                                <option value="16"> 2016</option>
-                                <option value="17"> 2017</option>
-                                <option value="18"> 2018</option>
-                                <option value="19"> 2019</option>
-                                <option value="20"> 2020</option>
-                                <option value="21"> 2021</option>
-                                <option value="22"> 2022</option>
-                                <option value="23"> 2023</option>
-                                <option value="24"> 2024</option>
-                                <option value="25"> 2025</option>
-                                <option value="26"> 2026</option>
-                                <option value="27"> 2027</option>
-                                <option value="28"> 2028</option>
-                                <option value="29"> 2029</option>
-                                <option value="30"> 2030</option>
-                                <option value="31"> 2031</option>
-                                <option value="32"> 2032</option>
-                                <option value="33"> 2033</option>
-                                <option value="34"> 2034</option>
-                                <option value="35"> 2035</option>
-                                <option value="36"> 2036</option>
-                                <option value="37"> 2037</option>
-                                <option value="38"> 2038</option>
-                                <option value="39"> 2039</option>
-                                <option value="40"> 2040</option>
-                                <option value="41"> 2041</option>
-                                <option value="42"> 2042</option>
-                                <option value="43"> 2043</option>
-                                <option value="44"> 2044</option>
-                                <option value="45"> 2045</option>
-                                <option value="46"> 2046</option>
-                                <option value="47"> 2047</option>
-                                <option value="48"> 2048</option>
-                                <option value="49"> 2049</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="form-group" id="credit_cards">
-                        <img src="{{asset('/images/visa.jpg')}}" id="visa">
-                        <img src="{{asset('/images/mastercard.jpg')}}" id="mastercard">
-                        <img src="{{asset('/images/amex.jpg')}}" id="amex">
-                    </div>
-                    <div class="form-group" id="pay-now">
-                        <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
+                    <div class="last-row">
+                        <div>
+                            <input type="text" id="cc-name" required="required" placeholder="NAME">
+                        </div>
                     </div>
                 </div>
 
@@ -132,32 +78,67 @@
             });
             $('#price').html(str)
         });
-        // jQuery(function($) {
-        //     $('[data-numeric]').payment('restrictNumeric');
-        //     $('.cc-number').payment('formatCardNumber');
-        //     $('.cc-exp').payment('formatCardExpiry');
-        //     $('.cc-cvc').payment('formatCardCVC');
-        //
-        //     $.fn.toggleInputError = function(erred) {
-        //         this.parent('.form-group').toggleClass('has-error', erred);
-        //         return this;
-        //     };
-        //
-        //     $('form').submit(function(e) {
-        //         var data = $('form').serialize();
-        //         e.preventDefault();
-        //
-        //         var cardType = $.payment.cardType($('.cc-number').val());
-        //         $('.cc-number').toggleInputError(!$.payment.validateCardNumber($('.cc-number').val()));
-        //         $('.cc-exp').toggleInputError(!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
-        //         $('.cc-cvc').toggleInputError(!$.payment.validateCardCVC($('.cc-cvc').val(), cardType));
-        //         $('.cc-brand').text(cardType);
-        //
-        //         $('.validation').removeClass('text-danger text-success');
-        //         $('.validation').addClass($('.has-error').length ? 'text-danger' : 'text-success');
-        //     });
-        // });
+
+        $(document).ready(function() {
+
+        });
     </script>
 
+<style>
+    #credit-card label{margin-right:5px;}
+    #credit-card input {
+        padding:8px 11px;
+        border:1px solid #d5d9da;
+        box-shadow: 0 0 5px #e8e9eb inset;
+        width: 100%;
+        font-size:1em;
+        margin-right: 5px;
+    }
+    #cc-number {
+        width: 330px !important;
+    }
+    #cc-name {
+        width: 330px !important;
+    }
+    #result{margin-left:5px;}
+    .row {
+        display: flex;
+        margin-bottom: 15px;
+    }
+    .last-row {
+        display: flex;
+    }
+    .col-1 {
+        width: 47%;
+    }
+    .col-2 {
+        width: 45%;
+    }
+    .full-width {
+        width: 100%;
+    }
+    #cc-expiration {
+        width: 80% !important;
+    }
+    .i-icon-cvv2 {
+        position: absolute;
+        right: 30px;
+        margin-top: -33px;
+    }
+    .i-icon-card-num{
+        width: 49px;
+        height: 30px;
+        background-position: 6px -69px;
+        position: absolute;
+        right: 32px;
+        top: 23px;
+    }
+
+    #show-cc-label {
+        position: absolute;
+        right: 30px;
+        margin-top: 2px;
+    }
+</style>
 @endsection
 

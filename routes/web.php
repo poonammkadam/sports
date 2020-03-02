@@ -28,7 +28,6 @@ Route::get('/payment','Controller@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
