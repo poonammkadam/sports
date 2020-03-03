@@ -120,10 +120,10 @@ var card =
                     Card.prototype.defaults = {
                         formatting: true,
                         formSelectors: {
-                            numberInput: 'input[name="number"]',
-                            expiryInput: 'input[name="expiry"]',
-                            cvcInput: 'input[name="cvc"]',
-                            nameInput: 'input[name="name"]'
+                            numberInput: 'input[name="cardholder_number"]',
+                            expiryInput: 'input[name="cardholder_expiry"]',
+                            cvcInput: 'input[name="cardholder_cvc"]',
+                            nameInput: 'input[name="cardholder_name"]'
                         },
                         cardSelectors: {
                             cardContainer: '.jp-card-container',

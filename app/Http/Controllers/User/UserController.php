@@ -74,7 +74,7 @@ class UserController extends Controller
        auth()->user()->email=$request->email;
        auth()->user()->registration_status= 'complete';
        auth()->user()->save();
-       return redirect('profile_update')->with('alert', 'Your Profile Added successfully.!');
+       return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
    }
 
    public function eventList(){
@@ -85,16 +85,24 @@ class UserController extends Controller
    public function eventStore(Request $request){
      $objEventParticipants = new EventParticipants();
 //     dd(auth()->user()->id);
-     $objProfile = Profile::where('user_id', auth()->user()->id)->first();
+       $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEventParticipants->category_id = $request->event_category;
-       $objEventParticipants->event_id = $request->event_id;
-       $objEventParticipants->profile_id = $objProfile->id;
-//       $objEvent->payment_status = $request->event_category;
-//       $objEvent->payment_type = $request->event_category;
+//       $objEventParticipants->event_id = $request->event_id;
+       $objEventParticipants->profile_id = 1;
+       $objEventParticipants->payment_type = $request->payment_type;
        $objEventParticipants->save();
        $arrMixExtraData=[];
-//       $this->makePayment($arrMixExtraData);
-
+       $objPayment='';
+       if($request->payment_type=='online'){
+           $arrMixExtraData['cardholder_name']= $request->cardholder_name;
+           $arrMixExtraData['cardholder_number']= $request->cardholder_number;
+           $arrMixExtraData['cardholder_expiry']= $request->cardholder_name;
+           $arrMixExtraData['cardholder_cvc']= $request->cardholder_cvc;
+           $arrMixExtraData['fee']= (int)$request->cardholder_cvc;
+           $arrMixExtraData['profile_id']= 1;
+           $objPayment=$this->makePayment($arrMixExtraData);
+       }
+dd('klsdflk');
        return redirect('events')->with('success', 'Data Added successfully.');
    }
 
@@ -130,7 +138,7 @@ class UserController extends Controller
 
         $txn->setAction(Actions::Payment);
         $txn->setCredentials($credentials);
-        $txn->setAmount(200000);
+        $txn->setAmount($arrMixExtraData['fee']);
         $txn->setCurrency("AUD");
         $txn->setInternalNote("Internal Note");
         $txn->setReference1("My Customer Reference");
@@ -140,9 +148,9 @@ class UserController extends Controller
         $txn->setSubType("single");
         $txn->setType(TransactionType::Internet);
 
-        $cardDetails->setCardHolderName("MR C CARDHOLDER");
-        $cardDetails->setCardNumber("5123456789012346");
-        $cardDetails->setCVN("678");
+        $cardDetails->setCardHolderName( $arrMixExtraData['cardholder_name']);
+        $cardDetails->setCardNumber($arrMixExtraData['cardholder_number']);
+        $cardDetails->setCVN($arrMixExtraData['cardholder_cvc']);
         $cardDetails->setExpiryDate("9900");
 
         $txn->setCardDetails($cardDetails);
@@ -167,33 +175,32 @@ class UserController extends Controller
         $shippingAddress->setAddress($address);
         $shippingAddress->setContactDetails($contactDetails);
         $shippingAddress->setPersonalDetails($personalDetails);
+//
+//        $order_item_1->setDescription("an item");
+//        $order_item_1->setQuantity(1);
+//        $order_item_1->setUnitPrice(1000);
+//
+//        $orderItems = array($order_item_1);
+//
+//        $order_recipient_1->setAddress($address);
+//        $order_recipient_1->setContactDetails($contactDetails);
+//        $order_recipient_1->setPersonalDetails($personalDetails);
+//
+//        $orderRecipients = array($order_recipient_1);
+//
+//        $order->setBillingAddress($billingAddress);
+//        $order->setOrderItems($orderItems);
+//        $order->setOrderRecipients($orderRecipients);
+//        $order->setShippingAddress($shippingAddress);
+//        $order->setShippingMethod("boat");
+//
+//        $txn->setOrder($order);
 
-        $order_item_1->setDescription("an item");
-        $order_item_1->setQuantity(1);
-        $order_item_1->setUnitPrice(1000);
-
-        $orderItems = array($order_item_1);
-
-        $order_recipient_1->setAddress($address);
-        $order_recipient_1->setContactDetails($contactDetails);
-        $order_recipient_1->setPersonalDetails($personalDetails);
-
-        $orderRecipients = array($order_recipient_1);
-
-        $order->setBillingAddress($billingAddress);
-        $order->setOrderItems($orderItems);
-        $order->setOrderRecipients($orderRecipients);
-        $order->setShippingAddress($shippingAddress);
-        $order->setShippingMethod("boat");
-
-        $txn->setOrder($order);
-
-        $customer->setCustomerNumber("1234");
+        $customer->setCustomerNumber($arrMixExtraData['profile_id']);
         $customer->setAddress($address);
         $customer->setExistingCustomer(false);
         $customer->setContactDetails($contactDetails);
         $customer->setPersonalDetails($personalDetails);
-        $customer->setCustomerNumber("1");
         $customer->setDaysOnFile(1);
 
         $txn->setCustomer($customer);
@@ -203,17 +210,17 @@ class UserController extends Controller
 
     //    $txn->setFraudScreeningRequest($fraudScreening);
 
-        $statementDescriptor->setAddressLine1("123 Drive Street");
-        $statementDescriptor->setAddressLine2("");
-        $statementDescriptor->setCity("Melbourne");
-        $statementDescriptor->setCompanyName("A Company Name");
-        $statementDescriptor->setCountryCode("AUS");
-        $statementDescriptor->setMerchantName("A Merchant Name");
-        $statementDescriptor->setPhoneNumber("0123456789");
-        $statementDescriptor->setPostCode("3000");
-        $statementDescriptor->setState("Victoria");
+//        $statementDescriptor->setAddressLine1("123 Drive Street");
+//        $statementDescriptor->setAddressLine2("");
+//        $statementDescriptor->setCity("Melbourne");
+//        $statementDescriptor->setCompanyName("A Company Name");
+//        $statementDescriptor->setCountryCode("AUS");
+//        $statementDescriptor->setMerchantName("A Merchant Name");
+//        $statementDescriptor->setPhoneNumber("0123456789");
+//        $statementDescriptor->setPostCode("3000");
+//        $statementDescriptor->setState("Victoria");
 
-        $txn->setStatementDescriptor($statementDescriptor);
+//        $txn->setStatementDescriptor($statementDescriptor);
 
         $txn->setTokenisationMode(3);
         $txn->setTimeout(93121);

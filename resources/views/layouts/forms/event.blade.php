@@ -20,7 +20,8 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Event Fee</label>
-                    <h6 id="price">-</h6>
+                    <input type="hidden" value="" id="exampleFormControlInput1" name="fee">
+                    <h6>B$ <span id="price">--</span> </h6>
                 </div>
 
                 <div class="form-group">
@@ -39,10 +40,10 @@
                 </div>
 
                 <div class="radio">
-                    <label for="offline"><input type="radio" required id="offline" value="offline" name="payment-type">Offline</label>
+                    <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
                 </div>
                 <div class="radio">
-                    <label for="online"><input type="radio" required id="online" value="online" name="payment-type">Online</label>
+                    <label for="online"><input type="radio" required id="online" value="online" name="payment_type">Online</label>
                 </div>
 
                 <div class="payment-online" style="display: none">
@@ -50,11 +51,10 @@
                         <div class="personal-information">
                             <h1>Payment Information</h1>
                         </div>
-                        <input type="hidden" name="payment-type" value="online">
-                        <input id="column-left"  required type="text" name="cardholder-name" placeholder="Cardholder Name"/>
-                        <label for="input-field"></label><input id="input-field" required type="text" name="number" placeholder="Card Number"/>
-                        <label for="column-left"></label><input id="column-left" required type="text" name="expiry" placeholder="MM / YY"/>
-                        <label for="column-right"></label><input id="column-right" required type="text" name="cvc" placeholder="CCV"/>
+                        <input id="column-left"  required type="text" name="cardholder_name" placeholder="Cardholder Name"/>
+                        <label for="input-field"></label><input id="input-field" required type="text" name="cardholder_number" placeholder="Card Number"/>
+                        <label for="column-left"></label><input id="column-left" required type="text" name="cardholder_expiry" placeholder="MM / YY"/>
+                        <label for="column-right"></label><input id="column-right" required type="text" name="cardholder_cvc" placeholder="CCV"/>
 
                         <div class="card-wrapper"></div>
                     </div>
@@ -71,6 +71,7 @@
                 str += $( this ).data('price') + " ";
             });
             $('#price').html(str)
+            $('input[name="fee"]').val(str)
         });
 
         $('#online').on('click', function()
