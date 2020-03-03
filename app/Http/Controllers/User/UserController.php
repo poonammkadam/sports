@@ -67,6 +67,7 @@ class UserController extends Controller
        $objProfile->address = $request->address;
        $objProfile->country = $request->country;
        $objProfile->mobile_no_primary = $request->mobile_no;
+       $objProfile->t_shrit_size = $request->t_shirt_size;
 
        $objProfile->save();
 

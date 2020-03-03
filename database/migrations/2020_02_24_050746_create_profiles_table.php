@@ -32,8 +32,9 @@ class CreateProfilesTable extends Migration
             $table->text('name_preference')->nullable();
             $table->text('language_preference')->nullable();
             $table->text('team_preference')->nullable();
-            $table->text('t-shrit_size')->nullable();
+            $table->text('t_shrit_size')->nullable();
             $table->boolean('newsletter')->nullable();
+            $table->text('extra_info')->nullable();
             $table->timestamps();
         });
     }

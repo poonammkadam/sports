@@ -98,6 +98,17 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
+                        <label for="inputAddress">T-shirt size</label>
+                        <select class="form-control custom-select" name="t_shirt_size">
+                            <option selected>Open this select menu</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="inputAddress2">Mobile phone</label>
                         <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
                     </div>

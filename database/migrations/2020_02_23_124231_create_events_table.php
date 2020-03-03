@@ -28,6 +28,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('event_date')->nullable();
             $table->dateTime('registration_end_date')->nullable();
             $table->text('banner')->nullable();
+            $table->text('extra_info')->nullable();
             $table->timestamps();
         });
     }

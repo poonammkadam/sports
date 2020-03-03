@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->text('category_type')->nullable();
             $table->text('category_subtype')->nullable();
             $table->text('amount')->nullable();
+            $table->text('extra_info')->nullable();
             $table->timestamps();
         });
     }
