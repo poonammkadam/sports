@@ -91,7 +91,7 @@ class UserController extends Controller
 //       $objEventParticipants->event_id = $request->event_id;
        $objEventParticipants->profile_id = 1;
        $objEventParticipants->payment_type = $request->payment_type;
-       $objEventParticipants->save();
+
        $arrMixExtraData=[];
        $objPayment='';
        if($request->payment_type=='online'){
@@ -99,11 +99,24 @@ class UserController extends Controller
            $arrMixExtraData['cardholder_number']= $request->cardholder_number;
            $arrMixExtraData['cardholder_expiry']= $request->cardholder_name;
            $arrMixExtraData['cardholder_cvc']= $request->cardholder_cvc;
-           $arrMixExtraData['fee']= (int)$request->cardholder_cvc;
+           $arrMixExtraData['fee']= (int)$request->fee;
            $arrMixExtraData['profile_id']= 1;
            $objPayment=$this->makePayment($arrMixExtraData);
+           $objApiResponse=$objPayment->getAPIResponse();
+           if($objApiResponse->isSuccessful()){
+               $objEventParticipants->payment_status=1;
+               $arrExtraData['transaction_details']=
+               $objEventParticipants->payment_status=1;
+               return view('payment.successful');
+           }else{
+               return view('payment.unsuccessful');
+           }
        }
-dd('klsdflk');
+       if($request->payment_type=='online') {
+           $objEventParticipants->payment_status = 2;
+           return view('payment.offline.successful');
+       }
+       $objEventParticipants->save();
        return redirect('events')->with('success', 'Data Added successfully.');
    }
 
@@ -114,7 +127,7 @@ dd('klsdflk');
             return view('layouts.forms.event',['objEvent'=>$objEvent]);
 //        }
 //        else{
-//            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you complete your profile');
+//            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you need complete your profile');
 //        }
 
     }
@@ -225,10 +238,7 @@ dd('klsdflk');
 
         $txn->setTokenisationMode(3);
         $txn->setTimeout(93121);
-
-        $response = $txn->submit();
-        dd($response);
-        return view('payment');
+       return   $response = $txn->submit();
     }
 
 }

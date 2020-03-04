@@ -54,6 +54,7 @@
                             <div class="col-1"></div>
                             <div class="col-7">{{$objEvent->registration_end_date}}</div>
                         </div>
+
                     </div>
                 </div>
             </div>

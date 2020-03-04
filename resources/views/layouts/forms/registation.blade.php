@@ -76,19 +76,34 @@
                                placeholder="" >
                     </div>
                 </div>
+
                 <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="tshirt">T-shirt size</label>
+                    <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                        <option selected>Open this select menu</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress2">Passport</label>
                         <input required  type="text" class="form-control" name="passport_no" id="inputAddress2" placeholder="Passport ID">
                     </div>
+
                 </div>
                 <h3>Contact Information</h3>
-                <div class="form-group">
+                <div class="form-row">
+
                     <div class="form-group col-md-6">
                     <label for="exampleFormControlTextarea1">Address</label>
                     <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    <div class="form-group col-md-3">
+
+                    <div class="form-group col-md-6">
                         <label for="inputAddress">Country</label>
                         <select class="form-control custom-select" name="country">
                             <option selected>Open this select menu</option>
@@ -97,20 +112,12 @@
                             <option value="3">c</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputAddress">T-shirt size</label>
-                        <select class="form-control custom-select" name="t_shirt_size">
-                            <option selected>Open this select menu</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
                         <label for="inputAddress2">Mobile phone</label>
-                        <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
+                        <input required  type="number"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
                     </div>
                 </div>
                 <button required  type="submit" class="btn btn-primary">Submit</button>
