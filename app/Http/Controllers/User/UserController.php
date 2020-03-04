@@ -48,15 +48,20 @@ class UserController extends Controller
    public function getProfile(){
        $objProfile =  auth()->user();
        $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
-       $objUserProfilEvents=  $objUserProfile->eventParticipants()->load('events');
+       $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
 
-    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfilEvents, 'objUserProfile'=> $objUserProfile]);
+    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
 
    }
 
    public function update(Request $request){
-       $objProfile = new Profile();
-       $objProfile->user_id =  Auth::user()->id;
+       $objProfileExist = Profile::where('user_id', auth()->user()->id)->first();
+       if($objProfileExist){
+           $objProfile=$objProfileExist;
+       }else{
+           $objProfile=new Profile();
+       }
+       $objProfile->user_id =  auth()->user()->id;
        $objProfile->first_name = $request->first_name;
        $objProfile->last_name = $request->last_name;
        $objProfile->gender = $request->gender;
@@ -67,13 +72,12 @@ class UserController extends Controller
        $objProfile->address = $request->address;
        $objProfile->country = $request->country;
        $objProfile->mobile_no_primary = $request->mobile_no;
-       $objProfile->t_shrit_size = $request->t_shirt_size;
-
+       $objProfile->t_shirt_size = $request->t_shirt_size;
        $objProfile->save();
 
        auth()->user()->name=$request->local_name;
        auth()->user()->email=$request->email;
-       auth()->user()->registration_status= 'complete';
+       auth()->user()->registration_status= true;
        auth()->user()->save();
        return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
    }
@@ -85,11 +89,11 @@ class UserController extends Controller
 
    public function eventStore(Request $request){
      $objEventParticipants = new EventParticipants();
-//     dd(auth()->user()->id);
+
        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEventParticipants->category_id = $request->event_category;
-//       $objEventParticipants->event_id = $request->event_id;
-       $objEventParticipants->profile_id = 1;
+       $objEventParticipants->event_id = $request->event_id;
+       $objEventParticipants->profile_id = $objProfile->id;
        $objEventParticipants->payment_type = $request->payment_type;
 
        $arrMixExtraData=[];
@@ -105,30 +109,31 @@ class UserController extends Controller
            $objApiResponse=$objPayment->getAPIResponse();
            if($objApiResponse->isSuccessful()){
                $objEventParticipants->payment_status=1;
-               $arrExtraData['transaction_details']=
-               $objEventParticipants->payment_status=1;
+               $objEventParticipants->save();
                return view('payment.successful');
            }else{
                return view('payment.unsuccessful');
            }
        }
-       if($request->payment_type=='online') {
+
+       if($request->payment_type=='offline') {
            $objEventParticipants->payment_status = 2;
+           $objEventParticipants->save();
            return view('payment.offline.successful');
        }
-       $objEventParticipants->save();
-       return redirect('events')->with('success', 'Data Added successfully.');
+
+       return redirect('events')->with('success', 'You are Registered Successfully successfully.');
    }
 
    public function eventCreate($id){
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
-//        if('complete' == auth()->user()->registration_status){
+        if(auth()->user()->registration_status){
             return view('layouts.forms.event',['objEvent'=>$objEvent]);
-//        }
-//        else{
-//            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you need complete your profile');
-//        }
+        }
+
+            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you need complete your profile');
+
 
     }
 

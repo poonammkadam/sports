@@ -38,6 +38,10 @@
                     <label for="exampleFormControlInput1">Event Date</label>
                     <h6>{{$objEvent->event_date}}</h6>
                 </div>
+    
+                <div class="radio">
+                    <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
+                </div>
 
                 <div class="radio">
                     <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
@@ -51,10 +55,10 @@
                         <div class="personal-information">
                             <h1>Payment Information</h1>
                         </div>
-                        <input id="column-left"  required type="text" name="cardholder_name" placeholder="Cardholder Name"/>
-                        <label for="input-field"></label><input id="input-field" required type="text" name="cardholder_number" placeholder="Card Number"/>
-                        <label for="column-left"></label><input id="column-left" required type="text" name="cardholder_expiry" placeholder="MM / YY"/>
-                        <label for="column-right"></label><input id="column-right" required type="text" name="cardholder_cvc" placeholder="CCV"/>
+                        <input id="column-left" type="text" name="cardholder_name" placeholder="Cardholder Name"/>
+                        <label for="input-field"></label><input id="input-field"  type="text" name="cardholder_number" placeholder="Card Number"/>
+                        <label for="column-left"></label><input id="column-left"  type="text" name="cardholder_expiry" placeholder="MM / YY"/>
+                        <label for="column-right"></label><input id="column-right"  type="text" name="cardholder_cvc" placeholder="CCV"/>
 
                         <div class="card-wrapper"></div>
                     </div>
