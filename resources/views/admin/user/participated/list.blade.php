@@ -4,7 +4,7 @@
         <div class="card-header">
             <h3 class="card-title">Events Participated by {{$objUserProfile->first_name}}{{$objUserProfile->last_name}}</h3>
         </div>
-       
+
         <!-- /.card-header -->
         <div class="card-body">
             @if(session()->has('message'))
@@ -12,6 +12,11 @@
                     {{ session()->get('message') }}
                 </div>
             @endif
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">
                     <div class="col-sm-12">
@@ -38,6 +43,10 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Organisers name
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                    Action
+                                </th>
                             </tr>
                             </thead>
 
@@ -57,6 +66,15 @@
 
                                         <td>
                                             {{$objEvent->events->organiser_name}}
+                                        </td>
+
+                                        <td>
+                                            @if($objEvent->payment_status == 1)
+                                            <a href="#" class="btn btn-success m-1 disabled"  >Paid</a>
+                                            @else
+                                                <a href="{{url('admin/events/paid/'.$objEvent->id)}}"
+                                               class="btn btn-danger m-1">Unpaid</a>
+                                        @endif
                                         </td>
                                     </tr>
                                 @endforeach

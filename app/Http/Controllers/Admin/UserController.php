@@ -30,6 +30,7 @@ class UserController extends Controller
         return view('admin.user.participated.list', ['objUserProfile' => $objUserProfile, 'objUserProfileEvents'=>$objUserProfileEvents]);
     }
 
+
     public function update($id, Request $request){
 
         return view('admin.user.edit');

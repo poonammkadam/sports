@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\Category;
+use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use Illuminate\Http\Request;
 
@@ -36,10 +37,8 @@ class EventController extends Controller
         $objEvent->organiser_name = $request->orgname;
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
-//        $objEvent->banner = $request->file('banner')->store('banner');
-
+        $objEvent->banner = $request->file('banner')->store('banner');
         $objEvent->save();
-
         $intEventkey = $objEvent->getKey();
         if($request->category){
         foreach ($request->category as $category){
@@ -59,6 +58,13 @@ class EventController extends Controller
         $objEvent=Events::where('id', $id)->first();
     return view('admin.events.edit', ['objEvent'=>$objEvent]);
     }
+
+        public  function setPaymentStatus($id){
+        $objEvent=EventParticipants::findOrFail($id);
+            $objEvent->payment_status=1;
+            $objEvent->save();
+            return redirect()->back()->with('success', 'Events Payment statu update Successfully.');
+        }
 
     public function update($id, Request $request){
         $objEvent=Events::where('id', $id)->first();

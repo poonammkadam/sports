@@ -99,6 +99,8 @@
                 <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
                 <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
                 <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
+                <li class="nav-item"><a href="{{ url('/organiser') }}">Organiser</a></li>
+
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

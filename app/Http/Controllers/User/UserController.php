@@ -36,7 +36,7 @@ class UserController extends Controller
 {
    public function getRegister(){
        $objProfile =  auth()->user();
-       if('complete' == $objProfile->registration_status){
+       if($objProfile->registration_status){
         return view('layouts.view.profile_complite', ['objProfile'=>$objProfile]);
        }
        else{
@@ -47,10 +47,15 @@ class UserController extends Controller
 
    public function getProfile(){
        $objProfile =  auth()->user();
-       $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
-       $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
+       if($objProfile->registration_status){
+           $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
+           $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
+           return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
+       }
+       else{
+           return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+       }
 
-    return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
 
    }
 
