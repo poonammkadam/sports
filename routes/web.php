@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('auth/logout', 'Auth\AuthController@logout');
+
 Route::get('/registration', function () {
     return view('layouts.forms.registation');
 });

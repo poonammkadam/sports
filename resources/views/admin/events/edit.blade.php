@@ -83,8 +83,12 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Is pickup and drop available</label>
 
                                 <div class="col-md-6">
-                                    <input type="radio" required class="pick_up_yes" name="pickup_drop"  value="yes">Yes
-                                    <input type="radio" required class="pick_up_no" name="pickup_drop" value="no">No
+                                    <label for="pick_up_yes">Yes
+                                        <input type="radio" required class="pick_up_yes" id="pick_up_yes" name="pickup_drop"  value="yes">
+                                    </label>
+                                    <label for="pick_up_no">No
+                                    <input type="radio" required class="pick_up_no" id="pick_up_no" name="pickup_drop" value="no">
+                                    </label>
                                 </div>
                             </div>
 

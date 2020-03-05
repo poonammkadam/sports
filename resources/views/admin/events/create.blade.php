@@ -41,14 +41,14 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Event Description</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description"  class="form-control " name="description"   autocomplete="description">
+                                    <textarea id="description"  class="form-control " name="description"  autocomplete="description">
                                     </textarea>
                                 </div>
                             </div>
-
+                            <button type="button" name="add" id="add" class="btn btn-outline-dark"><i class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
                                 <label >Add Event Type</label>
-                                <button type="button" name="add" id="add" class="btn btn-outline-dark" onclick="addEventType()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                
                                 <div id="dynamic_field"></div>
                             </div>
 
@@ -133,45 +133,60 @@
     </div>
 
     <script type="text/javascript">
-        function addEventType() {
-            var input = document.createElement("input");
-            var intIndex = $(document).find("#dynamic_field .event-type").length;
-            input.type = "text";
-            input.name = "category["+intIndex+"][type]";
-            input.placeholder = 'Enter Gender';
-            var div = document.createElement("div");
-            div.className = 'event-type form-group';
-            div.innerHTML = 'Add Event Gender:';
-            div.appendChild(input);
-
-            var input2 = document.createElement("input");
-            input2.type = "text";
-            input2.placeholder = 'Event Distance';
-            input2.name = "category["+intIndex+"][subtype]";
-            div.appendChild(input2);
-
-            var input3 = document.createElement("input");
-            input3.type = "text";
-            input3.placeholder = 'Event fee';
-            input3.name = "category["+intIndex+"][fee]";
-            div.appendChild(input3);
-
-            var input4 = document.createElement("input");
-            input4.type = "button";
-            input4.name = "remove_type";
-            input4.className = "remove_type";
-            input4.value = "Remove";
-            div.appendChild(input4);
-            document.getElementById("dynamic_field").appendChild(div);
-
-            $(document).ready(function () {
-                $(document).on('click', '.pick_up_yes', function (event) {
-                    $(this).parent().remove();
-                });
-
-
-            });
-        }
+		$(document).ready(function(){
+				$(document).on('click', '#add', function(){
+					var intIndex = $(document).find("#dynamic_field .event-type").length;
+					var html = '<div class="addedSection">';
+					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][type]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
+					html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
+					$('#dynamic_field').append(html);
+				});
+			$(document).on('click', '.remove', function(){
+				$("div.addedSection").first().remove();
+			});
+		})
+        
+        // function addEventType() {
+        //     var input = document.createElement("input");
+        //     var intIndex = $(document).find("#dynamic_field .event-type").length;
+        //     input.type = "text";
+        //     input.name = "category["+intIndex+"][type]";
+        //     input.placeholder = 'Enter Gender';
+        //     var div = document.createElement("div");
+        //     div.className = 'event-type form-group';
+        //     div.innerHTML = 'Add Event Gender:';
+        //     div.appendChild(input);
+        //
+        //     var input2 = document.createElement("input");
+        //     input2.type = "text";
+        //     input2.placeholder = 'Event Distance';
+        //     input2.name = "category["+intIndex+"][subtype]";
+        //     div.appendChild(input2);
+        //
+        //     var input3 = document.createElement("input");
+        //     input3.type = "text";
+        //     input3.placeholder = 'Event fee';
+        //     input3.name = "category["+intIndex+"][fee]";
+        //     div.appendChild(input3);
+        //
+        //     var input4 = document.createElement("input");
+        //     input4.type = "button";
+        //     input4.name = "remove_type";
+        //     input4.className = "remove_type";
+        //     input4.value = "Remove";
+        //     div.appendChild(input4);
+        //     document.getElementById("dynamic_field").appendChild(div);
+        //
+        //     $(document).ready(function () {
+        //         $(document).on('click', '.pick_up_yes', function (event) {
+        //             $(this).parent().remove();
+        //         });
+        //
+        //
+        //     });
+        // }
     </script>
 @endsection
 
