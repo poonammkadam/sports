@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales['ar-ma'] = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales['ar-ma'] = factory()));
+}(this, function () {
+    'use strict';
+    
     var arMa = {
         code: "ar-ma",
         week: {
@@ -25,7 +26,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     return arMa;
-
+    
 }));

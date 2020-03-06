@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.cs = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.cs = factory()));
+}(this, function () {
+    'use strict';
+    
     var cs = {
         code: "cs",
         week: {
@@ -26,7 +27,7 @@
         },
         noEventsMessage: "Žádné akce k zobrazení"
     };
-
+    
     return cs;
-
+    
 }));

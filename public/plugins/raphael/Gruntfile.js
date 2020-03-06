@@ -1,9 +1,9 @@
 "use strict";
 
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
+    
     var pkg = grunt.file.readJSON("package.json");
-
+    
     // Project configuration.
     grunt.initConfig({
         // Metadata.
@@ -61,12 +61,12 @@ module.exports = function(grunt) {
             }
         }
     });
-
+    
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-replace");
-
+    
     // Default task.
     grunt.registerTask("default", ["concat", "replace", "uglify"]);
 };

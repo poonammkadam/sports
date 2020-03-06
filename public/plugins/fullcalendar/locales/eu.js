@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.eu = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.eu = factory()));
+}(this, function () {
+    'use strict';
+    
     var eu = {
         code: "eu",
         week: {
@@ -24,7 +25,7 @@
         eventLimitText: "gehiago",
         noEventsMessage: "Ez dago ekitaldirik erakusteko"
     };
-
+    
     return eu;
-
+    
 }));

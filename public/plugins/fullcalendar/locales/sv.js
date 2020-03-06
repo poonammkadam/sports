@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.sv = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.sv = factory()));
+}(this, function () {
+    'use strict';
+    
     var sv = {
         code: "sv",
         week: {
@@ -24,7 +25,7 @@
         eventLimitText: "till",
         noEventsMessage: "Inga händelser att visa"
     };
-
+    
     return sv;
-
+    
 }));

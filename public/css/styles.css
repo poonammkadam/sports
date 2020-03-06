@@ -82,13 +82,14 @@
     opacity: 0.2;
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
     .creditCardForm .owner,
     .creditCardForm .CVV,
     .creditCardForm #expiration-date,
     .creditCardForm #credit_cards {
         width: 100%;
     }
+
     .creditCardForm #credit_cards {
         text-align: left;
     }
@@ -98,14 +99,14 @@
 /*  Examples Section */
 
 .examples {
-	max-width: 700px;
-	background-color: #fff;
-	margin: 0 auto 75px;
-	padding: 30px 50px;
-	color: #4c4e56;
+    max-width: 700px;
+    background-color: #fff;
+    margin: 0 auto 75px;
+    padding: 30px 50px;
+    color: #4c4e56;
 }
 
-.examples-note{
+.examples-note {
     text-align: center;
     font-size: 14px;
     max-width: 370px;

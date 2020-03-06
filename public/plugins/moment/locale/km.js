@@ -1,13 +1,14 @@
 //! moment.js locale configuration
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
-
-
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
+    
+    
     var symbolMap = {
         '1': '១',
         '2': '២',
@@ -31,7 +32,7 @@
         '៩': '9',
         '០': '0'
     };
-
+    
     var km = moment.defineLocale('km', {
         months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
             '_'
@@ -86,8 +87,8 @@
             y: 'មួយឆ្នាំ',
             yy: '%d ឆ្នាំ'
         },
-        dayOfMonthOrdinalParse : /ទី\d{1,2}/,
-        ordinal : 'ទី%d',
+        dayOfMonthOrdinalParse: /ទី\d{1,2}/,
+        ordinal: 'ទី%d',
         preparse: function (string) {
             return string.replace(/[១២៣៤៥៦៧៨៩០]/g, function (match) {
                 return numberMap[match];
@@ -103,7 +104,7 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         }
     });
-
+    
     return km;
-
+    
 })));

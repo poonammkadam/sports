@@ -1,43 +1,31 @@
 <?php
-namespace App\MerchantSuite
-{
 
+namespace App\MerchantSuite {
     abstract class Request
     {
-
         protected $url;
-
         protected $mode;
-
         protected $method;
-
-        private $username;
-
-        private $password;
-
-        private $membershipID;
-
-        private $baseUrl;
-
-        private $urlSuffix;
-
-        private $userAgent;
-
         protected $authHeader;
-
+        private $username;
+        private $password;
+        private $membershipID;
+        private $baseUrl;
+        private $urlSuffix;
+        private $userAgent;
         private $timeout;
-
-        public abstract function submit();
 
         public function __construct()
         {
-            $this->mode = NULL;
-            $this->username = NULL;
-            $this->password = NULL;
+            $this->mode         = NULL;
+            $this->username     = NULL;
+            $this->password     = NULL;
             $this->membershipID = NULL;
-            $this->userAgent = "MerchantSuite:2034:3:3.0.0.0|PHP";
-            $this->timeout = 100000;
+            $this->userAgent    = "MerchantSuite:2034:3:3.0.0.0|PHP";
+            $this->timeout      = 100000;
         }
+
+        public abstract function submit();
 
         public function setCredentials($credentials)
         {
@@ -49,7 +37,7 @@ namespace App\MerchantSuite
 
         public function setMode($mode)
         {
-            $this->mode = $mode;
+            $this->mode    = $mode;
             $this->baseUrl = URLDirectory::getBaseURL($this->mode);
         }
 
@@ -59,9 +47,17 @@ namespace App\MerchantSuite
             $this->setAuthHeader();
         }
 
-        public function setTimeout($timeout)
+        protected function setAuthHeader()
         {
-            $this->timeout = $timeout;
+            if ($this->username === NULL || $this->password === NULL || $this->membershipID === NULL) {
+                return;
+            } else {
+                $this->authHeader = base64_encode($this->username . "|" . $this->membershipID . ":" . $this->password);
+            }
+            if ($this->userAgent != NULL) {
+                RequestSender::setUserAgent($this->userAgent);
+            }
+            RequestSender::setTimeout($this->timeout);
         }
 
         public function setPassword($password)
@@ -74,6 +70,11 @@ namespace App\MerchantSuite
         {
             $this->membershipID = $membershipID;
             $this->setAuthHeader();
+        }
+
+        public function setTimeout($timeout)
+        {
+            $this->timeout = $timeout;
         }
 
         protected function setURL($suffix)
@@ -86,29 +87,14 @@ namespace App\MerchantSuite
             }
         }
 
-        protected function setMethod($method)
-        {
-            $this->method = $method;
-        }
-
         protected function getMethod()
         {
             return $this->method;
         }
 
-        protected function setAuthHeader()
+        protected function setMethod($method)
         {
-            if ($this->username === NULL || $this->password === NULL || $this->membershipID === NULL) {
-                return;
-            } else {
-                $this->authHeader = base64_encode($this->username . "|" . $this->membershipID . ":" . $this->password);
-            }
-
-            if ($this->userAgent != NULL) {
-                RequestSender::setUserAgent($this->userAgent);
-            }
-
-            RequestSender::setTimeout($this->timeout);
+            $this->method = $method;
         }
 
         protected function prepare()
@@ -120,21 +106,17 @@ namespace App\MerchantSuite
 
     class Credentials
     {
-
         private $username;
-
         private $password;
-
         private $membershipID;
-
         private $mode;
 
         public function __construct($username, $password, $membershipID, $mode = Mode::Live)
         {
-            $this->username = $username;
-            $this->password = $password;
+            $this->username     = $username;
+            $this->password     = $password;
             $this->membershipID = $membershipID;
-            $this->mode = $mode;
+            $this->mode         = $mode;
         }
 
         public function getUsername()
@@ -145,6 +127,7 @@ namespace App\MerchantSuite
         public function setUsername($username)
         {
             $this->username = $username;
+
             return $this;
         }
 
@@ -156,6 +139,7 @@ namespace App\MerchantSuite
         public function setPassword($password)
         {
             $this->password = $password;
+
             return $this;
         }
 
@@ -167,6 +151,7 @@ namespace App\MerchantSuite
         public function setMembershipID($membershipID)
         {
             $this->membershipID = $membershipID;
+
             return $this;
         }
 
@@ -178,41 +163,35 @@ namespace App\MerchantSuite
         public function setMode($mode)
         {
             $this->mode = $mode;
+
             return $this;
         }
     }
 
     class HppTxnFlowParameters
     {
-
         private $tokeniseTxnCheckBoxDefaultValue;
-
         private $hidePaymentReason;
-
         private $hideReference1;
-
         private $hideReference2;
-
         private $hideReference3;
-
         private $returnBarLabel;
-
         private $returnBarUrl;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
+            $payload = [];
             $payload["TokeniseTxnCheckBoxDefaultValue"] = $this->tokeniseTxnCheckBoxDefaultValue;
-            $payload["HidePaymentReason"] = $this->hidePaymentReason;
-            $payload["HideReference1"] = $this->hideReference1;
-            $payload["HideReference2"] = $this->hideReference2;
-            $payload["HideReference3"] = $this->hideReference3;
-            $payload["ReturnBarLabel"] = $this->returnBarLabel;
-            $payload["ReturnBarUrl"] = $this->returnBarUrl;
+            $payload["HidePaymentReason"]               = $this->hidePaymentReason;
+            $payload["HideReference1"]                  = $this->hideReference1;
+            $payload["HideReference2"]                  = $this->hideReference2;
+            $payload["HideReference3"]                  = $this->hideReference3;
+            $payload["ReturnBarLabel"]                  = $this->returnBarLabel;
+            $payload["ReturnBarUrl"]                    = $this->returnBarUrl;
 
             return $payload;
         }
@@ -225,6 +204,7 @@ namespace App\MerchantSuite
         public function setTokeniseTxnCheckBoxDefaultValue($tokeniseTxnCheckBoxDefaultValue)
         {
             $this->tokeniseTxnCheckBoxDefaultValue = $tokeniseTxnCheckBoxDefaultValue;
+
             return $this;
         }
 
@@ -236,6 +216,7 @@ namespace App\MerchantSuite
         public function setHidePaymentReason($hidePaymentReason)
         {
             $this->hidePaymentReason = $hidePaymentReason;
+
             return $this;
         }
 
@@ -247,6 +228,7 @@ namespace App\MerchantSuite
         public function setHideReference1($hideReference1)
         {
             $this->hideReference1 = $hideReference1;
+
             return $this;
         }
 
@@ -258,6 +240,7 @@ namespace App\MerchantSuite
         public function setHideReference2($hideReference2)
         {
             $this->hideReference2 = $hideReference2;
+
             return $this;
         }
 
@@ -269,6 +252,7 @@ namespace App\MerchantSuite
         public function setHideReference3($hideReference3)
         {
             $this->hideReference3 = $hideReference3;
+
             return $this;
         }
 
@@ -280,6 +264,7 @@ namespace App\MerchantSuite
         public function setReturnBarLabel($returnBarLabel)
         {
             $this->returnBarLabel = $returnBarLabel;
+
             return $this;
         }
 
@@ -291,25 +276,24 @@ namespace App\MerchantSuite
         public function setReturnBarUrl($returnBarUrl)
         {
             $this->returnBarUrl = $returnBarUrl;
+
             return $this;
         }
     }
 
     class IframeParameters
     {
-
         private $css = NULL;
-
         private $showSubmitButton = false;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["CSS"] = $this->css;
+            $payload = [];
+            $payload["CSS"]              = $this->css;
             $payload["ShowSubmitButton"] = $this->showSubmitButton;
 
             return $payload;
@@ -323,6 +307,7 @@ namespace App\MerchantSuite
         public function setCSS($css)
         {
             $this->css = $css;
+
             return $this;
         }
 
@@ -334,52 +319,43 @@ namespace App\MerchantSuite
         public function setShowSubmitButton($showSubmitButton)
         {
             $this->showSubmitButton = $showSubmitButton;
+
             return $this;
         }
     }
 
     class HppParameters
     {
-
         private $hideReference1 = false;
-
         private $hideReference2 = false;
-
         private $hideReference3 = false;
-
         private $isEddr = false;
-
         private $referenceLabel1 = NULL;
-
         private $referenceLabel2 = NULL;
-
         private $referenceLabel3 = NULL;
-
         private $paymentReason = NULL;
-
         private $showCustomerDetailsForm = false;
-
         private $returnBarLabel;
-
         private $returnBarUrl;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-            $payload["HideReference1"] = $this->hideReference1;
-            $payload["HideReference2"] = $this->hideReference2;
-            $payload["HideReference3"] = $this->hideReference3;
-            $payload["IsEddr"] = $this->isEddr;
-            $payload["Reference1Label"] = $this->referenceLabel1;
-            $payload["Reference2Label"] = $this->referenceLabel2;
-            $payload["Reference3Label"] = $this->referenceLabel3;
-            $payload["PaymentReason"] = $this->paymentReason;
+            $payload                            = [];
+            $payload["HideReference1"]          = $this->hideReference1;
+            $payload["HideReference2"]          = $this->hideReference2;
+            $payload["HideReference3"]          = $this->hideReference3;
+            $payload["IsEddr"]                  = $this->isEddr;
+            $payload["Reference1Label"]         = $this->referenceLabel1;
+            $payload["Reference2Label"]         = $this->referenceLabel2;
+            $payload["Reference3Label"]         = $this->referenceLabel3;
+            $payload["PaymentReason"]           = $this->paymentReason;
             $payload["ShowCustomerDetailsForm"] = $this->showCustomerDetailsForm;
-            $payload["ReturnBarLabel"] = $this->returnBarLabel;
-            $payload["ReturnBarUrl"] = $this->returnBarUrl;
+            $payload["ReturnBarLabel"]          = $this->returnBarLabel;
+            $payload["ReturnBarUrl"]            = $this->returnBarUrl;
 
             return $payload;
         }
@@ -392,6 +368,7 @@ namespace App\MerchantSuite
         public function setHideReference1($hideReference1)
         {
             $this->hideReference1 = $hideReference1;
+
             return $this;
         }
 
@@ -403,6 +380,7 @@ namespace App\MerchantSuite
         public function setHideReference2($hideReference2)
         {
             $this->hideReference2 = $hideReference2;
+
             return $this;
         }
 
@@ -414,6 +392,7 @@ namespace App\MerchantSuite
         public function setHideReference3($hideReference3)
         {
             $this->hideReference3 = $hideReference3;
+
             return $this;
         }
 
@@ -425,6 +404,7 @@ namespace App\MerchantSuite
         public function setIsEddr($isEddr)
         {
             $this->isEddr = $isEddr;
+
             return $this;
         }
 
@@ -436,6 +416,7 @@ namespace App\MerchantSuite
         public function setReferenceLabel1($referenceLabel1)
         {
             $this->referenceLabel1 = $referenceLabel1;
+
             return $this;
         }
 
@@ -447,6 +428,7 @@ namespace App\MerchantSuite
         public function setReferenceLabel2($referenceLabel2)
         {
             $this->referenceLabel2 = $referenceLabel2;
+
             return $this;
         }
 
@@ -458,6 +440,7 @@ namespace App\MerchantSuite
         public function setReferenceLabel3($referenceLabel3)
         {
             $this->referenceLabel3 = $referenceLabel3;
+
             return $this;
         }
 
@@ -469,6 +452,7 @@ namespace App\MerchantSuite
         public function setPaymentReason($paymentReason)
         {
             $this->paymentReason = $paymentReason;
+
             return $this;
         }
 
@@ -480,6 +464,7 @@ namespace App\MerchantSuite
         public function setShowCustomerDetailsForm($showCustomerDetailsForm)
         {
             $this->showCustomerDetailsForm = $showCustomerDetailsForm;
+
             return $this;
         }
 
@@ -491,6 +476,7 @@ namespace App\MerchantSuite
         public function setReturnBarLabel($returnBarLabel)
         {
             $this->returnBarLabel = $returnBarLabel;
+
             return $this;
         }
 
@@ -502,13 +488,13 @@ namespace App\MerchantSuite
         public function setReturnBarUrl($returnBarUrl)
         {
             $this->returnBarUrl = $returnBarUrl;
+
             return $this;
         }
     }
 
     class SystemStatus extends Request
     {
-
         public function __construct()
         {
             parent::__construct();
@@ -519,7 +505,6 @@ namespace App\MerchantSuite
         {
             $this->setAuthHeader();
             $this->setURL('/status/');
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return APIResponse::fromFullResponse($response);
@@ -528,69 +513,45 @@ namespace App\MerchantSuite
 
     class Transaction extends Request
     {
-
         private $action;
-
         private $amount;
-
         private $amountOriginal;
-
         private $amountSurcharge;
-
         private $currency;
-
         private $customer;
-
         private $internalNote;
-
         private $order;
-
         private $originalTxnNumber;
-
         private $reference1;
-
         private $reference2;
-
         private $reference3;
-
         private $paymentReason;
-
-        private $storeCard = FALSE;
-
-        private $testMode = FALSE;
-
+        private $storeCard = false;
+        private $testMode = false;
         private $subType;
-
         private $type;
-
         private $emailAddress = NULL;
-
         private $cardDetails;
-
         private $tokenisationMode = TokenisationMode::Default_Mode;
-
         private $fraudScreeningRequest;
-
         private $statementDescriptor;
 
         public function __construct()
         {
             parent::__construct();
             $this->setMethod("POST");
-
             /**
              * Set defaults for currently ignored fields
              */
-
-            $this->currency = NULL;
-            $this->order = NULL;
-            $this->customer = NULL;
-            $this->originalTxnNumber = NULL;
+            $this->currency              = NULL;
+            $this->order                 = NULL;
+            $this->customer              = NULL;
+            $this->originalTxnNumber     = NULL;
             $this->fraudScreeningRequest = NULL;
-            $this->statementDescriptor = NULL;
-            $this->amount = 0;
-            $this->amountOriginal = 0;
-            $this->amountSurcharge = 0;
+            $this->statementDescriptor   = NULL;
+            $this->amount                = 0;
+            $this->amountOriginal        = 0;
+            $this->amountSurcharge       = 0;
         }
 
         public function setAction($action)
@@ -701,100 +662,86 @@ namespace App\MerchantSuite
         public function setEmailAddress($emailAddress)
         {
             $this->emailAddress = $emailAddress;
+
             return $this;
-        }
-
-        public function getPayload()
-        {
-            $payload = array();
-
-            $payload["Action"] = $this->action;
-            $payload["Amount"] = $this->amount;
-            $payload["AmountOriginal"] = $this->amountOriginal;
-            $payload["AmountSurcharge"] = $this->amountSurcharge;
-            $payload["Currency"] = $this->currency;
-            if ($this->customer !== NULL) {
-                $payload["Customer"] = $this->customer->getPayload();
-            } else {
-                $payload["Customer"] = null;
-            }
-            $payload["InternalNote"] = $this->internalNote;
-            if ($this->order !== NULL) {
-                $payload["Order"] = $this->order->getPayload();
-            } else {
-                $payload["Order"] = null;
-            }
-            $payload["OriginalTxnNumber"] = $this->originalTxnNumber;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["StoreCard"] = ! ! $this->storeCard;
-            $payload["SubType"] = $this->subType;
-            $payload["Type"] = $this->type;
-            if ($this->cardDetails !== NULL) {
-                $payload["CardDetails"] = $this->cardDetails->getArrayRepresentation();
-            } else {
-                $payload["CardDetails"] = null;
-            }
-            $payload["TestMode"] = $this->testMode;
-            $payload["EmailAddress"] = $this->emailAddress;
-            $payload["TokenisationMode"] = $this->tokenisationMode;
-            if ($this->fraudScreeningRequest !== NULL) {
-                $payload["FraudScreeningRequest"] = $this->fraudScreeningRequest->getPayload();
-            } else {
-                $payload["FraudScreeningRequest"] = null;
-            }
-            if ($this->statementDescriptor !== NULL) {
-                $payload["StatementDescriptor"] = $this->statementDescriptor->getPayload();
-            } else {
-                $payload["StatementDescriptor"] = null;
-            }
-
-            $wrappedPayload = array(
-                "TxnReq" => $payload
-            );
-            return $wrappedPayload;
         }
 
         public function submit()
         {
             $this->setAuthHeader();
             $this->setURL('/txns/');
-
             $response = RequestSender::send($this->url, $this->authHeader, $this->getPayload(), $this->method);
 
             return new TransactionResponse($response);
+        }
+
+        public function getPayload()
+        {
+            $payload = [];
+            $payload["Action"]          = $this->action;
+            $payload["Amount"]          = $this->amount;
+            $payload["AmountOriginal"]  = $this->amountOriginal;
+            $payload["AmountSurcharge"] = $this->amountSurcharge;
+            $payload["Currency"]        = $this->currency;
+            if ($this->customer !== NULL) {
+                $payload["Customer"] = $this->customer->getPayload();
+            } else {
+                $payload["Customer"] = NULL;
+            }
+            $payload["InternalNote"] = $this->internalNote;
+            if ($this->order !== NULL) {
+                $payload["Order"] = $this->order->getPayload();
+            } else {
+                $payload["Order"] = NULL;
+            }
+            $payload["OriginalTxnNumber"] = $this->originalTxnNumber;
+            $payload["Reference1"]        = $this->reference1;
+            $payload["Reference2"]        = $this->reference2;
+            $payload["Reference3"]        = $this->reference3;
+            $payload["PaymentReason"]     = $this->paymentReason;
+            $payload["StoreCard"]         = !!$this->storeCard;
+            $payload["SubType"]           = $this->subType;
+            $payload["Type"]              = $this->type;
+            if ($this->cardDetails !== NULL) {
+                $payload["CardDetails"] = $this->cardDetails->getArrayRepresentation();
+            } else {
+                $payload["CardDetails"] = NULL;
+            }
+            $payload["TestMode"]         = $this->testMode;
+            $payload["EmailAddress"]     = $this->emailAddress;
+            $payload["TokenisationMode"] = $this->tokenisationMode;
+            if ($this->fraudScreeningRequest !== NULL) {
+                $payload["FraudScreeningRequest"] = $this->fraudScreeningRequest->getPayload();
+            } else {
+                $payload["FraudScreeningRequest"] = NULL;
+            }
+            if ($this->statementDescriptor !== NULL) {
+                $payload["StatementDescriptor"] = $this->statementDescriptor->getPayload();
+            } else {
+                $payload["StatementDescriptor"] = NULL;
+            }
+            $wrappedPayload = [
+                "TxnReq" => $payload,
+            ];
+
+            return $wrappedPayload;
         }
     }
 
     class TransactionWithAuthKey
     {
-
         private $amount;
-
         private $amountOriginal;
-
         private $amountSurcharge;
-
         private $currency;
-
         private $internalNote;
-
         private $reference1;
-
         private $reference2;
-
         private $reference3;
-
         private $paymentReason;
-
-        private $storeCard = FALSE;
-
+        private $storeCard = false;
         private $emailAddress;
-
         private $cardDetails;
-
         private $fraudScreeningDeviceFingerprint;
 
         public function setAmount($amount)
@@ -860,28 +807,28 @@ namespace App\MerchantSuite
         public function setEmailAddress($emailAddress)
         {
             $this->emailAddress = $emailAddress;
+
             return $this;
         }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Amount"] = $this->amount;
-            $payload["AmountOriginal"] = $this->amountOriginal;
+            $payload = [];
+            $payload["Amount"]          = $this->amount;
+            $payload["AmountOriginal"]  = $this->amountOriginal;
             $payload["AmountSurcharge"] = $this->amountSurcharge;
-            $payload["Currency"] = $this->currency;
-            $payload["InternalNote"] = $this->internalNote;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["StoreCard"] = $this->storeCard;
-            $payload["EmailAddress"] = $this->emailAddress;
+            $payload["Currency"]        = $this->currency;
+            $payload["InternalNote"]    = $this->internalNote;
+            $payload["Reference1"]      = $this->reference1;
+            $payload["Reference2"]      = $this->reference2;
+            $payload["Reference3"]      = $this->reference3;
+            $payload["PaymentReason"]   = $this->paymentReason;
+            $payload["StoreCard"]       = $this->storeCard;
+            $payload["EmailAddress"]    = $this->emailAddress;
             if ($this->cardDetails !== NULL) {
                 $payload["CardDetails"] = $this->cardDetails->getArrayRepresentation();
             } else {
-                $payload["CardDetails"] = null;
+                $payload["CardDetails"] = NULL;
             }
             $payload["FraudScreeningDeviceFingerprint"] = $this->fraudScreeningDeviceFingerprint;
 
@@ -891,7 +838,6 @@ namespace App\MerchantSuite
 
     class ProcessTransactionWithAuthKey
     {
-
         private $txnRequest;
 
         public function setTransactionRequest($txnRequest)
@@ -901,8 +847,7 @@ namespace App\MerchantSuite
 
         public function getPayload()
         {
-            $payload = array();
-
+            $payload = [];
             $payload["TxnReq"] = $this->getPayload();
 
             return $payload;
@@ -911,14 +856,12 @@ namespace App\MerchantSuite
 
     class TransactionRetrieval extends Request
     {
-
         private $txnNumber = NULL;
 
         public function __construct($txnNumber = NULL)
         {
             parent::__construct();
             $this->setMethod("GET");
-
             $this->setTxnNumber($txnNumber);
         }
 
@@ -931,7 +874,6 @@ namespace App\MerchantSuite
         {
             $this->setAuthHeader();
             $this->setURL("/txns/" . $this->txnNumber);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return new TransactionResponse($response);
@@ -940,14 +882,12 @@ namespace App\MerchantSuite
 
     class DeleteToken extends Request
     {
-
         private $token;
 
         public function __construct($token = NULL)
         {
             parent::__construct();
             $this->setMethod("DELETE");
-
             $this->token = $token;
         }
 
@@ -959,7 +899,6 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/tokens/" . $this->token);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return APIResponse::fromFullResponse($response);
@@ -968,21 +907,13 @@ namespace App\MerchantSuite
 
     class AddTokenAuthKey extends Request
     {
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
         private $emailAddress = NULL;
-
         private $redirectionUrl = NULL;
-
         private $webHookUrl = NULL;
-
         private $hppParameters = NULL;
-
         private $iframeParameters = NULL;
 
         public function __construct()
@@ -999,65 +930,77 @@ namespace App\MerchantSuite
         public function setReference1($reference1)
         {
             $this->reference1 = $reference1;
+
             return $this;
         }
 
         public function setReference2($reference2)
         {
             $this->reference2 = $reference2;
+
             return $this;
         }
 
         public function setReference3($reference3)
         {
             $this->reference3 = $reference3;
+
             return $this;
         }
 
         public function setEmailAddress($emailAddress)
         {
             $this->emailAddress = $emailAddress;
+
             return $this;
         }
 
         public function setRedirectionUrl($redirectionUrl)
         {
             $this->redirectionUrl = $redirectionUrl;
+
             return $this;
         }
 
         public function setWebHookUrl($webHookUrl)
         {
             $this->webHookUrl = $webHookUrl;
+
             return $this;
         }
 
         public function setIframeParameters($iframeParameters)
         {
             $this->iframeParameters = $iframeParameters;
+
             return $this;
+        }
+
+        public function submit()
+        {
+            $this->setURL("/tokens/addtokenauthkey");
+            $payload = $this->buildPayload();
+            $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
+
+            return new AuthKeyResponse($response);
         }
 
         protected function buildPayload()
         {
-            $payload = array();
-            $outerPayload = array();
-
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
+            $payload      = [];
+            $outerPayload = [];
+            $payload["Reference1"]   = $this->reference1;
+            $payload["Reference2"]   = $this->reference2;
+            $payload["Reference3"]   = $this->reference3;
             $payload["EmailAddress"] = $this->emailAddress;
-
             $outerPayload["FixedAddTokenData"] = $payload;
-            $outerPayload["RedirectionUrl"] = $this->redirectionUrl;
-            $outerPayload["WebHookUrl"] = $this->webHookUrl;
-
+            $outerPayload["RedirectionUrl"]    = $this->redirectionUrl;
+            $outerPayload["WebHookUrl"]        = $this->webHookUrl;
             if ($this->hppParameters !== NULL) {
                 $outerPayload["HppParameters"] = $this->hppParameters->getPayload();
             } else {
                 $outerPayload["HppParameters"] = NULL;
             }
-
             if ($this->iframeParameters !== NULL) {
                 $outerPayload["IframeParameters"] = $this->iframeParameters->getPayload();
             } else {
@@ -1066,21 +1009,10 @@ namespace App\MerchantSuite
 
             return $outerPayload;
         }
-
-        public function submit()
-        {
-            $this->setURL("/tokens/addtokenauthkey");
-            $payload = $this->buildPayload();
-
-            $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
-
-            return new AuthKeyResponse($response);
-        }
     }
 
     class UpdateTokenAuthKey extends AddTokenAuthKey
     {
-
         private $token;
 
         public function __construct()
@@ -1098,19 +1030,15 @@ namespace App\MerchantSuite
         {
             $this->setURL("/tokens/updatetokenauthkey");
             $tempPayload = $this->buildPayload();
-
             // Rename FixedAddTokenData to FixedUpdateTokenData
-
-            $payload = array(
+            $payload = [
                 "FixedUpdateTokenData" => $tempPayload["FixedAddTokenData"],
-                "RedirectionUrl" => $tempPayload["RedirectionUrl"],
-                "WebHookUrl" => $tempPayload["WebHookUrl"],
-                "HppParameters" => $tempPayload["HppParameters"],
-                "IframeParameters" => $tempPayload["IframeParameters"]
-            );
-
+                "RedirectionUrl"       => $tempPayload["RedirectionUrl"],
+                "WebHookUrl"           => $tempPayload["WebHookUrl"],
+                "HppParameters"        => $tempPayload["HppParameters"],
+                "IframeParameters"     => $tempPayload["IframeParameters"],
+            ];
             $payload["FixedUpdateTokenData"]["Token"] = $this->token;
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new AuthKeyResponse($response);
@@ -1119,19 +1047,12 @@ namespace App\MerchantSuite
 
     class AddToken extends Request
     {
-
         private $cardDetails = NULL;
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
         private $emailAddress = NULL;
-
         private $bankAccountDetails = NULL;
-
         private $acceptBADirectDebitTC = false;
 
         public function __construct()
@@ -1143,6 +1064,7 @@ namespace App\MerchantSuite
         public function setBankAccountDetails($bankAccountDetails)
         {
             $this->bankAccountDetails = $bankAccountDetails;
+
             return $this;
         }
 
@@ -1174,45 +1096,43 @@ namespace App\MerchantSuite
         public function setAcceptBADirectDebitTC($acceptBADirectDebitTC)
         {
             $this->acceptBADirectDebitTC = $acceptBADirectDebitTC;
+
             return $this;
-        }
-
-        protected function getPayload()
-        {
-            $payload = array();
-            if (NULL != $this->bankAccountDetails) {
-                $payload["BankAccountDetails"] = $this->bankAccountDetails->getArrayRepresentation();
-            }
-
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["EmailAddress"] = $this->emailAddress;
-            if (NULL != $this->cardDetails) {
-                $payload["CardDetails"] = $this->cardDetails->getArrayRepresentation();
-            }
-            $payload["AcceptBADirectDebitTC"] = $this->acceptBADirectDebitTC;
-            $wrappedPayload = array(
-                "TokenReq" => $payload
-            );
-
-            return $wrappedPayload;
         }
 
         public function submit()
         {
             $payload = $this->getPayload();
             $this->setURL("/tokens/");
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new TokenResponse($response);
+        }
+
+        protected function getPayload()
+        {
+            $payload = [];
+            if (NULL != $this->bankAccountDetails) {
+                $payload["BankAccountDetails"] = $this->bankAccountDetails->getArrayRepresentation();
+            }
+            $payload["Reference1"]   = $this->reference1;
+            $payload["Reference2"]   = $this->reference2;
+            $payload["Reference3"]   = $this->reference3;
+            $payload["EmailAddress"] = $this->emailAddress;
+            if (NULL != $this->cardDetails) {
+                $payload["CardDetails"] = $this->cardDetails->getArrayRepresentation();
+            }
+            $payload["AcceptBADirectDebitTC"] = $this->acceptBADirectDebitTC;
+            $wrappedPayload                   = [
+                "TokenReq" => $payload,
+            ];
+
+            return $wrappedPayload;
         }
     }
 
     class UpdateToken extends AddToken
     {
-
         private $token;
 
         public function __construct($token = NULL)
@@ -1222,21 +1142,20 @@ namespace App\MerchantSuite
             $this->token = $token;
         }
 
-        public function setToken($token)
-        {
-            $this->token = $token;
-        }
-
         public function getToken()
         {
             return $this->token;
+        }
+
+        public function setToken($token)
+        {
+            $this->token = $token;
         }
 
         public function submit()
         {
             $payload = $this->getPayload();
             $this->setURL("/tokens/" . $this->token);
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new TokenResponse($response);
@@ -1245,7 +1164,6 @@ namespace App\MerchantSuite
 
     class TokeniseTransaction extends Request
     {
-
         private $txnNumber;
 
         public function __construct($txnNumber = NULL)
@@ -1263,7 +1181,6 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/tokens/txn/" . $this->txnNumber);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return new TokenResponse($response);
@@ -1272,7 +1189,6 @@ namespace App\MerchantSuite
 
     class AddTokenViaIframe extends AddToken
     {
-
         private $authKey = NULL;
 
         public function __construct($authKey = NULL)
@@ -1286,7 +1202,6 @@ namespace App\MerchantSuite
             $payload = $this->getPayload();
             $this->setMethod("POST");
             $this->setURL("/tokens/iframe/add/" . $this->authKey);
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new ResultKeyResponse($response);
@@ -1295,7 +1210,6 @@ namespace App\MerchantSuite
 
     class UpdateTokenViaIframe extends AddToken
     {
-
         private $authKey = NULL;
 
         public function __construct($authKey = NULL)
@@ -1309,7 +1223,6 @@ namespace App\MerchantSuite
             $payload = $this->getPayload();
             $this->setMethod("POST");
             $this->setURL("/tokens/iframe/update/" . $this->authKey);
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new ResultKeyResponse($response);
@@ -1318,9 +1231,7 @@ namespace App\MerchantSuite
 
     class ProcessIframeTxn extends Request
     {
-
         private $authKey;
-
         private $processTransactionWithAuthKey;
 
         public function __construct($authKey = NULL)
@@ -1343,10 +1254,8 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/txns/processiframetxn/" . $this->authKey);
-
-            $payload = array();
+            $payload           = [];
             $payload["TxnReq"] = $this->processTransactionWithAuthKey->getPayload();
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new ResultKeyResponse($response);
@@ -1355,7 +1264,6 @@ namespace App\MerchantSuite
 
     class RetrieveToken extends Request
     {
-
         private $token;
 
         public function __construct($token = NULL)
@@ -1373,7 +1281,6 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/tokens/" . $this->token);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return new TokenResponse($response);
@@ -1382,63 +1289,46 @@ namespace App\MerchantSuite
 
     class TokenSearch extends Request
     {
-
         private $cardType = NULL;
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
-        private $expiredCardsOnly = FALSE;
-
+        private $expiredCardsOnly = false;
         private $expiryDate = NULL;
-
         private $fromDate = NULL;
-
         private $toDate = NULL;
-
         private $source = NULL;
-
         private $token = NULL;
-
         private $userCreated = NULL;
-
         private $userUpdated = NULL;
-
         private $maskedCardNumber = NULL;
 
         public function __construct()
         {
             parent::__construct();
-
             $this->setMethod("POST");
         }
 
         public function submit()
         {
             $this->setURL("/tokens/search");
-            $payload = array();
-
-            $payload["CardType"] = $this->cardType;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["ExpiredCardsOnly"] = ! ! $this->expiredCardsOnly;
-            $payload["ExpiryDate"] = $this->expiryDate;
-            $payload["FromDate"] = $this->fromDate;
-            $payload["ToDate"] = $this->toDate;
-            $payload["Source"] = $this->source;
-            $payload["Token"] = $this->token;
-            $payload["UserCreated"] = $this->userCreated;
-            $payload["UserUpdated"] = $this->userUpdated;
+            $payload = [];
+            $payload["CardType"]         = $this->cardType;
+            $payload["Reference1"]       = $this->reference1;
+            $payload["Reference2"]       = $this->reference2;
+            $payload["Reference3"]       = $this->reference3;
+            $payload["ExpiredCardsOnly"] = !!$this->expiredCardsOnly;
+            $payload["ExpiryDate"]       = $this->expiryDate;
+            $payload["FromDate"]         = $this->fromDate;
+            $payload["ToDate"]           = $this->toDate;
+            $payload["Source"]           = $this->source;
+            $payload["Token"]            = $this->token;
+            $payload["UserCreated"]      = $this->userCreated;
+            $payload["UserUpdated"]      = $this->userUpdated;
             $payload["MaskedCardNumber"] = $this->maskedCardNumber;
-
-            $wrappedPayload = array(
-                "SearchInput" => $payload
-            );
-
+            $wrappedPayload = [
+                "SearchInput" => $payload,
+            ];
             $response = RequestSender::send($this->url, $this->authHeader, $wrappedPayload, $this->method);
 
             return new TokenSearchResponse($response);
@@ -1462,6 +1352,7 @@ namespace App\MerchantSuite
         public function setCardType($cardType)
         {
             $this->cardType = $cardType;
+
             return $this;
         }
 
@@ -1473,6 +1364,7 @@ namespace App\MerchantSuite
         public function setReference1($reference1)
         {
             $this->reference1 = $reference1;
+
             return $this;
         }
 
@@ -1484,6 +1376,7 @@ namespace App\MerchantSuite
         public function setReference2($reference2)
         {
             $this->reference2 = $reference2;
+
             return $this;
         }
 
@@ -1495,6 +1388,7 @@ namespace App\MerchantSuite
         public function setReference3($reference3)
         {
             $this->reference3 = $reference3;
+
             return $this;
         }
 
@@ -1506,6 +1400,7 @@ namespace App\MerchantSuite
         public function setExpiredCardsOnly($expiredCardsOnly)
         {
             $this->expiredCardsOnly = $expiredCardsOnly;
+
             return $this;
         }
 
@@ -1517,6 +1412,7 @@ namespace App\MerchantSuite
         public function setExpiryDate($expiryDate)
         {
             $this->expiryDate = $expiryDate;
+
             return $this;
         }
 
@@ -1528,6 +1424,7 @@ namespace App\MerchantSuite
         public function setFromDate($fromDate)
         {
             $this->fromDate = $fromDate;
+
             return $this;
         }
 
@@ -1539,6 +1436,7 @@ namespace App\MerchantSuite
         public function setToDate($toDate)
         {
             $this->toDate = $toDate;
+
             return $this;
         }
 
@@ -1550,6 +1448,7 @@ namespace App\MerchantSuite
         public function setSource($source)
         {
             $this->source = $source;
+
             return $this;
         }
 
@@ -1561,6 +1460,7 @@ namespace App\MerchantSuite
         public function setToken($token)
         {
             $this->token = $token;
+
             return $this;
         }
 
@@ -1572,6 +1472,7 @@ namespace App\MerchantSuite
         public function setUserCreated($userCreated)
         {
             $this->userCreated = $userCreated;
+
             return $this;
         }
 
@@ -1583,20 +1484,19 @@ namespace App\MerchantSuite
         public function setUserUpdated($userUpdated)
         {
             $this->userUpdates = $userUpdated;
+
             return $this;
         }
     }
 
     class TokenResultKeyRetrieval extends Request
     {
-
         private $resultKey;
 
         public function __construct($resultKey = NULL)
         {
             parent::__construct();
             $this->setMethod("GET");
-
             $this->setResultKey($resultKey);
         }
 
@@ -1608,22 +1508,20 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/tokens/withauthkey/" . $this->resultKey);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
+
             return new TokenResponse($response);
         }
     }
 
     class ResultKeyRetrieval extends Request
     {
-
         private $resultKey;
 
         public function __construct($resultKey = NULL)
         {
             parent::__construct();
             $this->setMethod("GET");
-
             $this->setResultKey($resultKey);
         }
 
@@ -1636,65 +1534,39 @@ namespace App\MerchantSuite
         {
             $this->setAuthHeader();
             $this->setURL("/txns/withauthkey/" . $this->resultKey);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
+
             return new TransactionResponse($response);
         }
     }
 
     class AuthKeyTransaction extends Request
     {
-
         private $action = NULL;
-
         private $amount = 0;
-
         private $amountOriginal = 0;
-
         private $amountSurcharge = 0;
-
         private $paymentReason = NULL;
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
         private $customer = NULL;
-
         private $order = NULL;
-
         private $currency = NULL;
-
         private $internalNote = NULL;
-
         private $redirectionUrl = NULL;
-
         private $webHookUrl = NULL;
-
         private $type = NULL;
-
         private $subType = NULL;
-
-        private $testMode = FALSE;
-
+        private $testMode = false;
         private $emailAddress = NULL;
-
         private $tokenisationMode = TokenisationMode::Default_Mode;
-
         private $hppParameters = NULL;
-
         private $fraudScreeningRequest = NULL;
-
-        private $AmexExpressCheckout = FALSE;
-
+        private $AmexExpressCheckout = false;
         private $iframeParameters = NULL;
-
         private $tokenData = NULL;
-
-        private $bypass3DS = FALSE;
-
+        private $bypass3DS = false;
         private $statementDescriptor = NULL;
 
         public function __construct()
@@ -1707,63 +1579,49 @@ namespace App\MerchantSuite
         {
             $this->setAuthHeader();
             $this->setURL("/txns/processtxnauthkey");
-
-            $payload = array();
-            $wrappedPayload = array();
-
-            $payload["Action"] = $this->action;
-            $payload["Amount"] = $this->amount;
-            $payload["AmountOriginal"] = $this->amountOriginal;
+            $payload        = [];
+            $wrappedPayload = [];
+            $payload["Action"]          = $this->action;
+            $payload["Amount"]          = $this->amount;
+            $payload["AmountOriginal"]  = $this->amountOriginal;
             $payload["AmountSurcharge"] = $this->amountSurcharge;
-            $payload["Currency"] = $this->currency;
-
+            $payload["Currency"]        = $this->currency;
             if ($this->customer !== NULL) {
                 $payload["Customer"] = $this->customer->getPayload();
             }
-
             $payload["InternalNote"] = $this->internalNote;
-
             if ($this->order !== NULL) {
                 $payload["Order"] = $this->order->getPayload();
             }
-
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["Type"] = $this->type;
-            $payload["SubType"] = $this->subType;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["TestMode"] = $this->testMode;
+            $payload["Reference1"]       = $this->reference1;
+            $payload["Reference2"]       = $this->reference2;
+            $payload["Reference3"]       = $this->reference3;
+            $payload["Type"]             = $this->type;
+            $payload["SubType"]          = $this->subType;
+            $payload["PaymentReason"]    = $this->paymentReason;
+            $payload["TestMode"]         = $this->testMode;
             $payload["TokenisationMode"] = $this->tokenisationMode;
-            $payload["EmailAddress"] = $this->emailAddress;
-
+            $payload["EmailAddress"]     = $this->emailAddress;
             if ($this->tokenData !== NULL) {
                 $payload["TokenData"] = $this->tokenData->getPayload();
             }
-
             if ($this->fraudScreeningRequest !== NULL) {
                 $payload["FraudScreeningRequest"] = $this->fraudScreeningRequest->getPayload();
             }
-
             if ($this->statementDescriptor !== NULL) {
                 $payload["StatementDescriptor"] = $this->statementDescriptor->getPayload();
             }
-
             $payload["AmexExpressCheckout"] = $this->AmexExpressCheckout;
-            $payload["Bypass3DS"] = $this->bypass3DS;
-
+            $payload["Bypass3DS"]           = $this->bypass3DS;
             $wrappedPayload["ProcessTxnData"] = $payload;
             $wrappedPayload["RedirectionUrl"] = $this->redirectionUrl;
-            $wrappedPayload["WebHookUrl"] = $this->webHookUrl;
-
+            $wrappedPayload["WebHookUrl"]     = $this->webHookUrl;
             if ($this->hppParameters !== NULL) {
                 $wrappedPayload["HppParameters"] = $this->hppParameters->getPayload();
             }
-
             if ($this->iframeParameters !== NULL) {
                 $wrappedPayload["IframeParameters"] = $this->iframeParameters->getPayload();
             }
-
             $response = RequestSender::send($this->url, $this->authHeader, $wrappedPayload, $this->method);
 
             return new AuthKeyTransactionResponse($response);
@@ -1902,47 +1760,26 @@ namespace App\MerchantSuite
 
     class TransactionSearch extends Request
     {
-
         private $action = NULL;
-
         private $amount = 0;
-
         private $authoriseId = NULL;
-
         private $bankResponseCode = NULL;
-
         private $cardType = NULL;
-
         private $currency = NULL;
-
         private $internalNote = NULL;
-
         private $rrn = NULL;
-
         private $receiptNumber = NULL;
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
         private $responseCode = NULL;
-
         private $paymentReason = NULL;
-
         private $settlementDate = NULL;
-
         private $source = NULL;
-
         private $txnNumber = NULL;
-
         private $expiryDate = NULL;
-
         private $maskedCardNumber = NULL;
-
         private $fromDate = NULL;
-
         private $toDate = NULL;
 
         public function submit()
@@ -1950,35 +1787,31 @@ namespace App\MerchantSuite
             $this->setURL("/txns/search");
             $this->setMethod("POST");
             $this->setAuthHeader();
-
-            $request = array();
-
-            $request["Action"] = $this->action;
-            $request["Amount"] = $this->amount;
-            $request["AuthoriseID"] = $this->authoriseId;
+            $request = [];
+            $request["Action"]           = $this->action;
+            $request["Amount"]           = $this->amount;
+            $request["AuthoriseID"]      = $this->authoriseId;
             $request["BankResponseCode"] = $this->bankResponseCode;
-            $request["PaymentReason"] = $this->paymentReason;
-            $request["CardType"] = $this->cardType;
-            $request["Reference1"] = $this->reference1;
-            $request["Reference2"] = $this->reference2;
-            $request["Reference3"] = $this->reference3;
-            $request["Currency"] = $this->currency;
-            $request["ExpiryDate"] = $this->expiryDate;
-            $request["FromDate"] = $this->fromDate;
+            $request["PaymentReason"]    = $this->paymentReason;
+            $request["CardType"]         = $this->cardType;
+            $request["Reference1"]       = $this->reference1;
+            $request["Reference2"]       = $this->reference2;
+            $request["Reference3"]       = $this->reference3;
+            $request["Currency"]         = $this->currency;
+            $request["ExpiryDate"]       = $this->expiryDate;
+            $request["FromDate"]         = $this->fromDate;
             $request["MaskedCardNumber"] = $this->maskedCardNumber;
-            $request["InternalNote"] = $this->internalNote;
-            $request["RRN"] = $this->rrn;
-            $request["ReceiptNumber"] = $this->receiptNumber;
-            $request["ResponseCode"] = $this->responseCode;
-            $request["SettlementDate"] = $this->settlementDate;
-            $request["Source"] = $this->source;
-            $request["ToDate"] = $this->toDate;
-            $request["TxnNumber"] = $this->txnNumber;
-
-            $wrappedRequest = array(
-                "SearchInput" => $request
-            );
-
+            $request["InternalNote"]     = $this->internalNote;
+            $request["RRN"]              = $this->rrn;
+            $request["ReceiptNumber"]    = $this->receiptNumber;
+            $request["ResponseCode"]     = $this->responseCode;
+            $request["SettlementDate"]   = $this->settlementDate;
+            $request["Source"]           = $this->source;
+            $request["ToDate"]           = $this->toDate;
+            $request["TxnNumber"]        = $this->txnNumber;
+            $wrappedRequest = [
+                "SearchInput" => $request,
+            ];
             $response = RequestSender::send($this->url, $this->authHeader, $wrappedRequest, $this->method);
 
             return new TransactionSearchResponse($response);
@@ -2096,9 +1929,7 @@ namespace App\MerchantSuite
 
     class CreateSecureCallAuthKeyRequest extends Request
     {
-
         private $secureCallRequest = NULL;
-
         private $webHookUrl = NULL;
 
         public function submit()
@@ -2106,15 +1937,11 @@ namespace App\MerchantSuite
             $this->setURL("/ivr/addsecurecallauthkey");
             $this->setMethod("POST");
             $this->setAuthHeader();
-
-            $request = array();
-
+            $request = [];
             $request["WebHookUrl"] = $this->webHookUrl;
-
             if ($this->secureCallRequest !== NULL) {
                 $request["SecureCallRequest"] = $this->secureCallRequest->getPayload();
             }
-
             $response = RequestSender::send($this->url, $this->authHeader, $request, $this->method);
 
             return new CreateSecureCallAuthKeyResponse($response);
@@ -2123,19 +1950,20 @@ namespace App\MerchantSuite
         public function setWebHookUrl($value)
         {
             $this->webHookUrl = $value;
+
             return $this;
         }
 
         public function setSecureCallRequest($value)
         {
             $this->secureCallRequest = $value;
+
             return $this;
         }
     }
 
     class InitiateSecureCallRequest extends Request
     {
-
         private $authKey = NULL;
 
         public function __construct($authKey = NULL)
@@ -2149,9 +1977,7 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/" . $this->authKey);
             $this->setAuthHeader();
-
-            $request = array();
-
+            $request = [];
             $response = RequestSender::send($this->url, $this->authHeader, $request, $this->method);
 
             return new InitiateSecureCallResponse($response);
@@ -2160,15 +1986,14 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
     }
 
     class InitiateSecureCallActionRequest extends Request
     {
-
         private $action = NULL;
-
         private $authKey = NULL;
 
         public function __construct($authKey = NULL)
@@ -2182,12 +2007,10 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/action/" . $this->authKey);
             $this->setAuthHeader();
-
-            $request = array(
-                "Action" => $this->action
-            );
+            $request = [
+                "Action" => $this->action,
+            ];
             // $wrappedRequest = array("InitiateSecureCallActionReq" => $request);
-
             $response = RequestSender::send($this->url, $this->authHeader, $request, $this->method);
 
             return new InitiateSecureCallActionResponse($response);
@@ -2196,19 +2019,20 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
 
         public function setAction($value)
         {
             $this->action = $value;
+
             return $this;
         }
     }
 
     class GetSecureCallDetailsRequest extends Request
     {
-
         private $authKey = NULL;
 
         public function __construct($authKey = NULL)
@@ -2222,7 +2046,6 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/" . $this->authKey);
             $this->setAuthHeader();
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return new GetSecureCallDetailsResponse($response);
@@ -2231,15 +2054,14 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
     }
 
     class ProcessSecureCallTxnRequest extends Request
     {
-
         private $authKey = NULL;
-
         private $txnRequest = NULL;
 
         public function __construct($authKey = NULL)
@@ -2253,11 +2075,9 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/processtxn/" . $this->authKey);
             $this->setAuthHeader();
-
-            $request = array(
-                "TxnReq" => $this->txnRequest->getPayload()
-            );
-
+            $request = [
+                "TxnReq" => $this->txnRequest->getPayload(),
+            ];
             $response = RequestSender::send($this->url, $this->authHeader, $request, $this->method);
 
             return new ProcessSecureCallTxnResponse($response);
@@ -2266,59 +2086,40 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
 
         public function setTxnReq($value)
         {
             $this->txnRequest = $value;
+
             return $this;
         }
     }
 
     class SecureCallTxnRequest
     {
-
         private $action;
-
         private $emailAddress = NULL;
-
         private $amount;
-
         private $amountOriginal;
-
         private $amountSurcharge;
-
         private $currency;
-
         private $customer;
-
         private $internalNote;
-
         private $membershipid;
-
         private $order;
-
         private $reference1;
-
         private $reference2;
-
         private $reference3;
-
         private $paymentReason;
-
-        private $storeCard = FALSE;
-
+        private $storeCard = false;
         private $subType;
-
-        private $testMode = FALSE;
-
+        private $testMode = false;
         private $tokenisationMode = TokenisationMode::Default_Mode;
-
         private $type;
-
         private $fraudScreeningRequest;
-
         private $statementDescriptor;
 
         public function __construct()
@@ -2327,14 +2128,14 @@ namespace App\MerchantSuite
             /**
              * Set defaults for currently ignored fields
              */
-            $this->currency = NULL;
-            $this->order = NULL;
-            $this->customer = NULL;
+            $this->currency              = NULL;
+            $this->order                 = NULL;
+            $this->customer              = NULL;
             $this->fraudScreeningRequest = NULL;
-            $this->statementDescriptor = NULL;
-            $this->amount = 0;
-            $this->amountOriginal = 0;
-            $this->amountSurcharge = 0;
+            $this->statementDescriptor   = NULL;
+            $this->amount                = 0;
+            $this->amountOriginal        = 0;
+            $this->amountSurcharge       = 0;
         }
 
         public function setAction($value)
@@ -2442,67 +2243,63 @@ namespace App\MerchantSuite
             $this->statementDescriptor = $value;
         }
 
+        public function submit()
+        {
+            $this->setAuthHeader();
+            $this->setURL('/txns/');
+            $response = RequestSender::send($this->url, $this->authHeader, $this->getPayload(), $this->method);
+
+            return new TransactionResponse($response);
+        }
+
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Action"] = $this->action;
-            $payload["EmailAddress"] = $this->emailAddress;
-            $payload["Amount"] = $this->amount;
-            $payload["AmountOriginal"] = $this->amountOriginal;
+            $payload = [];
+            $payload["Action"]          = $this->action;
+            $payload["EmailAddress"]    = $this->emailAddress;
+            $payload["Amount"]          = $this->amount;
+            $payload["AmountOriginal"]  = $this->amountOriginal;
             $payload["AmountSurcharge"] = $this->amountSurcharge;
-            $payload["Currency"] = $this->currency;
+            $payload["Currency"]        = $this->currency;
             if ($this->customer !== NULL) {
                 $payload["Customer"] = $this->customer->getPayload();
             } else {
-                $payload["Customer"] = null;
+                $payload["Customer"] = NULL;
             }
             $payload["InternalNote"] = $this->internalNote;
             $payload["MembershipID"] = $this->membershipid;
             if ($this->order !== NULL) {
                 $payload["Order"] = $this->order->getPayload();
             } else {
-                $payload["Order"] = null;
+                $payload["Order"] = NULL;
             }
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["StoreCard"] = ! ! $this->storeCard;
-            $payload["SubType"] = $this->subType;
-            $payload["TestMode"] = $this->testMode;
+            $payload["Reference1"]       = $this->reference1;
+            $payload["Reference2"]       = $this->reference2;
+            $payload["Reference3"]       = $this->reference3;
+            $payload["PaymentReason"]    = $this->paymentReason;
+            $payload["StoreCard"]        = !!$this->storeCard;
+            $payload["SubType"]          = $this->subType;
+            $payload["TestMode"]         = $this->testMode;
             $payload["TokenisationMode"] = $this->tokenisationMode;
-            $payload["Type"] = $this->type;
+            $payload["Type"]             = $this->type;
             if ($this->fraudScreeningRequest !== NULL) {
                 $payload["FraudScreeningRequest"] = $this->fraudScreeningRequest->getPayload();
             } else {
-                $payload["FraudScreeningRequest"] = null;
+                $payload["FraudScreeningRequest"] = NULL;
             }
             if ($this->statementDescriptor !== NULL) {
                 $payload["StatementDescriptor"] = $this->statementDescriptor->getPayload();
             } else {
-                $payload["StatementDescriptor"] = null;
+                $payload["StatementDescriptor"] = NULL;
             }
 
             return $payload;
-        }
-
-        public function submit()
-        {
-            $this->setAuthHeader();
-            $this->setURL('/txns/');
-
-            $response = RequestSender::send($this->url, $this->authHeader, $this->getPayload(), $this->method);
-
-            return new TransactionResponse($response);
         }
     }
 
     class AddSecureCallTokenRequest extends Request
     {
-
         private $authKey = NULL;
-
         private $tokenRequest = NULL;
 
         public function __construct($authKey = NULL)
@@ -2516,11 +2313,10 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/addtoken/" . $this->authKey);
             $this->setAuthHeader();
-            $wrappedRequest = array(
-                "TokenReq" => $this->tokenRequest->getPayload()
-            );
+            $wrappedRequest = [
+                "TokenReq" => $this->tokenRequest->getPayload(),
+            ];
             // AddSecureCallTokenReq
-
             $response = RequestSender::send($this->url, $this->authHeader, $wrappedRequest, $this->method);
 
             return new AddSecureCallTokenResponse($response);
@@ -2529,21 +2325,21 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
 
         public function setTokenReq($value)
         {
             $this->tokenRequest = $value;
+
             return $this;
         }
     }
 
     class UpdateSecureCallTokenRequest extends Request
     {
-
         private $authKey = NULL;
-
         private $tokenRequest = NULL;
 
         public function __construct($authKey = NULL)
@@ -2557,11 +2353,10 @@ namespace App\MerchantSuite
         {
             $this->setURL("/ivr/securecall/updatetoken/" . $this->authKey);
             $this->setAuthHeader();
-            $wrappedRequest = array(
-                "TokenReq" => $this->tokenRequest->getPayload()
-            );
+            $wrappedRequest = [
+                "TokenReq" => $this->tokenRequest->getPayload(),
+            ];
             // UpdateSecureCallTokenReq
-
             $response = RequestSender::send($this->url, $this->authHeader, $wrappedRequest, $this->method);
 
             return new UpdateSecureCallTokenResponse($response);
@@ -2570,33 +2365,30 @@ namespace App\MerchantSuite
         public function setAuthKey($value)
         {
             $this->authKey = $value;
+
             return $this;
         }
 
         public function setTokenReq($value)
         {
             $this->tokenRequest = $value;
+
             return $this;
         }
     }
 
     class SecureCallTokenRequest
     {
-
         private $token = NULL;
-
         private $reference1 = NULL;
-
         private $reference2 = NULL;
-
         private $reference3 = NULL;
-
         private $emailAddress = NULL;
-
         private $membershipid = NULL;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function setToken($value)
         {
@@ -2630,12 +2422,11 @@ namespace App\MerchantSuite
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Token"] = $this->token;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
+            $payload = [];
+            $payload["Token"]        = $this->token;
+            $payload["Reference1"]   = $this->reference1;
+            $payload["Reference2"]   = $this->reference2;
+            $payload["Reference3"]   = $this->reference3;
             $payload["EmailAddress"] = $this->emailAddress;
             $payload["MembershipID"] = $this->membershipid;
 
@@ -2645,42 +2436,32 @@ namespace App\MerchantSuite
 
     class Order
     {
-
         private $billingAddress;
-
         private $shippingAddress;
-
         private $shippingMethod;
-
-        private $orderRecipients = array();
-
-        private $orderItems = array();
+        private $orderRecipients = [];
+        private $orderItems = [];
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["BillingAddress"] = $this->billingAddress->getPayload();
+            $payload = [];
+            $payload["BillingAddress"]  = $this->billingAddress->getPayload();
             $payload["ShippingAddress"] = $this->shippingAddress->getPayload();
-            $payload["ShippingMethod"] = $this->shippingMethod;
-
-            $itemsPayload = array();
-
-            for ($i = 0; $i < count($this->orderItems); $i ++) {
-                array_push($itemsPayload, $this->orderItems[$i]->getPayload());
+            $payload["ShippingMethod"]  = $this->shippingMethod;
+            $itemsPayload = [];
+            for ($i = 0; $i < count($this->orderItems); $i++) {
+                array_push($itemsPayload, $this->orderItems[ $i ]->getPayload());
             }
-
-            $recipientsPayload = array();
-
-            for ($i = 0; $i < count($this->orderRecipients); $i ++) {
-                array_push($recipientsPayload, $this->orderRecipients[$i]->getPayload());
+            $recipientsPayload = [];
+            for ($i = 0; $i < count($this->orderRecipients); $i++) {
+                array_push($recipientsPayload, $this->orderRecipients[ $i ]->getPayload());
             }
-
             $payload["OrderRecipients"] = $recipientsPayload;
-            $payload["OrderItems"] = $itemsPayload;
+            $payload["OrderItems"]      = $itemsPayload;
 
             return $payload;
         }
@@ -2693,6 +2474,7 @@ namespace App\MerchantSuite
         public function setBillingAddress($billingAddress)
         {
             $this->billingAddress = $billingAddress;
+
             return $this;
         }
 
@@ -2704,6 +2486,7 @@ namespace App\MerchantSuite
         public function setShippingAddress($shippingAddress)
         {
             $this->shippingAddress = $shippingAddress;
+
             return $this;
         }
 
@@ -2715,6 +2498,7 @@ namespace App\MerchantSuite
         public function setShippingMethod($shippingMethod)
         {
             $this->shippingMethod = $shippingMethod;
+
             return $this;
         }
 
@@ -2726,6 +2510,7 @@ namespace App\MerchantSuite
         public function setOrderRecipients($orderRecipients)
         {
             $this->orderRecipients = $orderRecipients;
+
             return $this;
         }
 
@@ -2737,32 +2522,29 @@ namespace App\MerchantSuite
         public function setOrderItems($orderItems)
         {
             $this->orderItems = $orderItems;
+
             return $this;
         }
     }
 
     class OrderAddress
     {
-
         private $address;
-
         private $contactDetails;
-
         private $personalDetails;
-
         private $comments;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Address"] = $this->address->getPayload();
-            $payload["ContactDetails"] = $this->contactDetails->getPayload();
+            $payload = [];
+            $payload["Address"]         = $this->address->getPayload();
+            $payload["ContactDetails"]  = $this->contactDetails->getPayload();
             $payload["PersonalDetails"] = $this->personalDetails->getPayload();
-            $payload["Comments"] = $this->comments;
+            $payload["Comments"]        = $this->comments;
 
             return $payload;
         }
@@ -2775,6 +2557,7 @@ namespace App\MerchantSuite
         public function setAddress($value)
         {
             $this->address = $value;
+
             return $this;
         }
 
@@ -2786,6 +2569,7 @@ namespace App\MerchantSuite
         public function setContactDetails($value)
         {
             $this->contactDetails = $value;
+
             return $this;
         }
 
@@ -2797,6 +2581,7 @@ namespace App\MerchantSuite
         public function setPersonalDetails($value)
         {
             $this->personalDetails = $value;
+
             return $this;
         }
 
@@ -2808,50 +2593,41 @@ namespace App\MerchantSuite
         public function setComments($value)
         {
             $this->comments = $value;
+
             return $this;
         }
     }
 
     class OrderItem
     {
-
         private $comments;
-
         private $description;
-
         private $giftMessage;
-
         private $partNumber;
-
         private $productCode;
-
         private $quantity;
-
         private $sku;
-
         private $shippingMethod;
-
         private $shippingNumber;
-
         private $unitPrice;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Comments"] = $this->comments;
-            $payload["Description"] = $this->description;
-            $payload["GiftMessage"] = $this->giftMessage;
-            $payload["PartNumber"] = $this->partNumber;
-            $payload["ProductCode"] = $this->productCode;
-            $payload["Quantity"] = $this->quantity;
-            $payload["Sku"] = $this->sku;
+            $payload = [];
+            $payload["Comments"]       = $this->comments;
+            $payload["Description"]    = $this->description;
+            $payload["GiftMessage"]    = $this->giftMessage;
+            $payload["PartNumber"]     = $this->partNumber;
+            $payload["ProductCode"]    = $this->productCode;
+            $payload["Quantity"]       = $this->quantity;
+            $payload["Sku"]            = $this->sku;
             $payload["ShippingMethod"] = $this->shippingMethod;
             $payload["ShippingNumber"] = $this->shippingNumber;
-            $payload["UnitPrice"] = $this->unitPrice;
+            $payload["UnitPrice"]      = $this->unitPrice;
 
             return $payload;
         }
@@ -2864,6 +2640,7 @@ namespace App\MerchantSuite
         public function setComments($comments)
         {
             $this->comments = $comments;
+
             return $this;
         }
 
@@ -2875,6 +2652,7 @@ namespace App\MerchantSuite
         public function setDescription($description)
         {
             $this->description = $description;
+
             return $this;
         }
 
@@ -2886,6 +2664,7 @@ namespace App\MerchantSuite
         public function setGiftMessage($giftMessage)
         {
             $this->giftMessage = $giftMessage;
+
             return $this;
         }
 
@@ -2897,6 +2676,7 @@ namespace App\MerchantSuite
         public function setPartNumber($partNumber)
         {
             $this->partNumber = $partNumber;
+
             return $this;
         }
 
@@ -2908,6 +2688,7 @@ namespace App\MerchantSuite
         public function setProductCode($productCode)
         {
             $this->productCode = $productCode;
+
             return $this;
         }
 
@@ -2919,6 +2700,7 @@ namespace App\MerchantSuite
         public function setQuantity($quantity)
         {
             $this->quantity = $quantity;
+
             return $this;
         }
 
@@ -2930,6 +2712,7 @@ namespace App\MerchantSuite
         public function setSku($sku)
         {
             $this->sku = $sku;
+
             return $this;
         }
 
@@ -2941,6 +2724,7 @@ namespace App\MerchantSuite
         public function setShippingMethod($shippingMethod)
         {
             $this->shippingMethod = $shippingMethod;
+
             return $this;
         }
 
@@ -2952,6 +2736,7 @@ namespace App\MerchantSuite
         public function setShippingNumber($shippingNumber)
         {
             $this->shippingNumber = $shippingNumber;
+
             return $this;
         }
 
@@ -2963,28 +2748,26 @@ namespace App\MerchantSuite
         public function setUnitPrice($unitPrice)
         {
             $this->unitPrice = $unitPrice;
+
             return $this;
         }
     }
 
     class OrderRecipient
     {
-
         private $address;
-
         private $contactDetails;
-
         private $personalDetails;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Address"] = $this->address->getPayload();
-            $payload["ContactDetails"] = $this->contactDetails->getPayload();
+            $payload = [];
+            $payload["Address"]         = $this->address->getPayload();
+            $payload["ContactDetails"]  = $this->contactDetails->getPayload();
             $payload["PersonalDetails"] = $this->personalDetails->getPayload();
 
             return $payload;
@@ -2998,6 +2781,7 @@ namespace App\MerchantSuite
         public function setAddress($address)
         {
             $this->address = $address;
+
             return $this;
         }
 
@@ -3009,6 +2793,7 @@ namespace App\MerchantSuite
         public function setContactDetails($contactDetails)
         {
             $this->contactDetails = $contactDetails;
+
             return $this;
         }
 
@@ -3020,41 +2805,35 @@ namespace App\MerchantSuite
         public function setPersonalDetails($personalDetails)
         {
             $this->personalDetails = $personalDetails;
+
             return $this;
         }
     }
 
     class FraudScreeningRequest
     {
-
         private $performFraudScreening;
-
         private $deviceFingerprint;
-
         private $customerIPAddress;
-
         private $txnSourceWebsiteURL;
-
-        private $customFields = array();
+        private $customFields = [];
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $customFieldsArray = array();
-
+            $payload = [];
+            $customFieldsArray = [];
             foreach ($this->customFields as $value) {
                 $customFieldsArray[] = $value->getPayload();
             }
-
-            $payload["PerformFraudScreening"] = $this->performFraudScreening;
+            $payload["PerformFraudScreening"]           = $this->performFraudScreening;
             $payload["FraudScreeningDeviceFingerprint"] = $this->deviceFingerprint;
-            $payload["CustomerIPAddress"] = $this->customerIPAddress;
-            $payload["SourceWebsiteURL"] = $this->txnSourceWebsiteURL;
-            $payload["CustomFields"] = $customFieldsArray;
+            $payload["CustomerIPAddress"]               = $this->customerIPAddress;
+            $payload["SourceWebsiteURL"]                = $this->txnSourceWebsiteURL;
+            $payload["CustomFields"]                    = $customFieldsArray;
 
             return $payload;
         }
@@ -3067,6 +2846,7 @@ namespace App\MerchantSuite
         public function setPerformFraudScreening($performFraudScreening)
         {
             $this->performFraudScreening = $performFraudScreening;
+
             return $this;
         }
 
@@ -3078,6 +2858,7 @@ namespace App\MerchantSuite
         public function setDeviceFingerprint($deviceFingerprint)
         {
             $this->deviceFingerprint = $deviceFingerprint;
+
             return $this;
         }
 
@@ -3089,6 +2870,7 @@ namespace App\MerchantSuite
         public function setCustomerIPAddress($customerIPAddress)
         {
             $this->customerIPAddress = $customerIPAddress;
+
             return $this;
         }
 
@@ -3100,6 +2882,7 @@ namespace App\MerchantSuite
         public function setTxnSourceWebsiteURL($txnSourceWebsiteURL)
         {
             $this->txnSourceWebsiteURL = $txnSourceWebsiteURL;
+
             return $this;
         }
 
@@ -3111,22 +2894,22 @@ namespace App\MerchantSuite
         public function setCustomFields($customFields)
         {
             $this->customFields = $customFields;
+
             return $this;
         }
     }
 
     class CustomField
     {
-
         private $customField;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
+            $payload = [];
             $payload["CustomField"] = $this->customField;
 
             return $payload;
@@ -3140,38 +2923,33 @@ namespace App\MerchantSuite
         public function setCustomField($customField)
         {
             $this->customField = $customField;
+
             return $this;
         }
     }
 
     class Customer
     {
-
         private $address;
-
         private $contactDetails;
-
         private $customerNumber;
-
         private $personalDetails;
-
-        private $isExistingCustomer = FALSE;
-
+        private $isExistingCustomer = false;
         private $daysOnFile = 1;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Address"] = $this->address->getPayload();
-            $payload["ContactDetails"] = $this->contactDetails->getPayload();
-            $payload["CustomerNumber"] = $this->customerNumber;
-            $payload["PersonalDetails"] = $this->personalDetails->getPayload();
+            $payload = [];
+            $payload["Address"]          = $this->address->getPayload();
+            $payload["ContactDetails"]   = $this->contactDetails->getPayload();
+            $payload["CustomerNumber"]   = $this->customerNumber;
+            $payload["PersonalDetails"]  = $this->personalDetails->getPayload();
             $payload["ExistingCustomer"] = $this->isExistingCustomer;
-            $payload["DaysOnFile"] = $this->daysOnFile;
+            $payload["DaysOnFile"]       = $this->daysOnFile;
 
             return $payload;
         }
@@ -3184,6 +2962,7 @@ namespace App\MerchantSuite
         public function setAddress($address)
         {
             $this->address = $address;
+
             return $this;
         }
 
@@ -3195,6 +2974,7 @@ namespace App\MerchantSuite
         public function setContactDetails($contactDetails)
         {
             $this->contactDetails = $contactDetails;
+
             return $this;
         }
 
@@ -3206,6 +2986,7 @@ namespace App\MerchantSuite
         public function setCustomerNumber($customerNumber)
         {
             $this->customerNumber = $customerNumber;
+
             return $this;
         }
 
@@ -3217,6 +2998,7 @@ namespace App\MerchantSuite
         public function setPersonalDetails($personalDetails)
         {
             $this->personalDetails = $personalDetails;
+
             return $this;
         }
 
@@ -3228,6 +3010,7 @@ namespace App\MerchantSuite
         public function setExistingCustomer($isExistingCustomer)
         {
             $this->isExistingCustomer = $isExistingCustomer;
+
             return $this;
         }
 
@@ -3239,41 +3022,35 @@ namespace App\MerchantSuite
         public function setDaysOnFile($daysOnFile)
         {
             $this->daysOnFile = $daysOnFile;
+
             return $this;
         }
     }
 
     class Address
     {
-
         private $addressLine1;
-
         private $addressLine2;
-
         private $addressLine3;
-
         private $city;
-
         private $countryCode;
-
         private $postCode;
-
         private $state;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
+            $payload = [];
             $payload["AddressLine1"] = $this->addressLine1;
             $payload["AddressLine2"] = $this->addressLine2;
             $payload["AddressLine3"] = $this->addressLine3;
-            $payload["City"] = $this->city;
-            $payload["CountryCode"] = $this->countryCode;
-            $payload["PostCode"] = $this->postCode;
-            $payload["State"] = $this->state;
+            $payload["City"]         = $this->city;
+            $payload["CountryCode"]  = $this->countryCode;
+            $payload["PostCode"]     = $this->postCode;
+            $payload["State"]        = $this->state;
 
             return $payload;
         }
@@ -3286,6 +3063,7 @@ namespace App\MerchantSuite
         public function setAddressLine1($addressLine1)
         {
             $this->addressLine1 = $addressLine1;
+
             return $this;
         }
 
@@ -3297,6 +3075,7 @@ namespace App\MerchantSuite
         public function setAddressLine2($addressLine2)
         {
             $this->addressLine2 = $addressLine2;
+
             return $this;
         }
 
@@ -3308,6 +3087,7 @@ namespace App\MerchantSuite
         public function setAddressLine3($addressLine3)
         {
             $this->addressLine3 = $addressLine3;
+
             return $this;
         }
 
@@ -3319,6 +3099,7 @@ namespace App\MerchantSuite
         public function setCity($city)
         {
             $this->city = $city;
+
             return $this;
         }
 
@@ -3330,6 +3111,7 @@ namespace App\MerchantSuite
         public function setCountryCode($countryCode)
         {
             $this->countryCode = $countryCode;
+
             return $this;
         }
 
@@ -3341,6 +3123,7 @@ namespace App\MerchantSuite
         public function setPostCode($postCode)
         {
             $this->postCode = $postCode;
+
             return $this;
         }
 
@@ -3352,35 +3135,31 @@ namespace App\MerchantSuite
         public function setState($state)
         {
             $this->state = $state;
+
             return $this;
         }
     }
 
     class ContactDetails
     {
-
         private $emailAddress;
-
         private $faxNumber;
-
         private $homePhoneNumber;
-
         private $mobilePhoneNumber;
-
         private $workPhoneNumber;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["EmailAddress"] = $this->emailAddress;
-            $payload["FaxNumber"] = $this->faxNumber;
-            $payload["HomePhoneNumber"] = $this->homePhoneNumber;
+            $payload = [];
+            $payload["EmailAddress"]      = $this->emailAddress;
+            $payload["FaxNumber"]         = $this->faxNumber;
+            $payload["HomePhoneNumber"]   = $this->homePhoneNumber;
             $payload["MobilePhoneNumber"] = $this->mobilePhoneNumber;
-            $payload["WorkPhoneNumber"] = $this->workPhoneNumber;
+            $payload["WorkPhoneNumber"]   = $this->workPhoneNumber;
 
             return $payload;
         }
@@ -3393,6 +3172,7 @@ namespace App\MerchantSuite
         public function setEmailAddress($emailAddress)
         {
             $this->emailAddress = $emailAddress;
+
             return $this;
         }
 
@@ -3404,6 +3184,7 @@ namespace App\MerchantSuite
         public function setFaxNumber($faxNumber)
         {
             $this->faxNumber = $faxNumber;
+
             return $this;
         }
 
@@ -3415,6 +3196,7 @@ namespace App\MerchantSuite
         public function setHomePhoneNumber($homePhoneNumber)
         {
             $this->homePhoneNumber = $homePhoneNumber;
+
             return $this;
         }
 
@@ -3426,6 +3208,7 @@ namespace App\MerchantSuite
         public function setMobilePhoneNumber($mobilePhoneNumber)
         {
             $this->mobilePhoneNumber = $mobilePhoneNumber;
+
             return $this;
         }
 
@@ -3437,35 +3220,31 @@ namespace App\MerchantSuite
         public function setWorkPhoneNumber($workPhoneNumber)
         {
             $this->workPhoneNumber = $workPhoneNumber;
+
             return $this;
         }
     }
 
     class PersonalDetails
     {
-
         private $dateOfBirth;
-
         private $firstName;
-
         private $lastName;
-
         private $middleName;
-
         private $salutation;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
+            $payload = [];
             $payload["DateOfBirth"] = $this->dateOfBirth;
-            $payload["FirstName"] = $this->firstName;
-            $payload["LastName"] = $this->lastName;
-            $payload["MiddleName"] = $this->middleName;
-            $payload["Salutation"] = $this->salutation;
+            $payload["FirstName"]   = $this->firstName;
+            $payload["LastName"]    = $this->lastName;
+            $payload["MiddleName"]  = $this->middleName;
+            $payload["Salutation"]  = $this->salutation;
 
             return $payload;
         }
@@ -3478,6 +3257,7 @@ namespace App\MerchantSuite
         public function setDateOfBirth($dateOfBirth)
         {
             $this->dateOfBirth = $dateOfBirth;
+
             return $this;
         }
 
@@ -3489,6 +3269,7 @@ namespace App\MerchantSuite
         public function setFirstName($firstName)
         {
             $this->firstName = $firstName;
+
             return $this;
         }
 
@@ -3500,6 +3281,7 @@ namespace App\MerchantSuite
         public function setLastName($lastName)
         {
             $this->lastName = $lastName;
+
             return $this;
         }
 
@@ -3511,6 +3293,7 @@ namespace App\MerchantSuite
         public function setMiddleName($middleName)
         {
             $this->middleName = $middleName;
+
             return $this;
         }
 
@@ -3522,29 +3305,27 @@ namespace App\MerchantSuite
         public function setSalutation($salutation)
         {
             $this->salutation = $salutation;
+
             return $this;
         }
     }
 
     class SecureCallRequest
     {
-
         private $agent;
-
         private $agentPhoneNumber;
-
         private $paymentReason;
 
         public function __construct()
-        {}
+        {
+        }
 
         public function getPayload()
         {
-            $payload = array();
-
-            $payload["Agent"] = $this->agent;
+            $payload = [];
+            $payload["Agent"]            = $this->agent;
             $payload["AgentPhoneNumber"] = $this->agentPhoneNumber;
-            $payload["PaymentReason"] = $this->paymentReason;
+            $payload["PaymentReason"]    = $this->paymentReason;
 
             return $payload;
         }
@@ -3557,6 +3338,7 @@ namespace App\MerchantSuite
         public function setAgent($value)
         {
             $this->agent = $value;
+
             return $this;
         }
 
@@ -3568,6 +3350,7 @@ namespace App\MerchantSuite
         public function setAgentPhoneNumber($value)
         {
             $this->agentPhoneNumber = $value;
+
             return $this;
         }
 
@@ -3579,23 +3362,21 @@ namespace App\MerchantSuite
         public function setPaymentReason($value)
         {
             $this->paymentReason = $value;
+
             return $this;
         }
     }
 
     // --------------------------------------------------------
     // Begin Payment Request classes.
-
     class CancelPaymentRequest extends Request
     {
-
         private $guid;
 
         public function __construct($guid)
         {
             parent::__construct();
             $this->setMethod("POST");
-
             $this->guid = $guid;
         }
 
@@ -3607,50 +3388,32 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/payreq/cancel/" . $this->guid);
-
             var_dump($this->url);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
             print_r($response);
+
             return new PaymentRequestResponse($response);
         }
     }
 
     class CreatePaymentRequest extends Request
     {
-
         private $acceptablePaymentType;
-
         private $action;
-
         private $amount;
-
         private $currency;
-
         private $dueDate;
-
         private $emailAddress;
-
         private $emailSenderName;
-
         private $expiryDate;
-
         private $internalNote;
-
         private $messagingMode;
-
         private $mobilePhoneNumber;
-
         private $mobilePhoneNumberCountryCode;
-
         private $paymentReason;
-
         private $reference1;
-
         private $reference2;
-
         private $reference3;
-
         private $token;
 
         public function __construct()
@@ -3662,194 +3425,184 @@ namespace App\MerchantSuite
         public function setAcceptablePaymentType($AcceptablePaymentType)
         {
             $this->acceptablePaymentType = $AcceptablePaymentType;
+
             return $this;
         }
 
         public function setAction($Action)
         {
             $this->action = $Action;
+
             return $this;
         }
 
         public function setAmount($Amount)
         {
             $this->amount = $Amount;
+
             return $this;
         }
 
         public function setCurrency($Currency)
         {
             $this->currency = $Currency;
+
             return $this;
         }
 
         public function setDueDate($DueDate)
         {
             $this->dueDate = $DueDate;
+
             return $this;
         }
 
         public function setEmailAddress($EmailAddress)
         {
             $this->emailAddress = $EmailAddress;
+
             return $this;
         }
 
         public function setEmailSenderName($EmailSenderName)
         {
             $this->emailSenderName = $EmailSenderName;
+
             return $this;
         }
 
         public function setExpiryDate($ExpiryDate)
         {
             $this->expiryDate = $ExpiryDate;
+
             return $this;
         }
 
         public function setInternalNote($InternalNote)
         {
             $this->internalNote = $InternalNote;
+
             return $this;
         }
 
         public function setMessagingMode($MessagingMode)
         {
             $this->messagingMode = $MessagingMode;
+
             return $this;
         }
 
         public function setMobilePhoneNumber($MobilePhoneNumber)
         {
             $this->mobilePhoneNumber = $MobilePhoneNumber;
+
             return $this;
         }
 
         public function setMobilePhoneNumberCountryCode($MobilePhoneNumberCountryCode)
         {
             $this->mobilePhoneNumberCountryCode = $MobilePhoneNumberCountryCode;
+
             return $this;
         }
 
         public function setPaymentReason($PaymentReason)
         {
             $this->paymentReason = $PaymentReason;
+
             return $this;
         }
 
         public function setReference1($Reference1)
         {
             $this->reference1 = $Reference1;
+
             return $this;
         }
 
         public function setReference2($Reference2)
         {
             $this->reference2 = $Reference2;
+
             return $this;
         }
 
         public function setReference3($Reference3)
         {
             $this->reference3 = $Reference3;
+
             return $this;
         }
 
         public function setToken($Token)
         {
             $this->token = $Token;
+
             return $this;
-        }
-
-        protected function getPayload()
-        {
-            $payload = array();
-
-            $payload["AcceptablePaymentType"] = $this->acceptablePaymentType;
-            $payload["Action"] = $this->action;
-            $payload["Amount"] = $this->amount;
-            $payload["Currency"] = $this->currency;
-            $payload["DueDate"] = $this->dueDate;
-            $payload["EmailAddress"] = $this->emailAddress;
-            $payload["EmailSenderName"] = $this->emailSenderName;
-            $payload["ExpiryDate"] = $this->expiryDate;
-            $payload["InternalNote"] = $this->internalNote;
-            $payload["MessagingMode"] = $this->messagingMode;
-            $payload["MobilePhoneNumber"] = $this->mobilePhoneNumber;
-            $payload["MobilePhoneNumberCountryCode"] = $this->mobilePhoneNumberCountryCode;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["Token"] = $this->token;
-
-            $wrappedPayload = array(
-                "PaymentRequestReq" => $payload
-            );
-
-            return $wrappedPayload;
         }
 
         public function submit()
         {
             $payload = $this->getPayload();
             $this->setURL("/payreq/");
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new PaymentRequestResponse($response);
+        }
+
+        protected function getPayload()
+        {
+            $payload = [];
+            $payload["AcceptablePaymentType"]        = $this->acceptablePaymentType;
+            $payload["Action"]                       = $this->action;
+            $payload["Amount"]                       = $this->amount;
+            $payload["Currency"]                     = $this->currency;
+            $payload["DueDate"]                      = $this->dueDate;
+            $payload["EmailAddress"]                 = $this->emailAddress;
+            $payload["EmailSenderName"]              = $this->emailSenderName;
+            $payload["ExpiryDate"]                   = $this->expiryDate;
+            $payload["InternalNote"]                 = $this->internalNote;
+            $payload["MessagingMode"]                = $this->messagingMode;
+            $payload["MobilePhoneNumber"]            = $this->mobilePhoneNumber;
+            $payload["MobilePhoneNumberCountryCode"] = $this->mobilePhoneNumberCountryCode;
+            $payload["PaymentReason"]                = $this->paymentReason;
+            $payload["Reference1"]                   = $this->reference1;
+            $payload["Reference2"]                   = $this->reference2;
+            $payload["Reference3"]                   = $this->reference3;
+            $payload["Token"]                        = $this->token;
+            $wrappedPayload = [
+                "PaymentRequestReq" => $payload,
+            ];
+
+            return $wrappedPayload;
         }
     }
 
     class SearchPaymentRequest extends Request
     {
-
         private $action;
-
         private $emailAddress;
-
         private $emailSenderName;
-
         private $fromAmount = 0;
-
         private $fromAmountOutstanding = 0;
-
         private $fromAmountPaid = 0;
-
         private $fromDate;
-
         private $fromDueDate;
-
         private $fromExpiryDate;
-
         private $guid;
-
         private $internalNote;
-
         private $mobilePhoneNumber;
-
         private $paymentReason;
-
         private $reference1;
-
         private $reference2;
-
         private $reference3;
-
         private $status;
-
         private $toAmount = 0;
-
         private $toAmountOutstanding = 0;
-
         private $toAmountPaid = 0;
-
         private $toDate;
-
         private $toDueDate;
-
         private $toExpiryDate;
-
         private $token;
 
         public function __construct()
@@ -3858,207 +3611,226 @@ namespace App\MerchantSuite
             $this->setMethod("POST");
         }
 
-        protected function getPayload()
-        {
-            $payload = array();
-
-            $payload["Action"] = $this->action;
-            $payload["EmailAddress"] = $this->emailAddress;
-            $payload["EmailSenderName"] = $this->emailSenderName;
-            $payload["FromAmount"] = $this->fromAmount;
-            $payload["FromAmountOutstanding"] = $this->fromAmountOutstanding;
-            $payload["FromAmountPaid"] = $this->fromAmountPaid;
-            $payload["FromDate"] = $this->fromDate;
-            $payload["FromDueDate"] = $this->fromDueDate;
-            $payload["FromExpiryDate"] = $this->fromExpiryDate;
-            $payload["Guid"] = $this->guid;
-            $payload["InternalNote"] = $this->internalNote;
-            $payload["MobilePhoneNumber"] = $this->mobilePhoneNumber;
-            $payload["PaymentReason"] = $this->paymentReason;
-            $payload["Reference1"] = $this->reference1;
-            $payload["Reference2"] = $this->reference2;
-            $payload["Reference3"] = $this->reference3;
-            $payload["Status"] = $this->status;
-            $payload["ToAmount"] = $this->toAmount;
-            $payload["ToAmountOutstanding"] = $this->toAmountOutstanding;
-            $payload["ToAmountPaid"] = $this->toAmountPaid;
-            $payload["ToDate"] = $this->toDate;
-            $payload["ToDueDate"] = $this->toDueDate;
-            $payload["ToExpiryDate"] = $this->toExpiryDate;
-            $payload["Token"] = $this->token;
-
-            $wrappedPayload = array(
-                "SearchInput" => $payload
-            );
-
-            return $wrappedPayload;
-        }
-
         public function submit()
         {
             $payload = $this->getPayload();
             $this->setURL("/payreq/search");
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new PaymentRequestResponseList($response);
         }
 
+        protected function getPayload()
+        {
+            $payload = [];
+            $payload["Action"]                = $this->action;
+            $payload["EmailAddress"]          = $this->emailAddress;
+            $payload["EmailSenderName"]       = $this->emailSenderName;
+            $payload["FromAmount"]            = $this->fromAmount;
+            $payload["FromAmountOutstanding"] = $this->fromAmountOutstanding;
+            $payload["FromAmountPaid"]        = $this->fromAmountPaid;
+            $payload["FromDate"]              = $this->fromDate;
+            $payload["FromDueDate"]           = $this->fromDueDate;
+            $payload["FromExpiryDate"]        = $this->fromExpiryDate;
+            $payload["Guid"]                  = $this->guid;
+            $payload["InternalNote"]          = $this->internalNote;
+            $payload["MobilePhoneNumber"]     = $this->mobilePhoneNumber;
+            $payload["PaymentReason"]         = $this->paymentReason;
+            $payload["Reference1"]            = $this->reference1;
+            $payload["Reference2"]            = $this->reference2;
+            $payload["Reference3"]            = $this->reference3;
+            $payload["Status"]                = $this->status;
+            $payload["ToAmount"]              = $this->toAmount;
+            $payload["ToAmountOutstanding"]   = $this->toAmountOutstanding;
+            $payload["ToAmountPaid"]          = $this->toAmountPaid;
+            $payload["ToDate"]                = $this->toDate;
+            $payload["ToDueDate"]             = $this->toDueDate;
+            $payload["ToExpiryDate"]          = $this->toExpiryDate;
+            $payload["Token"]                 = $this->token;
+            $wrappedPayload = [
+                "SearchInput" => $payload,
+            ];
+
+            return $wrappedPayload;
+        }
+
         public function setAction($Action)
         {
             $this->action = $Action;
+
             return $this;
         }
 
         public function setEmailAddress($EmailAddress)
         {
             $this->emailAddress = $EmailAddress;
+
             return $this;
         }
 
         public function setEmailSenderName($EmailSenderName)
         {
             $this->emailSenderName = $EmailSenderName;
+
             return $this;
         }
 
         public function setFromAmount($FromAmount)
         {
             $this->fromAmount = $FromAmount;
+
             return $this;
         }
 
         public function setFromAmountOutstanding($FromAmountOutstanding)
         {
             $this->fromAmountOutstanding = $FromAmountOutstanding;
+
             return $this;
         }
 
         public function setFromAmountPaid($FromAmountPaid)
         {
             $this->fromAmountPaid = $FromAmountPaid;
+
             return $this;
         }
 
         public function setFromDate($FromDate)
         {
             $this->fromDate = $FromDate;
+
             return $this;
         }
 
         public function setFromDueDate($FromDueDate)
         {
             $this->fromDueDate = $FromDueDate;
+
             return $this;
         }
 
         public function setFromExpiryDate($FromExpiryDate)
         {
             $this->fromExpiryDate = $FromExpiryDate;
+
             return $this;
         }
 
         public function setGuid($Guid)
         {
             $this->guid = $Guid;
+
             return $this;
         }
 
         public function setInternalNote($InternalNote)
         {
             $this->internalNote = $InternalNote;
+
             return $this;
         }
 
         public function setMobilePhoneNumber($MobilePhoneNumber)
         {
             $this->mobilePhoneNumber = $MobilePhoneNumber;
+
             return $this;
         }
 
         public function setPaymentReason($PaymentReason)
         {
             $this->paymentReason = $PaymentReason;
+
             return $this;
         }
 
         public function setReference1($Reference1)
         {
             $this->reference1 = $Reference1;
+
             return $this;
         }
 
         public function setReference2($Reference2)
         {
             $this->reference2 = $Reference2;
+
             return $this;
         }
 
         public function setReference3($Reference3)
         {
             $this->reference3 = $Reference3;
+
             return $this;
         }
 
         public function setStatus($Status)
         {
             $this->status = $Status;
+
             return $this;
         }
 
         public function setToAmount($ToAmount)
         {
             $this->toAmount = $ToAmount;
+
             return $this;
         }
 
         public function setToAmountOutstanding($ToAmountOutstanding)
         {
             $this->toAmountOutstanding = $ToAmountOutstanding;
+
             return $this;
         }
 
         public function setToAmountPaid($ToAmountPaid)
         {
             $this->toAmountPaid = $ToAmountPaid;
+
             return $this;
         }
 
         public function setToDate($ToDate)
         {
             $this->toDate = $ToDate;
+
             return $this;
         }
 
         public function setToDueDate($ToDueDate)
         {
             $this->toDueDate = $ToDueDate;
+
             return $this;
         }
 
         public function setToExpiryDate($ToExpiryDate)
         {
             $this->toExpiryDate = $ToExpiryDate;
+
             return $this;
         }
 
         public function setToken($Token)
         {
             $this->token = $Token;
+
             return $this;
         }
     }
 
     class ResendPaymentRequest extends Request
     {
-
         private $guid;
 
         public function __construct($guid)
         {
             parent::__construct();
             $this->setMethod("POST");
-
             $this->guid = $guid;
         }
 
@@ -4070,74 +3842,82 @@ namespace App\MerchantSuite
         public function submit()
         {
             $this->setURL("/payreq/resend/" . $this->guid);
-
             $response = RequestSender::send($this->url, $this->authHeader, NULL, $this->method);
 
             return new PaymentRequestResponse($response);
         }
     }
 
-    class UpdatePaymentRequest extends Request {
+    class UpdatePaymentRequest extends Request
+    {
         private $acceptablePaymentType;
         private $amount;
         private $dueDate;
         private $expiryDate;
         private $guid;
 
-        public function __construct() {
+        public function __construct()
+        {
             parent::__construct();
             $this->setMethod("POST");
         }
 
-        protected function getPayload() {
-            $payload = array();
-
-            $payload["AcceptablePaymentType"] = $this->acceptablePaymentType;
-            $payload["Amount"] = $this->amount;
-            $payload["DueDate"] = $this->dueDate;
-            $payload["ExpiryDate"] = $this->expiryDate;
-            $payload["Guid"] = $this->guid;
-
-            $wrappedPayload = array("PaymentRequestReq" => $payload);
-
-            return $wrappedPayload;
-        }
-
-        public function submit() {
+        public function submit()
+        {
             $payload = $this->getPayload();
             $this->setURL("/payreq/update");
-
             $response = RequestSender::send($this->url, $this->authHeader, $payload, $this->method);
 
             return new PaymentRequestResponse($response);
         }
 
-        public function setAcceptablePaymentType($AcceptablePaymentType){
+        protected function getPayload()
+        {
+            $payload = [];
+            $payload["AcceptablePaymentType"] = $this->acceptablePaymentType;
+            $payload["Amount"]                = $this->amount;
+            $payload["DueDate"]               = $this->dueDate;
+            $payload["ExpiryDate"]            = $this->expiryDate;
+            $payload["Guid"]                  = $this->guid;
+            $wrappedPayload = [ "PaymentRequestReq" => $payload ];
+
+            return $wrappedPayload;
+        }
+
+        public function setAcceptablePaymentType($AcceptablePaymentType)
+        {
             $this->acceptablePaymentType = $AcceptablePaymentType;
+
             return $this;
         }
 
-        public function setAmount($Amount){
+        public function setAmount($Amount)
+        {
             $this->amount = $Amount;
+
             return $this;
         }
 
-        public function setDueDate($DueDate){
+        public function setDueDate($DueDate)
+        {
             $this->dueDate = $DueDate;
+
             return $this;
         }
 
-        public function setExpiryDate($ExpiryDate){
+        public function setExpiryDate($ExpiryDate)
+        {
             $this->expiryDate = $ExpiryDate;
+
             return $this;
         }
 
-        public function setGuid($Guid){
+        public function setGuid($Guid)
+        {
             $this->guid = $Guid;
+
             return $this;
         }
-
-
     }
 
     // End Payment Request classes.

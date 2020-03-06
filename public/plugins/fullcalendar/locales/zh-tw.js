@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales['zh-tw'] = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales['zh-tw'] = factory()));
+}(this, function () {
+    'use strict';
+    
     var zhTw = {
         code: "zh-tw",
         buttonText: {
@@ -20,7 +21,7 @@
         eventLimitText: '顯示更多',
         noEventsMessage: "没有任何活動"
     };
-
+    
     return zhTw;
-
+    
 }));

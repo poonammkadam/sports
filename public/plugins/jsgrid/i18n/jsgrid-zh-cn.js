@@ -1,5 +1,5 @@
-(function(jsGrid) {
-
+(function (jsGrid) {
+    
     jsGrid.locales["zh-cn"] = {
         grid: {
             noDataContent: "暂无数据",
@@ -12,11 +12,11 @@
             loadMessage: "请稍后...",
             invalidMessage: "数据有误！"
         },
-
+        
         loadIndicator: {
             message: "载入中..."
         },
-
+        
         fields: {
             control: {
                 searchModeButtonTooltip: "切换为搜索",
@@ -30,17 +30,17 @@
                 cancelEditButtonTooltip: "取消编辑"
             }
         },
-
+        
         validators: {
-            required: { message: "字段必填" },
-            rangeLength: { message: "字段值长度超过定义范围" },
-            minLength: { message: "字段长度过短" },
-            maxLength: { message: "字段长度过长" },
-            pattern: { message: "字段值不符合定义规则" },
-            range: { message: "字段值超过定义范围" },
-            min: { message: "字段值太小" },
-            max: { message: "字段值太大" }
+            required: {message: "字段必填"},
+            rangeLength: {message: "字段值长度超过定义范围"},
+            minLength: {message: "字段长度过短"},
+            maxLength: {message: "字段长度过长"},
+            pattern: {message: "字段值不符合定义规则"},
+            range: {message: "字段值超过定义范围"},
+            min: {message: "字段值太小"},
+            max: {message: "字段值太大"}
         }
     };
-
+    
 }(jsGrid, jQuery));

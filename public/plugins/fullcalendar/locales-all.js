@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global.FullCalendarLocalesAll = factory());
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, global.FullCalendarLocalesAll = factory());
+}(this, function () {
+    'use strict';
+    
     var _m0 = {
         code: "af",
         week: {
@@ -24,7 +25,7 @@
         eventLimitText: "Addisionele",
         noEventsMessage: "Daar is geen gebeurtenisse nie"
     };
-
+    
     var _m1 = {
         code: "ar-dz",
         week: {
@@ -46,7 +47,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m2 = {
         code: "ar-kw",
         week: {
@@ -68,7 +69,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m3 = {
         code: "ar-ly",
         week: {
@@ -90,7 +91,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m4 = {
         code: "ar-ma",
         week: {
@@ -112,7 +113,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m5 = {
         code: "ar-sa",
         week: {
@@ -134,7 +135,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m6 = {
         code: "ar-tn",
         week: {
@@ -156,7 +157,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m7 = {
         code: "ar",
         week: {
@@ -178,7 +179,7 @@
         eventLimitText: "أخرى",
         noEventsMessage: "أي أحداث لعرض"
     };
-
+    
     var _m8 = {
         code: "bg",
         week: {
@@ -200,7 +201,7 @@
         },
         noEventsMessage: "Няма събития за показване"
     };
-
+    
     var _m9 = {
         code: "bs",
         week: {
@@ -223,7 +224,7 @@
         },
         noEventsMessage: "Nema događaja za prikazivanje"
     };
-
+    
     var _m10 = {
         code: "ca",
         week: {
@@ -244,7 +245,7 @@
         eventLimitText: "més",
         noEventsMessage: "No hi ha esdeveniments per mostrar"
     };
-
+    
     var _m11 = {
         code: "cs",
         week: {
@@ -267,7 +268,7 @@
         },
         noEventsMessage: "Žádné akce k zobrazení"
     };
-
+    
     var _m12 = {
         code: "da",
         week: {
@@ -288,7 +289,7 @@
         eventLimitText: "flere",
         noEventsMessage: "Ingen arrangementer at vise"
     };
-
+    
     var _m13 = {
         code: "de",
         week: {
@@ -312,7 +313,7 @@
         },
         noEventsMessage: "Keine Ereignisse anzuzeigen"
     };
-
+    
     var _m14 = {
         code: "el",
         week: {
@@ -333,7 +334,7 @@
         eventLimitText: "περισσότερα",
         noEventsMessage: "Δεν υπάρχουν γεγονότα για να εμφανιστεί"
     };
-
+    
     var _m15 = {
         code: "en-au",
         week: {
@@ -341,7 +342,7 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         }
     };
-
+    
     var _m16 = {
         code: "en-gb",
         week: {
@@ -349,7 +350,7 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         }
     };
-
+    
     var _m17 = {
         code: "en-nz",
         week: {
@@ -357,7 +358,7 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         }
     };
-
+    
     var _m18 = {
         code: "es",
         week: {
@@ -378,7 +379,7 @@
         eventLimitText: "más",
         noEventsMessage: "No hay eventos para mostrar"
     };
-
+    
     var _m19 = {
         code: "es",
         week: {
@@ -399,7 +400,7 @@
         eventLimitText: "más",
         noEventsMessage: "No hay eventos para mostrar"
     };
-
+    
     var _m20 = {
         code: "et",
         week: {
@@ -422,7 +423,7 @@
         },
         noEventsMessage: "Kuvamiseks puuduvad sündmused"
     };
-
+    
     var _m21 = {
         code: "eu",
         week: {
@@ -443,7 +444,7 @@
         eventLimitText: "gehiago",
         noEventsMessage: "Ez dago ekitaldirik erakusteko"
     };
-
+    
     var _m22 = {
         code: "fa",
         week: {
@@ -467,7 +468,7 @@
         },
         noEventsMessage: "هیچ رویدادی به نمایش"
     };
-
+    
     var _m23 = {
         code: "fi",
         week: {
@@ -488,7 +489,7 @@
         eventLimitText: "lisää",
         noEventsMessage: "Ei näytettäviä tapahtumia"
     };
-
+    
     var _m24 = {
         code: "fr",
         buttonText: {
@@ -506,7 +507,7 @@
         eventLimitText: "en plus",
         noEventsMessage: "Aucun événement à afficher"
     };
-
+    
     var _m25 = {
         code: "fr-ch",
         week: {
@@ -528,7 +529,7 @@
         eventLimitText: "en plus",
         noEventsMessage: "Aucun événement à afficher"
     };
-
+    
     var _m26 = {
         code: "fr",
         week: {
@@ -550,7 +551,7 @@
         eventLimitText: "en plus",
         noEventsMessage: "Aucun événement à afficher"
     };
-
+    
     var _m27 = {
         code: "gl",
         week: {
@@ -571,7 +572,7 @@
         eventLimitText: "máis",
         noEventsMessage: "Non hai eventos para amosar"
     };
-
+    
     var _m28 = {
         code: "he",
         dir: 'rtl',
@@ -589,7 +590,7 @@
         noEventsMessage: "אין אירועים להצגה",
         weekLabel: "שבוע"
     };
-
+    
     var _m29 = {
         code: "hi",
         week: {
@@ -612,7 +613,7 @@
         },
         noEventsMessage: "कोई घटनाओं को प्रदर्शित करने के लिए"
     };
-
+    
     var _m30 = {
         code: "hr",
         week: {
@@ -635,7 +636,7 @@
         },
         noEventsMessage: "Nema događaja za prikaz"
     };
-
+    
     var _m31 = {
         code: "hu",
         week: {
@@ -656,7 +657,7 @@
         eventLimitText: "további",
         noEventsMessage: "Nincs megjeleníthető esemény"
     };
-
+    
     var _m32 = {
         code: "id",
         week: {
@@ -677,7 +678,7 @@
         eventLimitText: "lebih",
         noEventsMessage: "Tidak ada acara untuk ditampilkan"
     };
-
+    
     var _m33 = {
         code: "is",
         week: {
@@ -698,7 +699,7 @@
         eventLimitText: "meira",
         noEventsMessage: "Engir viðburðir til að sýna"
     };
-
+    
     var _m34 = {
         code: "it",
         week: {
@@ -721,7 +722,7 @@
         },
         noEventsMessage: "Non ci sono eventi da visualizzare"
     };
-
+    
     var _m35 = {
         code: "ja",
         buttonText: {
@@ -740,7 +741,7 @@
         },
         noEventsMessage: "表示する予定はありません"
     };
-
+    
     var _m36 = {
         code: "ka",
         week: {
@@ -763,7 +764,7 @@
         },
         noEventsMessage: "ღონისძიებები არ არის"
     };
-
+    
     var _m37 = {
         code: "kk",
         week: {
@@ -786,7 +787,7 @@
         },
         noEventsMessage: "Көрсету үшін оқиғалар жоқ"
     };
-
+    
     var _m38 = {
         code: "ko",
         buttonText: {
@@ -803,7 +804,7 @@
         eventLimitText: "개",
         noEventsMessage: "일정이 없습니다"
     };
-
+    
     var _m39 = {
         code: "lb",
         week: {
@@ -824,7 +825,7 @@
         eventLimitText: "méi",
         noEventsMessage: "Nee Evenementer ze affichéieren"
     };
-
+    
     var _m40 = {
         code: "lt",
         week: {
@@ -845,7 +846,7 @@
         eventLimitText: "daugiau",
         noEventsMessage: "Nėra įvykių rodyti"
     };
-
+    
     var _m41 = {
         code: "lv",
         week: {
@@ -868,7 +869,7 @@
         },
         noEventsMessage: "Nav notikumu"
     };
-
+    
     var _m42 = {
         code: "mk",
         buttonText: {
@@ -887,7 +888,7 @@
         },
         noEventsMessage: "Нема настани за прикажување"
     };
-
+    
     var _m43 = {
         code: "ms",
         week: {
@@ -910,7 +911,7 @@
         },
         noEventsMessage: "Tiada peristiwa untuk dipaparkan"
     };
-
+    
     var _m44 = {
         code: "nb",
         week: {
@@ -931,7 +932,7 @@
         eventLimitText: "til",
         noEventsMessage: "Ingen hendelser å vise"
     };
-
+    
     var _m45 = {
         code: "nl",
         week: {
@@ -952,7 +953,7 @@
         eventLimitText: "extra",
         noEventsMessage: "Geen evenementen om te laten zien"
     };
-
+    
     var _m46 = {
         code: "nn",
         week: {
@@ -973,7 +974,7 @@
         eventLimitText: "til",
         noEventsMessage: "Ingen hendelser å vise"
     };
-
+    
     var _m47 = {
         code: "pl",
         week: {
@@ -994,7 +995,7 @@
         eventLimitText: "więcej",
         noEventsMessage: "Brak wydarzeń do wyświetlenia"
     };
-
+    
     var _m48 = {
         code: "pt-br",
         buttonText: {
@@ -1013,7 +1014,7 @@
         },
         noEventsMessage: "Não há eventos para mostrar"
     };
-
+    
     var _m49 = {
         code: "pt",
         week: {
@@ -1034,7 +1035,7 @@
         eventLimitText: "mais",
         noEventsMessage: "Não há eventos para mostrar"
     };
-
+    
     var _m50 = {
         code: "ro",
         week: {
@@ -1057,7 +1058,7 @@
         },
         noEventsMessage: "Nu există evenimente de afișat"
     };
-
+    
     var _m51 = {
         code: "ru",
         week: {
@@ -1080,7 +1081,7 @@
         },
         noEventsMessage: "Нет событий для отображения"
     };
-
+    
     var _m52 = {
         code: "sk",
         week: {
@@ -1103,7 +1104,7 @@
         },
         noEventsMessage: "Žiadne akcie na zobrazenie"
     };
-
+    
     var _m53 = {
         code: "sl",
         week: {
@@ -1124,7 +1125,7 @@
         eventLimitText: "več",
         noEventsMessage: "Ni dogodkov za prikaz"
     };
-
+    
     var _m54 = {
         code: "sq",
         week: {
@@ -1147,7 +1148,7 @@
         },
         noEventsMessage: "Nuk ka evente për të shfaqur"
     };
-
+    
     var _m55 = {
         code: "sr-cyrl",
         week: {
@@ -1170,7 +1171,7 @@
         },
         noEventsMessage: "Нема догађаја за приказ"
     };
-
+    
     var _m56 = {
         code: "sr",
         week: {
@@ -1193,7 +1194,7 @@
         },
         noEventsMessage: "Nеma događaja za prikaz"
     };
-
+    
     var _m57 = {
         code: "sv",
         week: {
@@ -1214,7 +1215,7 @@
         eventLimitText: "till",
         noEventsMessage: "Inga händelser att visa"
     };
-
+    
     var _m58 = {
         code: "th",
         buttonText: {
@@ -1230,7 +1231,7 @@
         eventLimitText: "เพิ่มเติม",
         noEventsMessage: "ไม่มีกิจกรรมที่จะแสดง"
     };
-
+    
     var _m59 = {
         code: "tr",
         week: {
@@ -1251,7 +1252,7 @@
         eventLimitText: "daha fazla",
         noEventsMessage: "Gösterilecek etkinlik yok"
     };
-
+    
     var _m60 = {
         code: "uk",
         week: {
@@ -1274,7 +1275,7 @@
         },
         noEventsMessage: "Немає подій для відображення"
     };
-
+    
     var _m61 = {
         code: "vi",
         week: {
@@ -1297,7 +1298,7 @@
         },
         noEventsMessage: "Không có sự kiện để hiển thị"
     };
-
+    
     var _m62 = {
         code: "zh-cn",
         week: {
@@ -1321,7 +1322,7 @@
         },
         noEventsMessage: "没有事件显示"
     };
-
+    
     var _m63 = {
         code: "zh-tw",
         buttonText: {
@@ -1338,11 +1339,11 @@
         eventLimitText: '顯示更多',
         noEventsMessage: "没有任何活動"
     };
-
+    
     var _rollupPluginMultiEntry_entryPoint = [
-    _m0, _m1, _m2, _m3, _m4, _m5, _m6, _m7, _m8, _m9, _m10, _m11, _m12, _m13, _m14, _m15, _m16, _m17, _m18, _m19, _m20, _m21, _m22, _m23, _m24, _m25, _m26, _m27, _m28, _m29, _m30, _m31, _m32, _m33, _m34, _m35, _m36, _m37, _m38, _m39, _m40, _m41, _m42, _m43, _m44, _m45, _m46, _m47, _m48, _m49, _m50, _m51, _m52, _m53, _m54, _m55, _m56, _m57, _m58, _m59, _m60, _m61, _m62, _m63
+        _m0, _m1, _m2, _m3, _m4, _m5, _m6, _m7, _m8, _m9, _m10, _m11, _m12, _m13, _m14, _m15, _m16, _m17, _m18, _m19, _m20, _m21, _m22, _m23, _m24, _m25, _m26, _m27, _m28, _m29, _m30, _m31, _m32, _m33, _m34, _m35, _m36, _m37, _m38, _m39, _m40, _m41, _m42, _m43, _m44, _m45, _m46, _m47, _m48, _m49, _m50, _m51, _m52, _m53, _m54, _m55, _m56, _m57, _m58, _m59, _m60, _m61, _m62, _m63
     ];
-
+    
     return _rollupPluginMultiEntry_entryPoint;
-
+    
 }));

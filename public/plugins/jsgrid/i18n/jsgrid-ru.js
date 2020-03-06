@@ -1,5 +1,5 @@
-(function(jsGrid) {
-
+(function (jsGrid) {
+    
     jsGrid.locales.ru = {
         grid: {
             noDataContent: "Данных не найдено",
@@ -12,11 +12,11 @@
             loadMessage: "Пожалуйста, подождите...",
             invalidMessage: "Введены неверные данные!"
         },
-
+        
         loadIndicator: {
             message: "Загрузка..."
         },
-
+        
         fields: {
             control: {
                 searchModeButtonTooltip: "Поиск",
@@ -30,18 +30,18 @@
                 cancelEditButtonTooltip: "Отменить"
             }
         },
-
+        
         validators: {
-            required: { message: "Поле обязательно для заполения" },
-            rangeLength: { message: "Длинна введенного значения вне допустимого диапазона" },
-            minLength: { message: "Введенное значение слишком короткое" },
-            maxLength: { message: "Введенное значение слишком длинное" },
-            pattern: { message: "Введенное значение не соответствует заданному шаблону" },
-            range: { message: "Введенное значение вне допустимого диапазона" },
-            min: { message: "Введенное значение слишком маленькое" },
-            max: { message: "Введенное значение слишком большое" }
+            required: {message: "Поле обязательно для заполения"},
+            rangeLength: {message: "Длинна введенного значения вне допустимого диапазона"},
+            minLength: {message: "Введенное значение слишком короткое"},
+            maxLength: {message: "Введенное значение слишком длинное"},
+            pattern: {message: "Введенное значение не соответствует заданному шаблону"},
+            range: {message: "Введенное значение вне допустимого диапазона"},
+            min: {message: "Введенное значение слишком маленькое"},
+            max: {message: "Введенное значение слишком большое"}
         }
     };
-
+    
 }(jsGrid, jQuery));
 

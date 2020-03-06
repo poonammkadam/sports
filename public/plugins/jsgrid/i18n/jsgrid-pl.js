@@ -1,5 +1,5 @@
-(function(jsGrid) {
-
+(function (jsGrid) {
+    
     jsGrid.locales.pl = {
         grid: {
             noDataContent: "Nie znaleziono",
@@ -12,11 +12,11 @@
             loadMessage: "Proszę czekać...",
             invalidMessage: "Wprowadzono nieprawidłowe dane!"
         },
-
+        
         loadIndicator: {
             message: "Ładowanie..."
         },
-
+        
         fields: {
             control: {
                 searchModeButtonTooltip: "Wyszukiwanie",
@@ -30,7 +30,7 @@
                 cancelEditButtonTooltip: "Anuluj edytowanie"
             }
         },
-
+        
         validators: {
             required: {
                 message: "Pole jest wymagane"
@@ -58,5 +58,5 @@
             }
         }
     };
-
+    
 }(jsGrid, jQuery));

@@ -1,13 +1,14 @@
 //! moment.js locale configuration
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
-
-
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
+    
+    
     var symbolMap = {
         '1': '၁',
         '2': '၂',
@@ -31,14 +32,14 @@
         '၉': '9',
         '၀': '0'
     };
-
+    
     var my = moment.defineLocale('my', {
         months: 'ဇန်နဝါရီ_ဖေဖော်ဝါရီ_မတ်_ဧပြီ_မေ_ဇွန်_ဇူလိုင်_သြဂုတ်_စက်တင်ဘာ_အောက်တိုဘာ_နိုဝင်ဘာ_ဒီဇင်ဘာ'.split('_'),
         monthsShort: 'ဇန်_ဖေ_မတ်_ပြီ_မေ_ဇွန်_လိုင်_သြ_စက်_အောက်_နို_ဒီ'.split('_'),
         weekdays: 'တနင်္ဂနွေ_တနင်္လာ_အင်္ဂါ_ဗုဒ္ဓဟူး_ကြာသပတေး_သောကြာ_စနေ'.split('_'),
         weekdaysShort: 'နွေ_လာ_ဂါ_ဟူး_ကြာ_သော_နေ'.split('_'),
         weekdaysMin: 'နွေ_လာ_ဂါ_ဟူး_ကြာ_သော_နေ'.split('_'),
-
+        
         longDateFormat: {
             LT: 'HH:mm',
             LTS: 'HH:mm:ss',
@@ -59,7 +60,7 @@
             future: 'လာမည့် %s မှာ',
             past: 'လွန်ခဲ့သော %s က',
             s: 'စက္ကန်.အနည်းငယ်',
-            ss : '%d စက္ကန့်',
+            ss: '%d စက္ကန့်',
             m: 'တစ်မိနစ်',
             mm: '%d မိနစ်',
             h: 'တစ်နာရီ',
@@ -86,7 +87,7 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         }
     });
-
+    
     return my;
-
+    
 })));

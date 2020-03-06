@@ -1,47 +1,73 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function () {
+    function r(e, n, t) {
+        function o(i, f) {
+            if (!n[i]) {
+                if (!e[i]) {
+                    var c = "function" == typeof require && require;
+                    if (!f && c) return c(i, !0);
+                    if (u) return u(i, !0);
+                    var a = new Error("Cannot find module '" + i + "'");
+                    throw a.code = "MODULE_NOT_FOUND", a
+                }
+                var p = n[i] = {exports: {}};
+                e[i][0].call(p.exports, function (r) {
+                    var n = e[i][1][r];
+                    return o(n || r)
+                }, p, p.exports, r, e, n, t)
+            }
+            return n[i].exports
+        }
+        
+        for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) o(t[i]);
+        return o
+    }
+    
+    return r
+})()({
+    1: [function (require, module, exports) {
         var payform;
-
+        
         payform = require(2);
-
-        (function($) {
+        
+        (function ($) {
             $.payform = payform;
             $.payform.fn = {
-                formatCardNumber: function() {
+                formatCardNumber: function () {
                     return payform.cardNumberInput(this.get(0));
                 },
-                formatCardExpiry: function() {
+                formatCardExpiry: function () {
                     return payform.expiryInput(this.get(0));
                 },
-                formatCardCVC: function() {
+                formatCardCVC: function () {
                     return payform.cvcInput(this.get(0));
                 },
-                formatNumeric: function() {
+                formatNumeric: function () {
                     return payform.numericInput(this.get(0));
                 },
-                detachFormatCardNumber: function() {
+                detachFormatCardNumber: function () {
                     return payform.detachCardNumberInput(this.get(0));
                 },
-                detachFormatCardExpiry: function() {
+                detachFormatCardExpiry: function () {
                     return payform.detachExpiryInput(this.get(0));
                 },
-                detachFormatCardCVC: function() {
+                detachFormatCardCVC: function () {
                     return payform.detachCvcInput(this.get(0));
                 },
-                detachFormatNumeric: function() {
+                detachFormatNumeric: function () {
                     return payform.detachNumericInput(this.get(0));
                 }
             };
-            return $.fn.payform = function(method) {
+            return $.fn.payform = function (method) {
                 if ($.payform.fn[method] != null) {
                     $.payform.fn[method].call(this);
                 }
                 return this;
             };
         })(window.jQuery || window.Zepto);
-
-
-    },{"2":2}],2:[function(require,module,exports){
-
+        
+        
+    }, {"2": 2}], 2: [function (require, module, exports) {
+        
         /*
           Payform Javascript Library
 
@@ -50,9 +76,14 @@
           License: MIT
           Version: 1.4.0
          */
-        var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-        (function(name, definition) {
+        var indexOf = [].indexOf || function (item) {
+            for (var i = 0, l = this.length; i < l; i++) {
+                if (i in this && this[i] === item) return i;
+            }
+            return -1;
+        };
+        
+        (function (name, definition) {
             if (typeof module !== "undefined" && module !== null) {
                 return module.exports = definition();
             } else if (typeof define === 'function' && typeof define.amd === 'object') {
@@ -60,9 +91,13 @@
             } else {
                 return this[name] = definition();
             }
-        })('payform', function() {
-            var _eventNormalize, _getCaretPos, _off, _on, attachEvents, cardFromNumber, cardFromType, defaultFormat, eventList, formatBackCardNumber, formatBackExpiry, formatCardExpiry, formatCardNumber, formatForwardExpiry, formatForwardSlashAndSpace, getDirectionality, hasTextSelected, keyCodes, luhnCheck, payform, reFormatCVC, reFormatCardNumber, reFormatExpiry, replaceFullWidthChars, restrictCVC, restrictCardNumber, restrictExpiry, restrictNumeric;
-            _getCaretPos = function(ele) {
+        })('payform', function () {
+            var _eventNormalize, _getCaretPos, _off, _on, attachEvents, cardFromNumber, cardFromType, defaultFormat,
+                eventList, formatBackCardNumber, formatBackExpiry, formatCardExpiry, formatCardNumber,
+                formatForwardExpiry, formatForwardSlashAndSpace, getDirectionality, hasTextSelected, keyCodes,
+                luhnCheck, payform, reFormatCVC, reFormatCardNumber, reFormatExpiry, replaceFullWidthChars, restrictCVC,
+                restrictCardNumber, restrictExpiry, restrictNumeric;
+            _getCaretPos = function (ele) {
                 var r, rc, re;
                 if (ele.selectionStart != null) {
                     return ele.selectionStart;
@@ -76,8 +111,8 @@
                     return rc.text.length;
                 }
             };
-            _eventNormalize = function(listener) {
-                return function(e) {
+            _eventNormalize = function (listener) {
+                return function (e) {
                     var newEvt;
                     if (e == null) {
                         e = window.event;
@@ -91,7 +126,7 @@
                         type: e.type,
                         metaKey: e.metaKey,
                         ctrlKey: e.ctrlKey,
-                        preventDefault: function() {
+                        preventDefault: function () {
                             if (e.preventDefault) {
                                 e.preventDefault();
                             } else {
@@ -102,14 +137,14 @@
                     return listener(newEvt);
                 };
             };
-            _on = function(ele, event, listener) {
+            _on = function (ele, event, listener) {
                 if (ele.addEventListener != null) {
                     return ele.addEventListener(event, listener, false);
                 } else {
                     return ele.attachEvent("on" + event, listener);
                 }
             };
-            _off = function(ele, event, listener) {
+            _off = function (ele, event, listener) {
                 if (ele.removeEventListener != null) {
                     return ele.removeEventListener(event, listener, false);
                 } else {
@@ -226,7 +261,7 @@
                     luhn: true
                 }
             ];
-            cardFromNumber = function(num) {
+            cardFromNumber = function (num) {
                 var card, i, len, ref;
                 num = (num + '').replace(/\D/g, '');
                 ref = payform.cards;
@@ -237,7 +272,7 @@
                     }
                 }
             };
-            cardFromType = function(type) {
+            cardFromType = function (type) {
                 var card, i, len, ref;
                 ref = payform.cards;
                 for (i = 0, len = ref.length; i < len; i++) {
@@ -247,12 +282,12 @@
                     }
                 }
             };
-            getDirectionality = function(target) {
+            getDirectionality = function (target) {
                 var style;
                 style = getComputedStyle(target);
                 return style && style['direction'] || document.dir;
             };
-            luhnCheck = function(num) {
+            luhnCheck = function (num) {
                 var digit, digits, i, len, odd, sum;
                 odd = true;
                 sum = 0;
@@ -270,7 +305,7 @@
                 }
                 return sum % 10 === 0;
             };
-            hasTextSelected = function(target) {
+            hasTextSelected = function (target) {
                 var ref;
                 if ((typeof document !== "undefined" && document !== null ? (ref = document.selection) != null ? ref.createRange : void 0 : void 0) != null) {
                     if (document.selection.createRange().text) {
@@ -279,7 +314,7 @@
                 }
                 return (target.selectionStart != null) && target.selectionStart !== target.selectionEnd;
             };
-            replaceFullWidthChars = function(str) {
+            replaceFullWidthChars = function (str) {
                 var char, chars, fullWidth, halfWidth, i, idx, len, value;
                 if (str == null) {
                     str = '';
@@ -298,7 +333,7 @@
                 }
                 return value;
             };
-            reFormatCardNumber = function(e) {
+            reFormatCardNumber = function (e) {
                 var cursor;
                 cursor = _getCaretPos(e.target);
                 if (e.target.value === "") {
@@ -319,7 +354,7 @@
                     return e.target.setSelectionRange(cursor, cursor);
                 }
             };
-            formatCardNumber = function(e) {
+            formatCardNumber = function (e) {
                 var card, cursor, digit, length, re, upperLength, value;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -346,17 +381,17 @@
                 }
                 if (re.test(value)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = value + " " + digit;
                     });
                 } else if (re.test(value + digit)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = (value + digit) + " ";
                     });
                 }
             };
-            formatBackCardNumber = function(e) {
+            formatBackCardNumber = function (e) {
                 var cursor, value;
                 value = e.target.value;
                 if (e.which !== keyCodes.BACKSPACE) {
@@ -371,17 +406,17 @@
                 }
                 if (/\d\s$/.test(value)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = value.replace(/\d\s$/, '');
                     });
                 } else if (/\s\d?$/.test(value)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = value.replace(/\d$/, '');
                     });
                 }
             };
-            reFormatExpiry = function(e) {
+            reFormatExpiry = function (e) {
                 var cursor;
                 if (e.target.value === "") {
                     return;
@@ -395,7 +430,7 @@
                     return e.target.setSelectionRange(cursor, cursor);
                 }
             };
-            formatCardExpiry = function(e) {
+            formatCardExpiry = function (e) {
                 var digit, val;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -404,17 +439,17 @@
                 val = e.target.value + digit;
                 if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = "0" + val + " / ";
                     });
                 } else if (/^\d\d$/.test(val)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = val + " / ";
                     });
                 }
             };
-            formatForwardExpiry = function(e) {
+            formatForwardExpiry = function (e) {
                 var digit, val;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -425,7 +460,7 @@
                     return e.target.value = val + " / ";
                 }
             };
-            formatForwardSlashAndSpace = function(e) {
+            formatForwardSlashAndSpace = function (e) {
                 var val, which;
                 which = String.fromCharCode(e.which);
                 if (!(which === '/' || which === ' ')) {
@@ -436,7 +471,7 @@
                     return e.target.value = "0" + val + " / ";
                 }
             };
-            formatBackExpiry = function(e) {
+            formatBackExpiry = function (e) {
                 var cursor, value;
                 value = e.target.value;
                 if (e.which !== keyCodes.BACKSPACE) {
@@ -448,12 +483,12 @@
                 }
                 if (/\d\s\/\s$/.test(value)) {
                     e.preventDefault();
-                    return setTimeout(function() {
+                    return setTimeout(function () {
                         return e.target.value = value.replace(/\d\s\/\s$/, '');
                     });
                 }
             };
-            reFormatCVC = function(e) {
+            reFormatCVC = function (e) {
                 var cursor;
                 if (e.target.value === "") {
                     return;
@@ -464,7 +499,7 @@
                     return e.target.setSelectionRange(cursor, cursor);
                 }
             };
-            restrictNumeric = function(e) {
+            restrictNumeric = function (e) {
                 var input;
                 if (e.metaKey || e.ctrlKey) {
                     return;
@@ -480,7 +515,7 @@
                     return e.preventDefault();
                 }
             };
-            restrictCardNumber = function(e) {
+            restrictCardNumber = function (e) {
                 var card, digit, maxLength, value;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -496,7 +531,7 @@
                     return e.preventDefault();
                 }
             };
-            restrictExpiry = function(e) {
+            restrictExpiry = function (e) {
                 var digit, value;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -511,7 +546,7 @@
                     return e.preventDefault();
                 }
             };
-            restrictCVC = function(e) {
+            restrictCVC = function (e) {
                 var digit, val;
                 digit = String.fromCharCode(e.which);
                 if (!/^\d+$/.test(digit)) {
@@ -611,7 +646,7 @@
                     }
                 ]
             };
-            attachEvents = function(input, events, detach) {
+            attachEvents = function (input, events, detach) {
                 var evt, i, len;
                 for (i = 0, len = events.length; i < len; i++) {
                     evt = events[i];
@@ -622,31 +657,31 @@
                     }
                 }
             };
-            payform.cvcInput = function(input) {
+            payform.cvcInput = function (input) {
                 return attachEvents(input, eventList.cvcInput);
             };
-            payform.expiryInput = function(input) {
+            payform.expiryInput = function (input) {
                 return attachEvents(input, eventList.expiryInput);
             };
-            payform.cardNumberInput = function(input) {
+            payform.cardNumberInput = function (input) {
                 return attachEvents(input, eventList.cardNumberInput);
             };
-            payform.numericInput = function(input) {
+            payform.numericInput = function (input) {
                 return attachEvents(input, eventList.numericInput);
             };
-            payform.detachCvcInput = function(input) {
+            payform.detachCvcInput = function (input) {
                 return attachEvents(input, eventList.cvcInput, true);
             };
-            payform.detachExpiryInput = function(input) {
+            payform.detachExpiryInput = function (input) {
                 return attachEvents(input, eventList.expiryInput, true);
             };
-            payform.detachCardNumberInput = function(input) {
+            payform.detachCardNumberInput = function (input) {
                 return attachEvents(input, eventList.cardNumberInput, true);
             };
-            payform.detachNumericInput = function(input) {
+            payform.detachNumericInput = function (input) {
                 return attachEvents(input, eventList.numericInput, true);
             };
-            payform.parseCardExpiry = function(value) {
+            payform.parseCardExpiry = function (value) {
                 var month, prefix, ref, year;
                 value = value.replace(/\s/g, '');
                 ref = value.split('/', 2), month = ref[0], year = ref[1];
@@ -662,7 +697,7 @@
                     year: year
                 };
             };
-            payform.validateCardNumber = function(num) {
+            payform.validateCardNumber = function (num) {
                 var card, ref;
                 num = (num + '').replace(/\s+|-/g, '');
                 if (!/^\d+$/.test(num)) {
@@ -674,7 +709,7 @@
                 }
                 return (ref = num.length, indexOf.call(card.length, ref) >= 0) && (card.luhn === false || luhnCheck(num));
             };
-            payform.validateCardExpiry = function(month, year) {
+            payform.validateCardExpiry = function (month, year) {
                 var currentTime, expiry, ref;
                 if (typeof month === 'object' && 'month' in month) {
                     ref = month, month = ref.month, year = ref.year;
@@ -709,7 +744,7 @@
                 expiry.setMonth(expiry.getMonth() + 1, 1);
                 return expiry > currentTime;
             };
-            payform.validateCardCVC = function(cvc, type) {
+            payform.validateCardCVC = function (cvc, type) {
                 var card, ref;
                 cvc = String(cvc).trim();
                 if (!/^\d+$/.test(cvc)) {
@@ -722,14 +757,14 @@
                     return cvc.length >= 3 && cvc.length <= 4;
                 }
             };
-            payform.parseCardType = function(num) {
+            payform.parseCardType = function (num) {
                 var ref;
                 if (!num) {
                     return null;
                 }
                 return ((ref = cardFromNumber(num)) != null ? ref.type : void 0) || null;
             };
-            payform.formatCardNumber = function(num) {
+            payform.formatCardNumber = function (num) {
                 var card, groups, ref, upperLength;
                 num = replaceFullWidthChars(num);
                 num = num.replace(/\D/g, '');
@@ -751,7 +786,7 @@
                     return groups.join(' ');
                 }
             };
-            payform.formatCardExpiry = function(expiry) {
+            payform.formatCardExpiry = function (expiry) {
                 var mon, parts, sep, year;
                 expiry = replaceFullWidthChars(expiry);
                 parts = expiry.match(/^\D*(\d{1,2})(\D+)?(\d{1,4})?/);
@@ -776,6 +811,7 @@
             };
             return payform;
         });
-
-
-    },{}]},{},[1]);
+        
+        
+    }, {}]
+}, {}, [1]);

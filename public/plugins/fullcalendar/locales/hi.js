@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.hi = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.hi = factory()));
+}(this, function () {
+    'use strict';
+    
     var hi = {
         code: "hi",
         week: {
@@ -26,7 +27,7 @@
         },
         noEventsMessage: "कोई घटनाओं को प्रदर्शित करने के लिए"
     };
-
+    
     return hi;
-
+    
 }));

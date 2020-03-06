@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.sr = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.sr = factory()));
+}(this, function () {
+    'use strict';
+    
     var sr = {
         code: "sr",
         week: {
@@ -26,7 +27,7 @@
         },
         noEventsMessage: "Nеma događaja za prikaz"
     };
-
+    
     return sr;
-
+    
 }));

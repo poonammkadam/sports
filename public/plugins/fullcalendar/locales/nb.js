@@ -1,9 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.nb = factory()));
-}(this, function () { 'use strict';
-
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, (global.FullCalendarLocales = global.FullCalendarLocales || {}, global.FullCalendarLocales.nb = factory()));
+}(this, function () {
+    'use strict';
+    
     var nb = {
         code: "nb",
         week: {
@@ -24,7 +25,7 @@
         eventLimitText: "til",
         noEventsMessage: "Ingen hendelser å vise"
     };
-
+    
     return nb;
-
+    
 }));

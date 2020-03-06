@@ -17,41 +17,49 @@
 /*.events-item{*/
 /*    background-color: rgba(87, 87, 87, 0.8) !important;*/
 /*}*/
-.profile-data h4{
+.profile-data h4 {
     background-color: #242323 !important;
     font-size: 25px !important;
     padding: 5px !important;
 
 }
-.profile-data{
+
+.profile-data {
 
 }
-.profile-head{
+
+.profile-head {
     color: antiquewhite !important;
 }
-.profile-head h1{
+
+.profile-head h1 {
     background-color: #908c8b !important;
     opacity: 0.8 !important;
 }
-.item-inner{
+
+.item-inner {
     margin: 5px !important;
     align-items: center;
 }
-.event-img{
+
+.event-img {
     width: 200px !important;
     height: 200px !important;
 }
-.my-event{
+
+.my-event {
     margin-left: 160px !important;
 }
-.jumbotron{
+
+.jumbotron {
     background-image: url('/images/profile.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
     opacity: 0.8;
 }
-.guest-page{
-    background-image: url('/images/profile.jpg') ;
+
+.guest-page {
+    background-image: url('/images/profile.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
 }

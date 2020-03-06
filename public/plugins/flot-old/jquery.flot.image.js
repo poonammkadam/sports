@@ -62,12 +62,12 @@ Google Maps).
             }
         }
     };
-
+    
     $.plot.image = {};
-
+    
     $.plot.image.loadDataImages = function (series, options, callback) {
         var urls = [], points = [];
-
+        
         var defaultShow = options.series.images.show;
         
         $.each(series, function (i, s) {
@@ -76,7 +76,7 @@ Google Maps).
             
             if (s.data)
                 s = s.data;
-
+            
             $.each(s, function (i, p) {
                 if (typeof p[0] == "string") {
                     urls.push(p[0]);
@@ -84,14 +84,14 @@ Google Maps).
                 }
             });
         });
-
+        
         $.plot.image.load(urls, function (loadedImages) {
             $.each(points, function (i, p) {
                 var url = p[0];
                 if (loadedImages[url])
                     p[0] = loadedImages[url];
             });
-
+            
             callback();
         });
     };
@@ -100,7 +100,7 @@ Google Maps).
         var missing = urls.length, loaded = {};
         if (missing == 0)
             callback({});
-
+        
         $.each(urls, function (i, url) {
             var handler = function () {
                 --missing;
@@ -110,7 +110,7 @@ Google Maps).
                 if (missing == 0)
                     callback(loaded);
             };
-
+            
             $('<img />').load(handler).error(handler).attr('src', url);
         });
     };
@@ -130,13 +130,13 @@ Google Maps).
                 x2 = points[i + 3], y2 = points[i + 4],
                 xaxis = series.xaxis, yaxis = series.yaxis,
                 tmp;
-
+            
             // actually we should check img.complete, but it
             // appears to be a somewhat unreliable indicator in
             // IE6 (false even after load event)
             if (!img || img.width <= 0 || img.height <= 0)
                 continue;
-
+            
             if (x1 > x2) {
                 tmp = x2;
                 x2 = x1;
@@ -151,10 +151,10 @@ Google Maps).
             // if the anchor is at the center of the pixel, expand the 
             // image by 1/2 pixel in each direction
             if (series.images.anchor == "center") {
-                tmp = 0.5 * (x2-x1) / (img.width - 1);
+                tmp = 0.5 * (x2 - x1) / (img.width - 1);
                 x1 -= tmp;
                 x2 += tmp;
-                tmp = 0.5 * (y2-y1) / (img.height - 1);
+                tmp = 0.5 * (y2 - y1) / (img.height - 1);
                 y1 -= tmp;
                 y2 += tmp;
             }
@@ -164,23 +164,23 @@ Google Maps).
                 x1 >= xaxis.max || x2 <= xaxis.min ||
                 y1 >= yaxis.max || y2 <= yaxis.min)
                 continue;
-
+            
             var sx1 = 0, sy1 = 0, sx2 = img.width, sy2 = img.height;
             if (x1 < xaxis.min) {
                 sx1 += (sx2 - sx1) * (xaxis.min - x1) / (x2 - x1);
                 x1 = xaxis.min;
             }
-
+            
             if (x2 > xaxis.max) {
                 sx2 += (sx2 - sx1) * (xaxis.max - x2) / (x2 - x1);
                 x2 = xaxis.max;
             }
-
+            
             if (y1 < yaxis.min) {
                 sy2 += (sy1 - sy2) * (yaxis.min - y1) / (y2 - y1);
                 y1 = yaxis.min;
             }
-
+            
             if (y2 > yaxis.max) {
                 sy1 += (sy1 - sy2) * (yaxis.max - y2) / (y2 - y1);
                 y2 = yaxis.max;
@@ -202,28 +202,28 @@ Google Maps).
                 y2 = y1;
                 y1 = tmp;
             }
-
+            
             tmp = ctx.globalAlpha;
             ctx.globalAlpha *= series.images.alpha;
             ctx.drawImage(img,
-                          sx1, sy1, sx2 - sx1, sy2 - sy1,
-                          x1 + plotOffset.left, y1 + plotOffset.top,
-                          x2 - x1, y2 - y1);
+                sx1, sy1, sx2 - sx1, sy2 - sy1,
+                x1 + plotOffset.left, y1 + plotOffset.top,
+                x2 - x1, y2 - y1);
             ctx.globalAlpha = tmp;
         }
     }
-
+    
     function processRawData(plot, series, data, datapoints) {
         if (!series.images.show)
             return;
-
+        
         // format is Image, x1, y1, x2, y2 (opposite corners)
         datapoints.format = [
-            { required: true },
-            { x: true, number: true, required: true },
-            { y: true, number: true, required: true },
-            { x: true, number: true, required: true },
-            { y: true, number: true, required: true }
+            {required: true},
+            {x: true, number: true, required: true},
+            {y: true, number: true, required: true},
+            {x: true, number: true, required: true},
+            {y: true, number: true, required: true}
         ];
     }
     
