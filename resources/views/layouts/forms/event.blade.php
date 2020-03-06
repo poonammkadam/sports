@@ -38,14 +38,12 @@
                     <label for="exampleFormControlInput1">Event Date</label>
                     <h6>{{$objEvent->event_date}}</h6>
                 </div>
-    
-                <div class="radio">
-                    <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
-                </div>
+
 
                 <div class="radio">
                     <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
                 </div>
+
                 <div class="radio">
                     <label for="online"><input type="radio" required id="online" value="online" name="payment_type">Online</label>
                 </div>
@@ -92,79 +90,7 @@
     </script>
 
 <style>
-    @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
 
-    .card-wrapper {
-        width: 100%;
-        display: flex;
-
-    }
-    .personal-information {
-        background-color: #3C8DC5;
-        color: #fff;
-        padding: 1px 0;
-        text-align: center;
-    }
-    h1 {
-        font-size: 1.3em;
-    }
-    input {
-        margin: 1px 0;
-        padding-left: 3%;
-        font-size: 14px;
-    }
-    input[type="text"]{
-        display: block;
-        height: 50px;
-        width: 97%;
-        border: none;
-    }
-    input[type="email"]{
-        display: block;
-        height: 50px;
-        width: 97%;
-        border: none;
-    }
-    #column-left {
-        width: 46.8%;
-        float: left;
-        margin-bottom: 2px;
-    }
-    #column-right {
-        width: 46.8%;
-        float: right;
-    }
-
-    @media only screen and (max-width: 480px){
-        input {
-            font-size: 1em;
-        }
-        #input-button {
-            width: 100%;
-        }
-        #input-field {
-            width: 96.5%;
-        }
-        h1 {
-            font-size: 1.2em;
-        }
-        input {
-            margin: 2px 0;
-        }
-        input[type="submit"]{
-            height: 50px;
-        }
-        #column-left {
-            width: 96.5%;
-            display: block;
-            float: none;
-        }
-        #column-right {
-            width: 96.5%;
-            display: block;
-            float: none;
-        }
-    }
 </style>
 @endsection
 
