@@ -24,7 +24,7 @@
 
 }
 .profile-data{
-  
+
 }
 .profile-head{
     color: antiquewhite !important;
@@ -49,4 +49,9 @@
     background-repeat: no-repeat;
     background-size: 100%;
     opacity: 0.8;
+}
+.guest-page{
+    background-image: url('/images/profile.jpg') ;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
