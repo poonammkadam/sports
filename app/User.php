@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(new Profile(), 'user_id', 'id');
     }
+
+    public function isOrganiser()
+    {
+        return $this->role=='organiser'?true:false;
+    }
 }
