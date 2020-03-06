@@ -43,6 +43,14 @@
                             </p>
                         </a>
                 </li>
+                <li class="nav-item">
+                        <a href="{{url('admin/organisation')}}" class="nav-link">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Organisation
+                            </p>
+                        </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

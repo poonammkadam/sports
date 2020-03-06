@@ -51,8 +51,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @if($arrObjUsers->count() > 0)
-                                     @foreach($arrObjUsers as $objUser)
+                                @if($arrObjOrganisation->count() > 0)
+                                     @foreach($arrObjOrganisation as $objUser)
                                      <tr role="row" class="odd">
                                     <td class="sorting_1">{{$objUser->id}}</td>
                                     <td>

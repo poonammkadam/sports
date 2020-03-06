@@ -22,7 +22,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input required  type="email" name="email" value="Email...."  class="form-control" id="inputEmail4" placeholder="Email">
+                                    <input required  type="email" name="email"   class="form-control" id="inputEmail4" placeholder="Email">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress">Local Name</label>
@@ -41,7 +41,9 @@
                                            placeholder="">
                                 </div>
                             </div>
+
                             <div class="form-row">
+
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress">DOB</label>
                                     <input required  type="date" class="form-control" name="dob" id="inputAddress" placeholder="">
@@ -66,8 +68,8 @@
                                         <label class="form-check-label" for="inlineRadio3">other</label>
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress">Nationality</label>
@@ -90,24 +92,32 @@
                                     <input required  type="text" class="form-control" name="passport_no" id="inputAddress2" placeholder="Passport ID">
                                 </div>
                             </div>
+
+
+                            <div class="form-group col-md-12">
+                                <label for="inputAddress2">User Role</label>
+                                <input required type="radio" name="user_role" class="" id="role_organiser" value="organiser"><label for="role_organiser">Organiser</label>
+                               <input required type="radio" name="user_role" class="" id="role_user" value="user"> <label for="role_user">User</label>
+                            </div>
+
                             <h3>Contact Information</h3>
                             <div class="form-group">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="exampleFormControlTextarea1">Address</label>
                                     <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputAddress">Country</label>
-                                    <select class="form-control custom-select" name="country">
+                                <div class="form-group col-md-6">
+                                    <label for="contry">Country</label>
+                                    <select class="form-control custom-select"  id="contry"  name="country">
                                         <option selected>Open this select menu</option>
                                         <option value="1">a</option>
                                         <option value="2">b</option>
                                         <option value="3">c</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-6">
                                     <label for="inputAddress2">Mobile phone</label>
-                                    <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
+                                    <input required  type="tel"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
                                 </div>
                             </div>
                             <button required  type="submit" class="btn btn-primary">Submit</button>

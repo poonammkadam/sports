@@ -59,7 +59,7 @@ class EventController extends Controller
     return view('admin.events.edit', ['objEvent'=>$objEvent]);
     }
 
-        public  function setPaymentStatus($id){
+    public  function setPaymentStatus($id){
         $objEvent=EventParticipants::findOrFail($id);
             $objEvent->payment_status=1;
             $objEvent->save();

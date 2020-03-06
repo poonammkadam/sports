@@ -32,7 +32,6 @@ class UserController extends Controller
 
 
     public function update($id, Request $request){
-
         return view('admin.user.edit');
     }
 }

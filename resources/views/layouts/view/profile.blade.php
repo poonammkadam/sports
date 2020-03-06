@@ -5,11 +5,7 @@
             <div class="profile-head">
             <h1>{{$objProfile->name}}</h1>
             <p>{{$objProfile->email}}</p>
-<<<<<<< HEAD
             </div>
-=======
-
->>>>>>> 3649ec1d3836f9416213e05fddd4551650cb6613
             <button type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#demo">See More</button>
             <div id="demo" class="collapse  text-center">
                 <div class="profile-data"><h4>First Name :{{$objUserProfile->first_name}}</h4></div>

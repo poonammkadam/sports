@@ -39,6 +39,11 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/user/events/{id}', 'UserController@getParticipatedEvents');
     Route::post('/user/edit/{id}', 'UserController@update');
 
+    Route::get('/organisation', 'OrganisationController@index');
+    Route::get('/organisation/create', 'OrganisationController@create');
+    Route::post('/organisation/store', 'OrganisationController@store');
+    Route::get('/organisation/edit/{id}', 'OrganisationController@edit');
+    Route::post('/organisation/edit/{id}', 'OrganisationController@update');
 
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@eventCreate');

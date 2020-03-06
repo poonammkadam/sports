@@ -42,7 +42,6 @@ class UserController extends Controller
        else{
         return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
        }
-
    }
 
    public function getProfile(){
