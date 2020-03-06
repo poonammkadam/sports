@@ -7,7 +7,7 @@ use App\Http\Model\Organisation;
 use Illuminate\Http\Request;
 
 
-class OragnationController extends Controller
+class OrganisationController extends Controller
 {
     public function getRequestForm(){
         return view('layouts.forms.oragnation_request');
@@ -20,5 +20,8 @@ class OragnationController extends Controller
         $objOrganisation->request_status ='close';
         $objOrganisation->save();
         return view('layouts.forms.oragnation_request');
+    }
+    public function show(){
+        return view('layouts.view.organisation.organisation_view');
     }
 }

@@ -20,10 +20,13 @@
                     @endif
                 @else
                     <li class="nav-item"><a href="{{ url('/home') }}">Home</a></li>
-                    <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
-                    <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
+                    @if(auth()->user()->role != 'organizar')
+                    <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
+                    @else
+                        <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
+                        <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
+                    @endif
                     <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
-                    <li class="nav-item"><a href="{{ url('/organiser') }}">Organiser</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

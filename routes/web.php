@@ -62,4 +62,7 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/event/register', 'UserController@eventStore');
     Route::get('/organiser', 'OragnationController@getRequestForm');
     Route::post('/oragnation/request', 'OragnationController@postOragnationStore');
+
+    Route::get('/myorganisation', 'OrganisationController@show');
+    Route::get('/organisation/view', 'OrganisationController@show');
 });
