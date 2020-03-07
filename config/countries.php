@@ -10,4 +10,5 @@ return [
   |
   */
   'table_name' => 'countries',
+
 ];

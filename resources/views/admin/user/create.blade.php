@@ -80,12 +80,15 @@
                                         <option value="3">c</option>
                                     </select>
                                 </div>
+
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Local ID</label>
                                     <input required  type="text" class="form-control" name="local_id" id="inputAddress2"
                                            placeholder="" >
                                 </div>
+
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Passport</label>
@@ -105,15 +108,6 @@
                                 <div class="form-group col-md-12">
                                     <label for="exampleFormControlTextarea1">Address</label>
                                     <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="contry">Country</label>
-                                    <select class="form-control custom-select"  id="contry"  name="country">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">a</option>
-                                        <option value="2">b</option>
-                                        <option value="3">c</option>
-                                    </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Mobile phone</label>

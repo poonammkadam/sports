@@ -53,11 +53,10 @@
                         <div class="personal-information">
                             <h1>Payment Information</h1>
                         </div>
-                        <input id="column-left" type="text" name="cardholder_name" placeholder="Cardholder Name"/>
+                        <label for="column-left1"></label><input id="column-left1" type="text" name="cardholder_name" placeholder="Cardholder Name"/>
                         <label for="input-field"></label><input id="input-field"  type="text" name="cardholder_number" placeholder="Card Number"/>
                         <label for="column-left"></label><input id="column-left"  type="text" name="cardholder_expiry" placeholder="MM / YY"/>
                         <label for="column-right"></label><input id="column-right"  type="text" name="cardholder_cvc" placeholder="CCV"/>
-
                         <div class="card-wrapper"></div>
                     </div>
                 </div>

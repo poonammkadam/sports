@@ -26,13 +26,13 @@ class OrganisationController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
- 
+
     public function store(Request $request){
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|max:255|unique:users|email',
-        //     'password' => 'required|string|min:8|confirmed',
-        // ]);
+         $request->validate([
+             'name' => 'required|string|max:255',
+             'email' => 'required|string|max:255|unique:users|email',
+             'password' => 'required|string|min:8|confirmed',
+         ]);
         $objUserOrg = new User();
         $objUserOrg->name =  $request->name;
         $objUserOrg->email = $request->email;
@@ -42,28 +42,28 @@ class OrganisationController extends Controller
         $objUserOrg->save();
         $intId = $objUserOrg->getKey();
         $objOrganisation = User::where('id',$intId)->first();
-    
-        return view('admin.organisation.edit',['objOrganisation' => $objOrganisation]);
+        return redirect('admin/organisation/edit/'.$intId);
     }
-    public function edit(){
-        return view('admin.organisation.edit');
+    public function edit($id){
+        $objOrganisation = User::where('id',$id)->first();
+        $objOrganisationProfile = Organisation::where('user_id',$id)->first();
+        return view('admin.organisation.edit',['objOrganisation' => $objOrganisation,'objOrganisationProfile'=>$objOrganisationProfile]);
     }
     public function update($id, Request $request){
-        dd($id);
         $objProfileExist = Organisation::where('user_id', $id)->first();
         if($objProfileExist){
             $objOrganisation = $objProfileExist;
         }else{
             $objOrganisation = new Organisation();
         }
-    
+
         $objOrganisation->name = $request->name;
         $objOrganisation->about = $request->about;
         $objOrganisation->address = $request->address;
-        $objOrganisation->contact_no =$request->contact_no;
+        $objOrganisation->contact_no =$request->mobile_no;
         $objOrganisation->user_id =$id;
         $objOrganisation->save();
-        return redirect()->route('admin/organisation');
+        return redirect('admin/organisation');
     }
 }
 
