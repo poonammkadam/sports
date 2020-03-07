@@ -3,70 +3,44 @@
     <div class="jumbotron">
         <div class="container text-center">
             <div class="profile-head">
-                <h1>organisation name</h1>
-                <p>email id</p>
+                <h1>{{$objOrganisation->name}}</h1>
+                <p>{{auth()->user()->email}}</p>
             </div>
             <button type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#demo">See More</button>
             <div id="demo" class="collapse  text-center">
                 <div>
-                    <div class="profile-data"><h4>Description</h4></div>
-                   
+                    <div class="profile-data">
+                        <h4><strong>About : </strong>{{$objOrganisation->about}}</h4>
+                    </div>
+                    <div class="profile-data">
+                        <h4><strong>Address : </strong>{{$objOrganisation->address}}</h4>
+                    </div>
+                    <div class="profile-data">
+                        <h4><strong>Contact Number : </strong>{{$objOrganisation->contact_no}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="container-fluid bg-3 text-center">
         <h3>My Events</h3><br>
         <div class="row my-event">
-        
-{{--            @foreach ($objUserProfilEvents as $item)--}}
+            @foreach ($objOrganisation->events as $item)
                 <div class="shadow card col-md-3 item-inner text-center">
-                    <img src="{{asset('images/img1.jpeg')}}" class="card-img-top event-img" alt="">
+                    <img src="{{ URL::to('/') }}/public/{{ $item->banner }}" class="card-img-top event-img" alt="">
                     <div class="card-body">
                         <div class="overlay">
                             <br><br>
                         </div>
-                        <h4 class="card-title"><strong>Event one</strong></h4>
-                        <h5 class="card-title"><strong>On 26-03-2020</strong></h5>
-                    
-                    </div>
-                </div>
-            <div class="shadow card col-md-3 item-inner text-center">
-                <img src="{{asset('images/img2.jpg')}}" class="card-img-top event-img" alt="">
-                <div class="card-body">
-                    <div class="overlay">
-                        <br><br>
-                    </div>
-                    <h4 class="card-title"><strong>Event one</strong></h4>
-                    <h5 class="card-title"><strong>On 26-03-2020</strong></h5>
-        
-                </div>
-            </div>
-            <div class="shadow card col-md-3 item-inner text-center">
-                <img src="{{asset('images/img2.jpg')}}" class="card-img-top event-img" alt="">
-                <div class="card-body">
-                    <div class="overlay">
-                        <br><br>
-                    </div>
-                    <h4 class="card-title"><strong>Event one</strong></h4>
-                    <h5 class="card-title"><strong>On 26-03-2020</strong></h5>
-                </div>
-            </div>
-            <div class="shadow card col-md-3 item-inner text-center">
-                <img src="{{asset('images/img1.jpeg')}}" class="card-img-top event-img" alt="">
-                <div class="card-body">
-                    <div class="overlay">
-                        <br><br>
-                    </div>
-                    <h4 class="card-title"><strong>Event one</strong></h4>
-                    <h5 class="card-title"><strong>On 26-03-2020</strong></h5>
-        
-                </div>
-            </div>
+                        <h4 class="card-title"><strong>{{$item->name}}</strong></h4>
+                        <h5 class="card-title"><strong>{{$item->event_date}}</strong></h5>
 
-{{--            @endforeach--}}
-        
+                    </div>
+                </div>
+
+            @endforeach
+
         </div>
     </div>
 

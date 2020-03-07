@@ -22,6 +22,8 @@ class OrganisationController extends Controller
         return view('layouts.forms.oragnation_request');
     }
     public function show(){
-        return view('layouts.view.organisation.organisation_view');
+        $objOrganisation = Organisation::where('user_id',auth()->user()->id)->first();
+//        dd($objOrganisation);
+        return view('layouts.view.organisation.organisation_view',['objOrganisation' => $objOrganisation]);
     }
 }

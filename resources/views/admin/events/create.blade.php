@@ -74,28 +74,15 @@
                                         <input required id="venue" type="text" class="form-control" name="venue"  autocomplete="venue" autofocus>
                                     </div>
                             </div>
-
                             <div class="form-group row">
-                                    <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
-                                    <div class="col-md-6">
-                                        <input required id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
-                                    </div>
+                            <label for="tshirt">Select Organistion</label>
+                            <select id="org" class="form-control custom-select" name="organisation">
+                                <option selected>Open this select menu</option>
+                                @foreach($arrObjOrganisation as $objOrg)
+                                <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
+                                @endforeach
+                            </select>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="org_contact_no" class="col-md-4 col-form-label text-md-right">Organization Contact No.</label>
-                                <div class="col-md-6">
-                                    <input required id="org_contact_no" type="text" class="form-control" name="org_contact_no"  autocomplete="org_contact_no" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="org_address" class="col-md-4 col-form-label text-md-right">Organization Address</label>
-                                <div class="col-md-6">
-                                    <textarea required  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
-                                </div>
-                            </div>
-
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Is pickup and drop available</label>
 

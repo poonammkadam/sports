@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
+use App\Http\Model\Organisation;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -18,7 +19,8 @@ class EventController extends Controller
     public function eventCreate(){
         // $arrObjEvents = Events::all();
         // return view('admin.user.list', ['arrObjEvents'=>$arrObjEvents]);
-        return view('admin.events.create');
+        $arrObjOrganisation = Organisation::all();
+        return view('admin.events.create',['arrObjOrganisation'=>$arrObjOrganisation]);
     }
 
     public function view($id){
@@ -34,9 +36,7 @@ class EventController extends Controller
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
         $objEvent->venue = $request->venue;
-        $objEvent->organiser_name = $request->orgname;
-        $objEvent->organiser_contact_number = $request->org_contact_no;
-        $objEvent->organiser_address = $request->org_address;
+        $objEvent->org_id = $request->organisation;
         $objEvent->banner = $request->file('banner')->store('banner');
         $objEvent->save();
         $intEventkey = $objEvent->getKey();
