@@ -15,11 +15,12 @@ class CreateOrganisationsTable extends Migration
     {
         Schema::create('organisations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id')->nullable();
             $table->text('name')->nullable();
-            $table->text('description')->nullable();
+            $table->text('about')->nullable();
             $table->text('email')->nullable();
             $table->text('contact_no')->nullable();
-            $table->text('request_status')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }

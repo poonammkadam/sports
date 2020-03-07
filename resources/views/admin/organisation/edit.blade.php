@@ -19,29 +19,29 @@
                             @csrf
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="inputAddress">Oganisation Name</label>
-                                    <input required  type="text" name="name"  class="form-control" id="inputAddress" placeholder="">
+                                    <input required  type="text" name="name"  value="{{ $objOrganisationProfile ?$objOrganisationProfile->name:''}}" class="form-control" id="inputAddress" placeholder="">
                                 </div>
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="inputAddress">About Oganisation</label>
-                                    <input required  type="text" name="about"  class="form-control" id="inputAddress" placeholder="">
+                                    <textarea class="form-control"  name="about"  id="exampleFormControlTextarea1" rows="3">{{$objOrganisationProfile ?$objOrganisationProfile->about:''}} </textarea>
                                 </div>
                             </div>
-                        
+
                             <h3>Contact Information</h3>
                             <div class="form-group">
                                 <div class="form-group col-md-12">
                                     <label for="exampleFormControlTextarea1">Address</label>
-                                    <textarea class="form-control"  name="address" id="exampleFormControlTextarea1" rows="3"> </textarea>
+                                    <textarea class="form-control"  name="address"  id="exampleFormControlTextarea1" rows="3">{{$objOrganisationProfile ?$objOrganisationProfile->address:''}} </textarea>
                                 </div>
-                        
+
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Mobile phone</label>
-                                    <input required  type="text"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
+                                    <input required  type="text"  name="mobile_no"  value="{{$objOrganisationProfile ?$objOrganisationProfile->contact_no:''}}" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
                                 </div>
                             </div>
                             <button required  type="submit" class="btn btn-primary">Submit</button>

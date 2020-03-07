@@ -136,11 +136,11 @@
     <script type="text/javascript">
 		$(document).ready(function(){
 				$(document).on('click', '#add', function(){
-					var intIndex = $(document).find("#dynamic_field .event-type").length;
+					var intIndex = 0
 					var html = '<div class="addedSection">';
-					html += '<div  class="form-group"><label for="category_type'+intIndex+'"></label> <input type="text" id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'"></label><input type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_fee'+intIndex+'"></label><input type="text"  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Fee</label><input type="text"  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
 					html += '<div class="form-group"><label for=""></label><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
 					$('#dynamic_field').append(html);
 				});

@@ -30,6 +30,7 @@ use App\MerchantSuite\URLDirectory;
 use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PragmaRX\Countries\Package\Countries;
 
 
 class UserController extends Controller
@@ -46,13 +47,16 @@ class UserController extends Controller
 
    public function getProfile(){
        $objProfile =  auth()->user();
+
        if($objProfile->registration_status){
            $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
            $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
            return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
        }
        else{
-           return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+           $objCountries = new Countries();
+           $arrCountries=$objCountries->all()->pluck('name.common');
+           return view('layouts.forms.registation', ['objProfile'=>$objProfile, 'arrCountries'=>$arrCountries]);
        }
 
 

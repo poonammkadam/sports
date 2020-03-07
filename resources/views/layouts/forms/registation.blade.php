@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-
+<?php
+$objCountries = new \PragmaRX\Countries\Package\Countries();
+$arrCountries=$objCountries->all()->pluck('name.common');
+?>
     <div class="container main-body">
         @if (session('alert'))
         <div class="alert alert-info">
@@ -18,6 +21,7 @@
                         <label for="inputEmail4">Email</label>
                         <input required  type="email" name="email" value="{{$objProfile->email}}"  class="form-control" id="inputEmail4" placeholder="Email">
                     </div>
+
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Local Name</label>
                         <input required  type="text" name="local_name" value="{{$objProfile->name}}" class="form-control" id="inputAddress" placeholder="">
@@ -34,6 +38,7 @@
                                placeholder="">
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">DOB</label>
@@ -60,14 +65,15 @@
                     </div>
 
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Nationality</label>
                         <select class="form-control custom-select" name="nationality">
                             <option selected>Open this select menu</option>
-                            <option value="1">a</option>
-                            <option value="2">b</option>
-                            <option value="3">c</option>
+                          @foreach($arrCountries as $objCountries)
+                                <option value="$objCountries">{{$objCountries}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-6">
@@ -95,7 +101,9 @@
                     </div>
 
                 </div>
+
                 <h3>Contact Information</h3>
+
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
@@ -103,23 +111,17 @@
                     <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="inputAddress">Country</label>
-                        <select class="form-control custom-select" name="country">
-                            <option selected>Open this select menu</option>
-                            <option value="1">a</option>
-                            <option value="2">b</option>
-                            <option value="3">c</option>
-                        </select>
-                    </div>
 
                 </div>
+
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress2">Mobile phone</label>
                         <input required  type="number"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
                     </div>
                 </div>
+
                 <button required  type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

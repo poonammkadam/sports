@@ -62,7 +62,7 @@
                                         {{$objUser->activation_status}}</td>
                                     --}}
                                     <td>
-                                        <a href="{{url('admin/user/edit/'.$objUser->id)}}"
+                                        <a href="{{url('admin/organisation/edit/'.$objUser->id)}}"
                                            class="btn btn-primary">Edit</a>
                                     </td>
                                 </tr>
