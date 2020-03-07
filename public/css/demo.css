@@ -233,18 +233,7 @@ input {
     padding-left: 3%;
     font-size: 14px;
 }
-input[type="text"]{
-    display: block;
-    height: 50px;
-    width: 97%;
-    border: none;
-}
-input[type="email"]{
-    display: block;
-    height: 50px;
-    width: 97%;
-    border: none;
-}
+
 #column-left {
     width: 46.8%;
     float: left;

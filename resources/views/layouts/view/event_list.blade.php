@@ -14,7 +14,7 @@
                                 <br><br>
                             </div>
                                   <h5 class="card-title"><strong>{{$objEvent->name}}</strong></h5>
-                        @if(auth()->user()->role == 'organizar')
+                        @if(auth()->user()->role != 'organizar')
                     <a class="btn btn-success btn-block" href="{{url('/event/register').'/'.$objEvent->id}}">Register</a>
                             @endif
                     </div>

@@ -66,3 +66,17 @@
     color: #fff !important;
     padding: 15px; 
 }
+.form-control{
+    border: 1px solid #eee !important;
+    height: 46px !important;
+    border-radius: 0px !important;
+}
+.btn.btn-submit{
+background-color: #FF4500 !important;
+border-radius: 0px !important;
+padding: 10px 15px !important;
+color: #fff !important;
+}
+.navbar-toggle{
+    background-color: #fff !important;
+}

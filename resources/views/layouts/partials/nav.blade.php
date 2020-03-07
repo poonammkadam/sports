@@ -1,11 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
-
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNavDropdown" aria-expanded="false">
+            <span class="glyphicon glyphicon-align-justify"></span>                     
+          </button>
             <a class="navbar-brand" href="#myPage">Logo</a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav navbar-nav navbar-right">

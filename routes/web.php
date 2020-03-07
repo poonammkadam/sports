@@ -40,7 +40,7 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/organisation/create', 'OrganisationController@create');
     Route::post('/organisation/store', 'OrganisationController@store');
     Route::get('/organisation/edit/{id}', 'OrganisationController@edit');
-    Route::post('/organisation/edit/{id}', 'OrganisationController@update');
+    Route::post('/organisation/update/{id}', 'OrganisationController@update');
 
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@eventCreate');
