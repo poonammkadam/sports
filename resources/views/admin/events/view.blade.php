@@ -89,6 +89,10 @@
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                                Sub-Category
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                aria-label="Browser: activate to sort column ascending" style="width: 100px;">
                                                 Gender
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -118,11 +122,15 @@
                                                     <td>
                                                         {{$objParticipants->profile->first_name}} {{$objParticipants->profile->last_name}}
                                                     </td>
+
                                                     <td>
-                                                        {{$objParticipants->category->category_subtype}}
+                                                        {{$objParticipants->category->category_type}}
                                                     </td>
                                                     <td>
-                                                        {{($objParticipants->category->type)}}
+                                                        {{($objParticipants->category->category_subtype)}}
+                                                    </td>
+                                                    <td>
+                                                        {{($objParticipants->profile->gender)}}
                                                     </td>
                                                     <td>
                                                         @if($objParticipants->payment_status == 1)

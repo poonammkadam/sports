@@ -5,7 +5,7 @@
             <h3 class="card-title">Organisation</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/organisation/create') }}" class="btn btn-info">Add organisation</a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -36,10 +36,6 @@
                                     Organisation Email
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                    Event Date
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Action
                                 </th>
@@ -48,22 +44,20 @@
                             <tbody>
 
                             @if($arrObjOrganisation->count() > 0)
-                                @foreach($arrObjOrganisation as $objEvents )
+                                @foreach($arrObjOrganisation as $objOrganisation )
                                     <tr role="row" class="odd">
-                                        <td class="sorting_1">{{$objEvents->id}}</td>
+                                        <td class="sorting_1">{{$objOrganisation->id}}</td>
                                         <td>
-                                            {{$objEvents->name}}
+                                            {{$objOrganisation->name}}
                                         </td>
                                         <td>
-                                            {{$objEvents->organiser_name}}
+                                            {{$objOrganisation->email}}
                                         </td>
+
                                         <td>
-                                            {{$objEvents->event_date}}
-                                        </td>
-                                        <td>
-                                            <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
+                                            <a href="{{url('admin/organisation/edit/'.$objOrganisation->id)}}"
                                                class="btn btn-primary m-1">Edit</a>
-                                            <a href="{{url('admin/events/view/'.$objEvents->id)}}"
+                                            <a href="{{url('admin/organisation/view/'.$objOrganisation->id)}}"
                                                class="btn btn-primary m-1">View</a>
                                         </td>
                                     </tr>

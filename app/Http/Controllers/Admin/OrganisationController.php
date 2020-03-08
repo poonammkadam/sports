@@ -17,6 +17,11 @@ class OrganisationController extends Controller
         return view('admin.organisation.list', ['arrObjOrganisation'=>$arrObjOrganisation]);
     }
 
+    public function show($id){
+        $objOrganisation = Organisation::where('user_id',$id)->first();
+        return view('admin.organisation.view', ['objOrganisation' => $objOrganisation ]);
+    }
+
     public function create(){
         return view('admin.organisation.create');
     }
@@ -49,6 +54,7 @@ class OrganisationController extends Controller
         $objOrganisationProfile = Organisation::where('user_id',$id)->first();
         return view('admin.organisation.edit',['objOrganisation' => $objOrganisation,'objOrganisationProfile'=>$objOrganisationProfile]);
     }
+
     public function update($id, Request $request){
         $objProfileExist = Organisation::where('user_id', $id)->first();
         if($objProfileExist){

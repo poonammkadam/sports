@@ -1,226 +1,313 @@
 @extends('layouts.app')
 @section('content')
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="{{asset('images/img1.jpeg')}}" alt="New York" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>New York</h3>
-                    <p>The atmosphere in New York is lorem ipsum.</p>
+    <section class="hero_section ">
+        <div class="hero-container container">
+            <div class="hero_detail-box">
+                <h3>
+                    Welcome to <br>
+                    Best educations
+                </h3>
+                <h1>
+                    The Racing
+                </h1>
+                <p>
+                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
+                    some form, by injected humour, or randomised
+                </p>
+                <div class="hero_btn-continer">
+                    <a href="" class="call_to-btn btn_white-border">
+              <span>
+                Contact
+              </span>
+                        <img src="images/right-arrow.png" alt="">
+                    </a>
                 </div>
             </div>
-
-            <div class="item">
-                <img src="{{asset('images/img2.jpg')}}" alt="Chicago" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>Chicago</h3>
-                    <p>Thank you, Chicago - A night we won't forget.</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="{{asset('images/img3.jpeg')}}" alt="Los Angeles" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>LA</h3>
-                    <p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
+            <div class="hero_img-container">
+                <div>
+                    <img src="images/race1.jpeg" alt="" class="img-fluid">
                 </div>
             </div>
         </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+    </section>
     </div>
+    <!-- end header section -->
 
-    <!-- Container (The Band Section) -->
-    <div id="band" class="container text-center">
-        <h3>THE BAND</h3>
-        <p><em>We love music!</em></p>
-        <p>We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
-                <p class="text-center"><strong>Name</strong></p><br>
-                <a href="#demo" data-toggle="collapse">
-                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
-                </a>
-                <div id="demo" class="collapse">
-                    <p>Guitarist and Lead Vocalist</p>
-                    <p>Loves long walks on the beach</p>
-                    <p>Member since 1988</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-center"><strong>Name</strong></p><br>
-                <a href="#demo2" data-toggle="collapse">
-                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
-                </a>
-                <div id="demo2" class="collapse">
-                    <p>Drummer</p>
-                    <p>Loves drummin'</p>
-                    <p>Member since 1988</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-center"><strong>Name</strong></p><br>
-                <a href="#demo3" data-toggle="collapse">
-                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
-                </a>
-                <div id="demo3" class="collapse">
-                    <p>Bass player</p>
-                    <p>Loves math</p>
-                    <p>Member since 2005</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Container (TOUR Section) -->
-    <div id="tour" class="bg-1">
+    <!-- about section -->
+    <section class="about_section layout_padding">
         <div class="container">
-            <h3 class="text-center">TOUR DATES</h3>
-            <p class="text-center">Lorem ipsum we'll play you some music.<br> Remember to book your tickets!</p>
-            <ul class="list-group">
-                <li class="list-group-item">September <span class="label label-danger">Sold Out!</span></li>
-                <li class="list-group-item">October <span class="label label-danger">Sold Out!</span></li>
-                <li class="list-group-item">November <span class="badge">3</span></li>
-            </ul>
+            <h2 class="main-heading ">
+                About Us
+            </h2>
+            <p class="text-center">
+                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
+                passages of Lorem Ipsum available, but the majority h  There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
+                passages of Lorem Ipsum available, but the majority h There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
+                passages of Lorem Ipsum available, but the majority h.
+            </p>
+            <div class="about_img-box ">
+                <img src="images/race2.jpeg" alt="" class="img-fluid w-100">
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="" class="call_to-btn  ">
 
-            <div class="row text-center">
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="paris.jpg" alt="Paris" width="400" height="300">
-                        <p><strong>Paris</strong></p>
-                        <p>Friday 27 November 2015</p>
-                        <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
+          <span>
+            Read More
+          </span>
+                    <img src="images/right-arrow.png" alt="">
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- about section -->
+
+    <!-- teacher section -->
+    <section class="teacher_section layout_padding-bottom">
+        <div class="container">
+            <h2 class="main-heading ">
+                Our Teachers
+            </h2>
+            <p class="text-center">
+                Ipsum available, but the majority h
+            </p>
+            <div class="teacher_container layout_padding2">
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="images/teacher-1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Den Mark</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="newyork.jpg" alt="New York" width="400" height="300">
-                        <p><strong>New York</strong></p>
-                        <p>Saturday 28 November 2015</p>
-                        <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
+                    <div class="card">
+                        <img class="card-img-top" src="images/teacher-2.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Leena jorj</h5>
+                        </div>
+
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
-                        <p><strong>San Francisco</strong></p>
-                        <p>Sunday 29 November 2015</p>
-                        <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
+                    <div class="card">
+                        <img class="card-img-top" src="images/teacher-3.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Magi Den</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="images/teacher-4.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">jonson mark</h5>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
+
+
+            <div class="d-flex justify-content-center mt-3">
+                <a href="" class="call_to-btn  ">
+
+          <span>
+            See More
+          </span>
+                    <img src="images/right-arrow.png" alt="">
+                </a>
+            </div>
         </div>
+    </section>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
+    <!-- teacher section -->
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per person</label>
-                                <input type="number" class="form-control" id="psw" placeholder="How many?">
+    <!-- vehicle section -->
+    <section class="vehicle_section layout_padding">
+        <div class="container">
+            <h2 class="main-heading ">
+                Racing Facility
+            </h2>
+            <p class="text-center">
+                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
+                passages of Lorem Ipsum available, but the majority h
+            </p>
+            <div class="layout_padding-top">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="vehicle_img-box ">
+                                <img src="images/img1.jpeg" alt="" class="img-fluid w-100">
                             </div>
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="vehicle_img-box ">
+                                <img src="images/img2.jpg" alt="" class="img-fluid w-100">
                             </div>
-                            <button type="submit" class="btn btn-block">Pay
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </button>
-                        </form>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="vehicle_img-box ">
+                                <img src="images/img3.jpeg" alt="" class="img-fluid w-100">
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-                            <span class="glyphicon glyphicon-remove"></span> Cancel
-                        </button>
-                        <p>Need <a href="#">help?</a></p>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- vehicle section -->
+    <!-- client section -->
+    <section class="client_section layout_padding">
+        <div class="container">
+            <h2 class="main-heading ">
+                Our Racer Feedback
+            </h2>
+            <p class="text-center">
+                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
+                passages of Lorem Ipsum available, but the majority h
+            </p>
+            <div class="layout_padding2">
+                <div class="client_container d-flex flex-column">
+                    <div class="client_detail d-flex align-items-center">
+                        <div class="client_img-box ">
+                            <img src="images/student.png" alt="">
+                        </div>
+                        <div class="client_detail-box">
+                            <h4>
+                                Veniam Quis
+                            </h4>
+                            <span>
+                (exercitation)
+              </span>
+                        </div>
+                    </div>
+                    <div class="client_text mt-4">
+                        <p>
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat
+                            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                            anim id est laborum."
+
+
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Container (Contact Section) -->
-    <div id="contact" class="container">
-        <h3 class="text-center">Contact</h3>
-        <p class="text-center"><em>We love our fans!</em></p>
 
-        <div class="row">
-            <div class="col-md-4">
-                <p>Fan? Drop a note.</p>
-                <p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
-                <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
-                <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
-            </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+
+
+    <!-- client section -->
+
+    <!-- contact section -->
+
+    <section class="contact_section layout_padding-bottom">
+        <div class="container">
+
+            <h2 class="main-heading">
+                Contact Now
+
+            </h2>
+            <p class="text-center">
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+
+            </p>
+            <div class="">
+                <div class="contact_section-container">
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="contact-form">
+                                <form action="">
+                                    <div>
+                                        <input type="text" placeholder="Name">
+                                    </div>
+                                    <div>
+                                        <input type="text" placeholder="Phone Number">
+                                    </div>
+                                    <div>
+                                        <input type="email" placeholder="Email">
+                                    </div>
+                                    <div>
+                                        <input type="text" placeholder="Message" class="input_message">
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn_on-hover">
+                                            Send
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
-                <br>
-                <div class="row">
-                    <div class="col-md-12 form-group">
-                        <button class="btn pull-right" type="submit">Send</button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- end contact section -->
+
+    <!-- admission section -->
+    <section class="admission_section ">
+        <div class="container-fluid position-relative">
+            <div class="row h-100">
+                <div id="map" class="h-100 w-100 ">
+                </div>
+                <div class="container">
+                    <div class="admission_container position-absolute">
+                        <div class="admission_img-box">
+                            <img src="images/kidss.jpg" alt="">
+                        </div>
+                        <div class="admission_detail">
+                            <h3>
+                                Join Us
+                            </h3>
+                            <p class="mt-3 mb-4">
+                                There are many variations of passages of Lorem Ipsum available, but the majority h
+                            </p>
+                            <div class="">
+                                <a href="" class="admission_btn btn_on-hover">
+                                    Read More
+                                </a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
-        <h3 class="text-center">From The Blog</h3>
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Mike</a></li>
-            <li><a data-toggle="tab" href="#menu1">Chandler</a></li>
-            <li><a data-toggle="tab" href="#menu2">Peter</a></li>
-        </ul>
+    </section>
+    
 
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <h2>Mike Ross, Manager</h2>
-                <p>Man, we've been on the road for some time now. Looking forward to lorem ipsum.</p>
-            </div>
-            <div id="menu1" class="tab-pane fade">
-                <h2>Chandler Bing, Guitarist</h2>
-                <p>Always a pleasure people! Hope you enjoyed it as much as I did. Could I BE.. any more pleased?</p>
-            </div>
-            <div id="menu2" class="tab-pane fade">
-                <h2>Peter Griffin, Bass player</h2>
-                <p>I mean, sometimes I enjoy the show, but other times I enjoy other things.</p>
-            </div>
+    <!-- landing section -->
+    <section class="landing_section layout_padding">
+        <div class="container">
+            <h2 class="main-heading">
+                Free Multipurpose Recing facility
+
+            </h2>
+            <p class="landing_detail text-center">
+                There are many variations of passages of Lorem Ipsum available, but the majority There are many variations of
+                passages of Lorem Ipsum available, but the majority h
+
+            </p>
         </div>
-    </div>
-
-    <!-- Image of location/map -->
-    <img src="map.jpg" class="img-responsive" style="width:100%">
-
+    </section>
 
 @endsection
-
