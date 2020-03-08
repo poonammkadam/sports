@@ -79,7 +79,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr> <td>No Records found</td> </tr>
+                                <tr> No Records found </tr>
                             @endif
                             </tbody>
                         </table>

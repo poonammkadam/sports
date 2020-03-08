@@ -26,7 +26,8 @@
 
             @foreach ($objUserProfilEvents as $item)
             <div class="shadow card col-md-3 item-inner text-center">
-                <img src="{{ URL::to('/') }}/public/{{ $item->events->banner }}" class="card-img-top event-img" alt="">
+                <a href="{{url('/event/view/'.$item->events->id)}}">
+                    <img src="{{ URL::to('/') }}/public/{{ $item->events->banner }}" class="card-img-top event-img" alt="">
                <div class="card-body">
                        <div class="overlay">
                            <br><br>
@@ -36,6 +37,7 @@
                     <h5 class="card-title"><strong>{{$item->events->event_date}}</strong></h5>
 
                </div>
+                </a>
            </div>
            @endforeach
 

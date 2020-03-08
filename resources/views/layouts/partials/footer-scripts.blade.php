@@ -5,19 +5,15 @@
 <!-- Placed at the end of the document so the pages load faster -->
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
 
 <script src="{{asset('js/card.js')}}"></script>
 <script>
+    new Card({
+        form: $('#event_submit'),
+        container: '.card-wrapper'
+    });
     $(document).ready(function(){
-        new Card({
-            form: document.querySelector('form'),
-            container: '.card-wrapper'
-        });
+
         // Initialize Tooltip
         $('[data-toggle="tooltip"]').tooltip();
 

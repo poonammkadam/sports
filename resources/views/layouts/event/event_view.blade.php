@@ -1,4 +1,4 @@
-@extends('admin.admin_template')
+@extends('layouts.app')
 @section('content')
     <div class="">
         <div class="row justify-content-center">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-
+@if(auth()->user()->role == 'organiser')
         <div class="row mt-2 justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -105,7 +105,7 @@
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                 aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                              Upload result
+                                                Upload result
                                             </th>
                                         </tr>
                                         </thead>
@@ -125,9 +125,9 @@
                                                         {{($objParticipants->category->type)}}
                                                     </td>
                                                     <td>
-                                                        @if($objParticipants->payment_status == 1)
+                                                        @if($objParticipants->payment_status)
                                                             <span>Completed</span>
-                                                        @elseif($objParticipants->payment_status == 2)
+                                                        @else
                                                             <span>Pending</span>
                                                         @endif
                                                     </td>
@@ -158,5 +158,6 @@
                 </div>
             </div>
         </div>
+    @endif
     </div>
 @endsection

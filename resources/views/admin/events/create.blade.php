@@ -74,15 +74,17 @@
                                         <input required id="venue" type="text" class="form-control" name="venue"  autocomplete="venue" autofocus>
                                     </div>
                             </div>
+
                             <div class="form-group row">
                             <label for="tshirt">Select Organistion</label>
-                            <select id="org" class="form-control custom-select" name="organisation">
+                             <select id="org" class="form-control custom-select" name="organisation">
                                 <option selected>Open this select menu</option>
                                 @foreach($arrObjOrganisation as $objOrg)
                                 <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
                                 @endforeach
                             </select>
                             </div>
+
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Is pickup and drop available</label>
 
@@ -125,10 +127,10 @@
 				$(document).on('click', '#add', function(){
 					var intIndex = 0
 					var html = '<div class="addedSection">';
-					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Fee</label><input type="text"  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
-					html += '<div class="form-group"><label for=""></label><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
+					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
+					html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
 					$('#dynamic_field').append(html);
 				});
 			$(document).on('click', '.remove', function(){

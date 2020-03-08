@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->role=='organiser'?true:false;
     }
+
+    public function isAdmin()
+    {
+        return $this->role=='admin'?true:false;
+    }
 }

@@ -27,6 +27,7 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                         <input required  type="text" name="local_name" value="{{$objProfile->name}}" class="form-control" id="inputAddress" placeholder="">
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">First Name</label>
