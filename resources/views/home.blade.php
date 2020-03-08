@@ -30,11 +30,11 @@
             </div>
         </div>
     </section>
-    </div>
+
     <!-- end header section -->
 
     <!-- about section -->
-    <section class="about_section layout_padding">
+    <section class="about_section ">
         <div class="container">
             <h2 class="main-heading ">
                 About Us
@@ -64,8 +64,8 @@
     <!-- about section -->
 
     <!-- teacher section -->
-    <section class="teacher_section layout_padding-bottom">
-        <div class="container">
+    <section class="teacher_section ">
+        <div class="container pt-0">
             <h2 class="main-heading ">
                 Our Teachers
             </h2>
@@ -123,8 +123,8 @@
     <!-- teacher section -->
 
     <!-- vehicle section -->
-    <section class="vehicle_section layout_padding">
-        <div class="container">
+    <section class="vehicle_section ">
+        <div class="">
             <h2 class="main-heading ">
                 Racing Facility
             </h2>
@@ -168,7 +168,7 @@
 
     <!-- vehicle section -->
     <!-- client section -->
-    <section class="client_section layout_padding">
+    <section class="client_section ">
         <div class="container">
             <h2 class="main-heading ">
                 Our Racer Feedback
@@ -216,7 +216,7 @@
 
     <!-- contact section -->
 
-    <section class="contact_section layout_padding-bottom">
+    <section class="contact_section ">
         <div class="container">
 
             <h2 class="main-heading">
@@ -303,7 +303,7 @@
 
 
     <!-- landing section -->
-    <section class="landing_section layout_padding">
+    <section class="landing_section ">
         <div class="container">
             <h2 class="main-heading">
                 Free Multipurpose Recing facility
