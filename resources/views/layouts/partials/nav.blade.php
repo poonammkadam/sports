@@ -17,6 +17,7 @@
                     @endif
                 @else
                     <li class="nav-item"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="nav-item"><a href="{{ url('/results') }}">Results</a></li>
                     @if(auth()->user()->role == 'organiser')
                     <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
                     @else

@@ -64,6 +64,8 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/oragnation/request', 'OragnationController@postOragnationStore');
     Route::get('/event/view/{id}', 'EventController@getParticipants');
 
+   // resulte
+    Route::get('/results', 'EventController@getResults');
 
     Route::get('/logout', function (){
         Auth::logout();

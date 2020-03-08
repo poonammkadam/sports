@@ -17,6 +17,10 @@ class EventController extends Controller
         return view('layouts.event.event_view', ['objEvent'=>$objEvent ]);
     }
 
+    public function getResults(){
+        return view('fornt.results.results');
+    }
+
 }
 
 
