@@ -262,45 +262,7 @@
 
 
     <!-- end contact section -->
-
-    <!-- admission section -->
-    <section class="admission_section ">
-        <div class="container-fluid position-relative">
-            <div class="row h-100">
-                <div id="map" class="h-100 w-100 ">
-                </div>
-                <div class="container">
-                    <div class="admission_container position-absolute">
-                        <div class="admission_img-box">
-                            <img src="images/kidss.jpg" alt="">
-                        </div>
-                        <div class="admission_detail">
-                            <h3>
-                                Join Us
-                            </h3>
-                            <p class="mt-3 mb-4">
-                                There are many variations of passages of Lorem Ipsum available, but the majority h
-                            </p>
-                            <div class="">
-                                <a href="" class="admission_btn btn_on-hover">
-                                    Read More
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-
-    <!-- admission section -->
-
+    
 
     <!-- landing section -->
     <section class="landing_section ">

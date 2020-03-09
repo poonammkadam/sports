@@ -74,7 +74,7 @@ class UserController extends Controller
        $objProfile->last_name = $request->last_name;
        $objProfile->gender = $request->gender;
        $objProfile->date_of_birth = $request->dob;
-//       $objProfile->nationality = $request->nationality;
+       $objProfile->nationality = $request->nationality;
        $objProfile->local_id = $request->local_id;
        $objProfile->passport = $request->passport_no;
        $objProfile->address = $request->address;
