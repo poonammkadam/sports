@@ -40,7 +40,8 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/organisation/create', 'OrganisationController@create');
     Route::post('/organisation/store', 'OrganisationController@store');
     Route::get('/organisation/edit/{id}', 'OrganisationController@edit');
-    Route::post('/organisation/edit/{id}', 'OrganisationController@update');
+    Route::get('/organisation/view/{id}', 'OrganisationController@show');
+    Route::post('/organisation/update/{id}', 'OrganisationController@update');
 
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@eventCreate');
@@ -62,4 +63,16 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/event/register', 'UserController@eventStore');
     Route::get('/organiser', 'OragnationController@getRequestForm');
     Route::post('/oragnation/request', 'OragnationController@postOragnationStore');
+    Route::get('/event/view/{id}', 'EventController@getParticipants');
+
+   // resulte
+    Route::get('/results', 'EventController@getResults');
+
+    Route::get('/logout', function (){
+        Auth::logout();
+        return redirect('/login');
+    });
+
+    Route::get('/myorganisation', 'OrganisationController@show');
+    Route::get('/organisation/view', 'OrganisationController@show');
 });

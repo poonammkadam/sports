@@ -6,22 +6,23 @@
             <div class="text-center">
                 <h3>Event Participation</h3>
             </div>
-            <form method="POST" id="credit-card" action="{{url('event/register')}}" autocomplete="off" >
+            <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
                 @csrf
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                 <h2>{{$objEvent->name}}</h2>
                 <br>
                 <select class="form-control custom-select" name="event_category" id="category">
                     <option>Select event</option>
-                @foreach($objEvent->category as $index => $prate)
-                        <option class="cate" data-price={{$prate->amount}} value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
-                 @endforeach
+                    @foreach($objEvent->category as $index => $prate)
+                        <option class="cate"
+                                data-price={{$prate->amount}} value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
+                    @endforeach
                 </select>
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Event Fee</label>
                     <input type="hidden" value="" id="exampleFormControlInput1" name="fee">
-                    <h6>B$ <span id="price">--</span> </h6>
+                    <h6>B$ <span id="price">--</span></h6>
                 </div>
 
                 <div class="form-group">
@@ -49,16 +50,29 @@
                 </div>
 
                 <div class="payment-online" style="display: none">
-                    <div class="form-container">
-                        <div class="personal-information">
-                            <h1>Payment Information</h1>
-                        </div>
-                        <input id="column-left" type="text" name="cardholder_name" placeholder="Cardholder Name"/>
-                        <label for="input-field"></label><input id="input-field"  type="text" name="cardholder_number" placeholder="Card Number"/>
-                        <label for="column-left"></label><input id="column-left"  type="text" name="cardholder_expiry" placeholder="MM / YY"/>
-                        <label for="column-right"></label><input id="column-right"  type="text" name="cardholder_cvc" placeholder="CCV"/>
-
+                    <div class="demo-container">
                         <div class="card-wrapper"></div>
+                        <div class="form-row mt-5">
+                                <div class="form-group col-md-6">
+                                    <input class="form-control" placeholder="Card number" type="tel" name="number">
+                                </div>
+                        </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input class="form-control" placeholder="Full name" type="text" name="name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input class="form-control" placeholder="MM/YY" type="tel" name="expiry">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input class="form-control" placeholder="CVC" type="number" name="cvc">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -67,30 +81,32 @@
         </div>
     </div>
     <script>
-        $("#category").on('change', function(){
+        $("#category").on('change', function () {
             let str = "";
-            $( "select option:selected" ).each(function() {
-                str += $( this ).data('price') + " ";
+            $("select option:selected").each(function () {
+                str += $(this).data('price') + " ";
             });
             $('#price').html(str)
             $('input[name="fee"]').val(str)
         });
 
-        $('#online').on('click', function()
-            {
+        $('#online').on('click', function () {
                 $('.payment-online').css('display', 'block')
             }
         )
 
-        $('#offline').on('click', function()
-            {
+        $('#offline').on('click', function () {
                 $('.payment-online').css('display', 'none')
             }
         )
     </script>
 
-<style>
-
-</style>
+    <script src="{{asset('js/card.js')}}"></script>
+    <script>
+        new Card({
+            form: document.querySelector('form'),
+            container: '.card-wrapper'
+        });
+    </script>
 @endsection
 

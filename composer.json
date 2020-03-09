@@ -16,8 +16,8 @@
         "khsing/world": "^0.8.0",
         "laravel/framework": "6.0.*",
         "laravel/tinker": "^2.0",
-        "monarobase/country-list": "^3.0",
-        "nategood/httpful": "0.2.2"
+        "nategood/httpful": "0.2.2",
+        "pragmarx/countries": "^0.7.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

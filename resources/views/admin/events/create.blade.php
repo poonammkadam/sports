@@ -45,10 +45,11 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <button type="button" name="add" id="add" class="btn btn-outline-dark"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                            <button type="button" name="add" id="add" class="btn offset-md-4 btn-outline-dark"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
                             <div class="form-group row">
-                                <label >Add Event Type</label>
-                                
+                                  <label class="col-md-4 col-form-label text-md-right" for="dynamic_field" >Add Event Type</label>
                                 <div id="dynamic_field"></div>
                             </div>
 
@@ -75,24 +76,13 @@
                             </div>
 
                             <div class="form-group row">
-                                    <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
-                                    <div class="col-md-6">
-                                        <input required id="orgname" type="text" class="form-control " name="orgname"  autocomplete="orgname" autofocus>
-                                    </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="org_contact_no" class="col-md-4 col-form-label text-md-right">Organization Contact No.</label>
-                                <div class="col-md-6">
-                                    <input required id="org_contact_no" type="text" class="form-control" name="org_contact_no"  autocomplete="org_contact_no" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="org_address" class="col-md-4 col-form-label text-md-right">Organization Address</label>
-                                <div class="col-md-6">
-                                    <textarea required  id="org_address" type="text" class="form-control " name="org_address"  autocomplete="org_address" autofocus rows="3"></textarea>
-                                </div>
+                            <label for="tshirt">Select Organistion</label>
+                             <select id="org" class="form-control custom-select" name="organisation">
+                                <option selected>Open this select menu</option>
+                                @foreach($arrObjOrganisation as $objOrg)
+                                <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
+                                @endforeach
+                            </select>
                             </div>
 
                             <div class="form-group row">
@@ -107,7 +97,7 @@
                             <div class="form-group row" id="pickup_drop_available" style="display: none">
                                 <label for="pickup_drop" class="col-md-4 col-form-label text-md-right">Is pickup and drop Location</label>
                                 <div class="col-md-6">
-                                    <textarea required  id="pickup_drop" type="text" class="form-control"  name="pickup_drop"  autocomplete="pickup_drop" autofocus rows="3"></textarea>
+                                    <textarea required  id="pickup_drop" type="text" class="form-control"  name="pickup_drop"  autocomplete="pickup_drop"  rows="3"></textarea>
                                 </div>
                             </div>
 
@@ -135,11 +125,11 @@
     <script type="text/javascript">
 		$(document).ready(function(){
 				$(document).on('click', '#add', function(){
-					var intIndex = $(document).find("#dynamic_field .event-type").length;
+					var intIndex = 0
 					var html = '<div class="addedSection">';
-					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][type]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><input type="text"  name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
+					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee]" class="form-control item_category"></div>';
 					html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
 					$('#dynamic_field').append(html);
 				});
@@ -147,46 +137,8 @@
 				$("div.addedSection").first().remove();
 			});
 		})
-        
-        // function addEventType() {
-        //     var input = document.createElement("input");
-        //     var intIndex = $(document).find("#dynamic_field .event-type").length;
-        //     input.type = "text";
-        //     input.name = "category["+intIndex+"][type]";
-        //     input.placeholder = 'Enter Gender';
-        //     var div = document.createElement("div");
-        //     div.className = 'event-type form-group';
-        //     div.innerHTML = 'Add Event Gender:';
-        //     div.appendChild(input);
-        //
-        //     var input2 = document.createElement("input");
-        //     input2.type = "text";
-        //     input2.placeholder = 'Event Distance';
-        //     input2.name = "category["+intIndex+"][subtype]";
-        //     div.appendChild(input2);
-        //
-        //     var input3 = document.createElement("input");
-        //     input3.type = "text";
-        //     input3.placeholder = 'Event fee';
-        //     input3.name = "category["+intIndex+"][fee]";
-        //     div.appendChild(input3);
-        //
-        //     var input4 = document.createElement("input");
-        //     input4.type = "button";
-        //     input4.name = "remove_type";
-        //     input4.className = "remove_type";
-        //     input4.value = "Remove";
-        //     div.appendChild(input4);
-        //     document.getElementById("dynamic_field").appendChild(div);
-        //
-        //     $(document).ready(function () {
-        //         $(document).on('click', '.pick_up_yes', function (event) {
-        //             $(this).parent().remove();
-        //         });
-        //
-        //
-        //     });
-        // }
+
+
     </script>
 @endsection
 
