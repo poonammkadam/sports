@@ -293,7 +293,14 @@
             </div>
         </div>
     </section>
-    
+
+
+
+
+
+
+    <!-- admission section -->
+
 
     <!-- landing section -->
     <section class="landing_section layout_padding">
