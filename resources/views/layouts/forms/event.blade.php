@@ -11,13 +11,19 @@
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                 <h2>{{$objEvent->name}}</h2>
                 <br>
-                <select class="form-control custom-select" name="event_category" id="category">
-                    <option>Select event</option>
-                    @foreach($objEvent->category as $index => $prate)
-                        <option class="cate"
-                                data-price={{$prate->amount}} value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <div class="form-row">
+                    <div class="col-md-6">
+                    <select class="form-control custom-select" name="event_category" id="category">
+                        <option>Select event</option>
+                        @foreach($objEvent->category as $index => $prate)
+                            <option class="cate"
+                                    data-price={{$prate->amount}} value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
+                        @endforeach
+                    </select>
+                    </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Event Fee</label>
@@ -53,30 +59,28 @@
                     <div class="demo-container">
                         <div class="card-wrapper"></div>
                         <div class="form-row mt-5">
-                                <div class="form-group col-md-6">
-                                    <input class="form-control" placeholder="Card number" type="tel" name="number">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <input class="form-control" placeholder="Card number" type="tel" name="number">
+                            </div>
                         </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input class="form-control" placeholder="Full name" type="text" name="name">
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input class="form-control" placeholder="Full name" type="text" name="name">
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input class="form-control" placeholder="MM/YY" type="tel" name="expiry">
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input class="form-control" placeholder="MM/YY" type="tel" name="expiry">
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input class="form-control" placeholder="CVC" type="number" name="cvc">
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input class="form-control" placeholder="CVC" type="number" name="cvc">
                             </div>
                         </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-
             </form>
         </div>
     </div>
