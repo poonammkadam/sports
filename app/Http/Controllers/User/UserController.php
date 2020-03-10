@@ -27,6 +27,7 @@ use App\MerchantSuite\StatementDescriptor;
 use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
+use App\Notifications\RegisterConfirmation;
 use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +98,8 @@ class UserController extends Controller
 
    public function eventStore(Request $request){
      $objEventParticipants = new EventParticipants();
-
+     $objUser=auth()->user();
+       $objUser->notify(new RegisterConfirmation());
        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEventParticipants->category_id = $request->event_category;
        $objEventParticipants->event_id = $request->event_id;
@@ -115,19 +117,21 @@ class UserController extends Controller
            $arrMixExtraData['profile_id']= 1;
            $objPayment=$this->makePayment($arrMixExtraData);
            $objApiResponse=$objPayment->getAPIResponse();
+           $objUser->notify(new RegisterConfirmation());
            if($objApiResponse->isSuccessful()){
                $objEventParticipants->payment_status=1;
                $objEventParticipants->save();
-               return view('payment.successful');
+               $objUser->notify(new RegisterConfirmation());
+               return redirect('events')->with('message', 'Payment Successful.');
            }else{
-               return view('payment.unsuccessful');
+               return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
            }
        }
 
        if($request->payment_type=='offline') {
            $objEventParticipants->payment_status = 2;
            $objEventParticipants->save();
-           return view('payment.offline.successful');
+           return redirect('events')->with('success', 'To confirm your registration please upload your payment receipt.');
        }
 
        return redirect('events')->with('success', 'You are Registered Successfully successfully.');
