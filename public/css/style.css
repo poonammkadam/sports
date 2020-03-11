@@ -514,3 +514,6 @@ a:focus {
 .footer_section a {
     color: #fdfdfe;
 }
+.event-exp{
+    opacity: 0.3 !important;
+}
