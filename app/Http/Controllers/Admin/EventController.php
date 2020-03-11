@@ -64,7 +64,7 @@ class EventController extends Controller
         $objEvent=EventParticipants::findOrFail($id);
             $objEvent->payment_status=1;
             $objEvent->save();
-            return redirect()->back()->with('success', 'Events Payment statu update Successfully.');
+            return redirect()->back()->with('success', 'Events Payment status update Successfully.');
         }
 
     public function update($id, Request $request){
@@ -92,7 +92,7 @@ class EventController extends Controller
         $objResulte->event_id = $request->category;
         $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
         $objResulte->save();
-    
+
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
 
     }

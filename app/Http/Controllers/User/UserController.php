@@ -98,15 +98,15 @@ class UserController extends Controller
 
    public function eventStore(Request $request){
      $objEventParticipants = new EventParticipants();
+     $arrMixExtraData=[];
      $objUser=auth()->user();
-       $objUser->notify(new RegisterConfirmation());
        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
        $objEventParticipants->category_id = $request->event_category;
        $objEventParticipants->event_id = $request->event_id;
        $objEventParticipants->profile_id = $objProfile->id;
        $objEventParticipants->payment_type = $request->payment_type;
 
-       $arrMixExtraData=[];
+       $arrMixExtraData['user']=$objUser;
        $objPayment='';
        if($request->payment_type=='online'){
            $arrMixExtraData['cardholder_name']= $request->cardholder_name;
@@ -117,12 +117,14 @@ class UserController extends Controller
            $arrMixExtraData['profile_id']= 1;
            $objPayment=$this->makePayment($arrMixExtraData);
            $objApiResponse=$objPayment->getAPIResponse();
+
            $objUser->notify(new RegisterConfirmation());
            if($objApiResponse->isSuccessful()){
                $objEventParticipants->payment_status=1;
                $objEventParticipants->save();
+               $arrMixExtraData['payment']=$objApiResponse;
                $objUser->notify(new RegisterConfirmation());
-               return redirect('events')->with('message', 'Payment Successful.');
+               return redirect('events')->with('success', 'Payment Successful.');
            }else{
                return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
            }
@@ -134,7 +136,7 @@ class UserController extends Controller
            return redirect('events')->with('success', 'To confirm your registration please upload your payment receipt.');
        }
 
-       return redirect('events')->with('success', 'You are Registered Successfully successfully.');
+       return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
    }
 
    public function eventCreate($id){
@@ -143,9 +145,7 @@ class UserController extends Controller
         if(auth()->user()->registration_status){
             return view('layouts.forms.event',['objEvent'=>$objEvent]);
         }
-
-            return redirect('registration')->with('alert', 'Sorry!!! you cant register for event first you need complete your profile');
-
+            return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
 
     }
 

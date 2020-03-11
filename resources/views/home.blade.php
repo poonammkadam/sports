@@ -208,11 +208,7 @@
             </div>
         </div>
     </section>
-
-
-
-
-    <!-- client section -->
+    
 
     <!-- contact section -->
 
@@ -225,7 +221,6 @@
             </h2>
             <p class="text-center">
                 reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-
             </p>
             <div class="">
                 <div class="contact_section-container">

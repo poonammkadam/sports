@@ -18,7 +18,7 @@ class EventController extends Controller
     }
 
     public function getResults(){
-        return view('fornt.results.results');
+        return view('front.results.results');
     }
 
 }

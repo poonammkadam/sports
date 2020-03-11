@@ -3,15 +3,14 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RegisterConfirmation extends Notification
+class RegistrationConfirmation extends Notification
 {
     use Queueable;
-
     private $message;
-
     /**
      * Create a new notification instance.
      *
@@ -41,8 +40,10 @@ class RegisterConfirmation extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view(
-            'mail.registered', ['message'=>$this->message]);
+        $url='/';
+        return (new MailMessage)
+            ->subject('Registration Confirmed')
+            ->markdown('mail.registered', ['url' => $url]);
     }
 
     /**
