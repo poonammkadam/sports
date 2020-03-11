@@ -7,6 +7,7 @@ use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use App\Http\Model\Organisation;
+use App\Resultes;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -81,6 +82,20 @@ class EventController extends Controller
         $objEvent->save();
     }
 
+    public function getResulte($id){
+        $objEvent = Events::where('id',$id)->first();
+        return view('admin.events.resulte',['objEvent'=>$objEvent]);
+    }
+    public function postResulte($id, Request $request){
+        $objResulte = new Resultes();
+        $objResulte->event_id = $id;
+        $objResulte->event_id = $request->category;
+        $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
+        $objResulte->save();
+    
+        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
+
+    }
 }
 
 

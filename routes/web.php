@@ -50,6 +50,8 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/events/view/{id}', 'EventController@view');
     Route::get('/events/paid/{id}', 'EventController@setPaymentStatus');
     Route::post('/events/edit/{id}', 'EventController@update');
+    Route::get('/resulte/edit/{id}', 'EventController@getResulte');
+    Route::post('/resulte/upload/{id}', 'EventController@postResulte');
 
 });
 

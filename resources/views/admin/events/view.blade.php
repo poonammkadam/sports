@@ -150,7 +150,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        --
+                                                       <a class="btn btn-info" href="/admin/resulte/edit">Upload</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
