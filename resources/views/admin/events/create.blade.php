@@ -50,7 +50,14 @@
 
                             <div class="form-group row">
                                   <label class="col-md-4 col-form-label text-md-right" for="dynamic_field" >Add Event Type</label>
-                                <div id="dynamic_field"></div>
+                               
+                                <div id="dynamic_field">
+                                    <div class="addedSection">
+                                        <label for="category_type0">Category</label> <input type="text" required id="category_type0" name="category[0][type]" class="form-control item_category">
+                                        <label for="category_subtype0">Sub-Category</label><input required type="text" id="category_subtype0" name="category[0][subtype]" class="form-control item_category">
+                                        <label for="category_fee0">Fee</label><input type="text" required  id="category_fee0" name="category[0][fee]" class="form-control item_category">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -124,8 +131,9 @@
 
     <script type="text/javascript">
 		$(document).ready(function(){
+			var intIndex = 0
 				$(document).on('click', '#add', function(){
-					var intIndex = 0
+					intIndex= intIndex++
 					var html = '<div class="addedSection">';
 					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
 					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
@@ -134,7 +142,7 @@
 					$('#dynamic_field').append(html);
 				});
 			$(document).on('click', '.remove', function(){
-				$("div.addedSection").first().remove();
+				$(this).closest('.addedSection').remove();
 			});
 		})
 
