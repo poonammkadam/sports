@@ -19,7 +19,7 @@ class RegisterConfirmation extends Notification
      */
     public function __construct($message)
     {
-        $this->message=$message;
+        $this->message = $message;
     }
 
     /**
@@ -41,8 +41,8 @@ class RegisterConfirmation extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view(
-            'mail.registered', ['message'=>$this->message]);
+
+        return (new MailMessage)->view('mail.registered',['objData'=>$this->message]);
     }
 
     /**

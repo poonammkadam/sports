@@ -67,6 +67,8 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/oragnation/request', 'OragnationController@postOragnationStore');
     Route::get('/event/view/{id}', 'EventController@getParticipants');
 
+    Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
+
    // resulte
     Route::get('/results', 'EventController@getResults');
 

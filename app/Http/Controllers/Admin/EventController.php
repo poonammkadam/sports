@@ -86,10 +86,11 @@ class EventController extends Controller
         $objEvent = Events::where('id',$id)->first();
         return view('admin.events.resulte',['objEvent'=>$objEvent]);
     }
+
     public function postResulte($id, Request $request){
         $objResulte = new Resultes();
         $objResulte->event_id = $id;
-        $objResulte->event_id = $request->category;
+        $objResulte->category_id = $request->category;
         $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
         $objResulte->save();
 

@@ -107,6 +107,7 @@ class UserController extends Controller
        $objEventParticipants->payment_type = $request->payment_type;
 
        $arrMixExtraData['user']=$objUser;
+       $arrMixExtraData['eventparticipant']=$objEventParticipants;
        $objPayment='';
        if($request->payment_type=='online'){
            $arrMixExtraData['cardholder_name']= $request->cardholder_name;
@@ -118,7 +119,7 @@ class UserController extends Controller
            $objPayment=$this->makePayment($arrMixExtraData);
            $objApiResponse=$objPayment->getAPIResponse();
 
-           $objUser->notify(new RegisterConfirmation());
+           $objUser->notify(new RegisterConfirmation($arrMixExtraData));
            if($objApiResponse->isSuccessful()){
                $objEventParticipants->payment_status=1;
                $objEventParticipants->save();
@@ -133,6 +134,7 @@ class UserController extends Controller
        if($request->payment_type=='offline') {
            $objEventParticipants->payment_status = 2;
            $objEventParticipants->save();
+           $objUser->notify(new RegisterConfirmation($arrMixExtraData));
            return redirect('events')->with('success', 'To confirm your registration please upload your payment receipt.');
        }
 

@@ -21,6 +21,11 @@ class EventController extends Controller
         return view('front.results.results');
     }
 
+    public function uploadReceipt($id){
+        $objParticipants=EventParticipants::where('id', $id)->first();
+        return view('layout.event.receipt', ['objParticipants' =>$objParticipants]);
+    }
+
 }
 
 
