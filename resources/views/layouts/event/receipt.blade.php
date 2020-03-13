@@ -1,13 +1,13 @@
 
 @extends('layouts.app')
 @section('content')
-
+{{dd($objParticipants)}}
     <div class="container">
         <div>
             <div class="text-center">
                 <h3>Event Participation</h3>
             </div>
-            <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
+            <form id="event_submit" method="POST" action="{{url('event/receipt/register')}}" autocomplete="off">
                 @csrf
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                 <h2>{{$objEvent->name}}</h2>

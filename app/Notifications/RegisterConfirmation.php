@@ -41,8 +41,8 @@ class RegisterConfirmation extends Notification
      */
     public function toMail($notifiable)
     {
-
-        return (new MailMessage)->view('mail.registered',['objData'=>$this->message]);
+        return (new MailMessage())
+            ->markdown('mail.registered', ['objData'=>$this->message]);
     }
 
     /**

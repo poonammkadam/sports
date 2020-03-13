@@ -33,7 +33,7 @@
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" type="text/css">
 </head>
-<body id="myPage">
+<body id="myPage" >
         @include('layouts.partials.nav')
         @yield('content')
         @include('layouts.partials.footer')

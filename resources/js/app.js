@@ -14,3 +14,10 @@ require('./bootstrap');
 
 require('./components/Example');
 
+$(document).ready(function() {
+    $('#content').css('min-height', (
+        $(document).height()
+        - $('nav').height()
+        - $('footer').height()
+    ));
+});
