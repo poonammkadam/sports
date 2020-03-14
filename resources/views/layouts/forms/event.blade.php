@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <div class="form-row">
                     <div class="col-md-6">
-                    <select class="form-control custom-select" name="event_category" id="category">
+                    <select class="form-control custom-select" required name="event_category" id="category">
                         <option>Select event</option>
                         @foreach($objEvent->category as $index => $prate)
                             <option class="cate"
