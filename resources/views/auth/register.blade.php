@@ -2,8 +2,8 @@
 @section('content')
     <div class="container" id="content">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="shadow-lg p-3 mb-5 bg-white rounded card">
+        <div class="col-md-8 guest-page">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded card login-form">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
