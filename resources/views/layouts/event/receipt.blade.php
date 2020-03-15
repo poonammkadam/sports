@@ -22,19 +22,19 @@
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Name:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objParticipants->events->organiser_name}}</div>
+                            <div class="col-7">{{$objParticipants->events->organisation->name}}</div>
                         </div>
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Contact No:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objParticipants->events->organiser_contact_number}}</div>
+                            <div class="col-7">{{$objParticipants->events->organisation->contact_no}}</div>
                         </div>
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Address:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objParticipants->events->organiser_address}}</div>
+                            <div class="col-7">{{$objParticipants->events->organisation->address}}</div>
                         </div>
 
                         <div class="row m-2">
@@ -58,15 +58,16 @@
                         <div class="row m-2">
                             <div class="col-4"><b> Upload Receipt</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objParticipants->events->registration_end_date}}</div>
-                        </div>
-
-                        <form enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Example file input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <div class="col-7">
+                                <form enctype="multipart/form-data" method="post" action="{{url('event/receipt/upload/'.$objParticipants->id)}}">
+                                    @csrf
+                                    <input type="file" class="form-control-file m-0 p-0" name="receipt" id="exampleFormControlFile1">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
 
                     </div>
                 </div>

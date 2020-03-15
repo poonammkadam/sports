@@ -68,6 +68,7 @@ Route::group(['namespace'=>'User'], function() {
     Route::get('/event/view/{id}', 'EventController@getParticipants');
 
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
+    Route::post('event/receipt/upload/{id}', 'EventController@postUploadReceipt');
 
    // resulte
     Route::get('/results', 'EventController@getResults');
