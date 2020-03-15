@@ -40,7 +40,7 @@ class EventController extends Controller
 
     public function getReceipt($id){
         $objEventParticipant=EventParticipants::findOrFail($id);
-        return Storage::get('');
+        return Storage::get('receipt/'.$objEventParticipant->id);
     }
 
 }
