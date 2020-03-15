@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-fixed-top">
-    <div class="container-fluid">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNavDropdown" aria-expanded="false">
-            <span class="glyphicon glyphicon-align-justify"></span>                     
+    <a class="navbar-brand" href="#">Logo</a>
+        <button type="button" class="navbar-toggle collapsed ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown" aria-expanded="false">
+            <span class="glyphicon glyphicon-align-justify"></span>
           </button>
-            <a class="navbar-brand" href="#myPage">Logo</a>
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav navbar-nav navbar-right">
                 @guest
@@ -40,5 +40,4 @@
                 @endguest
             </ul>
         </div>
-    </div>
 </nav>
