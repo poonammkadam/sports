@@ -3,9 +3,14 @@
 
     <div class="container">
         <div>
-            <div class="text-center">
+            <div class="text-center ">
                 <h3>Event Participation</h3>
             </div>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8 ">
+                    <div class="shadow-lg p-5">
             <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
                 @csrf
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
@@ -82,6 +87,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+                </div>
+                </div>
+            <div class="col-md-2">
+            </div>
+            </div>
         </div>
     </div>
     <script>
