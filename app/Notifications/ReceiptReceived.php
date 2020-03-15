@@ -42,7 +42,7 @@ class ReceiptReceived extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->markdown('mail.registered', ['objData'=> $this->message]);
+            ->markdown('mail.receipt', ['objData'=> $this->message]);
     }
 
     /**

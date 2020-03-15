@@ -11,6 +11,7 @@ use App\Notifications\ReceiptReceived;
 use App\Notifications\RegisterConfirmation;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -35,6 +36,11 @@ class EventController extends Controller
         $objEventParticipant->save();
         $obAdminUser=User::where('role', 'admin')->first();
         $obAdminUser->notify(new ReceiptReceived($objEventParticipant));
+    }
+
+    public function getReceipt($id){
+        $objEventParticipant=EventParticipants::findOrFail($id);
+        return Storage::get('');
     }
 
 }
