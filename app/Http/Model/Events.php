@@ -17,4 +17,9 @@ class Events extends Model
     {
         return $this->hasMany(new EventParticipants(), 'event_id', 'id');
     }
+
+    public function organisation()
+    {
+        return $this->hasOne(new Organisation(),  'id', 'org_id');
+    }
 }

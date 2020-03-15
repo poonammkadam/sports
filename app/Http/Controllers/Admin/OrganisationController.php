@@ -29,7 +29,7 @@ class OrganisationController extends Controller
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
 
     public function store(Request $request){
@@ -46,9 +46,9 @@ class OrganisationController extends Controller
         $objUserOrg->registration_status = 0;
         $objUserOrg->save();
         $intId = $objUserOrg->getKey();
-        $objOrganisation = User::where('id',$intId)->first();
         return redirect('admin/organisation/edit/'.$intId);
     }
+
     public function edit($id){
         $objOrganisation = User::where('id',$id)->first();
         $objOrganisationProfile = Organisation::where('user_id',$id)->first();

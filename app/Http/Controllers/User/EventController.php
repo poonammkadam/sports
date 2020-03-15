@@ -26,6 +26,12 @@ class EventController extends Controller
         return view('layouts.event.receipt', ['objParticipants' =>$objParticipants]);
     }
 
+    public function postUploadReceipt(Request $request, $id){
+        $objEventParticipant= EventParticipants::findOrFail($id);
+        $objEventParticipant->receipt = $request->file('receipt')->store('receipt/'.$objEventParticipant->id);
+
+    }
+
 }
 
 
