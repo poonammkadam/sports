@@ -50,7 +50,7 @@
 
                             <div class="form-group row">
                                   <label class="col-md-4 col-form-label text-md-right" for="dynamic_field" >Add Event Type</label>
-                               
+
                                 <div id="dynamic_field">
                                     <div class="addedSection">
                                         <label for="category_type0">Category</label> <input type="text" required id="category_type0" name="category[0][type]" class="form-control item_category">
@@ -133,7 +133,7 @@
 		$(document).ready(function(){
 			var intIndex = 0
 				$(document).on('click', '#add', function(){
-					intIndex= intIndex++
+					intIndex= intIndex + 1
 					var html = '<div class="addedSection">';
 					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
 					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';

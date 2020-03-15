@@ -97,6 +97,16 @@ class EventController extends Controller
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
 
     }
+
+    public function getUserCategory($id){
+        $objResulte = new Resultes();
+        $objResulte->event_id = $id;
+        $objResulte->category_id = $request->category;
+        $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
+        $objResulte->save();
+        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
+
+    }
 }
 
 

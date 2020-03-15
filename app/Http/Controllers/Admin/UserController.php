@@ -32,9 +32,10 @@ class UserController extends Controller
     {
         $objUserProfile       = Profile::where('id', $id)->first();
         $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
-
+        $objUserProfileCategory = $objUserProfile->eventParticipantsCat()->load('category');
+//dd($objUserProfileCategory);
         return view('admin.user.participated.list',
-            [ 'objUserProfile' => $objUserProfile, 'objUserProfileEvents' => $objUserProfileEvents ]);
+            [ 'objUserProfile' => $objUserProfile, 'objUserProfileEvents' => $objUserProfileEvents ,'objUserProfileCategory'=>$objUserProfileCategory]);
     }
 
     public function update($id, Request $request)

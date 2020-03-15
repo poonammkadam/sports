@@ -45,29 +45,43 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                    Action
+                                    Category name
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                    Event Fee amount
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                    Payment status
+                                </th>
+
                             </tr>
                             </thead>
 
                             <tbody>
 
-                            @if($objUserProfileEvents->count() > 0)
-                                @foreach($objUserProfileEvents as $objEvent)
+                            @if($objUserProfileCategory->count() > 0)
+                                @foreach($objUserProfileCategory as $objEvent)
                                     <tr role="row" class="odd">
                                         <td class="sorting_1">{{$objEvent->id}}</td>
                                         <td>
-                                            {{$objEvent->events->name}}
+                                            {{$objEvent->category->events->name}}
                                         </td>
 
                                         <td>
-                                            {{$objEvent->events->description}}
+                                            {{$objEvent->category->events->description}}
                                         </td>
 
                                         <td>
-                                            {{$objEvent->events->organiser_name}}
+                                            {{$objEvent->category->events->organisation->name}}
                                         </td>
-
+                                        <td>
+                                            {{$objEvent->category->category_type}}  {{$objEvent->category->category_subtype}}
+                                        </td>
+                                        <td>
+                                            {{$objEvent->category->amount}}
+                                        </td>
                                         <td>
                                             @if($objEvent->payment_status == 1)
                                             <a href="#" class="btn btn-success m-1 disabled"  >Paid</a>

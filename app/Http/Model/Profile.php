@@ -14,6 +14,11 @@ class Profile extends Model
         return EventParticipants::where('profile_id', $this->id)->groupBy('event_id')->get();
     }
 
+    public function eventParticipantsCat()
+    {
+        return EventParticipants::where('profile_id', $this->id)->groupBy('category_id')->get();
+    }
+
     public function user()
     {
         return $this->belongsTo(new User(), 'user_id', 'id');

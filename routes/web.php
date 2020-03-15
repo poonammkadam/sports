@@ -36,6 +36,7 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::get('/user/events/{id}', 'UserController@getParticipatedEvents');
     Route::post('/user/edit/{id}', 'UserController@update');
 
+
     Route::get('/organisation', 'OrganisationController@index');
     Route::get('/organisation/create', 'OrganisationController@create');
     Route::post('/organisation/store', 'OrganisationController@store');
@@ -52,6 +53,8 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
     Route::post('/events/edit/{id}', 'EventController@update');
     Route::get('/resulte/edit/{id}', 'EventController@getResulte');
     Route::post('/resulte/upload/{id}', 'EventController@postResulte');
+    Route::get('/user/event/category/{id}', 'EventController@getUserCategory');
+
 
 });
 
@@ -70,6 +73,8 @@ Route::group(['namespace'=>'User'], function() {
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
     Route::post('event/receipt/upload/{id}', 'EventController@postUploadReceipt');
     Route::get('event/participant/receipt/{id}', 'EventController@getReceipt');
+
+
 
    // resulte
     Route::get('/results', 'EventController@getResults');
