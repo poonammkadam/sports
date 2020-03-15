@@ -73,9 +73,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization Name</label>
-                                <div class="col-md-6">
-                                    <input id="orgname" value="{{$objEvent->orgname}}" type="text" class="form-control @error('orgname') is-invalid @enderror" name="orgname" required autocomplete="orgname" autofocus>
+                                <label for="orgname" class="col-md-4 col-form-label text-md-right">Organization </label>
+                                <div class="col-md-6">{{$objOrganisation->name}}
                                 </div>
                             </div>
 

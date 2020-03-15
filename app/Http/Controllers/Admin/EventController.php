@@ -57,7 +57,8 @@ class EventController extends Controller
 
     public function edit($id){
         $objEvent=Events::where('id', $id)->first();
-    return view('admin.events.edit', ['objEvent'=>$objEvent]);
+        $objOrganisation = Organisation::where('id',$objEvent->org_id)->first();
+    return view('admin.events.edit', ['objEvent'=>$objEvent,'objOrganisation'=>$objOrganisation]);
     }
 
     public  function setPaymentStatus($id){
@@ -93,7 +94,6 @@ class EventController extends Controller
         $objResulte->category_id = $request->category;
         $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
         $objResulte->save();
-
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
 
     }
