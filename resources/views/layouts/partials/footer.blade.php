@@ -1,5 +1,5 @@
 <!-- Footer -->
 <footer id="footer" class="text-center">
 
-    <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>
+    <p>XYZ - All Rights Reserved <a href="/" data-toggle="tooltip" title="Visit xyz">www.xyz.com</a></p>
 </footer>

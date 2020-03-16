@@ -517,3 +517,13 @@ a:focus {
 .event-exp{
     opacity: 0.3 !important;
 }
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    height: 15px;
+    opacity: 0.8 !important;
+ }
