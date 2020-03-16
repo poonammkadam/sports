@@ -36,6 +36,7 @@ class EventController extends Controller
         $objEventParticipant->save();
         $obAdminUser=User::where('role', 'admin')->first();
         $obAdminUser->notify(new ReceiptReceived($objEventParticipant));
+        return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
     }
 
     public function getReceipt($id){
