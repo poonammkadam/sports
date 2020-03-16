@@ -8,7 +8,7 @@
             <div class="row">
                 @foreach($arrObjEvents as $objEvent)
                 @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) > date('Y-m-d'))
-                <div class="shadow-lg p-3 mb-5 bg-white rounded card  item-inner" style="width:220px">
+                <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
 
                     <img class="card-img-top" src="{{asset('images/img3.jpeg')}}"  style="width:100%">
                     <div class="card-body">
@@ -20,7 +20,7 @@
                     </div>
                   </div>
                 @else
-                <div class="shadow-lg p-3 mb-5 bg-white rounded card  item-inner" style="width:220px">
+                <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
 
                     <img class="card-img-top" src="{{asset('images/img3.jpeg')}}"  data-toggle="tooltip" title="registertion close" style="width:100%">
                     <div class="card-body">
