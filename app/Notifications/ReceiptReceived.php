@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notification;
 class ReceiptReceived extends Notification
 {
     use Queueable;
+    private $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -40,10 +41,8 @@ class ReceiptReceived extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new MailMessage())
+            ->markdown('mail.registered', ['objData'=> $this->message]);
     }
 
     /**
