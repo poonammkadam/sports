@@ -3,7 +3,7 @@
     <div class="container" id="content">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded card">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">

@@ -59,9 +59,9 @@
 }
 
 .guest-page {
-    background-image: url('/images/profile.jpg');
+    /* background-image: url('/images/profile.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100%; */
 }
 .card{
     background-color: black !important;
@@ -527,3 +527,15 @@ a:focus {
     height: 15px;
     opacity: 0.8 !important;
  }
+ .card.login-form{
+    background-color: #4c4b4b !important;
+    opacity: 0.6 !important;
+    color: #fff !important;
+    margin-top: 50px;
+ }
+ .login-form :hover {
+    opacity: 1.0;
+  }
+  .form-check-label{
+    margin-left: 20px;
+  }

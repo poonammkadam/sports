@@ -2,10 +2,12 @@
 @section('content')
 <div class="container" id="content">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-6 guest-page">
+            <img class="card-img-top" src="{{asset('images/profile.jpg')}}"  style="width:100%" height="400px">
+        </div>
+        <div class="col-md-6">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded card login-form">
                 <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body login-box" id="parent">
                     <form method="POST"  id="form_login" action="{{ route('login') }}">
                         @csrf
