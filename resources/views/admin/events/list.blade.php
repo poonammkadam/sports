@@ -43,10 +43,6 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Action
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                              Upload result
-                            </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -69,9 +65,6 @@
                                                class="btn btn-primary m-1">Edit</a>
                                             <a href="{{url('admin/events/view/'.$objEvents->id)}}"
                                                class="btn btn-primary m-1">View</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info"  href="{{url('admin/resulte/edit/'.$objEvents->id)}}">Upload</a>
                                         </td>
                                     </tr>
                                 @endforeach

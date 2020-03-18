@@ -14,8 +14,10 @@ class AddColumnEventParticipants extends Migration
     public function up()
     {
        Schema::table('event_participants' , function (Blueprint $table) {
-           $table->text('receipt')->nullable();
-           $table->integer('result_id')->nullable();
+           $table->time('race_time')->nullable();
+           $table->text('rank_status')->nullable();
+           $table->text('file')->nullable();
+           $table->boolean('result_status')->default(false);
        });
     }
 

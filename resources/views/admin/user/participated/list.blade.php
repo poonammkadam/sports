@@ -55,6 +55,10 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Payment status
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                  Upload Resulte
+                                </th>
 
                             </tr>
                             </thead>
@@ -76,19 +80,30 @@
                                         <td>
                                             {{$objEvent->category->events->organisation->name}}
                                         </td>
+
                                         <td>
                                             {{$objEvent->category->category_type}}  {{$objEvent->category->category_subtype}}
                                         </td>
+
                                         <td>
                                             {{$objEvent->category->amount}}
                                         </td>
+
                                         <td>
                                             @if($objEvent->payment_status == 1)
-                                            <a href="#" class="btn btn-success m-1 disabled"  >Paid</a>
+                                            <a href="#" class="btn btn-success m-1 disabled">Paid</a>
                                             @else
                                                 <a href="{{url('admin/events/paid/'.$objEvent->id)}}"
                                                class="btn btn-danger m-1">Unpaid</a>
-                                        @endif
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(!$objEvent->result_status)
+                                                <a href="{{url('/admin/resulte/edit/'.$objEvent->id)}}" class="btn btn-success m-1 " >Upload</a>
+
+                                            @else
+                                                <a class="btn btn-info disabled" title="Resulte already upload" href="#">Already Uploaded</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

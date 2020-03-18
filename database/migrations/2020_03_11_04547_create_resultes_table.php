@@ -15,8 +15,8 @@ class CreateResultesTable extends Migration
     {
         Schema::create('resultes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('event_id')->nullable();
-            $table->integer('category_id')->nullable();
+            $table->time('time')->nullable();
+            $table->text('rank_status')->nullable();
             $table->text('file')->nullable();
             $table->timestamps();
         });

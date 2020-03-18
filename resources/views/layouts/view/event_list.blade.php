@@ -8,20 +8,18 @@
             <div class="row">
                 @foreach($arrObjEvents as $objEvent)
                 @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) > date('Y-m-d'))
-                <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
-
+                 <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
                     <img class="card-img-top" src="{{asset('images/img3.jpeg')}}"  style="width:100%">
                     <div class="card-body">
                       <h4 class="card-title ellipsis">{{$objEvent->name}}</h4>
                       <p class="card-text">Registration will Close :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                      @if(auth()->user()->role != 'organizar')
+                      @if(auth()->user()->role != 'organiser')
                       <a href="{{url('/event/register').'/'.$objEvent->id}}" class="btn btn-primary stretched-link">Register</a>
                       @endif
                     </div>
                   </div>
                 @else
                 <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
-
                     <img class="card-img-top" src="{{asset('images/img3.jpeg')}}"  data-toggle="tooltip" title="registertion close" style="width:100%">
                     <div class="card-body">
                       <h4 class="card-title">{{$objEvent->name}}</h4>
@@ -31,7 +29,6 @@
                       @endif
                     </div>
                   </div>
-
                @endif
                 @endforeach
               </div>

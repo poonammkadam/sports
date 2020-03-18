@@ -84,29 +84,21 @@ class EventController extends Controller
     }
 
     public function getResulte($id){
-        $objEvent = Events::where('id',$id)->first();
-        return view('admin.events.resulte',['objEvent'=>$objEvent]);
+        $objEventParticipant = EventParticipants::where('id',$id)->first();
+        return view('admin.events.resulte',['objEventParticipant'=>$objEventParticipant]);
     }
 
     public function postResulte($id, Request $request){
-        $objResulte = new Resultes();
-        $objResulte->event_id = $id;
-        $objResulte->category_id = $request->category;
-        $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
+        $objResulte = EventParticipants::where('id',$id)->first();
+        $objResulte->race_time = $request->race_time;
+        $objResulte->rank_status = $request->rank_status;
+        $objResulte->result_status = true;
+        $objResulte->file = $request->file('file')->store('resulte/'.$id);
         $objResulte->save();
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
 
     }
 
-    public function getUserCategory($id){
-        $objResulte = new Resultes();
-        $objResulte->event_id = $id;
-        $objResulte->category_id = $request->category;
-        $objResulte->file = $request->file('file')->store('resulte/'.$request->category);
-        $objResulte->save();
-        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
-
-    }
 }
 
 
