@@ -50,18 +50,18 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio1"
-                                           value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                           value="male">
+                                    <label class="form-check-label ml-0" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio2"
-                                           value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                           value="female">
+                                    <label class="form-check-label ml-0" for="inlineRadio2">Female</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" required  type="radio" name="gender" id="inlineRadio3"
-                                           value="option3">
-                                    <label class="form-check-label" for="inlineRadio3">other</label>
+                                           value="others">
+                                    <label class="form-check-label ml-0" for="inlineRadio3">other</label>
                                 </div>
                             </div>
         
@@ -72,7 +72,7 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                 <select class="form-control custom-select" name="nationality">
                                     <option selected>Open this select menu</option>
                                     @foreach($arrCountries as $objCountries)
-                                    <option value="$objCountries">{{$objCountries}}</option>
+                                    <option value="{{$objCountries}}">{{$objCountries}}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -111,21 +111,12 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                             <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="col-md-2"></div>
-                            <div class="form-group col-md-5">
-                                <label for="inputAddress">Country</label>
-                                <select class="form-control custom-select" name="country">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">a</option>
-                                    <option value="2">b</option>
-                                    <option value="3">c</option>
-                                </select>
-                            </div>
         
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-5">
                                 <label for="inputAddress2">Mobile phone</label>
-                                <input required  type="number"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
+                                <input required  type="tel"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="with country code">
                             </div>
                         </div>
                         <button required  type="submit" class="btn btn-primary">Submit</button>
