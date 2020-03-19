@@ -150,6 +150,12 @@ class UserController extends Controller
             return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
 
     }
+    public function getUserResult(){
+        $objProfile = Profile::Where('user_id',auth()->user()->id)->first();
+        $arrObjParticipant =$objProfile->eventParticipantsCat();
+
+        return view('front.results.my_result',['objProfile'=>$objProfile,'arrObjParticipant'=>$arrObjParticipant]);
+    }
 
    public function makePayment($arrMixExtraData){
         URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
