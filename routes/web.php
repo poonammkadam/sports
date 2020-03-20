@@ -27,7 +27,7 @@ Route::get('/payment','Controller@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin'], function() {
+Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth', 'admin']], function() {
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
     Route::get('/user/create', 'UserController@create');
