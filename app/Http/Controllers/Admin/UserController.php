@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Profile;
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 
 class UserController extends Controller
 {
@@ -30,8 +31,9 @@ class UserController extends Controller
     {
         $objProfile = Profile::where('id', $id)->first();
         $objProfile->load('user');
-
-        return view('admin.user.edit', [ 'objProfile' => $objProfile ]);
+        $objCountries = new Countries();
+        $arrCountries=$objCountries->all()->pluck('name.common');
+        return view('admin.user.edit', [ 'objProfile' => $objProfile ,'arrCountries'=>$arrCountries]);
     }
 
     public function getParticipatedEvents($id)

@@ -73,9 +73,9 @@
                                     <label for="nationality">Nationality</label>
                                         <select id="nationality" class="form-control custom-select" name="nationality">
                                             <option selected>Open this select menu</option>
-                                            <option value="1">a</option>
-                                            <option value="2">b</option>
-                                            <option value="3">c</option>
+                                            @foreach($arrCountries as $objCountries)
+                                             <option value="{{$objCountries}}">{{$objCountries}}</option>
+                                            @endforeach
                                         </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -100,9 +100,11 @@
                                     <label for="inputAddress">Country</label>
                                     <select class="form-control custom-select" name="country">
                                         <option selected>Open this select menu</option>
-                                        <option value="1">a</option>
-                                        <option value="2">b</option>
-                                        <option value="3">c</option>
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
