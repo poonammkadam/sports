@@ -76,7 +76,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if($objOrganisation->events->count() > 0)
+                                        @if($objOrganisation->event && $objOrganisation->events->count() > 0)
                                             @foreach($objOrganisation->events as $objEvent)
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1">{{$objEvent->id}}</td>
