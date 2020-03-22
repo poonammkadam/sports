@@ -124,7 +124,8 @@ class UserController extends Controller
                $objEventParticipants->payment_status=1;
                $objEventParticipants->save();
                $arrMixExtraData['payment']=$objApiResponse;
-               $objUser->notify(new RegisterConfirmation());
+               $objUser->notify(new RegisterConfirmation($arrMixExtraData));
+               $objEventParticipants->save();
                return redirect('events')->with('success', 'Payment Successful.');
            }else{
                return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
@@ -152,6 +153,9 @@ class UserController extends Controller
     }
     public function getUserResult(){
         $objProfile = Profile::Where('user_id',auth()->user()->id)->first();
+        if(!$objProfile){
+            return redirect('registration')->with('alert', 'Sorry!!! You need complete your profile first.');
+        }
         $arrObjParticipant =$objProfile->eventParticipantsCat();
 
         return view('front.results.my_result',['objProfile'=>$objProfile,'arrObjParticipant'=>$arrObjParticipant]);

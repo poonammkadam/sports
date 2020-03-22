@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" autocomplete="off" action="/admin/user/create">
+                        <form method="POST" autocomplete="off" action="/admin/user/store">
                             @csrf
 
                             <div class="form-row">
@@ -33,12 +33,24 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress">First Name</label>
-                                    <input required  type="text" name="first_name" class="form-control" id="inputAddress" placeholder="">
+                                    <input required  type="text" name="first_name" class="form-control" id="inputAddress" placeholder="First Name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Last Name</label>
                                     <input required  type="text" name="last_name" class="form-control" id="inputAddress2"
-                                           placeholder="">
+                                           placeholder="Last Name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="password">Password</label>
+                                    <input required  type="text" name="password" class="form-control" id="password" placeholder="Password">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="conf_password">Confirm Password</label>
+                                    <input required  type="text" name="confirm_Password" class="form-control" id="conf_password"
+                                           placeholder="Confirm Password">
                                 </div>
                             </div>
 
@@ -75,16 +87,16 @@
                                     <label for="inputAddress">Nationality</label>
                                     <select class="form-control custom-select" name="nationality">
                                         <option selected>Open this select menu</option>
-                                        <option value="1">a</option>
-                                        <option value="2">b</option>
-                                        <option value="3">c</option>
+                                        @foreach($arrCountries as $objCountries)
+                                            <option value="{{$objCountries}}">{{$objCountries}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Local ID</label>
                                     <input required  type="text" class="form-control" name="local_id" id="inputAddress2"
-                                           placeholder="" >
+                                           placeholder="Login ID" >
                                 </div>
 
                             </div>

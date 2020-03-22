@@ -6,7 +6,8 @@
                 <h3>Events</h3>
             </div>
             <div class="row">
-                @foreach($arrObjEvents as $objEvent)
+                @if(($arrObjEvents->count())>0)
+                    @foreach($arrObjEvents as $objEvent)
                 @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) > date('Y-m-d'))
                  <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
                     <img class="card-img-top" src="{{asset('images/img3.jpeg')}}"  style="width:100%">
@@ -24,13 +25,16 @@
                     <div class="card-body">
                       <h4 class="card-title">{{$objEvent->name}}</h4>
                       <p class="card-text">Registration Close :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                      @if(auth()->user()->role != 'organizar')
+                      @if(auth()->user()->role != 'organiser')
                       <a href="{{url('/event/register').'/'.$objEvent->id}}" disabled='disabled' data-toggle="tooltip" title="registertion close" class="btn btn-primary stretched-link">Register</a>
                       @endif
                     </div>
                   </div>
                @endif
                 @endforeach
+                @else
+                <h1> There is no event available to register. </h1>
+                @endif
               </div>
         </div>
     </div>

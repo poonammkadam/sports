@@ -64,7 +64,7 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                     <label class="form-check-label ml-0" for="inlineRadio3">other</label>
                                 </div>
                             </div>
-        
+
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-5">
@@ -72,8 +72,8 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                 <select class="form-control custom-select" name="nationality">
                                     <option selected>Open this select menu</option>
                                     @foreach($arrCountries as $objCountries)
-                                    <option value="{{$objCountries}}">{{$objCountries}}</option>
-                                @endforeach
+                                     <option value="{{$objCountries}}">{{$objCountries}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-2"></div>
@@ -83,7 +83,7 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                        placeholder="" >
                             </div>
                         </div>
-        
+
                         <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="tshirt">T-shirt size</label>
@@ -101,17 +101,17 @@ $arrCountries=$objCountries->all()->pluck('name.common');
                                 <label for="inputAddress2">Passport</label>
                                 <input required  type="text" class="form-control" name="passport_no" id="inputAddress2" placeholder="Passport ID">
                             </div>
-        
+
                         </div>
                         <h2  class="mt-4">Contact Information</h2>
                         <div class="form-row">
-        
+
                             <div class="form-group col-md-5">
                             <label for="exampleFormControlTextarea1">Address</label>
                             <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="col-md-2"></div>
-        
+
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-5">

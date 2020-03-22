@@ -42,7 +42,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Action
-                                </th>m
+                                </th>
                             </tr>
                             </thead>
                             <tbody>

@@ -23,7 +23,7 @@ Route::get('/registration', function () {
     return view('layouts.forms.registation');
 });
 
-Route::get('/payment','Controller@index');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -31,11 +31,10 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
     Route::get('/user/create', 'UserController@create');
-    Route::post('/user/store', 'UserController@create');
+    Route::post('/user/store', 'UserController@store');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::get('/user/events/{id}', 'UserController@getParticipatedEvents');
     Route::post('/user/edit/{id}', 'UserController@update');
-
 
     Route::get('/organisation', 'OrganisationController@index');
     Route::get('/organisation/create', 'OrganisationController@create');
@@ -54,8 +53,6 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth
     Route::get('/resulte/edit/{id}', 'EventController@getResulte');
     Route::post('/resulte/upload/{id}', 'EventController@postResulte');
     Route::get('/user/event/category/{id}', 'EventController@getUserCategory');
-
-
 
 });
 

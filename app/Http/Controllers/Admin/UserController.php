@@ -20,6 +20,12 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
+    public function store(Request $request)
+    {
+
+        return view('admin.user.create');
+    }
+
     public function edit($id)
     {
         $objProfile = Profile::where('id', $id)->first();
@@ -33,7 +39,7 @@ class UserController extends Controller
         $objUserProfile       = Profile::where('id', $id)->first();
         $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
         $objUserProfileCategory = $objUserProfile->eventParticipantsCat()->load('category');
-//dd($objUserProfileCategory);
+
         return view('admin.user.participated.list',
             [ 'objUserProfile' => $objUserProfile, 'objUserProfileEvents' => $objUserProfileEvents ,'objUserProfileCategory'=>$objUserProfileCategory]);
     }
