@@ -126,7 +126,7 @@ class UserController extends Controller
                $arrMixExtraData['payment']=$objApiResponse;
                $objUser->notify(new RegisterConfirmation($arrMixExtraData));
                $objEventParticipants->save();
-               return redirect('events')->with('success', 'Payment Successful.');
+               return redirect('events')->with('message', 'Payment Successful. Please check your email.');
            }else{
                return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
            }
@@ -136,7 +136,7 @@ class UserController extends Controller
            $objEventParticipants->payment_status = 2;
            $objEventParticipants->save();
            $objUser->notify(new RegisterConfirmation($arrMixExtraData));
-           return redirect('events')->with('success', 'To confirm your registration please upload your payment receipt.');
+           return redirect('events')->with('message', 'To confirm your registration. Please check your email.');
        }
 
        return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');

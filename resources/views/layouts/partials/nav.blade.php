@@ -5,7 +5,7 @@
           </button>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right m-2">
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -30,7 +30,7 @@
                         <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
                     @endif
                 @endif
-                   
+
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

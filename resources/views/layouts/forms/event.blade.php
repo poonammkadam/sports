@@ -38,12 +38,12 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Organizer</label>
-                    <h6>{{$objEvent->organiser_name}}</h6>
+                    <h6>{{$objEvent->organisation->name}}</h6>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Contact Number</label>
-                    <h6>{{$objEvent->organiser_contact_number}}</h6>
+                    <h6>{{$objEvent->organisation->number}}</h6>
                 </div>
 
                 <div class="form-group">

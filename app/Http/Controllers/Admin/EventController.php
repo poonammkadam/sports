@@ -18,10 +18,13 @@ class EventController extends Controller
        }
 
     public function eventCreate(){
-        // $arrObjEvents = Events::all();
-        // return view('admin.user.list', ['arrObjEvents'=>$arrObjEvents]);
         $arrObjOrganisation = Organisation::all();
-        return view('admin.events.create',['arrObjOrganisation'=>$arrObjOrganisation]);
+        if($arrObjOrganisation->count() > 0){
+            return view('admin.events.create',['arrObjOrganisation'=>$arrObjOrganisation]);
+        }
+        else{
+            return view('admin.organisation.create', '');
+        }
     }
 
     public function view($id){

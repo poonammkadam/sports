@@ -6,6 +6,11 @@
                 <h3>Events</h3>
             </div>
             <div class="row">
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 @if(($arrObjEvents->count())>0)
                     @foreach($arrObjEvents as $objEvent)
                 @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) > date('Y-m-d'))

@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-@if(auth()->user()->role == 'organiser')
+    @if(auth()->user()->role == 'organiser')
         <div class="row mt-2 justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -103,10 +103,10 @@
                                                 aria-label="Browser: activate to sort column ascending" style="width: 100px;">
                                                 Payment Type
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                                Upload result
-                                            </th>
+{{--                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"--}}
+{{--                                                aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">--}}
+{{--                                                Upload result--}}
+{{--                                            </th>--}}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -119,10 +119,18 @@
                                                         {{$objParticipants->profile->first_name}} {{$objParticipants->profile->last_name}}
                                                     </td>
                                                     <td>
+                                                        @if($objParticipants->category)
                                                         {{$objParticipants->category->category_subtype}}
+                                                            @else
+                                                                --
+                                                            @endif
                                                     </td>
                                                     <td>
+                                                        @if($objParticipants->category)
                                                         {{($objParticipants->category->type)}}
+                                                        @else
+                                                            --
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($objParticipants->payment_status)
@@ -132,7 +140,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        --
+                                                        {{$objParticipants->profile->gender}}
                                                     </td>
                                                     <td>
                                                         @if($objParticipants->payment_type=='online')
@@ -141,9 +149,9 @@
                                                             <span>Offline</span>
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        --
-                                                    </td>
+{{--                                                    <td>--}}
+{{--                                                        ----}}
+{{--                                                    </td>--}}
                                                 </tr>
                                             @endforeach
                                         @else
