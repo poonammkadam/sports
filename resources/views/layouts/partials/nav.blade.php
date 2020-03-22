@@ -16,8 +16,12 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item"><a href="{{ url('/home') }}">Home</a></li>
-                    <li class="nav-item"><a href="{{ url('/results') }}">Results</a></li>
+                <li class="nav-item"><a href="{{ url('/home') }}">Home</a></li>
+                <li class="nav-item"><a href="{{ url('/results') }}">Results</a></li>
+                @if(Auth::check() && Auth::user()->isAdmin())
+                  <li class="nav-item"><a href="{{ url('/admin') }}"> Dashboard</a></li>
+                @else
+                <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
                     @if(auth()->user()->role == 'organiser')
                     <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
                     @else
@@ -25,7 +29,8 @@
                         <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>
                         <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
                     @endif
-                    <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
+                @endif
+                   
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

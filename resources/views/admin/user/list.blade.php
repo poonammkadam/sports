@@ -4,9 +4,7 @@
         <div class="card-header">
             <h3 class="card-title">Users</h3>
         </div>
-        <div align="left">
-            <a href="{{ url('admin/user/create') }}" class="btn btn-info">Add New User</a>
-        </div>
+    
         <!-- /.card-header -->
          <div class="card-body">
             @if(session()->has('message'))
