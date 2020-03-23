@@ -87,7 +87,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Passport</label>
-                                    <input required  type="text" class="form-control" value="{{$objProfile->passport_no}}" name="passport_no" id="inputAddress2" placeholder="Passport ID">
+                                    <input  type="text" class="form-control" value="{{$objProfile->passport}}" name="passport_no" id="inputAddress2" placeholder="Passport ID">
                                 </div>
                             </div>
                             <h3>Contact Information</h3>
@@ -97,19 +97,19 @@
                                     <textarea class="form-control"  name="address" id="exampleFormControlTextarea1" rows="3"> {{$objProfile->address}}"</textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputAddress">Country</label>
-                                    <select class="form-control custom-select" name="country">
+                                    <label for="inputAddress">T-shirt size</label>
+                                    <select class="form-control custom-select" name="t_shirt_size">
                                         <option selected>Open this select menu</option>
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
+                                        <option {{$company->t_shirt_size == 'XS'  ? 'selected' : ''}} value="XS">XS</option>
+                                        <option {{$company->t_shirt_size == 'S'  ? 'selected' : ''}} value="S">S</option>
+                                        <option {{$company->t_shirt_size == 'M'  ? 'selected' : ''}} value="M">M</option>
+                                        <option {{$company->t_shirt_size == 'L'  ? 'selected' : ''}} value="L">L</option>
+                                        <option {{$company->t_shirt_size == 'XL'  ? 'selected' : ''}} value="XL">XL</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Mobile phone</label>
-                                    <input required  type="text" value="{{$objProfile->mobile_no}}"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
+                                    <input required  type="tel" value="{{$objProfile->mobile_no_primary}}"  name="mobile_no" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
                                 </div>
                             </div>
                             <button required  type="submit" class="btn btn-primary">Submit</button>

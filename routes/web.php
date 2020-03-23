@@ -34,7 +34,7 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth
     Route::post('/user/store', 'UserController@store');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::get('/user/events/{id}', 'UserController@getParticipatedEvents');
-    Route::post('/user/edit/{id}', 'UserController@update');
+    Route::post('/user/update/{id}', 'UserController@update');
 
     Route::get('/organisation', 'OrganisationController@index');
     Route::get('/organisation/create', 'OrganisationController@create');

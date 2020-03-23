@@ -47,6 +47,29 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
+
+        $objProfile = Profile::where('id', $id)->first();
+        $objProfile->first_name = $request->first_name;
+        $objProfile->last_name = $request->last_name;
+        $objProfile->gender = $request->gender;
+        $objProfile->date_of_birth = $request->dob;
+        $objProfile->country = $request->nationality;
+        $objProfile->local_id = $request->local_id;
+        $objProfile->passport = $request->passport_no;
+        $objProfile->address = $request->address;
+        $objProfile->country = $request->country;
+        $objProfile->mobile_no_primary = $request->mobile_no;
+        $objProfile->t_shirt_size = $request->t_shirt_size;
+
+        $objProfile->save();
+
+        $objProfile->user->name=$request->local_name;
+        $objProfile->user->email=$request->email;
+        $objProfile->user->registration_status= true;
+        $objProfile->user->save();
+
+        return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
+
         return view('admin.user.edit');
     }
 }
