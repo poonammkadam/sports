@@ -83,13 +83,16 @@
                             </div>
 
                             <div class="form-group row">
-                            <label for="tshirt">Select Organistion</label>
+
+                            <label for="org">Select Organistion</label>
+                                <div class="col-md-6">
                              <select id="org" class="form-control custom-select" name="organisation">
                                 <option selected>Open this select menu</option>
                                 @foreach($arrObjOrganisation as $objOrg)
                                 <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
                                 @endforeach
                             </select>
+                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -104,7 +107,7 @@
                             <div class="form-group row" id="pickup_drop_available" style="display: none">
                                 <label for="pickup_drop" class="col-md-4 col-form-label text-md-right">Is pickup and drop Location</label>
                                 <div class="col-md-6">
-                                    <textarea required  id="pickup_drop" type="text" class="form-control"  name="pickup_drop"  autocomplete="pickup_drop"  rows="3"></textarea>
+                                    <textarea  id="pickup_drop" type="text" class="form-control"  name="pickup_drop"  autocomplete="pickup_drop"  rows="3"></textarea>
                                 </div>
                             </div>
 

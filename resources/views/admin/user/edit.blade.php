@@ -81,13 +81,13 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Local ID</label>
                                     <input required  type="text"  value="{{$objProfile->local_id}}" class="form-control" name="local_id" id="inputAddress2"
-                                           placeholder="" >
+                                           placeholder="Local ID" >
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress2">Passport</label>
-                                    <input  type="text" class="form-control" value="{{$objProfile->passport}}" name="passport_no" id="inputAddress2" placeholder="Passport ID">
+                                    <input  type="text" class="form-control" value="{{$objProfile->passport}}" name="passport_no" id="inputAddress2" placeholder="Passport">
                                 </div>
                             </div>
                             <h3>Contact Information</h3>
