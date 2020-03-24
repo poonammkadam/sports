@@ -100,11 +100,11 @@
                                     <label for="inputAddress">T-shirt size</label>
                                     <select class="form-control custom-select" name="t_shirt_size">
                                         <option selected>Open this select menu</option>
-                                        <option {{$company->t_shirt_size == 'XS'  ? 'selected' : ''}} value="XS">XS</option>
-                                        <option {{$company->t_shirt_size == 'S'  ? 'selected' : ''}} value="S">S</option>
-                                        <option {{$company->t_shirt_size == 'M'  ? 'selected' : ''}} value="M">M</option>
-                                        <option {{$company->t_shirt_size == 'L'  ? 'selected' : ''}} value="L">L</option>
-                                        <option {{$company->t_shirt_size == 'XL'  ? 'selected' : ''}} value="XL">XL</option>
+                                        <option {{$objProfile->t_shirt_size == 'XS'  ? 'selected' : ''}} value="XS">XS</option>
+                                        <option {{$objProfile->t_shirt_size == 'S'  ? 'selected' : ''}} value="S">S</option>
+                                        <option {{$objProfile->t_shirt_size == 'M'  ? 'selected' : ''}} value="M">M</option>
+                                        <option {{$objProfile->t_shirt_size == 'L'  ? 'selected' : ''}} value="L">L</option>
+                                        <option {{$objProfile->t_shirt_size == 'XL'  ? 'selected' : ''}} value="XL">XL</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
