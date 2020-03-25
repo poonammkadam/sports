@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class OrganisationController extends Controller
 {
     public function getRequestForm(){
-        return view('layouts.forms.oragnation_request');
+        return view('front.organisation.oragnation_request');
     }
 
     public function postOragnationStore(Request $request){
@@ -20,11 +20,11 @@ class OrganisationController extends Controller
         $objOrganisation->email = $request->email;
         $objOrganisation->request_status ='close';
         $objOrganisation->save();
-        return view('layouts.forms.oragnation_request');
+        return view('front.organisation.oragnation_request');
     }
 
     public function show(){
         $objOrganisation = Organisation::where('user_id',auth()->user()->id)->first();
-        return view('layouts.view.organisation.organisation_view',['objOrganisation' => $objOrganisation]);
+        return view('front.organisation.organisation.organisation_view',['objOrganisation' => $objOrganisation]);
     }
 }

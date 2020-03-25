@@ -18,7 +18,7 @@ class EventController extends Controller
     public function getParticipants($id){
         $objEvent=Events::where('id', $id)->first();
         ($objEvent->eventParticipants->load('category', 'profile'));
-        return view('layouts.event.event_view', ['objEvent'=>$objEvent ]);
+        return view('front.event.event_view', ['objEvent'=>$objEvent ]);
     }
 
     public function getResults(){
@@ -27,7 +27,7 @@ class EventController extends Controller
 
     public function uploadReceipt($id){
         $objParticipants=EventParticipants::where('id', $id)->first();
-        return view('layouts.event.receipt', ['objParticipants' =>$objParticipants]);
+        return view('front.event.receipt', ['objParticipants' =>$objParticipants]);
     }
 
     public function postUploadReceipt(Request $request, $id){

@@ -39,10 +39,10 @@ class UserController extends Controller
    public function getRegister(){
        $objProfile =  auth()->user();
        if($objProfile->registration_status){
-        return view('layouts.view.profile_complite', ['objProfile'=>$objProfile]);
+        return view('front.profile.profile_complite', ['objProfile'=>$objProfile]);
        }
        else{
-        return view('layouts.forms.registation', ['objProfile'=>$objProfile]);
+        return view('front.profile.registation', ['objProfile'=>$objProfile]);
        }
    }
 
@@ -52,12 +52,12 @@ class UserController extends Controller
        if($objProfile->registration_status){
            $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
            $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
-           return view('layouts.view.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
+           return view('front.profile.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
        }
        else{
            $objCountries = new Countries();
            $arrCountries=$objCountries->all()->pluck('name.common');
-           return view('layouts.forms.registation', ['objProfile'=>$objProfile, 'arrCountries'=>$arrCountries]);
+           return view('front.profile.registation', ['objProfile'=>$objProfile, 'arrCountries'=>$arrCountries]);
        }
 
 
@@ -93,7 +93,7 @@ class UserController extends Controller
 
    public function eventList(){
          $arrObjEvents = Events::all();
-        return view('layouts.view.event_list', ['arrObjEvents'=>$arrObjEvents]);
+        return view('front.event.event_list', ['arrObjEvents'=>$arrObjEvents]);
     }
 
    public function eventStore(Request $request){
@@ -146,7 +146,7 @@ class UserController extends Controller
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
         if(auth()->user()->registration_status){
-            return view('layouts.forms.event',['objEvent'=>$objEvent]);
+            return view('front.event.event',['objEvent'=>$objEvent]);
         }
             return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
 
