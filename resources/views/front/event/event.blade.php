@@ -1,17 +1,16 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container">
         <div>
             <div class="text-center ">
                 <h3>Event Participation</h3>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                 </div>
-                <div class="col-md-8 ">
+                <div class="col-md-10">
                     <div class="shadow-lg p-5">
-            <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
+               <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
                 @csrf
                 <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                 <h2>{{$objEvent->name}}</h2>
@@ -50,8 +49,49 @@
                     <label for="exampleFormControlInput1">Event Date</label>
                     <h6>{{$objEvent->event_date}}</h6>
                 </div>
+                   <div>
+                       <p>Team / Sponsor</p>
+                       <div class="form-group">
+                           <label for="inputAddress">Team / Sponsor</label>Optional
+                           <input required  type="text" name="local_name" value="" class="form-control" id="inputAddress" placeholder="">
+                       </div>
+                   </div>
+                   <div>
+                       <p>Tee Shirt</p>
+                       <div class="form-group">
+                           <label for="tshirt">T-shirt size</label>
+                           <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                               <option selected>Open this select menu</option>
+                               <option value="XS">XS</option>
+                               <option value="S">S</option>
+                               <option value="M">M</option>
+                               <option value="L">L</option>
+                               <option value="XL">XL</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div>
+                       <p>Accommodation</p>
+                       Optional accomodation. Type of room - Run of the house.
+                       Single (king size) + 1 breakfast Rm155
+                       Single (king size) + 2 breakfast Rm171
+                       Twin + 2 breakfast Rm171
+                       <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                           <option selected>Open this select menu</option>
+                           <option value="">Single (king size) + 1 breakfast Rm155</option>
+                           <option value=""> Single (king size) + 2 breakfast Rm171</option>
+                           <option value="">Twin + 2 breakfast Rm171</option>
+                       </select>
+                   </div>
+                   <div>
+                       <p>Bus Reservation</p>
+                       Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza hotel kota kinabalu. Rm80 both ways.
+                       <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                           <option selected  value="no">NO need</option>
+                           <option value="yes">Yes, both ways(Rm80)</option>
+                       </select>
 
-
+                   </div>
                 <div class="radio">
                     <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
                 </div>
@@ -89,7 +129,7 @@
             </form>
                 </div>
                 </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
             </div>
             </div>
         </div>
