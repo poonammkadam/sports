@@ -37,6 +37,7 @@ class EventController extends Controller
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
+        $objEvent->registration_start_date = $request->register_start_date;
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
         $objEvent->venue = $request->venue;
