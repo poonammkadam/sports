@@ -25,6 +25,7 @@ Route::get('/registration', function () {
 
 
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth', 'admin']], function() {
@@ -73,7 +74,7 @@ Route::group(['namespace'=>'User'], function() {
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
     Route::post('event/receipt/upload/{id}', 'EventController@postUploadReceipt');
     Route::get('event/participant/receipt/{id}', 'EventController@getReceipt');
-
+    Route::post('ckeditor/upload', 'EventController@upload')->name('ckeditor.upload');
 
 
    // resulte

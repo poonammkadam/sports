@@ -21,6 +21,8 @@
 
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </head>
@@ -73,6 +75,7 @@
             "autoWidth": false,
         });
     });
+    CKEDITOR.replace( 'description' );
 </script>
 </body>
 </html>
