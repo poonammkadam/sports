@@ -13,7 +13,6 @@ class UpdateEventInformation extends Migration
      */
     public function up()
     {
-        //
     }
 
     /**

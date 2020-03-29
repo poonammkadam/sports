@@ -34,6 +34,7 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
+//        dd($request->all());
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
@@ -50,8 +51,8 @@ class EventController extends Controller
                 $objCategory = new Category();
                 $objCategory->category_type  = $category['type'];
                 $objCategory->category_subtype  = $category['subtype'];
-                $objCategory->amount  = $category['fee'];
                 $objCategory->event_id = $intEventkey;
+                $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
         }
     }
