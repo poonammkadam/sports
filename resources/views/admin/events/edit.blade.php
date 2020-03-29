@@ -10,9 +10,9 @@
         });
 
     </script>
-    <div class="container ">
+    <div class="">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Submit Events</div>
 
@@ -119,4 +119,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    CKEDITOR.replace( 'description' );
+    </script>
 @endsection

@@ -16,7 +16,7 @@
                         <div class="row m-2">
                             <div class="col-4"><b> Event Description:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->description}}</div>
+                            <div class="col-7">{!! $objEvent->description !!}</div>
                         </div>
 
                         <div class="row m-2">

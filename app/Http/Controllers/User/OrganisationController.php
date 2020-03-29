@@ -25,6 +25,6 @@ class OrganisationController extends Controller
 
     public function show(){
         $objOrganisation = Organisation::where('user_id',auth()->user()->id)->first();
-        return view('front.organisation.organisation.organisation_view',['objOrganisation' => $objOrganisation]);
+        return view('front.organisation.organisation_view',['objOrganisation' => $objOrganisation]);
     }
 }
