@@ -142,10 +142,10 @@
                                                     </td>
 
                                                     <td>
-                                                        {{$objParticipants->category->category_type}}
+                                                        {{$objParticipants->category?$objParticipants->category->category_type:'--'}}
                                                     </td>
                                                     <td>
-                                                        {{($objParticipants->category->category_subtype)}}
+                                                        {{$objParticipants->category?$objParticipants->category->category_subtype:'--'}}
                                                     </td>
                                                     <td>
                                                         {{($objParticipants->profile->gender)}}

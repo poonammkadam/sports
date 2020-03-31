@@ -82,6 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
 
                             <div class="form-group row mt-3">
                                     <label for="register_expire_date" class="col-md-2 col-form-label text-md-right">Registration Expire Date</label>

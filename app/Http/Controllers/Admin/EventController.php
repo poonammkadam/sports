@@ -7,7 +7,6 @@ use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use App\Http\Model\Organisation;
-use App\Resultes;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -73,7 +72,6 @@ class EventController extends Controller
 
     public function update($id, Request $request){
         $objEvent=Events::where('id', $id)->first();
-        $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
         $objEvent->registration_end_date = $request->register_expire_date;
@@ -82,8 +80,12 @@ class EventController extends Controller
         $objEvent->organiser_name = $request->orgname;
         $objEvent->organiser_contact_number = $request->org_contact_no;
         $objEvent->organiser_address = $request->org_address;
-        $objEvent->banner = $request->file('banner')->store('banner');
+        if($request->hasFile('banner')){
+            $objEvent->banner = $request->file('banner')->store('banner');
+        }
+
         $objEvent->save();
+        return redirect('admin/events')->with('success', 'Events Updated Successfully.');
     }
 
     public function getResulte($id){

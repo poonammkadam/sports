@@ -55,7 +55,7 @@
                                             {{$objEvents->name}}
                                         </td>
                                         <td>
-                                            {{$objEvents->organisation->name}}
+                                            {{$objEvents->organisation?$objEvents->organisation->name:'--'}}
                                         </td>
                                         <td>
                                             {{$objEvents->event_date}}
