@@ -47,46 +47,52 @@
                             </div>
                             <label class="col-md-2 col-form-label text-md-right" for="add" >Add Event Type</label>
                             <button type="button" name="add" id="add" class="btn  btn-outline-dark"><i class="fa fa-plus" aria-hidden="true"></i></button>
-
-
                                 <div id="dynamic_field">
-                                    <div class="addedSection row">
-                                        <div class="col-md-3">
-                                        <label for="category_type0">Category</label> <input type="text" required id="category_type0" name="category[0][type]" class="form-control item_category">
-                                        <div class="col-md-3">
-                                            <label for="category_subtype0">Sub-Category</label><input required type="text" id="category_subtype0" name="category[0][subtype]" class="form-control item_category">
+                                    <div class="addedSection">
+                                        <h3>Category Defulte</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="category_type0">Category</label> <input type="text" required id="category_type0" name="category[0][type]" class="form-control item_category">
+                                            </div>
+                                                <div class="col-md-6">
+                                                    <label for="category_subtype0">Sub-Category</label><input required type="text" id="category_subtype0" name="category[0][subtype]" class="form-control item_category">
+                                                </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Early Bird Fee</label><input type="number" required  id="category_fee0" name="category[0][fee][earlybird]" class="form-control item_category">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="category_fee0">Early Bird Fee</label><input type="text" required  id="category_fee0" name="category[0][fee][early][earlybird]" class="form-control item_category">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="category_fee0">Early Bird Ticket Quantity</label><input type="text" required  id="category_fee0" name="category[0][fee][early][quantity]" class="form-control item_category">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="category_fee0">Early Bird Ticket Start Date</label><input type="date" required  id="category_fee0" name="category[0][fee][early][start_date]" class="form-control item_category">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="category_fee0">Early Bird Ticket End Date</label><input type="date" required  id="category_fee0" name="category[0][fee][early][end_date]" class="form-control item_category">
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Early Bird Ticket Quantity</label><input type="number" required  id="category_fee0" name="category[0][fee][quantity]" class="form-control item_category">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="category_fee0">General Fee</label><input type="text" required  id="category_fee0" name="category[0][fee][normal][normalfee]" class="form-control item_category">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="category_fee0">General Ticket Quantity</label><input type="text" required  id="category_fee0" name="category[0][fee][normal][quantity]" class="form-control item_category">
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Early Bird Ticket Start Date</label><input type="number" required  id="category_fee0" name="category[0][fee][start_date]" class="form-control item_category">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Early Bird Ticket End Date</label><input type="number" required  id="category_fee0" name="category[0][fee][end_date]" class="form-control item_category">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">General Fee</label><input type="number" required  id="category_fee0" name="category[0][fee][normal]" class="form-control item_category">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">General Ticket Quantity</label><input type="number" required  id="category_fee0" name="category[0][fee][quantity]" class="form-control item_category">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Late Fee</label><input type="number" required  id="category_fee0" name="category[0][fee][late]" class="form-control item_category">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="category_fee0">Late Ticket Quantity</label><input type="number" required  id="category_fee0" name="category[0][fee][quantity]" class="form-control item_category">
-                                        </div>
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="category_fee0">Late Fee</label><input type="text" required  id="category_fee0" name="category[0][fee][late][latefee]" class="form-control item_category">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="category_fee0">Late Ticket Quantity</label><input type="text" required  id="category_fee0" name="category[0][fee][late][quantity]" class="form-control item_category">
+                                            </div></div>
                                     </div>
                                 </div>
-                                </div>
 
-                            <div class="form-group row mt-3">
-                                    <label for="register_expire_date" class="col-md-2 col-form-label text-md-right">Registration Expire Date</label>
-                                <div class="col-md-10">
+                            <div class="form-group row">
+                                    <label for="register_expire_date" class="col-md-4 col-form-label text-md-right">Registration End Date</label>
+                                <div class="col-md-6">
                                 <input required type="datetime-local" class="form-control" id="register_expire_date" name="register_expire_date" placeholder="">
                                 </div>
                             </div>
@@ -96,7 +102,7 @@
                                 <div class="col-md-10">
                                     <input required type="datetime-local" class="form-control" id="eventdate" name="eventdate" placeholder="" >
                                 </div>
-                                </div>
+                            </div>
 
 
                             <div class="form-group row">
@@ -159,13 +165,22 @@
 		$(document).ready(function(){
 			var intIndex = 0
 				$(document).on('click', '#add', function(){
-					intIndex= intIndex + 1
-					var html = '<div class="addedSection">';
-					html += '<div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Early Bird Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][earlybird]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][normal]" class="form-control item_category"></div>';
-					html += '<div  class="form-group"><label for="category_fee'+intIndex+'">Late Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][late]" class="form-control item_category"></div>';
+					intIndex = intIndex + 1
+					var html = '<div class="addedSection"><h3>Category'+intIndex+'</h3>';
+					html += '<div class="row"><div class="col-md-6"><div  class="form-group"><label for="category_type'+intIndex+'">Category</label> <input type="text" required id="category_type'+intIndex+'" name="category['+intIndex+'][type]" class="form-control item_category"></div></div>';
+                    html += '<div class="col-md-6"><div  class="form-group"><label for="category_subtype'+intIndex+'">Sub-Category</label><input required type="text" id="category_subtype'+intIndex+'" name="category['+intIndex+'][subtype]" class="form-control item_category"></div></div></div>';
+
+					html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee'+intIndex+'">Early Bird Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][earl][earlybird]" class="form-control item_category"></div></div>';
+					html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee'+intIndex+'">Early Bird Ticket Quantity</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][earl][quantity]" class="form-control item_category"></div></div>';
+					html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee'+intIndex+'">Early Bird Ticket Start Date</label><input type="date" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][earl][start_date]" class="form-control item_category"></div></div>';
+					html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee'+intIndex+'">Early Bird Ticket End Date</label><input type="date" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][earl][end_date]" class="form-control item_category"></div></div></div>';
+
+					html += '<div class="row"><div class="col-md-6"><div  class="form-group"><label for="category_fee'+intIndex+'">General Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][normal][normalfee]" class="form-control item_category"></div></div>';
+					html += '<div class="col-md-6"><div  class="form-group"><label for="category_fee'+intIndex+'">General Ticket Quantity</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][normal][quantity]" class="form-control item_category"></div></div></div>';
+
+					html += '<div class="row"><div class="col-md-6"><div  class="form-group"><label for="category_fee'+intIndex+'">Late Fee</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][late][latefee]" class="form-control item_category"></div></div>';
+					html += '<div class="col-md-6"><div  class="form-group"><label for="category_fee'+intIndex+'">Late Ticket Quantity</label><input type="text" required  id="category_fee'+intIndex+'" name="category['+intIndex+'][fee][late][quantity]" class="form-control item_category"></div></div></div>';
+
 					html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
 					$('#dynamic_field').append(html);
 				});
@@ -179,5 +194,12 @@
         });
 
     </script>
+    <style>
+        .addedSection{
+            background-color: #bec4c6 !important;
+            margin: 20px !important;
+            padding: 10px !important;
+        }
+    </style>
 @endsection
 

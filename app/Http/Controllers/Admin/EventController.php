@@ -33,9 +33,11 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
+//        dd($request->all());
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
+        $objEvent->registration_start_date = $request->register_start_date;
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
         $objEvent->venue = $request->venue;
@@ -48,8 +50,8 @@ class EventController extends Controller
                 $objCategory = new Category();
                 $objCategory->category_type  = $category['type'];
                 $objCategory->category_subtype  = $category['subtype'];
-                $objCategory->amount  = $category['fee'];
                 $objCategory->event_id = $intEventkey;
+                $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
         }
     }

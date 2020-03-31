@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateEventInformation extends Migration
+class AddStartdateColumsToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,9 @@ class UpdateEventInformation extends Migration
      */
     public function up()
     {
+        Schema::table('events', function (Blueprint $table) {
+            $table->dateTime('registration_start_date')->nullable();
+        });
     }
 
     /**
@@ -22,6 +25,8 @@ class UpdateEventInformation extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('events', function (Blueprint $table) {
+            //
+        });
     }
 }
