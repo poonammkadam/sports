@@ -27,7 +27,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" autocomplete="off" action="{{url('/admin/event/edit')}}">
+                        <form method="POST" enctype="multipart/form-data" autocomplete="off" action="{{url('/admin/events/edit/'.$objEvent->id)}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
@@ -120,6 +120,9 @@
         </div>
     </div>
     <script type="text/javascript">
-    CKEDITOR.replace( 'description' );
+        CKEDITOR.replace('description', {
+            filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
     </script>
 @endsection
