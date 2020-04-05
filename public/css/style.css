@@ -542,3 +542,19 @@ a:focus {
 .rounded.card.item-inner{
     display: inline-block !important;
 }
+.chat-body{
+    background: #acdcf7;
+    opacity: 0.8;
+    padding: 20px;
+    width: 500px;
+    margin: 5px;
+}
+.thank-you{
+   padding: 100px;
+    margin: 20px;
+
+}
+.thank-you p {
+    color: #000;
+}
+

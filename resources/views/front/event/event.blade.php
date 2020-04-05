@@ -30,24 +30,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Event Fee</label>
+                    <label for="exampleFormControlInput1">Event Fee: </label>B $ <span id="price">--</span>
                     <input type="hidden" value="" id="exampleFormControlInput1" name="fee">
-                    <h6>B$ <span id="price">--</span></h6>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Organizer</label>
-                    <h6>{{$objEvent->organisation->name}}</h6>
+                    <label for="exampleFormControlInput1">Organizer :- </label> {{$objEvent->organisation->name}}
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Contact Number</label>
-                    <h6>{{$objEvent->organisation->number}}</h6>
+                    <label for="exampleFormControlInput1">Contact Number: </label>B $ <span id="price">--</span>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Event Date</label>
-                    <h6>{{$objEvent->event_date}}</h6>
+                    <label for="exampleFormControlInput1">Event Date : </label>{{$objEvent->event_date}}
                 </div>
                    <div>
                        <p>Team / Sponsor</p>
@@ -72,25 +70,29 @@
                    </div>
                    <div>
                        <p>Accommodation</p>
-                       Optional accomodation. Type of room - Run of the house.
-                       Single (king size) + 1 breakfast Rm155
-                       Single (king size) + 2 breakfast Rm171
-                       Twin + 2 breakfast Rm171
-                       <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
-                           <option selected>Open this select menu</option>
-                           <option value="">Single (king size) + 1 breakfast Rm155</option>
-                           <option value=""> Single (king size) + 2 breakfast Rm171</option>
-                           <option value="">Twin + 2 breakfast Rm171</option>
+                       <select id="accommodation" class="form-control custom-select" name="accommodation">
+                           <option value="no">No</option>
+                           <option value="yes">Yes</option>
+
                        </select>
                    </div>
                    <div>
                        <p>Bus Reservation</p>
                        Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza hotel kota kinabalu. Rm80 both ways.
-                       <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                       <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">
                            <option selected  value="no">NO need</option>
                            <option value="yes">Yes, both ways(Rm80)</option>
                        </select>
 
+                   </div>
+                   <div class="chat-body">
+                   <h5>Total Payment chat </h5>
+                   <div>
+                       <div class="row"><p class="col-6 chat-event">Event amount: </p><p class="col-6">----</p></div>
+                       <div class="row"><p class="col-6 chat-accommodation">Accommodation amount: </p><p class="col-6">----</p></div>
+                       <div class="row"><p class="col-6 chat-reservation">Reservation amount:</p><p class="col-6">----</p></div>
+                       <div class="row"><p class="col-6 chat-total">Total Amount:</p><p class="col-6">----</p></div>
+                   </div>
                    </div>
                 <div class="radio">
                     <label for="offline"><input type="radio" required id="offline" value="offline" name="payment_type">Offline</label>
