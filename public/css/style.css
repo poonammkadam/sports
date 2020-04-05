@@ -542,3 +542,10 @@ a:focus {
 .rounded.card.item-inner{
     display: inline-block !important;
 }
+.chat-body{
+    background: #acdcf7;
+    opacity: 0.8;
+    padding: 20px;
+    width: 500px;
+    margin: 5px;
+}
