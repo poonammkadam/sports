@@ -25,6 +25,8 @@
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+
 </head>
 <!-- /.navbar -->
 
@@ -62,6 +64,10 @@
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
+<link rel="stylesheet" href="{{asset('intl-tel-input-master/build/css/intlTelInput.css')}}">
+
+<script  src="{{asset('intl-tel-input-master/build/js/intlTelInput-jquery.js')}}"></script>
+
 <!-- page script -->
 <script>
     $(function () {
@@ -75,7 +81,8 @@
             "autoWidth": false,
         });
     });
-    CKEDITOR.replace( 'description' );
+    console.log($("#org_mob_no"));
+
 </script>
 </body>
 </html>

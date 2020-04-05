@@ -40,8 +40,18 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="inputAddress2">Mobile phone</label>
-                                    <input required  type="text"  name="mobile_no"  value="{{$objOrganisationProfile ?$objOrganisationProfile->contact_no:''}}" class="form-control" id="inputAddress2" placeholder="Please put along with country code">
+                                    <label for="phone">Mobile phone</label>
+                                    <input required  type="tel"  name="mobile_no"  value="{{$objOrganisationProfile ?$objOrganisationProfile->contact_no:''}}" class="form-control"  placeholder="Please put along with country code">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">Nationality</label>
+                                    <select class="form-control custom-select" name="nationality">
+                                        <option selected>Select Country</option>
+                                        @foreach($arrCountries as $objCountries)
+                                            <option value="{{$objCountries}}">{{$objCountries}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <button required  type="submit" class="btn btn-primary">Submit</button>
@@ -51,4 +61,8 @@
             </div>
         </div>
     </div>
+    <script>
+        var input = document.querySelector("#phone");
+        $("#phone").intlTelInput()
+    </script>
 @endsection

@@ -27,14 +27,14 @@ CKEDITOR.plugins.add('collapsibleItem', {
             editables: {
                 title: {
                     selector: '.collapsible-item-title-link',
-                    allowedContent: 'span strong img em u;*{color}'
+                    allowedContent: 'span strong em u;*{color}'
                 },
                 content: {
                     selector: '.collapsible-item-body',
-                    allowedContent: 'img; p;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];'
+                    allowedContent: 'p;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];'
                 }
             },
-            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];img(*)[*];a(!collapsible-item*,collapsed,panel*)[*] ;span(!glyphicon*)[*];img',
+            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span(!glyphicon*)[*];',
             requiredContent: 'div(collapsible-item);',
             upcast: function (element) {
                 return element.name == 'div' && element.hasClass('collapsible-item');
@@ -44,7 +44,7 @@ CKEDITOR.plugins.add('collapsibleItem', {
                 var accordionid = "";
                 if(editor.elementPath() != null) {
                     var parents = editor.elementPath().elements;
-                    for (var i = 0; i < parents.length; i++) {
+                    for (i = 0; i < parents.length; i++) {
                         if (parents[i].hasClass('accordion-list-group')) {
                             accordionid = parents[i].getId();
                             break;
@@ -53,19 +53,15 @@ CKEDITOR.plugins.add('collapsibleItem', {
                 }
                 if(accordionid == ""){
                     var parents = this.element.getParents();
-                    for(var i = 0 ; i < parents.length ; i++){
+                    for(i = 0 ; i < parents.length ; i++){
                         if(parents[i].hasClass('accordion-list-group')){
                             accordionid = parents[i].getId();
                             break;
                         }
                     }
                 }
-                var uniqueIdentifier = [
-                    (new Date()).getTime(),
-                    Math.floor(Math.random() * (1e6 - 1e5 - 1)) + 1e5
-                ].join('_');
                 this.setData('accordionId', accordionid);
-                this.setData('itemId', 'Collapsible' + uniqueIdentifier);
+                this.setData('itemId', 'Collapsible' + (new Date()).getTime());
             },
             data: function () {
                 //called whenever the data is updated
