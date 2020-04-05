@@ -539,3 +539,6 @@ a:focus {
   .form-check-label{
     margin-left: 20px;
   }
+.rounded.card.item-inner{
+    display: inline-block !important;
+}
