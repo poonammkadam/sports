@@ -7,6 +7,7 @@ use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use App\Http\Model\Organisation;
+use App\Ticket;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -33,7 +34,6 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-//        dd($request->all());
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
@@ -47,12 +47,27 @@ class EventController extends Controller
         $intEventkey = $objEvent->getKey();
         if($request->category){
         foreach ($request->category as $category){
-                $objCategory = new Category();
-                $objCategory->category_type  = $category['type'];
-                $objCategory->category_subtype  = $category['subtype'];
-                $objCategory->event_id = $intEventkey;
-                $objCategory->fee = json_encode($category['fee']);
-                $objCategory->save();
+
+            $objCategory = new Category();
+            $objCategory->category_type  = $category['type'];
+            $objCategory->category_subtype  = $category['subtype'];
+            $objCategory->event_id = $intEventkey;
+            $objCategory->fee = json_encode($category['fee']);
+            $objCategory->save();
+            foreach ($category['fee'] as $arrfees){
+                $objTicket=new Ticket();
+                $objTicket->category_id=$objCategory->id;
+                $objTicket->name=$arrfees['name'];
+                $objTicket->fee=$arrfees['fee'];
+                $objTicket->quantity=$arrfees['quantity'];
+                $objTicket->start_date=$arrfees['start_date'];
+                $objTicket->end_date=$arrfees['end_date'];
+                $objTicket->save();
+            }
+
+
+
+
         }
     }
         return redirect('admin/events')->with('success', 'Events Created Successfully.');

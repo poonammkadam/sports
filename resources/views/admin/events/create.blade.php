@@ -65,9 +65,10 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">$</span>
                                                 </div>
-                                                <input type="text" required  id="category_fee0" name="category[0][fee][early][earlybird]" class="form-control item_category" placeholder="Category fee...">
+                                                <input type="text" required  id="category_fee0" name="category[0][fee][early][fee]" class="form-control item_category" placeholder="Category fee...">
                                                 </div>
                                             </div>
+                                            <input type="hidden" required  id="category_fee_name0" name="category[0][fee][early][name]" class="form-control item_category" placeholder="Category fee..." value="early">
                                             <div class="col-md-3">
                                                 <label for="category_fee0">Early Bird Ticket Quantity</label><input type="text" required  id="category_fee0" name="category[0][fee][early][quantity]" class="form-control item_category">
                                             </div>
@@ -83,12 +84,13 @@
                                                 <label for="category_fee0">General Fee</label>
                                                 <div class="input-group mb-3">
                                                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                                                <input type="text" required  id="category_fee0" name="category[0][fee][normal][normalfee]" class="form-control item_category">
+                                                <input type="text" required  id="category_fee0" name="category[0][fee][normal][fee]" class="form-control item_category">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="category_fee0">General Ticket Quantity</label><input type="text" required  id="category_fee0" name="category[0][fee][normal][quantity]" class="form-control item_category">
                                             </div>
+                                            <input type="hidden" required  id="category_fee_name0" name="category[0][fee][normal][name]" class="form-control item_category" placeholder="Category fee..." value="normal">
                                             <div class="col-md-3">
                                                 <label for="category_fee0">General Ticket Start Date</label><input type="date" required  id="category_fee0" name="category[0][fee][normal][start_date]" class="form-control item_category">
                                             </div>
@@ -102,7 +104,7 @@
                                                 <label for="category_fee0">Late Fee</label>
                                                 <div class="input-group mb-3">
                                                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                                                <input type="text" required  id="category_fee0" name="category[0][fee][late][latefee]" class="form-control item_category">
+                                                <input type="text" required  id="category_fee0" name="category[0][fee][late][fee]" class="form-control item_category">
                                                 </div>
                                             </div>
                                                 <div class="col-md-3">
@@ -111,6 +113,8 @@
                                                 <div class="col-md-3">
                                                     <label for="category_fee0">Late Ticket Start Date</label><input type="date" required  id="category_fee0" name="category[0][fee][late][start_date]" class="form-control item_category">
                                                 </div>
+                                                <input type="hidden" required  id="category_fee_name0" name="category[0][fee][late][name]" class="form-control item_category" placeholder="Category fee..." value="late">
+
                                                 <div class="col-md-3">
                                                     <label for="category_fee0">Late Ticket End Date</label><input type="date" required  id="category_fee0" name="category[0][fee][late][end_date]" class="form-control item_category">
                                                 </div>
