@@ -549,3 +549,12 @@ a:focus {
     width: 500px;
     margin: 5px;
 }
+.thank-you{
+   padding: 100px;
+    margin: 20px;
+
+}
+.thank-you p {
+    color: #000;
+}
+
