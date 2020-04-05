@@ -22,7 +22,7 @@ class EventController extends Controller
             return view('admin.events.create',['arrObjOrganisation'=>$arrObjOrganisation]);
         }
         else{
-            return view('admin.organisation.create', '');
+            return view('admin.organisation.create');
         }
     }
 

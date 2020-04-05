@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Model\Organisation;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PragmaRX\Countries\Package\Countries;
 
 class OrganisationController extends Controller
 {
@@ -52,7 +53,9 @@ class OrganisationController extends Controller
     public function edit($id){
         $objOrganisation = User::where('id',$id)->first();
         $objOrganisationProfile = Organisation::where('user_id',$id)->first();
-        return view('admin.organisation.edit',['objOrganisation' => $objOrganisation,'objOrganisationProfile'=>$objOrganisationProfile]);
+        $objCountries = new Countries();
+        $arrCountries=$objCountries->all()->pluck('name.common');
+        return view('admin.organisation.edit',['objOrganisation' => $objOrganisation,'objOrganisationProfile'=>$objOrganisationProfile , 'arrCountries'=>$arrCountries]);
     }
 
     public function update($id, Request $request){
