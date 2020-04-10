@@ -9,6 +9,7 @@ use App\Http\Model\Events;
 use App\Http\Model\Organisation;
 use App\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -34,6 +35,7 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
+        DB::beginTransaction();
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
@@ -43,17 +45,15 @@ class EventController extends Controller
         $objEvent->venue = $request->venue;
         $objEvent->org_id = $request->organisation;
         $objEvent->banner = $request->file('banner')->store('banner');
-        $objEvent->save();
         $intEventkey = $objEvent->getKey();
         if($request->category){
         foreach ($request->category as $category){
-
             $objCategory = new Category();
             $objCategory->category_type  = $category['type'];
             $objCategory->category_subtype  = $category['subtype'];
             $objCategory->event_id = $intEventkey;
             $objCategory->fee = json_encode($category['fee']);
-            $objCategory->save();
+
             foreach ($category['fee'] as $arrfees){
                 $objTicket=new Ticket();
                 $objTicket->category_id=$objCategory->id;
@@ -62,14 +62,10 @@ class EventController extends Controller
                 $objTicket->quantity=$arrfees['quantity'];
                 $objTicket->start_date=$arrfees['start_date'];
                 $objTicket->end_date=$arrfees['end_date'];
-                $objTicket->save();
             }
-
-
-
-
         }
     }
+        DB::commit();
         return redirect('admin/events')->with('success', 'Events Created Successfully.');
     }
 
