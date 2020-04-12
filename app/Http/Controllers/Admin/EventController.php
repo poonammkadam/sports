@@ -38,12 +38,12 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         DB::beginTransaction();
         $objEvent = new Events();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
-        $objEvent->registration_start_date = $request->register_start_date;
+//        $objEvent->registration_start_date = $request->register_start_date;
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
         $objEvent->venue = $request->venue;
@@ -71,16 +71,16 @@ class EventController extends Controller
                 $objCategory->event_id = $intEventkey;
                 $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
-                foreach ($category['fee'] as $arrfees) {
-                    $objTicket = new Ticket();
-                    $objTicket->category_id = $objCategory->id;
-                    $objTicket->name = $arrfees['name'];
-                    $objTicket->fee = $arrfees['fee'];
-                    $objTicket->quantity = $arrfees['quantity'];
-                    $objTicket->start_date = $arrfees['start_date'];
-                    $objTicket->end_date = $arrfees['end_date'];
-                    $objTicket->save();
-                }
+//                foreach ($category['fee'] as $arrfees) {
+//                    $objTicket = new Ticket();
+//                    $objTicket->category_id = $objCategory->id;
+//                    $objTicket->name = $arrfees['name'];
+//                    $objTicket->fee = $arrfees['fee'];
+//                    $objTicket->quantity = $arrfees['quantity'];
+//                    $objTicket->start_date = $arrfees['start_date'];
+//                    $objTicket->end_date = $arrfees['end_date'];
+//                    $objTicket->save();
+//                }
             }
         }
         DB::commit();
