@@ -3,7 +3,6 @@
 namespace App\Http\Model;
 
 use App\Ticket;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model

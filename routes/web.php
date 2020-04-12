@@ -24,10 +24,9 @@ Route::get('/registration', function () {
 });
 
 
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
     Route::get('/user/create', 'UserController@create');
@@ -56,30 +55,30 @@ Route::group([ 'prefix' => 'admin', 'namespace'=>'Admin', 'middleware' => ['auth
 
 });
 
-Route::group(['namespace'=>'User'], function() {
+Route::group(['namespace' => 'User'], function () {
     Route::get('/registration', 'UserController@getRegister');
     Route::get('/profile_update', 'UserController@getRegister');
+
     Route::get('/myprofile', 'UserController@getProfile');
+
     Route::get('/events', 'UserController@eventList');
     Route::get('/event/register/{id}', 'UserController@eventCreate');
-    Route::post('/profile/update', 'UserController@update');
     Route::post('/event/register', 'UserController@eventStore');
+    Route::get('/event/view/{id}', 'EventController@getShow');
+
+    Route::post('/profile/update', 'UserController@update');
     Route::get('/myresult', 'UserController@getUserResult');
 
-    Route::get('/organiser', 'OragnationController@getRequestForm');
-    Route::post('/oragnation/request', 'OragnationController@postOragnationStore');
-    Route::get('/event/show/{id}', 'EventController@getShow');
-    Route::get('/event/view/{id}', 'EventController@getParticipants');
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
     Route::post('event/receipt/upload/{id}', 'EventController@postUploadReceipt');
     Route::get('event/participant/receipt/{id}', 'EventController@getReceipt');
     Route::post('ckeditor/upload', 'EventController@upload')->name('ckeditor.upload');
 
 
-   // resulte
+    // resulte
     Route::get('/results', 'EventController@getResults');
 
-    Route::get('/logout', function (){
+    Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');
     });
@@ -87,6 +86,13 @@ Route::group(['namespace'=>'User'], function() {
     Route::get('/thankyou', function () {
         return view('tankyou');
     });
+
+});
+
+Route::group(['namespace' => 'User', 'prefix' => 'organiser',], function () {
+    Route::get('/', 'OragnationController@getRequestForm');
     Route::get('/myorganisation', 'OrganisationController@show');
     Route::get('/organisation/view', 'OrganisationController@show');
+    Route::post('/oragnation/request', 'OrganisationController@postOraganisationStore');
+    Route::get('/event/view/{id}', 'OrganisationControlle@getShow');
 });

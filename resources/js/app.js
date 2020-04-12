@@ -14,10 +14,18 @@ require('./bootstrap');
 
 require('./components/Example');
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('#content').css('min-height', (
         $(document).height()
         - $('nav').height()
         - $('footer').height()
     ));
 });
+
+$(document).load(
+    $('#racetresults').load(
+        'StartPage.aspx?CId=20110'
+    )
+);
+
+$('#racetresults').load()

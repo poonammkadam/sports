@@ -14,8 +14,10 @@ class AddColumsToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->text('bus_reservation_amount')->nullable();
-            $table->text('accommodation_amount')->nullable();
+            $table->text('transstart')->nullable();
+            $table->text('transend')->nullable();
+            $table->text('accommodation')->nullable();
+            $table->text('racekit')->nullable();
         });
     }
 

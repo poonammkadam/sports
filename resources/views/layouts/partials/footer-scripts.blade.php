@@ -6,17 +6,4 @@
 
 
 
-<script src="{{asset('js/card.js')}}"></script>
-<script>
-    new Card({
-        form: $('#event_submit'),
-        container: '.card-wrapper'
-    });
-    $(document).ready(function(){
 
-        // Initialize Tooltip
-
-
-
-    })
-</script>

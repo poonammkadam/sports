@@ -21,7 +21,6 @@
 {{--                    <select class="form-control custom-select" required name="event_category" id="category">--}}
                         <option>Select event</option>
                         @foreach($objEvent->category as $index => $prate)
-                            {{dd($prate->getEventPrice())}}
                             <option class="cate"
                                     data-price={{$prate->amount}} value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
                         @endforeach

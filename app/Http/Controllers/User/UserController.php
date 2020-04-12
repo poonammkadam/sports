@@ -3,20 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
 use App\MerchantSuite\Address;
-use App\MerchantSuite\AuthKeyTransaction;
 use App\MerchantSuite\CardDetails;
 use App\MerchantSuite\ContactDetails;
 use App\MerchantSuite\Credentials;
 use App\MerchantSuite\Customer;
 use App\MerchantSuite\FraudScreeningRequest;
-use App\MerchantSuite\HppTxnFlowParameters;
-use App\MerchantSuite\IframeParameters;
 use App\MerchantSuite\Mode;
 use App\MerchantSuite\Order;
 use App\MerchantSuite\OrderAddress;
@@ -28,142 +24,125 @@ use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use App\Notifications\RegisterConfirmation;
-use http\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use PragmaRX\Countries\Package\Countries;
 
 
 class UserController extends Controller
 {
-   public function getRegister(){
-       $objProfile =  auth()->user();
-       if($objProfile->registration_status){
-        return view('front.profile.profile_complite', ['objProfile'=>$objProfile]);
-       }
-       else{
-        return view('front.profile.registation', ['objProfile'=>$objProfile]);
-       }
-   }
-
-   public function getProfile(){
-       $objProfile =  auth()->user();
-
-       if($objProfile->registration_status){
-           $objUserProfile = Profile::where('user_id',$objProfile->id)->first();
-           $objUserProfileEvents=  $objUserProfile->eventParticipants()->load('events');
-           return view('front.profile.profile', ['objProfile'=>$objProfile, 'objUserProfilEvents'=>$objUserProfileEvents, 'objUserProfile'=> $objUserProfile]);
-       }
-       else{
-           $objCountries = new Countries();
-           $arrCountries=$objCountries->all()->pluck('name.common');
-           return view('front.profile.registation', ['objProfile'=>$objProfile, 'arrCountries'=>$arrCountries]);
-       }
-
-
-   }
-
-   public function update(Request $request){
-       $objProfileExist = Profile::where('user_id', auth()->user()->id)->first();
-       if($objProfileExist){
-           $objProfile=$objProfileExist;
-       }else{
-           $objProfile=new Profile();
-       }
-       $objProfile->user_id =  auth()->user()->id;
-       $objProfile->first_name = $request->first_name;
-       $objProfile->last_name = $request->last_name;
-       $objProfile->gender = $request->gender;
-       $objProfile->date_of_birth = $request->dob;
-       $objProfile->country = $request->nationality;
-       $objProfile->local_id = $request->local_id;
-       $objProfile->passport = $request->passport_no;
-       $objProfile->address = $request->address;
-       $objProfile->country = $request->country;
-       $objProfile->mobile_no_primary = $request->mobile_no;
-       $objProfile->t_shirt_size = $request->t_shirt_size;
-       $objProfile->save();
-
-       auth()->user()->name=$request->local_name;
-       auth()->user()->email=$request->email;
-       auth()->user()->registration_status= true;
-       auth()->user()->save();
-       return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
-   }
-
-   public function eventList(){
-         $arrObjEvents = Events::all();
-        return view('front.event.event_list', ['arrObjEvents'=>$arrObjEvents]);
-    }
-
-   public function eventStore(Request $request){
-     $objEventParticipants = new EventParticipants();
-     $arrMixExtraData=[];
-     $objUser=auth()->user();
-       $objProfile = Profile::where('user_id', auth()->user()->id)->first();
-       $objEventParticipants->category_id = $request->event_category;
-       $objEventParticipants->event_id = $request->event_id;
-       $objEventParticipants->profile_id = $objProfile->id;
-       $objEventParticipants->payment_type = $request->payment_type;
-
-       $arrMixExtraData['user']=$objUser;
-       $arrMixExtraData['eventparticipant']=$objEventParticipants;
-       $objPayment='';
-       if($request->payment_type=='online'){
-           $arrMixExtraData['cardholder_name']= $request->cardholder_name;
-           $arrMixExtraData['cardholder_number']= $request->cardholder_number;
-           $arrMixExtraData['cardholder_expiry']= $request->cardholder_name;
-           $arrMixExtraData['cardholder_cvc']= $request->cardholder_cvc;
-           $arrMixExtraData['fee']= (int)$request->fee;
-           $arrMixExtraData['profile_id']= 1;
-           $objPayment=$this->makePayment($arrMixExtraData);
-           $objApiResponse=$objPayment->getAPIResponse();
-
-           $objUser->notify(new RegisterConfirmation($arrMixExtraData));
-           if($objApiResponse->isSuccessful()){
-               $objEventParticipants->payment_status=1;
-               $objEventParticipants->save();
-               $arrMixExtraData['payment']=$objApiResponse;
-               $objUser->notify(new RegisterConfirmation($arrMixExtraData));
-               $objEventParticipants->save();
-               return redirect('events')->with('message', 'Payment Successful. Please check your email.');
-           }else{
-               return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
-           }
-       }
-
-       if($request->payment_type=='offline') {
-           $objEventParticipants->payment_status = 2;
-           $objEventParticipants->save();
-           $objUser->notify(new RegisterConfirmation($arrMixExtraData));
-           return redirect('events')->with('message', 'To confirm your registration. Please check your email.');
-       }
-
-       return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
-   }
-
-   public function eventCreate($id){
-        $objEvent = Events::findOrFail($id);
-        $objEvent->load('category');
-        if(auth()->user()->registration_status){
-            return view('front.event.event',['objEvent'=>$objEvent]);
+    public function getRegister()
+    {
+        $objProfile = auth()->user();
+        if ($objProfile->registration_status) {
+            return view('front.profile.profile_complite', ['objProfile' => $objProfile]);
+        } else {
+            return view('front.profile.registation', ['objProfile' => $objProfile]);
         }
-            return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
-
     }
-    public function getUserResult(){
-        $objProfile = Profile::Where('user_id',auth()->user()->id)->first();
-        if(!$objProfile){
-            return redirect('registration')->with('alert', 'Sorry!!! You need complete your profile first.');
+
+    public function getProfile()
+    {
+        $objProfile = auth()->user();
+
+        if ($objProfile->registration_status) {
+            $objUserProfile = Profile::where('user_id', $objProfile->id)->first();
+            $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
+            return view('front.profile.profile', ['objProfile' => $objProfile, 'objUserProfilEvents' => $objUserProfileEvents, 'objUserProfile' => $objUserProfile]);
+        } else {
+            $objCountries = new Countries();
+            $arrCountries = $objCountries->all()->pluck('name.common');
+            return view('front.profile.registation', ['objProfile' => $objProfile, 'arrCountries' => $arrCountries]);
         }
-        $arrObjParticipant =$objProfile->eventParticipantsCat();
 
-        return view('front.results.my_result',['objProfile'=>$objProfile,'arrObjParticipant'=>$arrObjParticipant]);
+
     }
 
-   public function makePayment($arrMixExtraData){
-        URLDirectory::setBaseURL("reserved","https://www.merchantsuite.com/api/v3");
-        $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456",Mode::Live);
+    public function update(Request $request)
+    {
+        $objProfileExist = Profile::where('user_id', auth()->user()->id)->first();
+        if ($objProfileExist) {
+            $objProfile = $objProfileExist;
+        } else {
+            $objProfile = new Profile();
+        }
+        $objProfile->user_id = auth()->user()->id;
+        $objProfile->first_name = $request->first_name;
+        $objProfile->last_name = $request->last_name;
+        $objProfile->gender = $request->gender;
+        $objProfile->date_of_birth = $request->dob;
+        $objProfile->country = $request->nationality;
+        $objProfile->local_id = $request->local_id;
+        $objProfile->passport = $request->passport_no;
+        $objProfile->address = $request->address;
+        $objProfile->country = $request->country;
+        $objProfile->mobile_no_primary = $request->mobile_no;
+        $objProfile->t_shirt_size = $request->t_shirt_size;
+        $objProfile->save();
+
+        auth()->user()->name = $request->local_name;
+        auth()->user()->email = $request->email;
+        auth()->user()->registration_status = true;
+        auth()->user()->save();
+        return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
+    }
+
+    public function eventList()
+    {
+        $arrObjEvents = Events::all();
+        return view('front.event.event_list', ['arrObjEvents' => $arrObjEvents]);
+    }
+
+    public function eventStore(Request $request)
+    {
+        $objEventParticipants = new EventParticipants();
+        $arrMixExtraData = [];
+        $objUser = auth()->user();
+        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
+        $objEventParticipants->category_id = $request->event_category;
+        $objEventParticipants->event_id = $request->event_id;
+        $objEventParticipants->profile_id = $objProfile->id;
+        $objEventParticipants->payment_type = $request->payment_type;
+
+        $arrMixExtraData['user'] = $objUser;
+        $arrMixExtraData['eventparticipant'] = $objEventParticipants;
+        $objPayment = '';
+        if ($request->payment_type == 'online') {
+            $arrMixExtraData['cardholder_name'] = $request->cardholder_name;
+            $arrMixExtraData['cardholder_number'] = $request->cardholder_number;
+            $arrMixExtraData['cardholder_expiry'] = $request->cardholder_name;
+            $arrMixExtraData['cardholder_cvc'] = $request->cardholder_cvc;
+            $arrMixExtraData['fee'] = (int)$request->fee;
+            $arrMixExtraData['profile_id'] = 1;
+            $objPayment = $this->makePayment($arrMixExtraData);
+            $objApiResponse = $objPayment->getAPIResponse();
+
+            $objUser->notify(new RegisterConfirmation($arrMixExtraData));
+            if ($objApiResponse->isSuccessful()) {
+                $objEventParticipants->payment_status = 1;
+                $objEventParticipants->save();
+                $arrMixExtraData['payment'] = $objApiResponse;
+                $objUser->notify(new RegisterConfirmation($arrMixExtraData));
+                $objEventParticipants->save();
+                return redirect('events')->with('message', 'Payment Successful. Please check your email.');
+            } else {
+                return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
+            }
+        }
+
+        if ($request->payment_type == 'offline') {
+            $objEventParticipants->payment_status = 2;
+            $objEventParticipants->save();
+            $objUser->notify(new RegisterConfirmation($arrMixExtraData));
+            return redirect('events')->with('message', 'To confirm your registration. Please check your email.');
+        }
+
+        return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
+    }
+
+    public function makePayment($arrMixExtraData)
+    {
+        URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
+        $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456", Mode::Live);
 
         $txn = new Transaction();
         $cardDetails = new CardDetails();
@@ -191,7 +170,7 @@ class UserController extends Controller
         $txn->setSubType("single");
         $txn->setType(TransactionType::Internet);
 
-        $cardDetails->setCardHolderName( $arrMixExtraData['cardholder_name']);
+        $cardDetails->setCardHolderName($arrMixExtraData['cardholder_name']);
         $cardDetails->setCardNumber($arrMixExtraData['cardholder_number']);
         $cardDetails->setCVN($arrMixExtraData['cardholder_cvc']);
         $cardDetails->setExpiryDate("9900");
@@ -251,7 +230,7 @@ class UserController extends Controller
         $fraudScreening->setPerformFraudScreening(false);
         $fraudScreening->setDeviceFingerprint("ExampleDeviceFingerprint");
 
-    //    $txn->setFraudScreeningRequest($fraudScreening);
+        //    $txn->setFraudScreeningRequest($fraudScreening);
 
 //        $statementDescriptor->setAddressLine1("123 Drive Street");
 //        $statementDescriptor->setAddressLine2("");
@@ -267,7 +246,29 @@ class UserController extends Controller
 
         $txn->setTokenisationMode(3);
         $txn->setTimeout(93121);
-       return   $response = $txn->submit();
+        return $response = $txn->submit();
+    }
+
+    public function eventCreate($id)
+    {
+        $objEvent = Events::findOrFail($id);
+        $objEvent->load('category');
+        if (auth()->user()->registration_status) {
+            return view('front.event.event', ['objEvent' => $objEvent]);
+        }
+        return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
+
+    }
+
+    public function getUserResult()
+    {
+        $objProfile = Profile::Where('user_id', auth()->user()->id)->first();
+        if (!$objProfile) {
+            return redirect('registration')->with('alert', 'Sorry!!! You need complete your profile first.');
+        }
+        $arrObjParticipant = $objProfile->eventParticipantsCat();
+
+        return view('front.results.my_result', ['objProfile' => $objProfile, 'arrObjParticipant' => $arrObjParticipant]);
     }
 
 }
