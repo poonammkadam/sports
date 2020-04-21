@@ -71,16 +71,16 @@ class EventController extends Controller
                 $objCategory->event_id = $intEventkey;
                 $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
-//                foreach ($category['fee'] as $arrfees) {
-//                    $objTicket = new Ticket();
-//                    $objTicket->category_id = $objCategory->id;
-//                    $objTicket->name = $arrfees['name'];
-//                    $objTicket->fee = $arrfees['fee'];
-//                    $objTicket->quantity = $arrfees['quantity'];
-//                    $objTicket->start_date = $arrfees['start_date'];
-//                    $objTicket->end_date = $arrfees['end_date'];
-//                    $objTicket->save();
-//                }
+                foreach ($category['fee'] as $key => $arrfees) {
+                    $objTicket = new Ticket();
+                    $objTicket->category_id = $objCategory->id;
+                    $objTicket->name = $key;
+                    $objTicket->fee = $arrfees['fee'];
+                    $objTicket->quantity = $arrfees['quantity'];
+                    $objTicket->start_date = $arrfees['start_date'];
+                    $objTicket->end_date = $arrfees['end_date'];
+                    $objTicket->save();
+                }
             }
         }
         DB::commit();

@@ -22,6 +22,8 @@
                                     <h4 class="card-title ellipsis">{{$objEvent->name}}</h4>
                                     <p class="card-text">Registration will Close
                                         :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                    <a href="{{url('/event/register').'/'.$objEvent->id}}"
+                                       class=" stretched-link"></a>
                                 </div>
                             </div>
                         </div>

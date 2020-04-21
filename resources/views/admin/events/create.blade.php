@@ -63,6 +63,9 @@
                                                                                                 name="category[0][type]"
                                                                                                 class="form-control item_category">
                                         </div>
+                                        <input type="hidden" required id="category_fee_name0"
+                                               name="category[0][fee][early][name]" class="form-control item_category"
+                                               placeholder="Category fee..." value="early">
                                         <div class="col-md-6">
                                             <label for="category_subtype0">Sub-Category</label><input required
                                                                                                       type="text"
@@ -113,6 +116,9 @@
                                                        class="form-control item_category">
                                             </div>
                                         </div>
+                                        <input type="hidden" required id="category_fee_name0"
+                                               name="category[0][fee][normal][name]" class="form-control item_category"
+                                               placeholder="Category fee..." value="normal">
                                         <div class="col-md-3">
                                             <label for="category_fee0">General Ticket Quantity</label><input
                                                 type="number"
@@ -147,6 +153,10 @@
                                                        class="form-control item_category">
                                             </div>
                                         </div>
+                                        <input type="hidden" required id="category_fee_name0"
+                                               name="category[0][fee][late][name]" class="form-control item_category"
+                                               placeholder="Category fee..." value="late">
+
                                         <div class="col-md-3">
                                             <label for="category_fee0">Late Ticket Quantity</label><input type="number"
                                                                                                           required
@@ -197,7 +207,7 @@
                                            autocomplete="venue" autofocus>
                                 </div>
                                 <label for="org" class="col-md-2 col-form-label text-md-right">Select
-                                    Organistion</label>
+                                    Organisation</label>
                                 <div class="col-md-4">
                                     <select id="org" class="form-control custom-select" name="organisation">
                                         <option selected>Open this select menu</option>
@@ -313,17 +323,20 @@
                 html += '<div class="col-md-6"><div  class="form-group"><label for="category_subtype' + intIndex + '">Sub-Category</label><input required type="text" id="category_subtype' + intIndex + '" name="category[' + intIndex + '][subtype]" class="form-control item_category"></div></div></div>';
 
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][earlybird]" class="form-control item_category"></div></div></div>';
+                html += '   <input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][early][name]" class="form-control item_category" placeholder="Category fee..." value="early">\n'
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][quantity]" class="form-control item_category"></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket Start Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][start_date]" class="form-control item_category"></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket End Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][end_date]" class="form-control item_category"></div></div></div>';
 
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][normalfee]" class="form-control item_category"></div></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][quantity]" class="form-control item_category"></div></div>';
+                html += '   <input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][normal][name]" class="form-control item_category" placeholder="Category fee..." value="normal">\n'
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][start_date]" class="form-control item_category"></div></div>';
                 html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">General Ticket End Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][end_date]" class="form-control item_category"></div> </div>'
 
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Late Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][latefee]" class="form-control item_category"></div></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Late Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][quantity]" class="form-control item_category"></div></div>';
+                html += '   <input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][late][name]" class="form-control item_category" placeholder="Category fee..." value="late">\n'
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][start_date]" class="form-control item_category"></div></div>';
                 html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">Late Ticket End Date</label><input type="date" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][end_date]" class="form-control item_category"></div></div>'
 
