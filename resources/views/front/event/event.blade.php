@@ -1,9 +1,13 @@
 @extends('layouts.app')
 @section('content')
+    <?php
+    $listAccommodation = json_decode($objEvent->accommodation);
+    ?>
     <div class="container">
         <div>
             <div class="text-center ">
                 <h3>Event Participation</h3>
+
             </div>
             <div class="row">
                 <div class="col-md-1">
@@ -75,8 +79,10 @@
                             <div>
                                 <p>Accommodation</p>
                                 <select id="accommodation" class="form-control custom-select" name="accommodation">
-                                    <option value="no">No</option>
-                                    <option value="yes">Yes</option>
+                                    <option value="">Select</option>
+                                    @foreach($listAccommodation as $objOption)
+                                        <option value="{{$objOption->name}}">{{$objOption->name}}</option>
+                                    @endforeach
 
                                 </select>
                             </div>
