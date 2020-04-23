@@ -1,277 +1,290 @@
 @extends('layouts.app')
 @section('content')
-    <section class="hero_section ">
-        <div class="hero-container container">
-            <div class="hero_detail-box">
-                <h3>
-                    Welcome to <br>
-                    Best educations
-                </h3>
-                <h1>
-                    The Racing
-                </h1>
-                <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
-                    some form, by injected humour, or randomised
-                </p>
-                <div class="hero_btn-continer">
-                    <a href="" class="call_to-btn btn_white-border">
-              <span>
-                Contact
-              </span>
-                        <img src="images/right-arrow.png" alt="">
-                    </a>
-                </div>
-            </div>
-            <div class="hero_img-container">
-                <div>
-                    <img src="images/race1.jpeg" alt="" class="img-fluid">
-                </div>
-            </div>
+    <section id="intro">
+        <div class="intro-container wow fadeIn">
+            <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>
+            <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"
+               data-autoplay="true"></a>
+            <a href="#about" class="about-btn scrollto">About The Event</a>
         </div>
     </section>
 
     <!-- end header section -->
 
     <!-- about section -->
-    <section class="about_section ">
+    <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
         <div class="container">
-            <h2 class="main-heading ">
-                About Us
-            </h2>
-            <p class="text-center">
-                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
-                passages of Lorem Ipsum available, but the majority h  There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
-                passages of Lorem Ipsum available, but the majority h There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
-                passages of Lorem Ipsum available, but the majority h.
-            </p>
-            <div class="about_img-box ">
-                <img src="images/race2.jpeg" alt="" class="img-fluid w-100">
+            <div class="section-header">
+                <h2>Event Speakers</h2>
+                <p>Here are some of our speakers</p>
             </div>
-            <div class="d-flex justify-content-center mt-5">
-                <a href="" class="call_to-btn  ">
 
-          <span>
-            Read More
-          </span>
-                    <img src="images/right-arrow.png" alt="">
-                </a>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Brenden Legros</a></h3>
+                            <p>Quas alias incidunt</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
+                            <p>Consequuntur odio aut</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
+                            <p>Fugiat laborum et</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
+                            <p>Debitis iure vero</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
+                            <p>Qui molestiae natus</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="speaker">
+                        <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
+                        <div class="details">
+                            <h3><a href="speaker-details.html">Willow Trantow</a></h3>
+                            <p>Non autem dicta</p>
+                            <div class="social">
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-google-plus"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </section>
 
 
     <!-- about section -->
 
     <!-- teacher section -->
-    <section class="teacher_section ">
-        <div class="container pt-0">
-            <h2 class="main-heading ">
-                Our Teachers
-            </h2>
-            <p class="text-center">
-                Ipsum available, but the majority h
-            </p>
-            <div class="teacher_container layout_padding2">
-                <div class="card-deck">
-                    <div class="card">
-                        <img class="card-img-top" src="images/teacher-1.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Den Mark</h5>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="images/teacher-2.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Leena jorj</h5>
-                        </div>
+    <section id="supporters" class="section-with-bg wow fadeInUp"
+             style="visibility: visible; animation-name: fadeInUp;">
 
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="images/teacher-3.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Magi Den</h5>
-
-                        </div>
-
-                    </div>
-
-                    <div class="card">
-                        <img class="card-img-top" src="images/teacher-4.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">jonson mark</h5>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="d-flex justify-content-center mt-3">
-                <a href="" class="call_to-btn  ">
-
-          <span>
-            See More
-          </span>
-                    <img src="images/right-arrow.png" alt="">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- teacher section -->
-
-    <!-- vehicle section -->
-    <section class="vehicle_section ">
-        <div class="">
-            <h2 class="main-heading ">
-                Racing Facility
-            </h2>
-            <p class="text-center">
-                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
-                passages of Lorem Ipsum available, but the majority h
-            </p>
-            <div class="layout_padding-top">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="vehicle_img-box ">
-                                <img src="images/img1.jpeg" alt="" class="img-fluid w-100">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="vehicle_img-box ">
-                                <img src="images/img2.jpg" alt="" class="img-fluid w-100">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="vehicle_img-box ">
-                                <img src="images/img3.jpeg" alt="" class="img-fluid w-100">
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- vehicle section -->
-    <!-- client section -->
-    <section class="client_section ">
         <div class="container">
-            <h2 class="main-heading ">
-                Our Racer Feedback
-            </h2>
-            <p class="text-center">
-                There are many variations of passages of Lorem Ipsum available, but the majority hThere are many variations of
-                passages of Lorem Ipsum available, but the majority h
-            </p>
-            <div class="layout_padding2">
-                <div class="client_container d-flex flex-column">
-                    <div class="client_detail d-flex align-items-center">
-                        <div class="client_img-box ">
-                            <img src="images/student.png" alt="">
-                        </div>
-                        <div class="client_detail-box">
-                            <h4>
-                                Veniam Quis
-                            </h4>
-                            <span>
-                (exercitation)
-              </span>
-                        </div>
-                    </div>
-                    <div class="client_text mt-4">
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat
-                            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum."
+            <div class="section-header">
+                <h2>Sponsors</h2>
+            </div>
 
+            <div class="row no-gutters supporters-wrap clearfix">
 
-                        </p>
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/1.png" class="img-fluid" alt="">
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/2.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/3.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/4.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/5.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/6.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/7.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="supporter-logo">
+                        <img src="img/supporters/8.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
             </div>
+
+        </div>
+
+    </section>
+
+    <section id="subscribe">
+        <div class="container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="section-header">
+                <h2>Newsletter</h2>
+                <p>Rerum numquam illum recusandae quia mollitia consequatur.</p>
+            </div>
+
+            <form method="POST" action="#">
+                <div class="form-row justify-content-center">
+                    <div class="col-auto">
+                        <input type="text" class="form-control" placeholder="Enter your Email">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
     </section>
-    
 
-    <!-- contact section -->
+    <section id="contact" class="section-bg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 
-    <section class="contact_section ">
         <div class="container">
 
-            <h2 class="main-heading">
-                Contact Now
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Nihil officia ut sint molestiae tenetur.</p>
+            </div>
 
-            </h2>
-            <p class="text-center">
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            </p>
-            <div class="">
-                <div class="contact_section-container">
-                    <div class="row">
-                        <div class="col-md-6 mx-auto">
-                            <div class="contact-form">
-                                <form action="">
-                                    <div>
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                    <div>
-                                        <input type="text" placeholder="Phone Number">
-                                    </div>
-                                    <div>
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                    <div>
-                                        <input type="text" placeholder="Message" class="input_message">
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn_on-hover">
-                                            Send
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+            <div class="row contact-info">
+
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="ion-ios-location-outline"></i>
+                        <h3>Address</h3>
+                        <address>A108 Adam Street, NY 535022, USA</address>
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="ion-ios-telephone-outline"></i>
+                        <h3>Phone Number</h3>
+                        <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="ion-ios-email-outline"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@example.com">info@example.com</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form">
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div>
+                <form action="" method="post" role="form" class="contactForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                   data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                                   data-rule="email" data-msg="Please enter a valid email">
+                            <div class="validation"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                               data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="5" data-rule="required"
+                                  data-msg="Please write something for us" placeholder="Message"></textarea>
+                        <div class="validation"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit">Send Message</button>
+                    </div>
+                </form>
             </div>
 
         </div>
     </section>
 
 
-    <!-- end contact section -->
-    
+    </main>
 
-    <!-- landing section -->
-    <section class="landing_section ">
-        <div class="container">
-            <h2 class="main-heading">
-                Free Multipurpose Recing facility
 
-            </h2>
-            <p class="landing_detail text-center">
-                There are many variations of passages of Lorem Ipsum available, but the majority There are many variations of
-                passages of Lorem Ipsum available, but the majority h
 
-            </p>
-        </div>
-    </section>
+
+
+
+
 
 @endsection

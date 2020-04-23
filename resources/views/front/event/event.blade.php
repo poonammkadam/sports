@@ -7,7 +7,6 @@
         <div>
             <div class="text-center ">
                 <h3>Event Participation</h3>
-
             </div>
             <div class="row">
                 <div class="col-md-1">
