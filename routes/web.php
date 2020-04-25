@@ -53,6 +53,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/resulte/upload/{id}', 'EventController@postResulte');
     Route::get('/user/event/category/{id}', 'EventController@getUserCategory');
 
+    Route::get('/setting', 'EventController@create');
+    Route::post('/setting', 'EventController@store');
 });
 
 Route::group(['namespace' => 'User'], function () {
@@ -96,3 +98,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'organiser',], function () {
     Route::post('/oragnation/request', 'OrganisationController@postOraganisationStore');
     Route::get('/event/view/{id}', 'OrganisationControlle@getShow');
 });
+
+Route::get('/privacy', 'Controller@privacy');
+Route::get('/about-us', 'Controller@about');
+Route::get('/terms', 'Controller@terms');

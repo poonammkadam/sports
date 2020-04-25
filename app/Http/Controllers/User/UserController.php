@@ -82,7 +82,7 @@ class UserController extends Controller
         auth()->user()->email = $request->email;
         auth()->user()->registration_status = true;
         auth()->user()->save();
-        return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
+        return redirect('profile_update')->with('message', 'Your Profile Created successfully.!');
     }
 
     public function eventList()

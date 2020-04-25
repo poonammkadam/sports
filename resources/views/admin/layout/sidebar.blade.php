@@ -26,20 +26,28 @@
                 </li>
 
                 <li class="nav-item">
-                        <a href="{{url('admin/events')}}" class="nav-link">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <p>
-                                Events
-                            </p>
-                        </a>
+                    <a href="{{url('admin/events')}}" class="nav-link">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <p>
+                            Events
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-item">
-                        <a href="{{url('admin/organisation')}}" class="nav-link">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                            <p>
-                                Organisation
-                            </p>
-                        </a>
+                    <a href="{{url('admin/organisation')}}" class="nav-link">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <p>
+                            Organisation
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('admin/setting')}}" class="nav-link">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <p>
+                            Organisation
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

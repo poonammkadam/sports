@@ -15,10 +15,10 @@ class CreateSiteSettingsTable extends Migration
     {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('termsandconditions');
-            $table->text('securitypolicy');
-            $table->text('datapolicy');
-            $table->text('termsofuse');
+            $table->text('terms');
+            $table->text('about_us');
+            $table->text('policy');
+            $table->text('extra_data');
             $table->timestamps();
         });
     }
