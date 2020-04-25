@@ -43,7 +43,6 @@ class UserController extends Controller
     public function getProfile()
     {
         $objProfile = auth()->user();
-
         if ($objProfile->registration_status) {
             $objUserProfile = Profile::where('user_id', $objProfile->id)->first();
             $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
