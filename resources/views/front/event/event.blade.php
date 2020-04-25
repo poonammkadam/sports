@@ -2,6 +2,8 @@
 @section('content')
     <?php
     $listAccommodation = json_decode($objEvent->accommodation);
+    $listPickupTransportation = json_decode($objEvent->transstart);
+    $listDropTransportation = json_decode($objEvent->transend);
     ?>
     <div class="container" style="background-color: #d3d8d8;">
         <div>
@@ -18,7 +20,7 @@
                             <input type="hidden" name="event_id" value="{{$objEvent->id}}">
                             <h2 class="text-center ">{{$objEvent->name}}</h2>
                             <br>
-                            <div class="form-group">
+                            <div class="form-group evet-form-list">
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <label for="event-form-input" class="event-form-input">Event Categorys </label>
@@ -35,66 +37,102 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group evet-form-list">
                                 <label for="event-form-input" class="event-form-input">Event Fee: </label>B $ <span
                                     id="price">--</span>
                                 <input type="hidden" value="" id="event-form-input" name="fee">
 
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group evet-form-list">
                                 <label for="event-form-input"
                                        class="event-form-input">Organizer:- </label> {{$objEvent->organisation->name}}
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group evet-form-list">
                                 <label for="event-form-input" class="event-form-input">Contact Number: </label>B $ <span
                                     id="price">.....</span>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group evet-form-list">
                                 <label for="event-form-input" class="event-form-input">Event Date
                                     : </label>{{$objEvent->event_date}}
                             </div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="inputAddress" class="event-form-input">Team / Sponsor</label>Optional
-                                    <input required type="text" name="local_name" value="" class="form-control"
-                                           id="inputAddress" placeholder="">
-                                </div>
+
+                            <div class="form-group evet-form-list">
+                                <label for="inputAddress" class="event-form-input">Team / Sponsor</label>Optional
+                                <input required type="text" name="local_name" value="" class="form-control"
+                                       id="inputAddress" placeholder="">
                             </div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="tshirt" class="event-form-input">T-shirt size</label>
-                                    <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
-                                        <option selected>Open this select menu</option>
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                    </select>
-                                </div>
+
+                            <div class="form-group evet-form-list">
+                                <label for="tshirt" class="event-form-input">T-shirt size</label>
+                                <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                                    <option selected>Open this select menu</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
                             </div>
-                            <div>
+
+                            <div class="form-group evet-form-list">
                                 <label for="accommodation" class="event-form-input">Accommodation</label>
                                 <select id="accommodation" class="form-control custom-select" name="accommodation">
                                     <option value="">Select</option>
                                     @foreach($listAccommodation as $objOption)
-                                        <option value="{{$objOption->name}}">{{$objOption->name}}</option>
+                                        <option value="{{$objOption->name}}">{{$objOption->name}} ({{$objOption->fee}}
+                                            )
+                                        </option>
                                     @endforeach
 
                                 </select>
                             </div>
-                            <div>
+                            <div class="form-group evet-form-list">
+                                <label for="pickup_transportation" class="event-form-input">Select Pickup Loaction
+                                    (optional)</label>
+                                <select id="pickup_transportation" class="form-control custom-select"
+                                        name="pickup_transportation">
+                                    <option value="">Select</option>
+                                    @foreach($listPickupTransportation as $objOption)
+                                        <option value="{{$objOption->location}}">{{$objOption->location}}
+                                            ({{$objOption->fee}})
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="form-group evet-form-list">
+                                <label for="drop_transportation" class="event-form-input">Select Drop Loaction
+                                    (optional)</label>
+                                <select id="drop_transportation" class="form-control custom-select"
+                                        name="drop_transportation">
+                                    <option value="">Select</option>
+                                    @foreach($listDropTransportation as $objOption)
+                                        <option value="{{$objOption->location}}">{{$objOption->location}}
+                                            ({{$objOption->fee}}
+                                            )
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="form-group evet-form-list">
+                                <label for="racekit" class="event-form-input">Want RaceKit</label>
+                                <select id="racekit" class="form-control custom-select" name="racekit">
+                                    <option selected value="no">NO need</option>
+                                    <option value="yes">Yes, amount({{$objEvent->racekit}})</option>
+                                </select>
+                            </div>
+                            <div class="form-group evet-form-list">
                                 <label for="bus_reservation" class="event-form-input">Bus Reservation</label>
                                 Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza
                                 hotel kota kinabalu. Rm80 both ways.
                                 <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">
                                     <option selected value="no">NO need</option>
-                                    <option value="yes">Yes, both ways(Rm80)</option>
+                                    <option value="yes">Yes, amount({{$objEvent->bus_reservation_amount}})</option>
                                 </select>
-
                             </div>
                             <div class="chat-body">
                                 <label class="event-form-input">Total Payment Chat </label>
@@ -109,7 +147,7 @@
                                         <p class="col-6">----</p></div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="form-group evet-form-list">
                                 <label class="event-form-input">Select Payment Mode</label>
                                 <div class="radio">
                                     <label for="offline"><input type="radio" required id="offline" value="offline"
@@ -125,23 +163,23 @@
                                 <div class="demo-container">
                                     <div class="card-wrapper"></div>
                                     <div class="form-row mt-5">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group evet-form-list col-md-6">
                                             <input class="form-control" placeholder="Card number" type="tel"
                                                    name="number">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group evet-form-list col-md-6">
                                             <input class="form-control" placeholder="Full name" type="text" name="name">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group evet-form-list col-md-6">
                                             <input class="form-control" placeholder="MM/YY" type="tel" name="expiry">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group evet-form-list col-md-6">
                                             <input class="form-control" placeholder="CVC" type="number" name="cvc">
                                         </div>
                                     </div>

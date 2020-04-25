@@ -2244,3 +2244,24 @@ body.mobile-nav-active #mobile-nav-toggle {
     color: #000b16;
 }
 
+.evet-form-list {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+    font-size: 15px;
+}
+
+.evet-form-list input {
+    font-size: 15px;
+}
+
+.evet-form-list select option {
+    font-size: 15px;
+    height: 50px;
+    font-weight: 400;
+}
+
+.evet-form-list select {
+    font-size: 14px;
+    font-weight: 400;
+    height: 30px !important;
+}
