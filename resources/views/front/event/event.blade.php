@@ -3,68 +3,69 @@
     <?php
     $listAccommodation = json_decode($objEvent->accommodation);
     ?>
-    <div class="container">
+    <div class="container" style="background-color: #d3d8d8;">
         <div>
-            <div class="text-center ">
-                <h3>Event Participation</h3>
-            </div>
-            <div class="row">
+            <div class="row event-form-main">
                 <div class="col-md-1">
                 </div>
-                <div class="col-md-10">
-                    <div class="shadow-lg p-5">
+                <div class="col-md-10 event-form">
+                    <div class="text-center ">
+                        <h3>Event Participation</h3>
+                    </div>
+                    <div class="shadow-lg p-5" style="background: white;">
                         <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
                             @csrf
                             <input type="hidden" name="event_id" value="{{$objEvent->id}}">
-                            <h2>{{$objEvent->name}}</h2>
+                            <h2 class="text-center ">{{$objEvent->name}}</h2>
                             <br>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-6">
-                                        {{--                    <select class="form-control custom-select" required name="event_category" id="category">--}}
-                                        <option>Select event</option>
-                                        @foreach($objEvent->category as $index => $prate)
-                                            {{$prate->getEventPrice()}}
-                                            <option class="cate"
-                                                    value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
-                                        @endforeach
-                                        {{--                    </select>--}}
+                                        <label for="event-form-input" class="event-form-input">Event Categorys </label>
+                                        <select class="form-control custom-select" required name="event_category"
+                                                id="category">
+                                            <option>Select event</option>
+                                            @foreach($objEvent->category as $index => $prate)
+                                                {{$prate->getEventPrice()}}
+                                                <option class="cate"
+                                                        value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Event Fee: </label>B $ <span id="price">--</span>
-                                <input type="hidden" value="" id="exampleFormControlInput1" name="fee">
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Organizer
-                                    :- </label> {{$objEvent->organisation->name}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Contact Number: </label>B $ <span
+                                <label for="event-form-input" class="event-form-input">Event Fee: </label>B $ <span
                                     id="price">--</span>
+                                <input type="hidden" value="" id="event-form-input" name="fee">
 
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Event Date : </label>{{$objEvent->event_date}}
+                                <label for="event-form-input"
+                                       class="event-form-input">Organizer:- </label> {{$objEvent->organisation->name}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event-form-input" class="event-form-input">Contact Number: </label>B $ <span
+                                    id="price">.....</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event-form-input" class="event-form-input">Event Date
+                                    : </label>{{$objEvent->event_date}}
                             </div>
                             <div>
-                                <p>Team / Sponsor</p>
                                 <div class="form-group">
-                                    <label for="inputAddress">Team / Sponsor</label>Optional
+                                    <label for="inputAddress" class="event-form-input">Team / Sponsor</label>Optional
                                     <input required type="text" name="local_name" value="" class="form-control"
                                            id="inputAddress" placeholder="">
                                 </div>
                             </div>
                             <div>
-                                <p>Tee Shirt</p>
                                 <div class="form-group">
-                                    <label for="tshirt">T-shirt size</label>
+                                    <label for="tshirt" class="event-form-input">T-shirt size</label>
                                     <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
                                         <option selected>Open this select menu</option>
                                         <option value="XS">XS</option>
@@ -76,7 +77,7 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Accommodation</p>
+                                <label for="accommodation" class="event-form-input">Accommodation</label>
                                 <select id="accommodation" class="form-control custom-select" name="accommodation">
                                     <option value="">Select</option>
                                     @foreach($listAccommodation as $objOption)
@@ -86,7 +87,7 @@
                                 </select>
                             </div>
                             <div>
-                                <p>Bus Reservation</p>
+                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>
                                 Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza
                                 hotel kota kinabalu. Rm80 both ways.
                                 <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">
@@ -96,7 +97,7 @@
 
                             </div>
                             <div class="chat-body">
-                                <h5>Total Payment chat </h5>
+                                <label class="event-form-input">Total Payment Chat </label>
                                 <div>
                                     <div class="row"><p class="col-6 chat-event">Event amount: </p>
                                         <p class="col-6">----</p></div>
@@ -108,16 +109,18 @@
                                         <p class="col-6">----</p></div>
                                 </div>
                             </div>
-                            <div class="radio">
-                                <label for="offline"><input type="radio" required id="offline" value="offline"
-                                                            name="payment_type">Offline</label>
-                            </div>
+                            <div>
+                                <label class="event-form-input">Select Payment Mode</label>
+                                <div class="radio">
+                                    <label for="offline"><input type="radio" required id="offline" value="offline"
+                                                                name="payment_type">Offline</label>
+                                </div>
 
-                            <div class="radio">
-                                <label for="online"><input type="radio" required id="online" value="online"
-                                                           name="payment_type">Online</label>
+                                <div class="radio">
+                                    <label for="online"><input type="radio" required id="online" value="online"
+                                                               name="payment_type">Online</label>
+                                </div>
                             </div>
-
                             <div class="payment-online" style="display: none">
                                 <div class="demo-container">
                                     <div class="card-wrapper"></div>
