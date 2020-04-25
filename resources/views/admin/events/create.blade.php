@@ -58,20 +58,22 @@
                                     <h3>Category Default</h3>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="category_type0">Category</label> <input type="text" required
-                                                                                                id="category_type0"
-                                                                                                name="category[0][type]"
-                                                                                                class="form-control item_category">
+                                            <label for="category_type0">Category</label>
+                                            <input type="text" required
+                                                   id="category_type0"
+                                                   name="category[0][type]"
+                                                   class="form-control item_category">
                                         </div>
                                         <input type="hidden" required id="category_fee_name0"
                                                name="category[0][fee][early][name]" class="form-control item_category"
                                                placeholder="Category fee..." value="early">
                                         <div class="col-md-6">
-                                            <label for="category_subtype0">Sub-Category</label><input required
-                                                                                                      type="text"
-                                                                                                      id="category_subtype0"
-                                                                                                      name="category[0][subtype]"
-                                                                                                      class="form-control item_category">
+                                            <label for="category_subtype0">Sub-Category</label>
+                                            <input required
+                                                   type="text"
+                                                   id="category_subtype0"
+                                                   name="category[0][subtype]"
+                                                   class="form-control item_category">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -134,11 +136,12 @@
                                                 class="form-control item_category">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="category_fee0">General Ticket End Date</label><input type="date"
-                                                                                                             required
-                                                                                                             id="category_fee0"
-                                                                                                             name="category[0][fee][normal][end_date]"
-                                                                                                             class="form-control item_category">
+                                            <label for="category_fee0">General Ticket End Date</label>
+                                            <input type="date"
+                                                   required
+                                                   id="category_fee0"
+                                                   name="category[0][fee][normal][end_date]"
+                                                   class="form-control item_category">
                                         </div>
 
                                     </div>
@@ -158,26 +161,29 @@
                                                placeholder="Category fee..." value="late">
 
                                         <div class="col-md-3">
-                                            <label for="category_fee0">Late Ticket Quantity</label><input type="number"
-                                                                                                          required
-                                                                                                          id="category_fee0"
-                                                                                                          name="category[0][fee][late][quantity]"
-                                                                                                          class="form-control item_category">
+                                            <label for="category_fee0">Late Ticket Quantity</label>
+                                            <input type="number"
+                                                   required
+                                                   id="category_fee0"
+                                                   name="category[0][fee][late][quantity]"
+                                                   class="form-control item_category">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="category_fee0">Late Ticket Start Date</label><input type="date"
-                                                                                                            required
-                                                                                                            id="category_fee0"
-                                                                                                            name="category[0][fee][late][start_date]"
-                                                                                                            class="form-control item_category">
+                                            <label for="category_fee0">Late Ticket Start Date</label>
+                                            <input type="date"
+                                                   required
+                                                   id="category_fee0"
+                                                   name="category[0][fee][late][start_date]"
+                                                   class="form-control item_category">
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label for="category_fee0">Late Ticket End Date</label><input type="date"
-                                                                                                          required
-                                                                                                          id="category_fee0"
-                                                                                                          name="category[0][fee][late][end_date]"
-                                                                                                          class="form-control item_category">
+                                            <label for="category_fee0">Late Ticket End Date</label>
+                                            <input type="date"
+                                                   required
+                                                   id="category_fee0"
+                                                   name="category[0][fee][late][end_date]"
+                                                   class="form-control item_category">
                                         </div>
 
                                     </div>
@@ -222,8 +228,8 @@
                                     class="btn  btn-outline-dark"><i
                                     class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="add_start_transportation" class="col-md-2 col-form-label text-md-right">Start
-                                    Location</label>
+                                <label for="add_start_transportation" class="col-md-2 col-form-label text-md-right">Enter
+                                    Pickup Location </label>
 
                                 <div id="add_start_transportation_fields">
                                 </div>
@@ -233,8 +239,8 @@
                                     class="btn  btn-outline-dark"><i
                                     class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="add_end_transportation" class="col-md-2 col-form-label text-md-right">End
-                                    Location</label>
+                                <label for="add_end_transportation" class="col-md-2 col-form-label text-md-right">Enter
+                                    Drop Location After Event</label>
 
                                 <div id="add_end_transportation_field">
                                 </div>
@@ -250,15 +256,17 @@
                                 <div id="add_accomodation_field">
                                 </div>
                             </div>
-
-                            <button type="button" name="add" id="add_racekit"
-                                    class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="description" class="col-md-2 col-form-label text-md-right">Add
-                                    Racekit</label>
-
-                                <div id="add_racekit_field">
+                                <label for="description" class="col-md-2 col-form-label text-md-right">Enter Racekit
+                                    Amount (optional)</label>
+                                <div class="addedSection">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="description" class="">Enter Amount</label>
+                                            <input type="text" required="" id="racekit" name="racekit"
+                                                   class="form-control item_category">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -270,25 +278,6 @@
                                            name="bus_fee" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="description" class="col-md-2 col-form-label text-md-right">Is pickup and
-                                    drop available</label>
-
-                                <div class="col-md-10">
-                                    <input type="radio" required class="pick_up_yes" name="pickup_drop" value="yes">Yes
-                                    <input type="radio" required class="pick_up_no" name="pickup_drop" value="no">No
-                                </div>
-                            </div>
-
-                            <div class="form-group row" id="pickup_drop_available" style="display: none">
-                                <label for="pickup_drop" class="col-md-2 col-form-label text-md-right">Is pickup and
-                                    drop Location</label>
-                                <div class="col-md-10">
-                                    <textarea id="pickup_drop" type="text" class="form-control" name="pickup_drop"
-                                              autocomplete="pickup_drop" rows="3"></textarea>
-                                </div>
-                            </div>
-
                             <div class="form-group row">
                                 <label for="banner" class="col-md-2 col-form-label text-md-right">Upload Banner</label>
                                 <div class="col-md-10">
@@ -309,9 +298,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -385,18 +371,6 @@
             html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
             $('#add_accomodation_field').append(html);
             intAccomodationIndex = intAccomodationIndex + 1
-        });
-
-        var intRacekitIndex = 0
-        $(document).on('click', '#add_racekit', function () {
-
-            var html = '<div class="addedSection"><h3>Add Racekit</h3>';
-            html += '<div class="row"><div class="col-md-6"><div  class="form-group"><label for="racekit' + intRacekitIndex + '">RaceKit Name</label> <input type="text" required id="racekit' + intRacekitIndex + '" name="racekit[' + intRacekitIndex + '][type]" class="form-control item_category"></div></div>';
-            html += '<div class="col-md-6"><div  class="form-group"><label for="racekit_fee' + intRacekitIndex + '">Racekit Fee</label><input required type="text" id="racekit_fee' + intRacekitIndex + '" name="racekit[' + intRacekitIndex + '][subtype]" class="form-control item_category"></div></div></div>';
-
-            html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';
-            $('#add_racekit_field').append(html);
-            intRacekitIndex = intRacekitIndex + 1
         });
 
 

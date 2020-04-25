@@ -2220,3 +2220,48 @@ body.mobile-nav-active #mobile-nav-toggle {
         margin-top: 10px;
     }
 }
+
+.event-form-main {
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+
+}
+
+.event-form div h3 {
+    background-color: #cc2d18;
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #000b16;
+
+}
+
+.event-form-input {
+    font-weight: bolder;
+    font-size: 16px;
+    color: #000b16;
+}
+
+.evet-form-list {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+    font-size: 15px;
+}
+
+.evet-form-list input {
+    font-size: 15px;
+}
+
+.evet-form-list select option {
+    font-size: 15px;
+    height: 50px;
+    font-weight: 400;
+}
+
+.evet-form-list select {
+    font-size: 14px;
+    font-weight: 400;
+    height: 30px !important;
+}
