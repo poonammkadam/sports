@@ -5,15 +5,12 @@
     $listPickupTransportation = collect(json_decode($objEvent->transstart));
     $listDropTransportation = collect(json_decode($objEvent->transend));
     ?>
-    <div class="container" style="background-color: #d3d8d8;">
+    <div class="container">
         <div>
             <div class="row event-form-main">
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10 event-form">
-                    <div class="text-center ">
-                        <h3>Event Participation</h3>
-                    </div>
                     <div class="shadow-lg p-5" style="background: white;">
                         <form id="event_submit" method="POST" action="{{url('event/register')}}" autocomplete="off">
                             @csrf
@@ -22,7 +19,7 @@
                             <br>
                             <div class="form-group evet-form-list">
                                 <div>
-                                    <label for="event-form-input" class="event-form-input">Event Categorys </label>
+                                    <label for="event-form-input" class="event-form-input">Event Categories </label>
                                     <select class="form-control custom-select" required name="event_category"
                                             id="category">
                                         <option>Select event</option>
@@ -71,7 +68,7 @@
                                         <option value="">Select</option>
                                         @foreach($listAccommodation as $objOption)
                                             <option data-price="{{$objOption->fee}}"
-                                                    value="{{$objOption->name}}">{{$objOption->name}}
+                                                    value="{{$objOption->id}}">{{$objOption->name}}
                                                 ({{$objOption->fee}}
                                                 )
                                             </option>
@@ -81,14 +78,15 @@
                             @endif
                             @if($listPickupTransportation->count() > 0)
                                 <div class="form-group evet-form-list">
-                                    <label for="pickup_transportation" class="event-form-input">Select Pickup Loaction
+                                    <label for="pickup_transportation" class="event-form-input">Pickup Location(Before
+                                        Race)
                                         (optional)</label>
                                     <select id="pickup_transportation" class="form-control custom-select"
                                             name="pickup_transportation">
                                         <option value="">Select</option>
                                         @foreach($listPickupTransportation as $objOption)
                                             <option data-price="{{$objOption->fee}}"
-                                                    value="{{$objOption->location}}">{{$objOption->location}}
+                                                    value="{{$objOption->id}}">{{$objOption->location}}
                                                 ({{$objOption->fee}})
                                             </option>
                                         @endforeach
@@ -96,30 +94,35 @@
                                     </select>
                                 </div>
                             @endif
-                            <div class="form-group evet-form-list">
-                                <label for="drop_transportation" class="event-form-input">Select Drop Loaction
-                                    (optional)</label>
-                                <select id="drop_transportation" class="form-control custom-select"
-                                        name="drop_transportation">
-                                    <option value="">Select</option>
-                                    @foreach($listDropTransportation as $objOption)
-                                        <option data-price="{{$objOption->fee}}"
-                                                value="{{$objOption->location}}">{{$objOption->location}}
-                                            ({{$objOption->fee}}
-                                            )
+                            @if($listDropTransportation->count() > 0)
+                                <div class="form-group evet-form-list">
+                                    <label for="drop_transportation" class="event-form-input">Pickup Location(After
+                                        Race)
+                                        (optional)</label>
+                                    <select id="drop_transportation" class="form-control custom-select"
+                                            name="drop_transportation">
+                                        <option value="">Select</option>
+                                        @foreach($listDropTransportation as $objOption)
+                                            <option data-price="{{$objOption->fee}}"
+                                                    value="{{$objOption->id}}">{{$objOption->location}}
+                                                ({{$objOption->fee}}
+                                                )
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            @if($objEvent->racekit)
+                                <div class="form-group evet-form-list">
+                                    <label for="racekit" class="event-form-input">Want RaceKit</label>
+                                    <select id="racekit" class="form-control custom-select" name="racekit">
+                                        <option selected value="no">No need</option>
+                                        <option data-price="{{$objEvent->racekit}}" value="yes">Yes,
+                                            amount({{$objEvent->racekit}})
                                         </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group evet-form-list">
-                                <label for="racekit" class="event-form-input">Want RaceKit</label>
-                                <select id="racekit" class="form-control custom-select" name="racekit">
-                                    <option selected value="no">NO need</option>
-                                    <option data-price="{{$objEvent->racekit}}" value="yes">Yes,
-                                        amount({{$objEvent->racekit}})
-                                    </option>
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
+                            @endif
                             {{--                            <div class="form-group evet-form-list">--}}
                             {{--                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>--}}
                             {{--                                Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza--}}
@@ -131,20 +134,20 @@
                             {{--                                    </option>--}}
                             {{--                                </select>--}}
                             {{--                            </div>--}}
-                            <div class="chat-body">
-                                <label class="event-form-input">Total Payment Chat </label>
-                                <div>
-                                    <div class="row"><p class="col-6 chat-event">Event amount: </p>
-                                        <p class="col-6" id="eventamount">--</p></div>
-                                    <div class="row"><p class="col-6 chat-accommodation">Accommodation amount: </p>
-                                        <p class="col-6">----</p></div>
-                                    <div class="row"><p class="col-6 chat-reservation">Reservation amount:</p>
-                                        <p class="col-6">----</p></div>
-                                    <div class="row"><p class="col-6 chat-total">Total Amount:</p>
-                                        <p class="col-6" id="totalamount">--</p></div>
-                                    <input type="hidden" name="total" id="total">
-                                </div>
-                            </div>
+                            {{--                            <div class="chat-body">--}}
+                            {{--                                <label class="event-form-input">Total Payment Chat </label>--}}
+                            {{--                                <div>--}}
+                            {{--                                    <div class="row"><p class="col-6 chat-event">Event amount: </p>--}}
+                            {{--                                        <p class="col-6" id="eventamount">--</p></div>--}}
+                            {{--                                    <div class="row"><p class="col-6 chat-accommodation">Accommodation amount: </p>--}}
+                            {{--                                        <p class="col-6" id="accommodationamount">----</p></div>--}}
+                            {{--                                    <div class="row"><p class="col-6 chat-reservation">Reservation amount:</p>--}}
+                            {{--                                        <p class="col-6">----</p></div>--}}
+                            {{--                                    <div class="row"><p class="col-6 chat-total">Total Amount:</p>--}}
+                            {{--                                        <p class="col-6" id="totalamount">----</p></div>--}}
+                            {{--                                    <input type="hidden" name="total" id="total">--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                             <div class="form-group evet-form-list">
                                 <label class="event-form-input">Select Payment Mode</label>
                                 <div class="radio">
@@ -192,47 +195,6 @@
             </div>
         </div>
     </div>
-    <script>
-        $("#category").on('change', function () {
-            let str = "";
-            $("select option:selected").each(function () {
-                if ($(this).data('price')) {
-                    str += $(this).data('price') + " ";
-                }
-            });
-            $('#price').html(str)
-            $('#eventamount').html(str)
-            $('#totalamount').html(str)
-            $('input[name="fee"]').val(str)
-            $('input[name="total"]').val(str)
-            let total = parseInt($('input[name="total"]').val())
-            $('#total').val(str)
-        });
-
-        $("#accommodation").on('change', function () {
-            let str = "";
-            $("select option:selected").each(function () {
-                if ($(this).data('price')) {
-                    str += $(this).data('price') + " ";
-                }
-            });
-            $('#price').html(str)
-            $('#eventamount').html(str)
-            $('#totalamount').html(str)
-            $('#total').val(str)
-            $('input[name="fee"]').val(str)
-        });
-
-        $('#online').on('click', function () {
-                $('.payment-online').css('display', 'block')
-            }
-        )
-
-        $('#offline').on('click', function () {
-                $('.payment-online').css('display', 'none')
-            }
-        )
-    </script>
 
     <script src="{{asset('js/card.js')}}"></script>
     <script>

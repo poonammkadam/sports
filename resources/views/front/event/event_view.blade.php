@@ -8,8 +8,9 @@
         </div>
         <div class="title section-header">
             <h2>{!! $objEvent->name !!}</h2>
-
-            <p> {!! $objEvent->banner !!}</p>
+        </div>
+        <div class="description section-description">
+            <h2>{!! $objEvent->description !!}</h2>
             <a href="{{url('/event/register').'/'.$objEvent->id}}"
                class=" btn btn-primary stretched-link">Register</a>
         </div>

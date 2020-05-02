@@ -57,31 +57,31 @@ class EventController extends Controller
         $objEvent->save();
         if ($request->has('transstart')) {
             $objEvent->transstart = json_encode($request->transstart);
-            foreach ($objEvent->transstart as $transstart) {
+            foreach ($request->transstart as $transstart) {
                 $objTransstart = new Transstart();
-                $objTransstart->location = $transstart->location;
-                $objTransstart->price = $transstart->fee;
+                $objTransstart->location = $transstart['location'];
+                $objTransstart->price = $transstart['fee'];
                 $objTransstart->event_id = $objEvent->id;
                 $objTransstart->save();
             }
         }
         if ($request->has('transend')) {
             $objEvent->transend = json_encode($request->transend);
-            foreach ($objEvent->transend as $transend) {
+            foreach ($request->transend as $transend) {
                 $objTransend = new Transend();
-                $objTransend->location = $transend->location;
-                $objTransend->price = $transend->fee;
-                $objTransend->event_id = $transend->id;
+                $objTransend->location = $transend['location'];
+                $objTransend->price = $transend['fee'];
+                $objTransend->event_id = $objEvent->id;
                 $objTransend->save();
             }
         }
         if ($request->has('accomodation')) {
             $objEvent->accommodation = json_encode($request->accomodation);
-            foreach ($objEvent->accommodation as $accomodation) {
+            foreach ($request->accomodation as $accomodation) {
                 $objTransend = new Accomodation();
-                $objTransend->location = $transend->location;
-                $objTransend->price = $transend->fee;
-                $objTransend->event_id = $transend->id;
+                $objTransend->name = $accomodation['name'];
+                $objTransend->price = $accomodation['fee'];
+                $objTransend->event_id = $objEvent->id;
                 $objTransend->save();
             }
         }
@@ -115,7 +115,7 @@ class EventController extends Controller
                         $objEvent->save();
                     }
                     if ('late' == $objTicket->name) {
-                        $objEvent->registration_end_date = $objTicket->start_date;
+                        $objEvent->registration_end_date = $objTicket->end_date;
                         $objEvent->save();
                     }
                 }
@@ -139,7 +139,6 @@ class EventController extends Controller
         $objEvent = EventParticipants::findOrFail($id);
         $objEvent->payment_status = 1;
         $objEvent->save();
-
         return redirect()->back()->with('success', 'Events Payment status update Successfully.');
     }
 

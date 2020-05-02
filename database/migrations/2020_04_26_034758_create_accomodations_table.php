@@ -17,7 +17,7 @@ class CreateAccomodationsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('event_id');
             $table->text('name');
-            $table->integer('fee');
+            $table->integer('price');
             $table->timestamps();
         });
     }

@@ -53,8 +53,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/resulte/upload/{id}', 'EventController@postResulte');
     Route::get('/user/event/category/{id}', 'EventController@getUserCategory');
 
-    Route::get('/setting', 'EventController@create');
-    Route::post('/setting', 'EventController@store');
+    Route::get('/setting', 'SiteSettingController@create');
 });
 
 Route::group(['namespace' => 'User'], function () {
@@ -79,11 +78,11 @@ Route::group(['namespace' => 'User'], function () {
     Route::get('event/participant/receipt/{id}', 'EventController@getReceipt');
     Route::post('ckeditor/upload', 'EventController@upload')->name('ckeditor.upload');
 
-
-    // resulte
+    // result
     Route::get('/results', 'EventController@getAllResults');
     Route::get('/StartPage.aspx', 'EventController@getFromResult');
     Route::get('/results.aspx', 'EventController@getResult');
+    Route::get('/Stats.aspx', 'EventController@getStats');
 
     Route::get('/logout', function () {
         Auth::logout();

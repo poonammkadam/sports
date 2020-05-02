@@ -43,9 +43,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{url('admin/setting')}}" class="nav-link">
-                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
                         <p>
-                            Organisation
+                            Settings
                         </p>
                     </a>
                 </li>

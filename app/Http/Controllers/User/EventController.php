@@ -60,6 +60,19 @@ class EventController extends Controller
         return view('front.results.resultaspx', ['body' => $body]);
     }
 
+    public function getStats()
+    {
+        $endpoint = "https://www.racetecresults.com/Stats.aspx";
+        $client = new Client();
+
+        $response = $client->request('GET', $endpoint, [
+            'query' => ['CId' => '20110', 'RId' => $_GET['RId']]
+        ]);
+        $body = $response->getBody()->getContents();
+        $statusCode = $response->getStatusCode();;
+        return view('front.results.statsaspx', ['body' => $body]);
+    }
+
     public function getShow($id)
     {
         $objEvent = Events::where('id', $id)->first();
