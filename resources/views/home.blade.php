@@ -10,18 +10,16 @@
         </div>
     </section>
 
-    <!-- end header section -->
-
-    <!-- about section -->
+    <!-- Upcoming Events -->
     <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
         <div class="container">
             <div class="section-header">
-                <h2>Events</h2>
+                <h2>Upcoming Events</h2>
                 <p>Here are some of our events</p>
             </div>
 
             <div class="row">
-                @if(($arrObjEvents->count())>0)
+                @if(($arrObjEvents->count()) > 0)
 
                     @foreach($arrObjEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
@@ -43,6 +41,67 @@
         </div>
     </section>
 
+    <!-- Events -->
+    <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Events</h2>
+                <p>Here are some of our events</p>
+            </div>
+
+            <div class="row">
+                @if(($arrObjEvents->count()) > 0)
+
+                    @foreach($arrObjEvents as $objEvent)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="speaker">
+                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <div class="details">
+                                    <h3>{{$objEvent->name}}</h3>
+                                    <h4 class="text-white  mb-0"><i
+                                            class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                    </h4>
+                                    <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events -->
+    <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Closed Events</h2>
+                <p>Here are some of our events</p>
+            </div>
+
+            <div class="row">
+                @if(($arrObjEvents->count()) > 0)
+
+                    @foreach($arrObjEvents as $objEvent)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="speaker">
+                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <div class="details">
+                                    <h3>{{$objEvent->name}}</h3>
+                                    <h4 class="text-white  mb-0"><i
+                                            class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                    </h4>
+                                    <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
 
     <!-- about section -->
 

@@ -14,7 +14,7 @@ class AddStartdateColumsToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->dateTime('registration_start_date')->nullable();
+
         });
     }
 

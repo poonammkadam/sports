@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Http\Model\Profile;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -38,17 +37,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(new Profile(), 'user_id', 'id');
     }
 
     public function isOrganiser()
     {
-        return $this->role=='organiser'?true:false;
+        return $this->role == 'organiser' ? true : false;
     }
 
     public function isAdmin()
     {
-        return $this->role=='admin'?true:false;
+        return $this->role == 'admin' ? true : false;
     }
 }

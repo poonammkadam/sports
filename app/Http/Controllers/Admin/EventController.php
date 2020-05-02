@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Accomodation;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Category;
 use App\Http\Model\EventParticipants;
@@ -77,7 +78,7 @@ class EventController extends Controller
         if ($request->has('accomodation')) {
             $objEvent->accommodation = json_encode($request->accomodation);
             foreach ($objEvent->accommodation as $accomodation) {
-                $objTransend = new Transend();
+                $objTransend = new Accomodation();
                 $objTransend->location = $transend->location;
                 $objTransend->price = $transend->fee;
                 $objTransend->event_id = $transend->id;
@@ -111,6 +112,10 @@ class EventController extends Controller
                     $objTicket->save();
                     if ('early' == $objTicket->name) {
                         $objEvent->registration_start_date = $objTicket->start_date;
+                        $objEvent->save();
+                    }
+                    if ('late' == $objTicket->name) {
+                        $objEvent->registration_end_date = $objTicket->start_date;
                         $objEvent->save();
                     }
                 }
@@ -172,7 +177,6 @@ class EventController extends Controller
         $objResulte->result_status = true;
         $objResulte->file = $request->file('file')->store('resulte/' . $id);
         $objResulte->save();
-
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
     }
 }

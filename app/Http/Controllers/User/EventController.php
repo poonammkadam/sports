@@ -28,6 +28,20 @@ class EventController extends Controller
         $response = $client->request('GET', $endpoint, [
             'query' => ['CId' => '20110']
         ]);
+
+        $body = $response->getBody()->getContents();
+        $statusCode = $response->getStatusCode();;
+        return view('front.results.results', ['body' => $body]);
+    }
+
+    public function getFromResult()
+    {
+        $endpoint = "https://www.racetecresults.com/StartPage.aspx";
+        $client = new Client();
+        $response = $client->request('GET', $endpoint, [
+            'query' => ['CId' => '20110', 'From' => $_GET['From']]
+        ]);
+
         $body = $response->getBody()->getContents();
         $statusCode = $response->getStatusCode();;
         return view('front.results.results', ['body' => $body]);
@@ -43,7 +57,7 @@ class EventController extends Controller
         ]);
         $body = $response->getBody()->getContents();
         $statusCode = $response->getStatusCode();;
-        return view('front.results.results', ['body' => $body]);
+        return view('front.results.resultaspx', ['body' => $body]);
     }
 
     public function getShow($id)

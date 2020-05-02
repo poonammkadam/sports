@@ -82,6 +82,7 @@ Route::group(['namespace' => 'User'], function () {
 
     // resulte
     Route::get('/results', 'EventController@getAllResults');
+    Route::get('/StartPage.aspx', 'EventController@getFromResult');
     Route::get('/results.aspx', 'EventController@getResult');
 
     Route::get('/logout', function () {
@@ -90,7 +91,7 @@ Route::group(['namespace' => 'User'], function () {
     });
 
     Route::get('/thankyou', function () {
-        return view('tankyou');
+        return view('thankyou');
     });
 
 });
