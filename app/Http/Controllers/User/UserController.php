@@ -252,7 +252,7 @@ class UserController extends Controller
     {
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
-        if (auth()->user()->registration_status) {
+        if (auth()->check() && auth()->user()->registration_status) {
             return view('front.event.event', ['objEvent' => $objEvent]);
         }
         return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Model\Events;
 use Monarobase\CountryList\CountryList;
-use PragmaRX\Countries\Package\Countries;
 
 class HomeController extends Controller
 {
@@ -25,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $arrObjEvents = Events::all();
+        return view('home', ['arrObjEvents' => $arrObjEvents]);
     }
 }

@@ -16,104 +16,31 @@
     <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
         <div class="container">
             <div class="section-header">
-                <h2>Event Speakers</h2>
-                <p>Here are some of our speakers</p>
+                <h2>Events</h2>
+                <p>Here are some of our events</p>
             </div>
 
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Brenden Legros</a></h3>
-                            <p>Quas alias incidunt</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
+                @if(($arrObjEvents->count())>0)
+
+                    @foreach($arrObjEvents as $objEvent)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="speaker">
+                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <div class="details">
+                                    <h3>{{$objEvent->name}}</h3>
+                                    <h4 class="text-white  mb-0"><i
+                                            class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                    </h4>
+                                    <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                            <p>Consequuntur odio aut</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
-                            <p>Fugiat laborum et</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
-                            <p>Debitis iure vero</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
-                            <p>Qui molestiae natus</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="speaker">
-                        <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
-                        <div class="details">
-                            <h3><a href="speaker-details.html">Willow Trantow</a></h3>
-                            <p>Non autem dicta</p>
-                            <div class="social">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
-
     </section>
 
 

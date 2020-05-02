@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <?php
-    $listAccommodation = json_decode($objEvent->accommodation);
-    $listPickupTransportation = json_decode($objEvent->transstart);
-    $listDropTransportation = json_decode($objEvent->transend);
+    $listAccommodation = collect(json_decode($objEvent->accommodation));
+    $listPickupTransportation = collect(json_decode($objEvent->transstart));
+    $listDropTransportation = collect(json_decode($objEvent->transend));
     ?>
     <div class="container" style="background-color: #d3d8d8;">
         <div>
@@ -21,46 +21,33 @@
                             <h2 class="text-center ">{{$objEvent->name}}</h2>
                             <br>
                             <div class="form-group evet-form-list">
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <label for="event-form-input" class="event-form-input">Event Categorys </label>
-                                        <select class="form-control custom-select" required name="event_category"
-                                                id="category">
-                                            <option>Select event</option>
-                                            @foreach($objEvent->category as $index => $prate)
-                                                {{$prate->getEventPrice()}}
-                                                <option class="cate"
-                                                        value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label for="event-form-input" class="event-form-input">Event Categorys </label>
+                                    <select class="form-control custom-select" required name="event_category"
+                                            id="category">
+                                        <option>Select event</option>
+                                        @foreach($objEvent->category as $index => $prate)
+                                            <option data-price="{{$prate->getEventPrice()->fee}}" class="cate"
+                                                    value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
-                            <div class="form-group evet-form-list">
-                                <label for="event-form-input" class="event-form-input">Event Fee: </label>B $ <span
-                                    id="price">--</span>
-                                <input type="hidden" value="" id="event-form-input" name="fee">
+                            {{--                            <div class="form-group evet-form-list">--}}
+                            {{--                                <label for="event-form-input" class="event-form-input">Event Fee: </label>B $ <span--}}
+                            {{--                                    id="price"></span>--}}
+                            {{--                                <input type="hidden" value="" id="event-form-input" name="fee">--}}
+                            {{--                            </div>--}}
 
-                            </div>
 
-                            <div class="form-group evet-form-list">
-                                <label for="event-form-input"
-                                       class="event-form-input">Organizer:- </label> {{$objEvent->organisation->name}}
-                            </div>
-
-                            <div class="form-group evet-form-list">
-                                <label for="event-form-input" class="event-form-input">Contact Number: </label>B $ <span
-                                    id="price">.....</span>
-                            </div>
+                            {{--                            <div class="form-group evet-form-list">--}}
+                            {{--                                <label for="event-form-input" class="event-form-input">Event Date--}}
+                            {{--                                    : </label>{{$objEvent->event_date}}--}}
+                            {{--                            </div>--}}
 
                             <div class="form-group evet-form-list">
-                                <label for="event-form-input" class="event-form-input">Event Date
-                                    : </label>{{$objEvent->event_date}}
-                            </div>
-
-                            <div class="form-group evet-form-list">
-                                <label for="inputAddress" class="event-form-input">Team / Sponsor</label>Optional
+                                <label for="inputAddress" class="event-form-input">Team / Sponsor</label>(Optional)
                                 <input required type="text" name="local_name" value="" class="form-control"
                                        id="inputAddress" placeholder="">
                             </div>
@@ -77,32 +64,38 @@
                                 </select>
                             </div>
 
-                            <div class="form-group evet-form-list">
-                                <label for="accommodation" class="event-form-input">Accommodation</label>
-                                <select id="accommodation" class="form-control custom-select" name="accommodation">
-                                    <option value="">Select</option>
-                                    @foreach($listAccommodation as $objOption)
-                                        <option value="{{$objOption->name}}">{{$objOption->name}} ({{$objOption->fee}}
-                                            )
-                                        </option>
-                                    @endforeach
+                            @if($listAccommodation->count() > 0)
+                                <div class="form-group evet-form-list">
+                                    <label for="accommodation" class="event-form-input">Accommodation</label>
+                                    <select id="accommodation" class="form-control custom-select" name="accommodation">
+                                        <option value="">Select</option>
+                                        @foreach($listAccommodation as $objOption)
+                                            <option data-price="{{$objOption->fee}}"
+                                                    value="{{$objOption->name}}">{{$objOption->name}}
+                                                ({{$objOption->fee}}
+                                                )
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            @if($listPickupTransportation->count() > 0)
+                                <div class="form-group evet-form-list">
+                                    <label for="pickup_transportation" class="event-form-input">Select Pickup Loaction
+                                        (optional)</label>
+                                    <select id="pickup_transportation" class="form-control custom-select"
+                                            name="pickup_transportation">
+                                        <option value="">Select</option>
+                                        @foreach($listPickupTransportation as $objOption)
+                                            <option data-price="{{$objOption->fee}}"
+                                                    value="{{$objOption->location}}">{{$objOption->location}}
+                                                ({{$objOption->fee}})
+                                            </option>
+                                        @endforeach
 
-                                </select>
-                            </div>
-                            <div class="form-group evet-form-list">
-                                <label for="pickup_transportation" class="event-form-input">Select Pickup Loaction
-                                    (optional)</label>
-                                <select id="pickup_transportation" class="form-control custom-select"
-                                        name="pickup_transportation">
-                                    <option value="">Select</option>
-                                    @foreach($listPickupTransportation as $objOption)
-                                        <option value="{{$objOption->location}}">{{$objOption->location}}
-                                            ({{$objOption->fee}})
-                                        </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
+                            @endif
                             <div class="form-group evet-form-list">
                                 <label for="drop_transportation" class="event-form-input">Select Drop Loaction
                                     (optional)</label>
@@ -110,41 +103,46 @@
                                         name="drop_transportation">
                                     <option value="">Select</option>
                                     @foreach($listDropTransportation as $objOption)
-                                        <option value="{{$objOption->location}}">{{$objOption->location}}
+                                        <option data-price="{{$objOption->fee}}"
+                                                value="{{$objOption->location}}">{{$objOption->location}}
                                             ({{$objOption->fee}}
                                             )
                                         </option>
                                     @endforeach
-
                                 </select>
                             </div>
                             <div class="form-group evet-form-list">
                                 <label for="racekit" class="event-form-input">Want RaceKit</label>
                                 <select id="racekit" class="form-control custom-select" name="racekit">
                                     <option selected value="no">NO need</option>
-                                    <option value="yes">Yes, amount({{$objEvent->racekit}})</option>
+                                    <option data-price="{{$objEvent->racekit}}" value="yes">Yes,
+                                        amount({{$objEvent->racekit}})
+                                    </option>
                                 </select>
                             </div>
-                            <div class="form-group evet-form-list">
-                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>
-                                Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza
-                                hotel kota kinabalu. Rm80 both ways.
-                                <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">
-                                    <option selected value="no">NO need</option>
-                                    <option value="yes">Yes, amount({{$objEvent->bus_reservation_amount}})</option>
-                                </select>
-                            </div>
+                            {{--                            <div class="form-group evet-form-list">--}}
+                            {{--                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>--}}
+                            {{--                                Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza--}}
+                            {{--                                hotel kota kinabalu. Rm80 both ways.--}}
+                            {{--                                <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">--}}
+                            {{--                                    <option selected value="no">NO need</option>--}}
+                            {{--                                    <option value="yes" data-price="{{$objEvent->bus_reservation_amount}}">Yes,--}}
+                            {{--                                        amount({{$objEvent->bus_reservation_amount}})--}}
+                            {{--                                    </option>--}}
+                            {{--                                </select>--}}
+                            {{--                            </div>--}}
                             <div class="chat-body">
                                 <label class="event-form-input">Total Payment Chat </label>
                                 <div>
                                     <div class="row"><p class="col-6 chat-event">Event amount: </p>
-                                        <p class="col-6">----</p></div>
+                                        <p class="col-6" id="eventamount">--</p></div>
                                     <div class="row"><p class="col-6 chat-accommodation">Accommodation amount: </p>
                                         <p class="col-6">----</p></div>
                                     <div class="row"><p class="col-6 chat-reservation">Reservation amount:</p>
                                         <p class="col-6">----</p></div>
                                     <div class="row"><p class="col-6 chat-total">Total Amount:</p>
-                                        <p class="col-6">----</p></div>
+                                        <p class="col-6" id="totalamount">--</p></div>
+                                    <input type="hidden" name="total" id="total">
                                 </div>
                             </div>
                             <div class="form-group evet-form-list">
@@ -198,9 +196,30 @@
         $("#category").on('change', function () {
             let str = "";
             $("select option:selected").each(function () {
-                str += $(this).data('price') + " ";
+                if ($(this).data('price')) {
+                    str += $(this).data('price') + " ";
+                }
             });
             $('#price').html(str)
+            $('#eventamount').html(str)
+            $('#totalamount').html(str)
+            $('input[name="fee"]').val(str)
+            $('input[name="total"]').val(str)
+            let total = parseInt($('input[name="total"]').val())
+            $('#total').val(str)
+        });
+
+        $("#accommodation").on('change', function () {
+            let str = "";
+            $("select option:selected").each(function () {
+                if ($(this).data('price')) {
+                    str += $(this).data('price') + " ";
+                }
+            });
+            $('#price').html(str)
+            $('#eventamount').html(str)
+            $('#totalamount').html(str)
+            $('#total').val(str)
             $('input[name="fee"]').val(str)
         });
 
