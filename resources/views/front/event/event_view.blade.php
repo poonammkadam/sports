@@ -1,26 +1,17 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row container">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Events View</div>
-
-                    <div class="card-body">
-                        <div class="row m-2">
-                            <div class="col-4"><b> Event Name:</b></div>
-                            <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->name}}</div>
-                        </div>
-
-                        <div class="row m-2">
-                            <div class="col-4"><b> Event Description:</b></div>
-                            <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->description}}</div>
-                        </div>
-                    </div>
-                </div>
+    <div class="container top my-5">
+        <div class="row">
+            <div class="banner">
+                <img src="{{'/public/'.$objEvent->banner}}" style="max-height:400px" class="w-100">
             </div>
+        </div>
+        <div class="title section-header">
+            <h2>{!! $objEvent->name !!}</h2>
+
+            <p> {!! $objEvent->banner !!}</p>
+            <a href="{{url('/event/register').'/'.$objEvent->id}}"
+               class=" btn btn-primary stretched-link">Register</a>
         </div>
     </div>
 @endsection

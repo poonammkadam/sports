@@ -29,7 +29,6 @@ class Category extends Model
                 return $ticket;
             }
         }
-        return '';
     }
 
     public function ticket()

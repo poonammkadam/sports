@@ -61,15 +61,18 @@ Route::group(['namespace' => 'User'], function () {
     Route::get('/registration', 'UserController@getRegister');
     Route::get('/profile_update', 'UserController@getRegister');
 
+//    Route::get('/{result}', 'UserController@getRegister')->where(['result' => '\b(aspx)\b+']);;
+
     Route::get('/myprofile', 'UserController@getProfile');
 
     Route::get('/events', 'UserController@eventList');
     Route::get('/event/register/{id}', 'UserController@eventCreate');
     Route::post('/event/register', 'UserController@eventStore');
-    Route::get('/event/view/{id}', 'EventController@getShow');
+    Route::get('/event/{id}', 'EventController@getShow');
 
     Route::post('/profile/update', 'UserController@update');
     Route::get('/myresult', 'UserController@getUserResult');
+
 
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');
     Route::post('event/receipt/upload/{id}', 'EventController@postUploadReceipt');
@@ -78,7 +81,8 @@ Route::group(['namespace' => 'User'], function () {
 
 
     // resulte
-    Route::get('/results', 'EventController@getResults');
+    Route::get('/results', 'EventController@getAllResults');
+    Route::get('/results.aspx', 'EventController@getResult');
 
     Route::get('/logout', function () {
         Auth::logout();

@@ -20,13 +20,26 @@ class EventController extends Controller
         return view('front.event.event_view', ['objEvent' => $objEvent]);
     }
 
-    public function getResults()
+    public function getAllResults()
     {
         $endpoint = "https://www.racetecresults.com/StartPage.aspx";
         $client = new Client();
 
         $response = $client->request('GET', $endpoint, [
             'query' => ['CId' => '20110']
+        ]);
+        $body = $response->getBody()->getContents();
+        $statusCode = $response->getStatusCode();;
+        return view('front.results.results', ['body' => $body]);
+    }
+
+    public function getResult()
+    {
+        $endpoint = "https://www.racetecresults.com/results.aspx";
+        $client = new Client();
+
+        $response = $client->request('GET', $endpoint, [
+            'query' => ['CId' => '20110', 'RId' => $_GET['RId']]
         ]);
         $body = $response->getBody()->getContents();
         $statusCode = $response->getStatusCode();;
