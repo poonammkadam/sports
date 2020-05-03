@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <?php
-    $listAccommodation = collect(json_decode($objEvent->accommodation));
-    $listPickupTransportation = collect(json_decode($objEvent->transstart));
-    $listDropTransportation = collect(json_decode($objEvent->transend));
+    $listAccommodation = ($objEvent->accom);
+    $listPickupTransportation = ($objEvent->start);
+    $listDropTransportation = ($objEvent->end);
+
     ?>
     <div class="container">
         <div>
@@ -67,9 +68,9 @@
                                     <select id="accommodation" class="form-control custom-select" name="accommodation">
                                         <option value="">Select</option>
                                         @foreach($listAccommodation as $objOption)
-                                            <option data-price="{{$objOption->fee}}"
+                                            <option data-price="{{$objOption->price}}"
                                                     value="{{$objOption->id}}">{{$objOption->name}}
-                                                ({{$objOption->fee}}
+                                                ({{$objOption->price}}
                                                 )
                                             </option>
                                         @endforeach
@@ -85,9 +86,9 @@
                                             name="pickup_transportation">
                                         <option value="">Select</option>
                                         @foreach($listPickupTransportation as $objOption)
-                                            <option data-price="{{$objOption->fee}}"
+                                            <option data-price="{{$objOption->price}}"
                                                     value="{{$objOption->id}}">{{$objOption->location}}
-                                                ({{$objOption->fee}})
+                                                ({{$objOption->price}})
                                             </option>
                                         @endforeach
 
@@ -103,9 +104,9 @@
                                             name="drop_transportation">
                                         <option value="">Select</option>
                                         @foreach($listDropTransportation as $objOption)
-                                            <option data-price="{{$objOption->fee}}"
+                                            <option data-price="{{$objOption->price}}"
                                                     value="{{$objOption->id}}">{{$objOption->location}}
-                                                ({{$objOption->fee}}
+                                                ({{$objOption->price}}
                                                 )
                                             </option>
                                         @endforeach

@@ -2,6 +2,9 @@
 
 namespace App\Http\Model;
 
+use App\Accomodation;
+use App\Transend;
+use App\Transstart;
 use Illuminate\Database\Eloquent\Model;
 
 class Events extends Model
@@ -20,6 +23,21 @@ class Events extends Model
 
     public function organisation()
     {
-        return $this->hasOne(new Organisation(),  'id', 'org_id');
+        return $this->hasOne(new Organisation(), 'id', 'org_id');
+    }
+
+    public function accom()
+    {
+        return $this->hasOne(new Accomodation(), 'event_id', 'id');
+    }
+
+    public function start()
+    {
+        return $this->hasOne(new Transstart(), 'event_id', 'id');
+    }
+
+    public function end()
+    {
+        return $this->hasOne(new Transend(), 'event_id', 'id');
     }
 }

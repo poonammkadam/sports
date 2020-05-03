@@ -19,9 +19,9 @@
             </div>
 
             <div class="row">
-                @if(($arrObjEvents->count()) > 0)
+                @if(($arrObjUpcomingEvents->count()) > 0)
 
-                    @foreach($arrObjEvents as $objEvent)
+                    @foreach($arrObjUpcomingEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
                                 <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
@@ -50,9 +50,9 @@
             </div>
 
             <div class="row">
-                @if(($arrObjEvents->count()) > 0)
+                @if(($arrObjCurrentEvents->count()) > 0)
 
-                    @foreach($arrObjEvents as $objEvent)
+                    @foreach($arrObjCurrentEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
                                 <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
@@ -81,9 +81,9 @@
             </div>
 
             <div class="row">
-                @if(($arrObjEvents->count()) > 0)
+                @if(($arrObjPastEvents->count()) > 0)
 
-                    @foreach($arrObjEvents as $objEvent)
+                    @foreach($arrObjPastEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
                                 <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
