@@ -28,16 +28,16 @@ class Events extends Model
 
     public function accom()
     {
-        return $this->hasOne(new Accomodation(), 'event_id', 'id');
+        return $this->hasMany(new Accomodation(), 'event_id', 'id');
     }
 
     public function start()
     {
-        return $this->hasOne(new Transstart(), 'event_id', 'id');
+        return $this->hasMany(new Transstart(), 'event_id', 'id');
     }
 
     public function end()
     {
-        return $this->hasOne(new Transend(), 'event_id', 'id');
+        return $this->hasMany(new Transend(), 'event_id', 'id');
     }
 }

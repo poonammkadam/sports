@@ -203,6 +203,15 @@
             form: document.querySelector('form'),
             container: '.card-wrapper'
         });
+        $('#online').on('click', function () {
+                $('.payment-online').css('display', 'block')
+            }
+        )
+
+        $('#offline').on('click', function () {
+                $('.payment-online').css('display', 'none')
+            }
+        )
     </script>
 @endsection
 
