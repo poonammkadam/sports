@@ -10,7 +10,7 @@ class Organisation extends Model
 
     public function events()
     {
-        return $this->hasMany('App\Http\Model\Events', 'org_id', 'id');
+        return $this->hasMany(new Events(), 'org_id', 'id');
     }
 
 

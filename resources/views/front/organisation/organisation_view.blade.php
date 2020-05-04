@@ -6,7 +6,8 @@
                 <h1>{{$objOrganisation->name}}</h1>
                 <p>{{auth()->user()->email}}</p>
             </div>
-            <button type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#demo">See More</button>
+            <button type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#demo">See More
+            </button>
             <div id="demo" class="collapse  text-center">
                 <div>
                     <div class="profile-data">
@@ -27,21 +28,19 @@
         <h3>My Events</h3><br>
         <div class="row my-event">
             @foreach ($objOrganisation->events as $item)
-             <div class="shadow card col-md-3 item-inner text-center">
-                 <a href="{{url('/event/view/'.$item->id)}}">   <img src="{{ URL::to('/') }}/public/{{ $item->banner }}" class="card-img-top event-img" alt="">
-                    <div class="card-body">
-                        <div class="overlay">
-                            <br><br>
+                <div class="shadow card col-md-3 item-inner text-center">
+                    <a href="{{url('/event/view/'.$item->id)}}"> <img
+                            src="{{ URL::to('/') }}/public/{{ $item->banner }}" class="card-img-top event-img" alt="">
+                        <div class="card-body">
+                            <div class="overlay">
+                                <br><br>
+                            </div>
+                            <h4 class="card-title"><strong>{{$item->name}}</strong></h4>
+                            <h5 class="card-title"><strong>{{$item->event_date}}</strong></h5>
                         </div>
-                        <h4 class="card-title"><strong>{{$item->name}}</strong></h4>
-                        <h5 class="card-title"><strong>{{$item->event_date}}</strong></h5>
-
-                    </div>
-                 </a>
+                    </a>
                 </div>
-
             @endforeach
-
         </div>
     </div>
 

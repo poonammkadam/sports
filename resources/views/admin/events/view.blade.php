@@ -125,6 +125,12 @@
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1"
+                                                aria-label="Browser: activate to sort column ascending"
+                                                style="width: 100px;">
+                                                View Reciept
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1"
                                                 aria-label="CSS grade: activate to sort column ascending"
                                                 style="width: 95px;">
                                                 Upload result
@@ -158,7 +164,11 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        --
+                                                        @if($objParticipants->team)
+                                                            {{$objParticipants->team}}
+                                                        @else
+                                                            --
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($objParticipants->payment_type=='online')
@@ -168,11 +178,21 @@
                                                         @endif
                                                     </td>
                                                     <td>
+                                                        @if($objParticipants->receipt)
+                                                            <a target="_blank"
+                                                               href="{{url('public/'.$objParticipants->receipt )}}">View</a>
+                                                        @else
+                                                            --
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if(!$objParticipants->result_status)
                                                             <a class="btn btn-info"
                                                                href="{{url('/admin/resulte/edit/'.$objParticipants->id)}}">Upload</a>
                                                         @else
-                                                            <a class="btn btn-info disabled" title="Resulte already upload" href="#">Already Uploaded</a>
+                                                            <a class="btn btn-info disabled"
+                                                               title="Resulte already upload" href="#">Already
+                                                                Uploaded</a>
                                                         @endif
                                                     </td>
                                                 </tr>
