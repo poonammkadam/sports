@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Model\Events;
 use Carbon\Carbon;
-use Monarobase\CountryList\CountryList;
 
 class HomeController extends Controller
 {
@@ -25,10 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(4)->get();
-        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(4)->get();
+        $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
+        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
         $arrObjCurrentEvents = Events::whereDate('registration_start_date', '<', Carbon::now()->toDateString())
-            ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
+            ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
 
         return view('home', ['arrObjUpcomingEvents' => $arrObjUpcomingEvents, 'arrObjPastEvents' => $arrObjPastEvents, 'arrObjCurrentEvents' => $arrObjCurrentEvents]);
     }

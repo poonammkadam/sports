@@ -99,6 +99,11 @@ class UserController extends Controller
         $objProfile = Profile::where('user_id', auth()->user()->id)->first();
         $objEventParticipants->category_id = $request->event_category;
         $objEventParticipants->event_id = $request->event_id;
+        $objEventParticipants->t_shirt_size = $request->t_shirt_size;
+        $objEventParticipants->transstarts = $request->pickup_transportation;
+        $objEventParticipants->transends = $request->drop_transportation;
+        $objEventParticipants->racekit_price = $request->racekit;
+        $objEventParticipants->team = $request->team;
         $objEventParticipants->profile_id = $objProfile->id;
         $objEventParticipants->payment_type = $request->payment_type;
 
@@ -141,7 +146,7 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
-        $credentials = new Credentials("api.ms641829.7e", "EBpu185\/#HArq0-", "MS123456", Mode::Live);
+        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::LIVE);
 
         $txn = new Transaction();
         $cardDetails = new CardDetails();

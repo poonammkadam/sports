@@ -51,6 +51,7 @@ class EventController extends Controller
         //        $objEvent->registration_start_date = $request->register_start_date;
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
+        $objEvent->event_status = $request->event_status;
         $objEvent->venue = $request->venue;
         $objEvent->org_id = $request->organisation;
         $objEvent->banner = $request->file('banner')->store('banner');

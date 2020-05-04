@@ -28,6 +28,7 @@ class CreateEventsTable extends Migration
             $table->text('transend')->nullable();
             $table->text('accommodation')->nullable();
             $table->text('racekit')->nullable();
+            $table->boolean('event_status')->nullable();
             $table->text('extra_info')->nullable();
             $table->timestamps();
         });

@@ -230,7 +230,6 @@
                             <div class="form-group row">
                                 <label for="add_start_transportation" class="col-md-2 col-form-label text-md-right">Enter
                                     Pickup Location </label>
-
                                 <div id="add_start_transportation_fields">
                                 </div>
                             </div>
@@ -270,14 +269,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="bus_fee" class="col-md-2 col-form-label text-md-right">>Bus Reservation
-                                    Fee</label>
-                                <div class="col-md-4">
-                                    <input required type="text" class="form-control" id="bus_fee"
-                                           name="bus_fee" placeholder="">
-                                </div>
+                            <div class="form-group evet-form-list">
+                                <label for="event_status" class="event-form-input">Event Status</label>
+                                <select id="event_status" class="form-control custom-select" name="event_status">
+                                    <option selected>Open this select menu</option>
+                                    <option value="Open">Open</option>
+                                    <option value="Closed">Closed</option>
+                                    <option value="Postponed">Postponed</option>
+                                </select>
                             </div>
+
                             <div class="form-group row">
                                 <label for="banner" class="col-md-2 col-form-label text-md-right">Upload Banner</label>
                                 <div class="col-md-10">

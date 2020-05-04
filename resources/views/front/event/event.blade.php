@@ -46,7 +46,7 @@
 
                             <div class="form-group evet-form-list">
                                 <label for="inputAddress" class="event-form-input">Team / Sponsor</label>(Optional)
-                                <input required type="text" name="local_name" value="" class="form-control"
+                                <input type="text" name="local_name" value="" class="form-control"
                                        id="inputAddress" placeholder="">
                             </div>
 

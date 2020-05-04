@@ -11,8 +11,10 @@
         </div>
         <div class="description section-description">
             <h2>{!! $objEvent->description !!}</h2>
-            <a href="{{url('/event/register').'/'.$objEvent->id}}"
-               class=" btn btn-primary stretched-link">Register</a>
+            @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) < date('Y-m-d'))
+                <a href="{{url('/event/register').'/'.$objEvent->id}}"
+                   class=" btn btn-primary stretched-link">Register</a>
+            @endif
         </div>
     </div>
 @endsection

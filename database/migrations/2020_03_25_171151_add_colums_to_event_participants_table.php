@@ -15,7 +15,7 @@ class AddColumsToEventParticipantsTable extends Migration
     {
         Schema::table('event_participants', function (Blueprint $table) {
             $table->text('team')->nullable();
-            $table->text('t-shirt_size')->nullable();
+            $table->text('t_shirt_size')->nullable();
             $table->text('accommodation')->nullable();
             $table->integer('transstarts')->nullable();
             $table->integer('transends')->nullable();

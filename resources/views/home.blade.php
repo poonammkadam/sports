@@ -11,15 +11,16 @@
     </section>
 
     <!-- Upcoming Events -->
-    <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Upcoming Events</h2>
-                <p>Here are some of our events</p>
-            </div>
+    @if(($arrObjUpcomingEvents->count()) > 0)
+        <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Upcoming Events</h2>
+                    <p>Here are some of our events</p>
+                </div>
 
-            <div class="row">
-                @if(($arrObjUpcomingEvents->count()) > 0)
+                <div class="row">
+
 
                     @foreach($arrObjUpcomingEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
@@ -36,11 +37,10 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
+                </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endif
     <!-- Events -->
     <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
         <div class="container">
@@ -51,7 +51,6 @@
 
             <div class="row">
                 @if(($arrObjCurrentEvents->count()) > 0)
-
                     @foreach($arrObjCurrentEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
@@ -73,16 +72,15 @@
     </section>
 
     <!-- Past Events -->
-    <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Closed Events</h2>
-                <p>Here are some of our events</p>
-            </div>
+    @if(($arrObjPastEvents->count()) > 0)
+        <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Closed Events</h2>
+                    <p>Here are some of our events</p>
+                </div>
 
-            <div class="row">
-                @if(($arrObjPastEvents->count()) > 0)
-
+                <div class="row">
                     @foreach($arrObjPastEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
@@ -98,89 +96,88 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
+                </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endif
     <!-- about section -->
 
-    <!-- teacher section -->
-    <section id="supporters" class="section-with-bg wow fadeInUp"
-             style="visibility: visible; animation-name: fadeInUp;">
+    <!-- Sponsor section -->
+    {{--    <section id="supporters" class="section-with-bg wow fadeInUp"--}}
+    {{--             style="visibility: visible; animation-name: fadeInUp;">--}}
 
-        <div class="container">
-            <div class="section-header">
-                <h2>Sponsors</h2>
-            </div>
+    {{--        <div class="container">--}}
+    {{--            <div class="section-header">--}}
+    {{--                <h2>Sponsors</h2>--}}
+    {{--            </div>--}}
 
-            <div class="row no-gutters supporters-wrap clearfix">
+    {{--            <div class="row no-gutters supporters-wrap clearfix">--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/1.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/1.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/2.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/2.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/3.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/3.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/4.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/4.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/5.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/5.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/6.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/6.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/7.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/7.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="supporter-logo">
-                        <img src="img/supporters/8.png" class="img-fluid" alt="">
-                    </div>
-                </div>
+    {{--                <div class="col-lg-3 col-md-4 col-xs-6">--}}
+    {{--                    <div class="supporter-logo">--}}
+    {{--                        <img src="img/supporters/8.png" class="img-fluid" alt="">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
 
-            </div>
+    {{--            </div>--}}
 
-        </div>
+    {{--        </div>--}}
 
-    </section>
+    {{--    </section>--}}
 
     <section id="subscribe">
         <div class="container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
             <div class="section-header">
                 <h2>Newsletter</h2>
-                <p>Rerum numquam illum recusandae quia mollitia consequatur.</p>
+                <p>Subscribe to our newsLetter to stay updated</p>
             </div>
 
-            <form method="POST" action="#">
+            <form method="POST" action="/subscribe">
                 <div class="form-row justify-content-center">
                     <div class="col-auto">
-                        <input type="text" class="form-control" placeholder="Enter your Email">
+                        <input type="text" name="email" class="form-control" placeholder="Enter your Email">
                     </div>
                     <div class="col-auto">
                         <button type="submit">Subscribe</button>
@@ -262,15 +259,5 @@
 
         </div>
     </section>
-
-
-    </main>
-
-
-
-
-
-
-
 
 @endsection
