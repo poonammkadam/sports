@@ -66,6 +66,8 @@
                             </div>
                         </div>
                     @endforeach
+                @else
+                    <div class="col-12 text-center"><h3>There are No events available at a moment</h3></div>
                 @endif
             </div>
         </div>

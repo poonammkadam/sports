@@ -73,23 +73,22 @@
                 @else
                     <li class="nav-item"><a href="{{ url('/home') }}">Home</a></li>
                     <li class="nav-item"><a href="{{ url('/results') }}">Results</a></li>
-                    @if(Auth::check() && Auth::user()->isAdmin())
+                    @if(auth()->user() && auth()->user()->isAdmin())
                         <li class="nav-item"><a href="{{ url('/admin') }}"> Dashboard</a></li>
+                    @endif
+                    <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
+                    @if(auth()->user()->isOrganiser())
+                        <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
                     @else
-                        <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
-                        @if(auth()->user()->role == 'organiser')
-                            <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
-                        @else
-                            <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
-                            <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>
-                            <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
-                        @endif
+                        <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
+                        <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>
+                        <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
                     @endif
 
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
+                           id="navbarDropdown" role="button">
+                            {{ Auth::user()->name }} <span class="caret" style="color: red"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

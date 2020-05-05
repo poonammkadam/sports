@@ -95,12 +95,12 @@ Route::group(['namespace' => 'User'], function () {
 
 });
 
-Route::group(['namespace' => 'User', 'prefix' => 'organiser',], function () {
-    Route::get('/', 'OragnationController@getRequestForm');
+Route::group(['namespace' => 'User', 'prefix' => '',], function () {
+    Route::get('/', 'OrganisationController@getRequestForm');
     Route::get('/myorganisation', 'OrganisationController@show');
     Route::get('/organisation/view', 'OrganisationController@show');
     Route::post('/oragnation/request', 'OrganisationController@postOraganisationStore');
-    Route::get('/event/view/{id}', 'OrganisationControlle@getShow');
+    Route::get('/event/view/{id}', 'OrganisationController@getShow');
 });
 
 Route::get('/privacy', 'Controller@privacy');
