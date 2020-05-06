@@ -87,7 +87,7 @@
 
                     <li class="nav-item dropdown">
                         <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
-                           id="navbarDropdown" role="button">
+                           id="navbarDropdown" role="button" v-pre>
                             {{ Auth::user()->name }} <span class="caret" style="color: red"></span>
                         </a>
 

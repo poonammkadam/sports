@@ -30,15 +30,20 @@
 
                 <div class="card-text">
                     <div id="demo" class="text-center">
-                        <div class="row"><h6>First Name :{{$objUserProfile->first_name}}</h6></div>
-                        <div class="row"><h6>Last Name : {{$objUserProfile->last_name}}</h6></div>
-                        <div class="row"><h6>Gender :{{$objUserProfile->gender}}</h6></div>
+                        <div class="profile-data "><h4>First Name
+                                :{{$objUserProfile->first_name}}</h4></div>
+                        <div class="profile-data "><h4>Last Name
+                                : {{$objUserProfile->last_name}}</h4></div>
+                        <div class="profile-data"><h4>Gender
+                                :{{$objUserProfile->gender}}</h4></div>
                         <div>
-                            <h2>Contact Info</h2>
+                            <h3>Contact Info</h3>
                             <div class="profile-data"><h4>My Mobile Number : {{$objUserProfile->mobile_no_primary}}</h4>
                             </div>
-                            <div class="profile-data"><h4>My Country :{{$objUserProfile->country}}</h4></div>
-                            <div class="profile-data"><h4>My Address :{{$objUserProfile->address}}</h4></div>
+                            @if($objUserProfile->country)
+                                <div class="profile-data"><h4>My Country :{{$objUserProfile->country}}</h4></div>@endif
+                            @if($objUserProfile->address)
+                                <div class="profile-data"><h4>My Address :{{$objUserProfile->address}}</h4></div>@endif
                         </div>
                     </div>
                 </div>
