@@ -11,11 +11,11 @@
         </div>
         <div class="description section-description">
             <h2>{!! $objEvent->description !!}</h2>
-            {{--            @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) < date('Y-m-d'))--}}
-            @if(auth()->check() && !auth()->user()->isOrganiser())
-                <a href="{{url('/event/register').'/'.$objEvent->id}}"
-                   class=" btn btn-primary stretched-link">Register</a>
-                {{--            @endif--}}
+            @if( date('Y-m-d', strtotime($objEvent->registration_start_date)) < date('Y-m-d') && date('Y-m-d', strtotime($objEvent->registration_end_date)) > date('Y-m-d'))
+                @if(auth()->check() && !auth()->user()->isOrganiser())
+                    <a href="{{url('/event/register').'/'.$objEvent->id}}"
+                       class=" btn btn-primary stretched-link">Register</a>
+                @endif
             @endif
         </div>
     </div>

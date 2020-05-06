@@ -43,8 +43,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="form-check">
-                                <input class="form-check-input col-md-4" type="checkbox" name="remember"
+                            <div class="col-md-4"></div>
+                            <div class="form-check col-md-8">
+                                <input class="form-check-input col-md-1" type="checkbox" name="remember"
                                        id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label col-md-8" for="remember">
