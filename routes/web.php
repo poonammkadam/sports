@@ -95,7 +95,7 @@ Route::group(['namespace' => 'User'], function () {
 
 });
 
-Route::group(['namespace' => 'User', 'prefix' => '',], function () {
+Route::group(['namespace' => 'User', 'prefix' => 'organisation',], function () {
     Route::get('/', 'OrganisationController@getRequestForm');
     Route::get('/myorganisation', 'OrganisationController@show');
     Route::get('/organisation/view', 'OrganisationController@show');

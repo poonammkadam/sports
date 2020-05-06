@@ -81,7 +81,7 @@
                         <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
                     @else
                         <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
-                        <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>
+                        {{--                        <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>--}}
                         <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>
                     @endif
 

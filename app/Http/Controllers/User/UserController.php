@@ -24,6 +24,7 @@ use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use App\Notifications\RegisterConfirmation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -46,7 +47,7 @@ class UserController extends Controller
         if ($objProfile->registration_status) {
             $objUserProfile = Profile::where('user_id', $objProfile->id)->first();
             $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
-            return view('front.profile.profile', ['objProfile' => $objProfile, 'objUserProfilEvents' => $objUserProfileEvents, 'objUserProfile' => $objUserProfile]);
+            return view('front.profile.profile', ['objProfile' => $objProfile, 'objUserProfileEvents' => $objUserProfileEvents, 'objUserProfile' => $objUserProfile]);
         } else {
             $objCountries = new Countries();
             $arrCountries = $objCountries->all()->pluck('name.common');
@@ -87,8 +88,12 @@ class UserController extends Controller
 
     public function eventList()
     {
-        $arrObjEvents = Events::all();
-        return view('front.event.event_list', ['arrObjEvents' => $arrObjEvents]);
+        $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
+        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
+        $arrObjCurrentEvents = Events::whereDate('registration_start_date', '<', Carbon::now()->toDateString())
+            ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
+
+        return view('front.event.event_list', ['arrObjUpcomingEvents' => $arrObjUpcomingEvents, 'arrObjPastEvents' => $arrObjPastEvents, 'arrObjCurrentEvents' => $arrObjCurrentEvents]);
     }
 
     public function eventStore(Request $request)

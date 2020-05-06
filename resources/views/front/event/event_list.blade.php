@@ -2,90 +2,98 @@
 @section('content')
     <div class="container">
 
-        <div class="text-center">
-            <h3>Events</h3>
-        </div>
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-        <div class="row">
-            @if(($arrObjEvents->count())>0)
-                @foreach($arrObjEvents as $objEvent)
-                    @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) >= date('Y-m-d') && date('Y-m-d', strtotime($objEvent->registration_start_date)) < date('Y-m-d'))
-                        <div class="col-sm-12 col-md-4 mb-5">
-                            <div id="list-card" class="shadow-lg  bg-white rounded card "
-                            >
-                                <img class="card-img-top" src="{{asset('images/img3.jpeg')}}">
-                                <div class="card-body">
-                                    <h4 class="card-title ellipsis">{{$objEvent->name}}</h4>
-                                    <p class="card-text">Registration will Close
-                                        :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                    <a href="{{url('/event/register').'/'.$objEvent->id}}"
-                                       class=" stretched-link"></a>
+        <!-- Upcoming Events -->
+        @if(($arrObjUpcomingEvents->count()) > 0)
+            <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Upcoming Events</h2>
+                        <p>Here are some of our events</p>
+                    </div>
+
+                    <div class="row">
+
+
+                        @foreach($arrObjUpcomingEvents as $objEvent)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="speaker">
+                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <div class="details">
+                                        <h3>{{$objEvent->name}}</h3>
+                                        <h4 class="text-white  mb-0"><i
+                                                class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                        </h4>
+                                        <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
-            @else
-                <h1> There is no event available to register. </h1>
-            @endif
-        </div>
-        <div class="row">
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
+    <!-- Events -->
+        <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Events</h2>
+                    <p>Here are some of our events</p>
+                </div>
 
-            <h2 class="pagetitle"><span>Comming soon..</span></h2>
-            @if(($arrObjEvents->count())>0)
-                @foreach($arrObjEvents as $objEvent)
-                    @if( date('Y-m-d', strtotime($objEvent->registration_start_date)) > date('Y-m-d'))
-                        <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
-                            <img class="card-img-top" src="{{asset('images/img3.jpeg')}}" data-toggle="tooltip"
-                                 title="registertion close" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">{{$objEvent->name}}</h4>
-                                <p class="card-text">Registration Close
-                                    :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                @if(auth()->user()->role != 'organiser')
-                                    <a href="{{url('/event/register').'/'.$objEvent->id}}" disabled='disabled'
-                                       data-toggle="tooltip" title="registertion close"
-                                       class="btn btn-primary stretched-link">Register</a>
-                                @endif
+                <div class="row">
+                    @if(($arrObjCurrentEvents->count()) > 0)
+                        @foreach($arrObjCurrentEvents as $objEvent)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="speaker">
+                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <div class="details">
+                                        <h3>{{$objEvent->name}}</h3>
+                                        <h4 class="text-white  mb-0"><i
+                                                class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                        </h4>
+                                        <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+                    @else
+                        <div class="col-12 text-center"><h3>There are No events available at a moment</h3></div>
                     @endif
-                @endforeach
-            @else
-                <h1> There is no event available to register. </h1>
-            @endif
+                </div>
+            </div>
+        </section>
 
-        </div>
-        <div class="row">
+        <!-- Past Events -->
+        @if(($arrObjPastEvents->count()) > 0)
+            <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Closed Events</h2>
+                        <p>Here are some of our events</p>
+                    </div>
 
-            <h2 class="pagetitle"><span>Closed Events</span></h2>
-            @if(($arrObjEvents->count())>0)
-                @foreach($arrObjEvents as $objEvent)
-                    @if( date('Y-m-d', strtotime($objEvent->registration_end_date)) < date('Y-m-d'))
-                        <div class="shadow-lg  mb-5 bg-white rounded card  item-inner" style="width:220px">
-                            <img class="card-img-top" src="{{asset('images/img3.jpeg')}}" data-toggle="tooltip"
-                                 title="registertion close" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">{{$objEvent->name}}</h4>
-                                <p class="card-text">Registration Close
-                                    :-{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                @if(auth()->user()->role != 'organiser')
-                                    <a href="{{url('/event/register').'/'.$objEvent->id}}" disabled='disabled'
-                                       data-toggle="tooltip" title="registertion close"
-                                       class="btn btn-primary stretched-link">Register</a>
-                                @endif
+                    <div class="row">
+                        @foreach($arrObjPastEvents as $objEvent)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="speaker">
+                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <div class="details">
+                                        <h3>{{$objEvent->name}}</h3>
+                                        <h4 class="text-white  mb-0"><i
+                                                class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
+                                        </h4>
+                                        <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
+                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
-            @endif
-        </div>
-
-
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
     </div>
 @endsection
 
