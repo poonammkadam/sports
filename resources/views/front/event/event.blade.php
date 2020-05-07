@@ -21,13 +21,15 @@
                             <br>
                             <div class="form-group evet-form-list">
                                 <div>
+                                    <input type="hidden" name="ticket_id">
                                     <label for="event-form-input" class="event-form-input">Event Categories </label>
                                     <select class="form-control custom-select" onchange="getPrice(this)"
                                             required name="event_category"
                                             id="category">
                                         <option>Select event</option>
                                         @foreach($objEvent->category as $index => $prate)
-                                            <option data-price="{{$prate->getEventPrice()->fee}}" class="cate"
+                                            <option data-ticket="{{$prate->getEventPrice()->id}}"
+                                                    data-price="{{$prate->getEventPrice()->fee}}" class="cate"
                                                     value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
                                         @endforeach
                                     </select>
@@ -132,17 +134,17 @@
                                     </select>
                                 </div>
                             @endif
-                            <div class="form-group evet-form-list">
-                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>
-                                Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza
-                                hotel kota kinabalu. Rm80 both ways.
-                                <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">
-                                    <option selected value="no">NO need</option>
-                                    <option value="yes" data-price="{{$objEvent->bus_reservation_amount}}">Yes,
-                                        amount({{$objEvent->bus_reservation_amount}})
-                                    </option>
-                                </select>
-                            </div>
+                            {{--                            <div class="form-group evet-form-list">--}}
+                            {{--                                <label for="bus_reservation" class="event-form-input">Bus Reservation</label>--}}
+                            {{--                                Optional transportation. TD plaza hotel kota kinabalu - starting / finishing - TD plaza--}}
+                            {{--                                hotel kota kinabalu. Rm80 both ways.--}}
+                            {{--                                <select id="bus_reservation" class="form-control custom-select" name="bus_reservation">--}}
+                            {{--                                    <option selected value="no">NO need</option>--}}
+                            {{--                                    <option value="yes" data-price="{{$objEvent->bus_reservation_amount}}">Yes,--}}
+                            {{--                                        amount({{$objEvent->bus_reservation_amount}})--}}
+                            {{--                                    </option>--}}
+                            {{--                                </select>--}}
+                            {{--                            </div>--}}
                             <div class="chat-body">
                                 <label class="event-form-input">Total Payment Chart </label>
                                 <div>
@@ -169,12 +171,12 @@
                             <div class="form-group evet-form-list">
                                 <label class="event-form-input">Select Payment Mode</label>
                                 <div class="radio">
-                                    <label for="offline"><input type="radio" required id="offline" value="offline"
+                                    <label for="offline"><input type="radio" id="offline" value="offline"
                                                                 name="payment_type">Offline</label>
                                 </div>
 
                                 <div class="radio">
-                                    <label for="online"><input type="radio" required id="online" value="online"
+                                    <label for="online"><input type="radio" id="online" value="online"
                                                                name="payment_type">Online</label>
                                 </div>
                             </div>

@@ -100,28 +100,45 @@ class UserController extends Controller
     {
         $objEventParticipants = new EventParticipants();
         $arrMixExtraData = [];
+        $total = 0;
         $objUser = auth()->user();
         $objProfile = Profile::where('user_id', auth()->user()->id)->first();
         $objEventParticipants->category_id = $request->event_category;
         $objEventParticipants->event_id = $request->event_id;
         $objEventParticipants->t_shirt_size = $request->t_shirt_size;
+        $objEventParticipants->transstarts = $request->accommodation;
         $objEventParticipants->transstarts = $request->pickup_transportation;
         $objEventParticipants->transends = $request->drop_transportation;
         $objEventParticipants->racekit_price = $request->racekit;
         $objEventParticipants->team = $request->team;
         $objEventParticipants->profile_id = $objProfile->id;
         $objEventParticipants->payment_type = $request->payment_type;
-
+        $objEventParticipants->ticket_id = $objEventParticipants->category->getEventPrice()->id;
         $arrMixExtraData['user'] = $objUser;
         $arrMixExtraData['eventparticipant'] = $objEventParticipants;
-        $objPayment = '';
         if ($request->payment_type == 'online') {
             $arrMixExtraData['cardholder_name'] = $request->cardholder_name;
             $arrMixExtraData['cardholder_number'] = $request->cardholder_number;
             $arrMixExtraData['cardholder_expiry'] = $request->cardholder_name;
             $arrMixExtraData['cardholder_cvc'] = $request->cardholder_cvc;
-            $arrMixExtraData['fee'] = (int)$request->fee;
-            $arrMixExtraData['profile_id'] = 1;
+            $intEventId = $request->event_id;
+            $objEvent = Events::where('id', $intEventId)->first();
+            if ($request->accommodation) {
+                $total = $total + $objEvent->accom->price;
+            }
+
+            if ($request->pickup_transportation) {
+                $total = $total + $objEvent->start->price;
+            }
+
+            if ($request->drop_transportation) {
+                $total = $total + $objEvent->end->price;
+            }
+            if ($request->racekit) {
+                $total = $total + $objEvent->racekit;
+            }
+            $arrMixExtraData['fee'] = (int)$total;
+            $arrMixExtraData['profile_id'] = $objProfile->id;
             $objPayment = $this->makePayment($arrMixExtraData);
             $objApiResponse = $objPayment->getAPIResponse();
 
@@ -132,7 +149,7 @@ class UserController extends Controller
                 $arrMixExtraData['payment'] = $objApiResponse;
                 $objUser->notify(new RegisterConfirmation($arrMixExtraData));
                 $objEventParticipants->save();
-                return redirect('events')->with('message', 'Payment Successful. Please check your email.');
+                redirect('upload/receipt/' . $objEventParticipants->id)->with('message', 'Payment Successful. Please check your email.');
             } else {
                 return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
             }

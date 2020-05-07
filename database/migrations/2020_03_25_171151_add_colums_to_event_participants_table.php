@@ -20,6 +20,7 @@ class AddColumsToEventParticipantsTable extends Migration
             $table->integer('transstarts')->nullable();
             $table->integer('transends')->nullable();
             $table->integer('racekit_price')->nullable();
+            $table->integer('ticket_id')->nullable();
             $table->integer('team')->nullable();
             $table->integer('receipt')->nullable();
             $table->text('bus_reservation')->nullable();
