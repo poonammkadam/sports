@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
+use App\Http\Model\Organisation;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
 use App\MerchantSuite\Address;
@@ -105,6 +106,26 @@ class UserController extends Controller
         ]);
     }
 
+    public function organisationEventList($id)
+    {
+        $objOrganisation      = Organisation::where('user_id', $id)->first();
+        $arrObjUpcomingEvents = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
+            ->get();
+        $arrObjPastEvents     = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
+            ->get();
+        $arrObjCurrentEvents  = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
+            ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
+
+        return view('front.event.organisation_event_list', [
+            'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
+            'arrObjPastEvents'     => $arrObjPastEvents,
+            'arrObjCurrentEvents'  => $arrObjCurrentEvents,
+        ]);
+    }
+
     public function eventStore(Request $request)
     {
         $objEventParticipants                = new EventParticipants();
@@ -175,7 +196,8 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
-        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::LIVE);
+        $credentials         = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456",
+            Mode::LIVE);
         $txn                 = new Transaction();
         $cardDetails         = new CardDetails();
         $order               = new Order();
