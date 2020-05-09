@@ -135,7 +135,8 @@ class UserController extends Controller
         $arrMixExtraData = [];
         $total = 0;
         $objUser = auth()->user();
-        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
+        $intId = $objUser->id;
+        $objProfile = Profile::where('user_id', $intId)->first();
         $objEventParticipants->category_id = $request->event_category;
         $objEventParticipants->event_id = $request->event_id;
         $objEventParticipants->t_shirt_size = $request->t_shirt_size;
