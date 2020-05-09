@@ -20,9 +20,9 @@ class AdminSeeder extends Seeder
             'registration_status' => 1,
         ]);
         DB::table('users')->insert([
-            'name' => 'poonam',
-            'email' => 'poonammk97@gmail.com',
-            'password' => bcrypt('poonam'),
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('user123'),
             //            'role' => 'admin',
             'registration_status' => 1,
         ]);
