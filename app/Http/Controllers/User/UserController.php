@@ -123,6 +123,7 @@ class UserController extends Controller
             'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
             'arrObjPastEvents'     => $arrObjPastEvents,
             'arrObjCurrentEvents'  => $arrObjCurrentEvents,
+            'objOrganisation'      => $objOrganisation,
         ]);
     }
 
