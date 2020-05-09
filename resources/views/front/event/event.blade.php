@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <?php
+
     $listAccommodation = ($objEvent->accom);
     $listPickupTransportation = ($objEvent->start);
     $listDropTransportation = ($objEvent->end);

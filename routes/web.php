@@ -58,7 +58,7 @@ Route::group([ 'namespace' => 'User' ], function() {
     Route::post('/event/register/store', 'UserController@eventStore');
     Route::get('/event/{id}/{org}', 'EventController@getOrgShow');
     Route::get('/event/{id}', 'EventController@getShow');
-    Route::get('/org/participants/list/{id}', 'EventController@getOrgPartiList');
+    Route::get('/org/participants/list/{id}/{catid}', 'EventController@getOrgPartiList');
     Route::post('/profile/update', 'UserController@update');
     Route::get('/myresult', 'UserController@getUserResult');
     Route::get('/upload/receipt/{id}', 'EventController@uploadReceipt');

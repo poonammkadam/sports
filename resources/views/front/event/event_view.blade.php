@@ -33,7 +33,7 @@
                     <ul>
                         @foreach($objEvent->category as $objCategory)
                             <li><h5>{{$objCategory->category_type}}{{$objCategory->category_subtype}}</h5><a
-                                    href="{{'/org/participants/list/'.$objEvent->id}}"
+                                    href="{{'/org/participants/list/'.$objEvent->id.'/'.$objCategory->id}}"
                                     class="btn btn-outline-danger btn-lg mb-5"> View Participants list ->></a></li>
                         @endforeach
                     </ul>
