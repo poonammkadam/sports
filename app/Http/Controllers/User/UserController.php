@@ -6,6 +6,7 @@ use App\Accomodation;
 use App\Http\Controllers\Controller;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
+use App\Http\Model\Organisation;
 use App\Http\Model\Profile;
 use App\MerchantSuite\Actions;
 use App\MerchantSuite\Address;
@@ -31,7 +32,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
-
 class UserController extends Controller
 {
     public function getRegister()
@@ -50,14 +50,18 @@ class UserController extends Controller
         if ($objProfile->registration_status) {
             $objUserProfile = Profile::where('user_id', $objProfile->id)->first();
             $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
-            return view('front.profile.profile', ['objProfile' => $objProfile, 'objUserProfileEvents' => $objUserProfileEvents, 'objUserProfile' => $objUserProfile]);
+
+            return view('front.profile.profile', [
+                'objProfile' => $objProfile,
+                'objUserProfileEvents' => $objUserProfileEvents,
+                'objUserProfile' => $objUserProfile,
+            ]);
         } else {
             $objCountries = new Countries();
             $arrCountries = $objCountries->all()->pluck('name.common');
+
             return view('front.profile.registation', ['objProfile' => $objProfile, 'arrCountries' => $arrCountries]);
         }
-
-
     }
 
     public function update(Request $request)
@@ -81,22 +85,48 @@ class UserController extends Controller
         $objProfile->mobile_no_primary = $request->mobile_no;
         $objProfile->t_shirt_size = $request->t_shirt_size;
         $objProfile->save();
-
         auth()->user()->name = $request->local_name;
         auth()->user()->email = $request->email;
         auth()->user()->registration_status = true;
         auth()->user()->save();
+
         return redirect('profile_update')->with('message', 'Your Profile Created successfully.!');
     }
 
     public function eventList()
     {
-        $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
-        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)->get();
-        $arrObjCurrentEvents = Events::whereDate('registration_start_date', '<', Carbon::now()->toDateString())
+        $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())
+            ->orderBy('id', 'desc')->take(8)->get();
+        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())
+            ->orderBy('id', 'desc')->take(8)->get();
+        $arrObjCurrentEvents = Events::whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
             ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
 
-        return view('front.event.event_list', ['arrObjUpcomingEvents' => $arrObjUpcomingEvents, 'arrObjPastEvents' => $arrObjPastEvents, 'arrObjCurrentEvents' => $arrObjCurrentEvents]);
+        return view('front.event.event_list', [
+            'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
+            'arrObjPastEvents' => $arrObjPastEvents,
+            'arrObjCurrentEvents' => $arrObjCurrentEvents,
+        ]);
+    }
+
+    public function organisationEventList($id)
+    {
+        $objOrganisation = Organisation::where('user_id', $id)->first();
+        $arrObjUpcomingEvents = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
+            ->get();
+        $arrObjPastEvents = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
+            ->get();
+        $arrObjCurrentEvents = Events::where('org_id', $objOrganisation->id)
+            ->whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
+            ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
+
+        return view('front.event.organisation_event_list', [
+            'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
+            'arrObjPastEvents' => $arrObjPastEvents,
+            'arrObjCurrentEvents' => $arrObjCurrentEvents,
+        ]);
     }
 
     public function eventStore(Request $request)
@@ -130,12 +160,10 @@ class UserController extends Controller
                 $intPrice = Accomodation::where('id', $request->accommodation)->first()->price;
                 $total = $total + $intPrice;
             }
-
             if ($request->pickup_transportation) {
                 $intPrice = Transstart::where('id', $request->pickup_transportation)->first()->price;
                 $total = $total + $intPrice;
             }
-
             if ($request->drop_transportation) {
                 $intPrice = Transend::where('id', $request->drop_transportation)->first()->price;
                 $total = $total + $intPrice;
@@ -147,7 +175,6 @@ class UserController extends Controller
             $arrMixExtraData['profile_id'] = $objProfile->id;
             $objPayment = $this->makePayment($arrMixExtraData);
             $objApiResponse = $objPayment->getAPIResponse();
-
             $objUser->notify(new RegisterConfirmation($arrMixExtraData));
             if ($objApiResponse->isSuccessful()) {
                 $objEventParticipants->payment_status = 1;
@@ -155,16 +182,17 @@ class UserController extends Controller
                 $arrMixExtraData['payment'] = $objApiResponse;
                 $objUser->notify(new RegisterConfirmation($arrMixExtraData));
                 $objEventParticipants->save();
-                redirect('upload/receipt/' . $objEventParticipants->id)->with('message', 'Payment Successful. Please check your email.');
+                redirect('upload/receipt/' . $objEventParticipants->id)->with('message',
+                    'Payment Successful. Please check your email.');
             } else {
                 return redirect('events')->with('message', 'Payment Unsuccessful. Please try again after sometime.');
             }
         }
-
         if ($request->payment_type == 'offline') {
             $objEventParticipants->payment_status = 2;
             $objEventParticipants->save();
             $objUser->notify(new RegisterConfirmation($arrMixExtraData));
+
             return redirect('events')->with('message', 'To confirm your registration. Please check your email.');
         }
 
@@ -174,6 +202,7 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
+
         $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::UAT);
 
         $txn = new Transaction();
@@ -188,8 +217,8 @@ class UserController extends Controller
         $order_item_1 = new OrderItem();
         $order_recipient_1 = new OrderRecipient();
         $fraudScreening = new FraudScreeningRequest();
-        $statementDescriptor = new StatementDescriptor();
 
+        $statementDescriptor = new StatementDescriptor();
         $txn->setAction(Actions::Payment);
         $txn->setCredentials($credentials);
         $txn->setAmount($arrMixExtraData['fee']);
@@ -198,86 +227,73 @@ class UserController extends Controller
         $txn->setReference1("My Customer Reference");
         $txn->setReference2("Medium");
         $txn->setReference3("Large");
-        $txn->setStoreCard(TRUE);
+        $txn->setStoreCard(true);
         $txn->setSubType("single");
         $txn->setType(TransactionType::Internet);
-
         $cardDetails->setCardHolderName($arrMixExtraData['cardholder_name']);
         $cardDetails->setCardNumber($arrMixExtraData['cardholder_number']);
         $cardDetails->setCVN($arrMixExtraData['cardholder_cvc']);
         $cardDetails->setExpiryDate("9900");
-
         $txn->setCardDetails($cardDetails);
-
         $address->setAddressLine1("123 Fake Street");
         $address->setCity("Melbourne");
         $address->setCountryCode("AUS");
         $address->setPostCode("3000");
         $address->setState("Vic");
-
         $contactDetails->setEmailAddress("example@email.com");
-
         $personalDetails->setDateOfBirth("1900-01-01");
         $personalDetails->setFirstName("John");
         $personalDetails->setLastName("Smith");
         $personalDetails->setSalutation("Mr");
-
         $billingAddress->setAddress($address);
         $billingAddress->setContactDetails($contactDetails);
         $billingAddress->setPersonalDetails($personalDetails);
-
         $shippingAddress->setAddress($address);
         $shippingAddress->setContactDetails($contactDetails);
         $shippingAddress->setPersonalDetails($personalDetails);
-//
-//        $order_item_1->setDescription("an item");
-//        $order_item_1->setQuantity(1);
-//        $order_item_1->setUnitPrice(1000);
-//
-//        $orderItems = array($order_item_1);
-//
-//        $order_recipient_1->setAddress($address);
-//        $order_recipient_1->setContactDetails($contactDetails);
-//        $order_recipient_1->setPersonalDetails($personalDetails);
-//
-//        $orderRecipients = array($order_recipient_1);
-//
-//        $order->setBillingAddress($billingAddress);
-//        $order->setOrderItems($orderItems);
-//        $order->setOrderRecipients($orderRecipients);
-//        $order->setShippingAddress($shippingAddress);
-//        $order->setShippingMethod("boat");
-//
-//        $txn->setOrder($order);
-
+        //
+        //        $order_item_1->setDescription("an item");
+        //        $order_item_1->setQuantity(1);
+        //        $order_item_1->setUnitPrice(1000);
+        //
+        //        $orderItems = array($order_item_1);
+        //
+        //        $order_recipient_1->setAddress($address);
+        //        $order_recipient_1->setContactDetails($contactDetails);
+        //        $order_recipient_1->setPersonalDetails($personalDetails);
+        //
+        //        $orderRecipients = array($order_recipient_1);
+        //
+        //        $order->setBillingAddress($billingAddress);
+        //        $order->setOrderItems($orderItems);
+        //        $order->setOrderRecipients($orderRecipients);
+        //        $order->setShippingAddress($shippingAddress);
+        //        $order->setShippingMethod("boat");
+        //
+        //        $txn->setOrder($order);
         $customer->setCustomerNumber($arrMixExtraData['profile_id']);
         $customer->setAddress($address);
         $customer->setExistingCustomer(false);
         $customer->setContactDetails($contactDetails);
         $customer->setPersonalDetails($personalDetails);
         $customer->setDaysOnFile(1);
-
         $txn->setCustomer($customer);
-
         $fraudScreening->setPerformFraudScreening(false);
         $fraudScreening->setDeviceFingerprint("ExampleDeviceFingerprint");
-
         //    $txn->setFraudScreeningRequest($fraudScreening);
-
-//        $statementDescriptor->setAddressLine1("123 Drive Street");
-//        $statementDescriptor->setAddressLine2("");
-//        $statementDescriptor->setCity("Melbourne");
-//        $statementDescriptor->setCompanyName("A Company Name");
-//        $statementDescriptor->setCountryCode("AUS");
-//        $statementDescriptor->setMerchantName("A Merchant Name");
-//        $statementDescriptor->setPhoneNumber("0123456789");
-//        $statementDescriptor->setPostCode("3000");
-//        $statementDescriptor->setState("Victoria");
-
-//        $txn->setStatementDescriptor($statementDescriptor);
-
+        //        $statementDescriptor->setAddressLine1("123 Drive Street");
+        //        $statementDescriptor->setAddressLine2("");
+        //        $statementDescriptor->setCity("Melbourne");
+        //        $statementDescriptor->setCompanyName("A Company Name");
+        //        $statementDescriptor->setCountryCode("AUS");
+        //        $statementDescriptor->setMerchantName("A Merchant Name");
+        //        $statementDescriptor->setPhoneNumber("0123456789");
+        //        $statementDescriptor->setPostCode("3000");
+        //        $statementDescriptor->setState("Victoria");
+        //        $txn->setStatementDescriptor($statementDescriptor);
         $txn->setTokenisationMode(3);
         $txn->setTimeout(93121);
+
         return $response = $txn->submit();
     }
 
@@ -288,8 +304,9 @@ class UserController extends Controller
         if (auth()->check() && auth()->user()->registration_status) {
             return view('front.event.event', ['objEvent' => $objEvent]);
         }
-        return redirect('registration')->with('alert', 'Sorry!!! You can\'t register for event first you need complete your profile');
 
+        return redirect('registration')->with('alert',
+            'Sorry!!! You can\'t register for event first you need complete your profile');
     }
 
     public function getUserResult()
@@ -300,7 +317,7 @@ class UserController extends Controller
         }
         $arrObjParticipant = $objProfile->eventParticipantsCat();
 
-        return view('front.results.my_result', ['objProfile' => $objProfile, 'arrObjParticipant' => $arrObjParticipant]);
+        return view('front.results.my_result',
+            ['objProfile' => $objProfile, 'arrObjParticipant' => $arrObjParticipant]);
     }
-
 }

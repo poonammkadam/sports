@@ -76,10 +76,14 @@
                     @if(auth()->user() && auth()->user()->isAdmin())
                         <li class="nav-item"><a href="{{ url('/admin') }}"> Dashboard</a></li>
                     @endif
-                    <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
+
                     @if(auth()->user()->isOrganiser())
+                        <li class="nav-item"><a href="{{ url('/events') }}">All Event</a></li>
+                        <li class="nav-item"><a href="{{ url('/organisation_events/'.auth()->user()->id) }}"> My
+                                Organisation Event</a></li>
                         <li class="nav-item"><a href="{{ url('/myorganisation') }}"> My Organisation</a></li>
                     @else
+                        <li class="nav-item"><a href="{{ url('/events') }}">Event</a></li>
                         <li class="nav-item"><a href="{{ url('/myprofile') }}"> My Account</a></li>
                         {{--                        <li class="nav-item"><a href="{{ url('/myresult') }}"> My Result</a></li>--}}
                         <li class="nav-item"><a href="{{ url('/registration') }}">Registration</a></li>

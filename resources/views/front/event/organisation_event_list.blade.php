@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <h1> Organisation Events</h1>
         <!-- Upcoming Events -->
         @if(($arrObjUpcomingEvents->count()) > 0)
             <section id="speakers" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -69,7 +70,6 @@
                         <h2>Closed Events</h2>
                         <p>Here are some of our events</p>
                     </div>
-
                     <div class="row">
                         @foreach($arrObjPastEvents as $objEvent)
                             <div class="col-lg-4 col-md-6">
