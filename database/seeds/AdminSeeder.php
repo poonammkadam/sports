@@ -13,16 +13,16 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'                => 'Admin',
-            'email'               => 'adityachouhan81@gmail.com',
-            'password'            => bcrypt('Admin#@123'),
-            'role'                => 'admin',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('Admin#@123'),
+            'role' => 'admin',
             'registration_status' => 1,
         ]);
         DB::table('users')->insert([
-            'name'                => 'poonam',
-            'email'               => 'poonammk97@gmail.com',
-            'password'            => bcrypt('poonam'),
+            'name' => 'poonam',
+            'email' => 'poonammk97@gmail.com',
+            'password' => bcrypt('poonam'),
             //            'role' => 'admin',
             'registration_status' => 1,
         ]);
