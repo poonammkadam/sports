@@ -68,17 +68,20 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                            <div class="col-md-4"></div>
+
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
+
+
+                            <a class="btn btn-success" style="margin-left: 1rem"
+                               href="{{ route('login') }}">{{ __('Login') }}</a>
+
                         </div>
 
                     </form>
-                    <div>
-                        <a class="btn btn--radius btn--green" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </div>
+
                 </div>
             </div>
         </div>

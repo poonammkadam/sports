@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Accomodation;
 use App\Http\Controllers\Controller;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
@@ -25,6 +26,8 @@ use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use App\Notifications\RegisterConfirmation;
+use App\Transend;
+use App\Transstart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -35,9 +38,9 @@ class UserController extends Controller
     {
         $objProfile = auth()->user();
         if ($objProfile->registration_status) {
-            return view('front.profile.profile_complite', [ 'objProfile' => $objProfile ]);
+            return view('front.profile.profile_complite', ['objProfile' => $objProfile]);
         } else {
-            return view('front.profile.registation', [ 'objProfile' => $objProfile ]);
+            return view('front.profile.registation', ['objProfile' => $objProfile]);
         }
     }
 
@@ -45,19 +48,19 @@ class UserController extends Controller
     {
         $objProfile = auth()->user();
         if ($objProfile->registration_status) {
-            $objUserProfile       = Profile::where('user_id', $objProfile->id)->first();
+            $objUserProfile = Profile::where('user_id', $objProfile->id)->first();
             $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
 
             return view('front.profile.profile', [
-                'objProfile'           => $objProfile,
+                'objProfile' => $objProfile,
                 'objUserProfileEvents' => $objUserProfileEvents,
-                'objUserProfile'       => $objUserProfile,
+                'objUserProfile' => $objUserProfile,
             ]);
         } else {
             $objCountries = new Countries();
             $arrCountries = $objCountries->all()->pluck('name.common');
 
-            return view('front.profile.registation', [ 'objProfile' => $objProfile, 'arrCountries' => $arrCountries ]);
+            return view('front.profile.registation', ['objProfile' => $objProfile, 'arrCountries' => $arrCountries]);
         }
     }
 
@@ -69,21 +72,21 @@ class UserController extends Controller
         } else {
             $objProfile = new Profile();
         }
-        $objProfile->user_id           = auth()->user()->id;
-        $objProfile->first_name        = $request->first_name;
-        $objProfile->last_name         = $request->last_name;
-        $objProfile->gender            = $request->gender;
-        $objProfile->date_of_birth     = $request->dob;
-        $objProfile->country           = $request->nationality;
-        $objProfile->local_id          = $request->local_id;
-        $objProfile->passport          = $request->passport_no;
-        $objProfile->address           = $request->address;
-        $objProfile->country           = $request->country;
+        $objProfile->user_id = auth()->user()->id;
+        $objProfile->first_name = $request->first_name;
+        $objProfile->last_name = $request->last_name;
+        $objProfile->gender = $request->gender;
+        $objProfile->date_of_birth = $request->dob;
+        $objProfile->country = $request->nationality;
+        $objProfile->local_id = $request->local_id;
+        $objProfile->passport = $request->passport_no;
+        $objProfile->address = $request->address;
+        $objProfile->country = $request->country;
         $objProfile->mobile_no_primary = $request->mobile_no;
         $objProfile->t_shirt_size      = $request->t_shirt_size;
         $objProfile->save();
-        auth()->user()->name                = $request->local_name;
-        auth()->user()->email               = $request->email;
+        auth()->user()->name = $request->local_name;
+        auth()->user()->email = $request->email;
         auth()->user()->registration_status = true;
         auth()->user()->save();
 
@@ -129,47 +132,50 @@ class UserController extends Controller
 
     public function eventStore(Request $request)
     {
-        $objEventParticipants                = new EventParticipants();
-        $arrMixExtraData                     = [];
-        $total                               = 0;
-        $objUser                             = auth()->user();
-        $objProfile                          = Profile::where('user_id', auth()->user()->id)->first();
-        $objEventParticipants->category_id   = $request->event_category;
-        $objEventParticipants->event_id      = $request->event_id;
-        $objEventParticipants->t_shirt_size  = $request->t_shirt_size;
-        $objEventParticipants->transstarts   = $request->accommodation;
-        $objEventParticipants->transstarts   = $request->pickup_transportation;
-        $objEventParticipants->transends     = $request->drop_transportation;
+        $objEventParticipants = new EventParticipants();
+        $arrMixExtraData = [];
+        $total = 0;
+        $objUser = auth()->user();
+        $objProfile = Profile::where('user_id', auth()->user()->id)->first();
+        $objEventParticipants->category_id = $request->event_category;
+        $objEventParticipants->event_id = $request->event_id;
+        $objEventParticipants->t_shirt_size = $request->t_shirt_size;
+        $objEventParticipants->transstarts = $request->accommodation;
+        $objEventParticipants->transstarts = $request->pickup_transportation;
+        $objEventParticipants->transends = $request->drop_transportation;
         $objEventParticipants->racekit_price = $request->racekit;
-        $objEventParticipants->team          = $request->team;
-        $objEventParticipants->profile_id    = $objProfile->id;
-        $objEventParticipants->payment_type  = $request->payment_type;
-        $objEventParticipants->ticket_id     = $objEventParticipants->category->getEventPrice()->id;
-        $arrMixExtraData['user']             = $objUser;
+        $objEventParticipants->team = $request->team;
+        $objEventParticipants->profile_id = $objProfile->id;
+        $objEventParticipants->payment_type = $request->payment_type;
+        $objEventParticipants->ticket_id = $objEventParticipants->category->getEventPrice()->id;
+        $arrMixExtraData['user'] = $objUser;
         $arrMixExtraData['eventparticipant'] = $objEventParticipants;
         if ($request->payment_type == 'online') {
-            $arrMixExtraData['cardholder_name']   = $request->cardholder_name;
+            $arrMixExtraData['cardholder_name'] = $request->cardholder_name;
             $arrMixExtraData['cardholder_number'] = $request->cardholder_number;
             $arrMixExtraData['cardholder_expiry'] = $request->cardholder_name;
-            $arrMixExtraData['cardholder_cvc']    = $request->cardholder_cvc;
-            $intEventId                           = $request->event_id;
-            $objEvent                             = Events::where('id', $intEventId)->first();
+            $arrMixExtraData['cardholder_cvc'] = $request->cardholder_cvc;
+            $intEventId = $request->event_id;
+            $objEvent = Events::where('id', $intEventId)->first();
             if ($request->accommodation) {
-                $total = $total + $objEvent->accom->price;
+                $intPrice = Accomodation::where('id', $request->accommodation)->first()->price;
+                $total = $total + $intPrice;
             }
             if ($request->pickup_transportation) {
-                $total = $total + $objEvent->start->price;
+                $intPrice = Transstart::where('id', $request->pickup_transportation)->first()->price;
+                $total = $total + $intPrice;
             }
             if ($request->drop_transportation) {
-                $total = $total + $objEvent->end->price;
+                $intPrice = Transend::where('id', $request->drop_transportation)->first()->price;
+                $total = $total + $intPrice;
             }
             if ($request->racekit) {
                 $total = $total + $objEvent->racekit;
             }
-            $arrMixExtraData['fee']        = (int)$total;
+            $arrMixExtraData['fee'] = (int)$total;
             $arrMixExtraData['profile_id'] = $objProfile->id;
-            $objPayment                    = $this->makePayment($arrMixExtraData);
-            $objApiResponse                = $objPayment->getAPIResponse();
+            $objPayment = $this->makePayment($arrMixExtraData);
+            $objApiResponse = $objPayment->getAPIResponse();
             $objUser->notify(new RegisterConfirmation($arrMixExtraData));
             if ($objApiResponse->isSuccessful()) {
                 $objEventParticipants->payment_status = 1;
@@ -197,20 +203,22 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
-        $credentials         = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456",
-            Mode::LIVE);
-        $txn                 = new Transaction();
-        $cardDetails         = new CardDetails();
-        $order               = new Order();
-        $shippingAddress     = new OrderAddress();
-        $billingAddress      = new OrderAddress();
-        $address             = new Address();
-        $customer            = new Customer();
-        $personalDetails     = new PersonalDetails();
-        $contactDetails      = new ContactDetails();
-        $order_item_1        = new OrderItem();
-        $order_recipient_1   = new OrderRecipient();
-        $fraudScreening      = new FraudScreeningRequest();
+
+        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::UAT);
+
+        $txn = new Transaction();
+        $cardDetails = new CardDetails();
+        $order = new Order();
+        $shippingAddress = new OrderAddress();
+        $billingAddress = new OrderAddress();
+        $address = new Address();
+        $customer = new Customer();
+        $personalDetails = new PersonalDetails();
+        $contactDetails = new ContactDetails();
+        $order_item_1 = new OrderItem();
+        $order_recipient_1 = new OrderRecipient();
+        $fraudScreening = new FraudScreeningRequest();
+
         $statementDescriptor = new StatementDescriptor();
         $txn->setAction(Actions::Payment);
         $txn->setCredentials($credentials);
@@ -295,7 +303,7 @@ class UserController extends Controller
         $objEvent = Events::findOrFail($id);
         $objEvent->load('category');
         if (auth()->check() && auth()->user()->registration_status) {
-            return view('front.event.event', [ 'objEvent' => $objEvent ]);
+            return view('front.event.event', ['objEvent' => $objEvent]);
         }
 
         return redirect('registration')->with('alert',
@@ -311,6 +319,6 @@ class UserController extends Controller
         $arrObjParticipant = $objProfile->eventParticipantsCat();
 
         return view('front.results.my_result',
-            [ 'objProfile' => $objProfile, 'arrObjParticipant' => $arrObjParticipant ]);
+            ['objProfile' => $objProfile, 'arrObjParticipant' => $arrObjParticipant]);
     }
 }
