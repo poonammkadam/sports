@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Accomodation;
 use App\Http\Controllers\Controller;
 use App\Http\Model\EventParticipants;
 use App\Http\Model\Events;
@@ -24,6 +25,8 @@ use App\MerchantSuite\Transaction;
 use App\MerchantSuite\TransactionType;
 use App\MerchantSuite\URLDirectory;
 use App\Notifications\RegisterConfirmation;
+use App\Transend;
+use App\Transstart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -124,15 +127,18 @@ class UserController extends Controller
             $intEventId = $request->event_id;
             $objEvent = Events::where('id', $intEventId)->first();
             if ($request->accommodation) {
-                $total = $total + $objEvent->accom->price;
+                $intPrice = Accomodation::where('id', $request->accommodation)->first()->price;
+                $total = $total + $intPrice;
             }
 
             if ($request->pickup_transportation) {
-                $total = $total + $objEvent->start->price;
+                $intPrice = Transstart::where('id', $request->pickup_transportation)->first()->price;
+                $total = $total + $intPrice;
             }
 
             if ($request->drop_transportation) {
-                $total = $total + $objEvent->end->price;
+                $intPrice = Transend::where('id', $request->drop_transportation)->first()->price;
+                $total = $total + $intPrice;
             }
             if ($request->racekit) {
                 $total = $total + $objEvent->racekit;
@@ -168,7 +174,7 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
-        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::LIVE);
+        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::UAT);
 
         $txn = new Transaction();
         $cardDetails = new CardDetails();
