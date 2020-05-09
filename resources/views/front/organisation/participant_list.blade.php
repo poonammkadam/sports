@@ -28,15 +28,9 @@
                 @endif
             @endif
             @if(auth()->check() && auth()->user()->isOrganiser())
-                <h3>Event Category List</h3>
                 @if(isset($objOrganisation) && $objOrganisation->id == $objEvent->org_id )
-                    <ul>
-                        @foreach($objEvent->category as $objCategory)
-                            <li><h5>{{$objCategory->category_type}}{{$objCategory->category_subtype}}</h5><a
-                                    href="{{'/org/participants/list/'.$objEvent->id}}"
-                                    class="btn btn-outline-danger btn-lg mb-5"> View Participants list ->></a></li>
-                        @endforeach
-                    </ul>
+                    <a href="{{'/org/participants/list/'.$objEvent->id}}"
+                       class="btn btn-outline-danger btn-lg">View Participants list</a>
                 @endif
             @endif
         </div>

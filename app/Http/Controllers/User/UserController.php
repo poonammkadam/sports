@@ -83,7 +83,7 @@ class UserController extends Controller
         $objProfile->address = $request->address;
         $objProfile->country = $request->country;
         $objProfile->mobile_no_primary = $request->mobile_no;
-        $objProfile->t_shirt_size = $request->t_shirt_size;
+        $objProfile->t_shirt_size      = $request->t_shirt_size;
         $objProfile->save();
         auth()->user()->name = $request->local_name;
         auth()->user()->email = $request->email;
@@ -97,35 +97,36 @@ class UserController extends Controller
     {
         $arrObjUpcomingEvents = Events::whereDate('registration_start_date', '>', Carbon::now()->toDateString())
             ->orderBy('id', 'desc')->take(8)->get();
-        $arrObjPastEvents = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())
+        $arrObjPastEvents     = Events::whereDate('registration_end_date', '<', Carbon::now()->toDateString())
             ->orderBy('id', 'desc')->take(8)->get();
-        $arrObjCurrentEvents = Events::whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
+        $arrObjCurrentEvents  = Events::whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
             ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
 
         return view('front.event.event_list', [
             'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
-            'arrObjPastEvents' => $arrObjPastEvents,
-            'arrObjCurrentEvents' => $arrObjCurrentEvents,
+            'arrObjPastEvents'     => $arrObjPastEvents,
+            'arrObjCurrentEvents'  => $arrObjCurrentEvents,
         ]);
     }
 
     public function organisationEventList($id)
     {
-        $objOrganisation = Organisation::where('user_id', $id)->first();
+        $objOrganisation      = Organisation::where('user_id', $id)->first();
         $arrObjUpcomingEvents = Events::where('org_id', $objOrganisation->id)
             ->whereDate('registration_start_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
             ->get();
-        $arrObjPastEvents = Events::where('org_id', $objOrganisation->id)
+        $arrObjPastEvents     = Events::where('org_id', $objOrganisation->id)
             ->whereDate('registration_end_date', '<', Carbon::now()->toDateString())->orderBy('id', 'desc')->take(8)
             ->get();
-        $arrObjCurrentEvents = Events::where('org_id', $objOrganisation->id)
+        $arrObjCurrentEvents  = Events::where('org_id', $objOrganisation->id)
             ->whereDate('registration_start_date', '<=', Carbon::now()->toDateString())
             ->whereDate('registration_end_date', '>', Carbon::now()->toDateString())->orderBy('id', 'desc')->get();
 
         return view('front.event.organisation_event_list', [
             'arrObjUpcomingEvents' => $arrObjUpcomingEvents,
-            'arrObjPastEvents' => $arrObjPastEvents,
-            'arrObjCurrentEvents' => $arrObjCurrentEvents,
+            'arrObjPastEvents'     => $arrObjPastEvents,
+            'arrObjCurrentEvents'  => $arrObjCurrentEvents,
+            'objOrganisation'      => $objOrganisation,
         ]);
     }
 

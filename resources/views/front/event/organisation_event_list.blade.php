@@ -14,14 +14,15 @@
                         @foreach($arrObjUpcomingEvents as $objEvent)
                             <div class="col-lg-4 col-md-6">
                                 <div class="speaker">
-                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <img src="{{'/public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                     <div class="details">
                                         <h3>{{$objEvent->name}}</h3>
                                         <h4 class="text-white  mb-0"><i
                                                 class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                         </h4>
                                         <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                        <a href="{{'/event/'.$objEvent->id.'/'.$objOrganisation->id}}"
+                                           class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>
@@ -43,14 +44,15 @@
                         @foreach($arrObjCurrentEvents as $objEvent)
                             <div class="col-lg-4 col-md-6">
                                 <div class="speaker">
-                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <img src="{{'/public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                     <div class="details">
                                         <h3>{{$objEvent->name}}</h3>
                                         <h4 class="text-white  mb-0"><i
                                                 class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                         </h4>
                                         <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                        <a href="{{'/event/'.$objEvent->id.'/'.$objOrganisation->id}}"
+                                           class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>
@@ -74,14 +76,15 @@
                         @foreach($arrObjPastEvents as $objEvent)
                             <div class="col-lg-4 col-md-6">
                                 <div class="speaker">
-                                    <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                    <img src="{{'/public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                     <div class="details">
                                         <h3>{{$objEvent->name}}</h3>
                                         <h4 class="text-white  mb-0"><i
                                                 class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                         </h4>
                                         <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                        <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+                                        <a href="{{'/event/'.$objEvent->id.'/'.$objOrganisation->id}}"
+                                           class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>
