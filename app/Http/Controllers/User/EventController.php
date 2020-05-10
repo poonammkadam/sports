@@ -132,9 +132,11 @@ class EventController extends Controller
         }
     }
 
-    public function getOrgPartiList($id)
+    public function getOrgPartiList($id, $catid)
     {
-        $arrObjParticepent = EventParticipants::where('event_id', $id)->get();
+        $arrObjParticepent = EventParticipants::where('event_id', $id)->where('category_id', $catid)->get();
+
+        return view('front.organisation.participant_list', [ 'arrObjParticepent' => $arrObjParticepent ]);
     }
 }
 

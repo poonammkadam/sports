@@ -1,38 +1,41 @@
 @extends('layouts.app')
 @section('content')
     <div class="container top my-5">
-        <div class="row">
-            <div class="banner text-center">
-                <img src="{{'/public/'.$objEvent->banner}}" style="max-height:300px" class="w-100">
+        <div>
+            <div class="row event-form-main">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10 event-form">
+                    @foreach($arrObjParticepent as $objPra)
+                        <div class="shadow-lg p-5" style="background: white;">
+                            <ul>
+                                {{$objPra->t_shirt_size}}
+                                <li><h5>Particepent Name :</h5>
+                                    {{$objPra->profile->user->name}}</li>
+                                <li><h5>Particepent Email :</h5>
+                                    {{$objPra->profile->user->email}}</li>
+                                <li><h5>Particepent Gender :</h5>
+                                    {{$objPra->profile->gender}}</li>
+                                <li><h5>Particepent Full Name :</h5>
+                                    {{$objPra->profile->first_name}} {{$objPra->profile->last_name}}</li>
+                                <li><h5>Particepent Local Id :</h5>
+                                    {{$objPra->profile->local_id}}</li>
+                                <li><h5>Particepent Passport No. :</h5>
+                                    {{$objPra->profile->passport}}</li>
+                                <li><h5>Particepent DOB :</h5>
+                                    {{$objPra->profile->date_of_birth}}</li>
+                                <li><h5>Particepent Mobile No. :</h5>
+                                    {{$objPra->profile->mobile_no_primary}}</li>
+                                <li><h5>Particepent Address :</h5>
+                                    {{$objPra->profile->address}}</li>
+                                <li><h5>Particepent T-shirt Size :</h5>{{$objPra->t_shirt_size}}</li>
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-md-1">
+                </div>
             </div>
-        </div>
-        <div class="title section-header text-center">
-            <h2>{!! $objEvent->name !!}</h2>
-        </div>
-        <div class="description section-description text-center">
-            <h2>{!! $objEvent->description !!}</h2>
-            @if(auth()->check() && !auth()->user()->isOrganiser())
-                @if( date('Y-m-d', strtotime($objEvent->registration_start_date)) <= date('Y-m-d') && date('Y-m-d', strtotime($objEvent->registration_end_date)) >= date('Y-m-d'))
-                    <a href="{{url('/event/register').'/'.$objEvent->id}}"
-                       class="btn btn-outline-danger btn-lg">Register</a>
-
-                @elseif(date('Y-m-d', strtotime($objEvent->registration_end_date)) < date('Y-m-d'))
-                    <div class="title section-header text-center">
-                        <h4>Sorry Resgistration closed</h4>
-                    </div>
-                @else
-                    <div class="title section-header text-center">
-                        <h4>Resgistation will open
-                            at {{  date('l j F Y', strtotime($objEvent->registration_start_date))}}</h4>
-                    </div>
-                @endif
-            @endif
-            @if(auth()->check() && auth()->user()->isOrganiser())
-                @if(isset($objOrganisation) && $objOrganisation->id == $objEvent->org_id )
-                    <a href="{{'/org/participants/list/'.$objEvent->id}}"
-                       class="btn btn-outline-danger btn-lg">View Participants list</a>
-                @endif
-            @endif
         </div>
     </div>
 @endsection
