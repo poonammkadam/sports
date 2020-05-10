@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\Organisation;
 use App\Http\Model\Profile;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -13,7 +14,7 @@ class UserController extends Controller
     {
         $arrObjUsers = Profile::all();
 
-        return view('admin.user.list', [ 'arrObjUsers' => $arrObjUsers ]);
+        return view('admin.user.list', ['arrObjUsers' => $arrObjUsers]);
     }
 
     public function create()
@@ -31,18 +32,20 @@ class UserController extends Controller
         $objProfile = Profile::where('id', $id)->first();
         $objProfile->load('user');
         $objCountries = new Countries();
-        $arrCountries=$objCountries->all()->pluck('name.common');
-        return view('admin.user.edit', [ 'objProfile' => $objProfile ,'arrCountries'=>$arrCountries]);
+        $objOrganisation = new Organisation();
+        $arrObjOrganisation = $objOrganisation->all();
+        $arrCountries = $objCountries->all()->pluck('name.common');
+        return view('admin.user.edit', ['objProfile' => $objProfile, 'arrCountries' => $arrCountries, 'arrObjOrganisation' => $arrObjOrganisation]);
     }
 
     public function getParticipatedEvents($id)
     {
-        $objUserProfile       = Profile::where('id', $id)->first();
+        $objUserProfile = Profile::where('id', $id)->first();
         $objUserProfileEvents = $objUserProfile->eventParticipants()->load('events');
         $objUserProfileCategory = $objUserProfile->eventParticipantsCat()->load('category');
 
         return view('admin.user.participated.list',
-            [ 'objUserProfile' => $objUserProfile, 'objUserProfileEvents' => $objUserProfileEvents ,'objUserProfileCategory'=>$objUserProfileCategory]);
+            ['objUserProfile' => $objUserProfile, 'objUserProfileEvents' => $objUserProfileEvents, 'objUserProfileCategory' => $objUserProfileCategory]);
     }
 
     public function update($id, Request $request)
@@ -63,9 +66,9 @@ class UserController extends Controller
 
         $objProfile->save();
 
-        $objProfile->user->name=$request->local_name;
-        $objProfile->user->email=$request->email;
-        $objProfile->user->registration_status= true;
+        $objProfile->user->name = $request->local_name;
+        $objProfile->user->email = $request->email;
+        $objProfile->user->registration_status = true;
         $objProfile->user->save();
 
         return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
