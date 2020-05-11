@@ -90,9 +90,14 @@
                                 @foreach($objEvent->category as $key=>$category)
                                     <div class="addedSection">
 
-
                                         <h3>Category Default</h3>
                                         <div class="row">
+                                            <input type="hidden" required
+                                                   id="{{'category_id'.$key}}"
+                                                   name="{{'category['.$key.'][id]'}}"
+                                                   class="form-control item_category"
+                                                   value="{{$category->id}}"
+                                            >
                                             <div class="col-md-6">
                                                 <label for="{{'category_type'.$key}}">Category</label>
                                                 <input type="text" required
@@ -126,6 +131,12 @@
                                         @endphp
                                         <div class="row">
                                             <div class="col-md-3 ">
+                                                <input type="hidden" required id="{{'category_id'.$key}}"
+                                                       name="{{'category['.$key.'][fee][early][id]'}}"
+                                                       class="form-control item_category"
+                                                       placeholder="Category fee..."
+                                                       value="{{$objEarlyTicket->id}}"
+                                                >
                                                 <label for="{{'category_type'.$key}}">Early Bird Fee</label>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -170,6 +181,12 @@
                                         {{--                                        //end of early ticket--}}
                                         {{--                                        //normal ticket--}}
                                         <div class="row">
+                                            <input type="hidden" required id="{{'category_id'.$key}}"
+                                                   name="{{'category['.$key.'][fee][normal][id]'}}"
+                                                   class="form-control item_category"
+                                                   placeholder="Category fee..."
+                                                   value="{{$objNormalTicket->id}}"
+                                            >
                                             <div class="col-md-3">
                                                 <label for="{{'category_fee'.$key}}">General Fee</label>
                                                 <div class="input-group mb-3">
@@ -222,6 +239,12 @@
                                         {{--                                        end of normal ticket--}}
                                         {{--                                        Late ticket--}}
                                         <div class="row">
+                                            <input type="hidden" required id="{{'category_id'.$key}}"
+                                                   name="{{'category['.$key.'][fee][late][id]'}}"
+                                                   class="form-control item_category"
+                                                   placeholder="Category fee..."
+                                                   value="{{$objLateTicket->id}}"
+                                            >
                                             <div class="col-md-3">
                                                 <label for="{{'category_fee'.$key}}">Late Fee</label>
                                                 <div class="input-group mb-3">
@@ -288,6 +311,11 @@
                                     @foreach($objEvent->start as $intStart=>$transstart)
                                         <div class="addedSection"><h3>Add Transportation before Race</h3>
                                             <div class="row">
+                                                <input type="hidden" required
+                                                       id="{{'trans_id'.$intStart}}"
+                                                       name="{{'transstart['. $intStart .'][id]'}}"
+                                                       class="form-control item_category"
+                                                       value="{{$transstart->id}}">
                                                 <div class="col-md-6">
                                                     <div class="form-group"><label
                                                             for="{{'trans_start'.$intStart}}">Location
@@ -331,6 +359,11 @@
                                     @foreach($objEvent->end as $intEnd=>$transend)
                                         <div class="addedSection"><h3>Add Transportation After Race</h3>
                                             <div class="row">
+                                                <input type="hidden" required
+                                                       id="{{'trans_end' .$intEnd }}"
+                                                       name="{{'transend[' . $intEnd . '][id]'}}"
+                                                       class="form-control item_category"
+                                                       value="{{$transend->id}}">
                                                 <div class="col-md-6">
                                                     <div class="form-group"><label
                                                             for="{{'trans_end' .$intEnd }}">Location
@@ -377,6 +410,12 @@
                                     @foreach($objEvent->accom as $intAccom=>$objAccom)
                                         <div class="addedSection"><h3>Add Accomodation</h3>
                                             <div class="row">
+                                                <input type="hidden" required
+                                                       id="{{'accomodation' . $intAccom}}"
+                                                       name="{{'accomodation[' . $intAccom . '][id]'}}"
+                                                       class="form-control item_category"
+                                                       value="{{$objAccom->id}}"
+                                                >
                                                 <div class="col-md-6">
                                                     <div class="form-group"><label
                                                             for="{{'accomodation' . $intAccom}}">Accomodation
