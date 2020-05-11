@@ -23,18 +23,23 @@
                             <div class="form-group evet-form-list">
                                 <div>
                                     <input type="hidden" name="ticket_id">
-                                    <label for="event-form-input" class="event-form-input">Event Categories </label>
-                                    <select class="form-control custom-select" onchange="getPrice(this)"
-                                            required name="event_category"
+                                    <label for="category" class="event-form-input">Event Categories </label>
+                                    <select name="event_category" class="form-control custom-select"
+                                            onchange="getPrice(this)"
+
                                             id="category">
-                                        <option>Select event</option>
+                                        <option value="">Select event</option>
                                         @foreach($objEvent->category as $index => $prate)
                                             <option data-ticket="{{$prate->getEventPrice()->id}}"
                                                     data-price="{{$prate->getEventPrice()->fee}}" class="cate"
                                                     value="{{$prate->id}}">{{$prate->category_type}} {{$prate->category_subtype}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
+                                @error('event_category')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{--                            <div class="form-group evet-form-list">--}}
@@ -152,18 +157,27 @@
                                     <div class="row"><p class="col-6 chat-event">Event
                                             amount: </p>
                                         <p class="col-6" id="eventamount">----</p></div>
-                                    <div class="row"><p class="col-6 chat-accommodation">
-                                            Accommodation amount: </p>
-                                        <p class="col-6" id="accommodationamount">----</p></div>
-                                    <div class="row"><p class="col-6 chat-reservation">Pickup
-                                            amount:</p>
-                                        <p class="col-6" id="pickupbeforeamount">----</p></div>
-                                    <div class="row"><p class="col-6 chat-reservation">Pickup
-                                            amount:</p>
-                                        <p class="col-6" id="pickupafteramount">----</p></div>
-                                    <div class="row"><p class="col-6 chat-reservation">Pickup
-                                            amount:</p>
-                                        <p class="col-6" id="racekitamount">----</p></div>
+                                    @if($listAccommodation->count() > 0)
+                                        <div class="row"><p class="col-6 chat-accommodation">
+                                                Accommodation amount: </p>
+                                            <p class="col-6" id="accommodationamount">----</p></div>
+                                    @endif
+                                    @if($listPickupTransportation->count() > 0)
+                                        <div class="row"><p class="col-6 chat-reservation">Pickup
+                                                amount (Before Race):</p>
+                                            <p class="col-6" id="pickupbeforeamount">----</p>
+                                        </div>
+                                    @endif
+                                    @if($listDropTransportation->count() > 0)
+                                        <div class="row"><p class="col-6 chat-reservation">Pickup
+                                                amount (After Race):</p>
+                                            <p class="col-6" id="pickupafteramount">----</p></div>
+                                    @endif
+                                    @if($objEvent->racekit)
+                                        <div class="row"><p class="col-6 chat-reservation">Racekit
+                                                amount:</p>
+                                            <p class="col-6" id="racekitamount">----</p></div>
+                                    @endif
                                     <div class="row"><p class="col-6 chat-total">Total Amount:</p>
                                         <p class="col-6" id="totalamount">----</p></div>
                                     <input type="hidden" name="total" id="total">
@@ -180,6 +194,9 @@
                                     <label for="online"><input type="radio" id="online" value="online"
                                                                name="payment_type">Online</label>
                                 </div>
+                                @error('payment_type')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="payment-online" style="display: none">
                                 <div class="demo-container">
@@ -206,6 +223,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

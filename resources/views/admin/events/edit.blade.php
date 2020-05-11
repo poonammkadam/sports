@@ -87,9 +87,10 @@
                             <button type="button" name="add" id="add" class="btn  btn-outline-dark"><i
                                     class="fa fa-plus" aria-hidden="true"></i></button>
                             <div id="dynamic_field">
-                                <div class="addedSection">
+                                @foreach($objEvent->category as $key=>$category)
+                                    <div class="addedSection">
 
-                                    @foreach($objEvent->category as $key=>$category)
+
                                         <h3>Category Default</h3>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -271,8 +272,8 @@
                                                 >
                                             </div>
                                         </div>
-                                        //end late ticket
-                                </div>
+                                        {{--                                        //end late ticket--}}
+                                    </div>
                                 @endforeach
                             </div>
 
