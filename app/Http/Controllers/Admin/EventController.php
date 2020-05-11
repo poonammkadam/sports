@@ -43,7 +43,9 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        //        dd($request->all());
+        $this->validate($request, [
+            'banner' => 'dimensions:min_width=500,max_width=1500,min_height=500,max_height=1500'
+        ]);
         DB::beginTransaction();
         $objEvent = new Events();
         $objEvent->name = $request->name;
@@ -95,14 +97,14 @@ class EventController extends Controller
         $objEvent->save();
         $intEventkey = $objEvent->getKey();
         if ($request->has('category')) {
-            foreach ($request->category as $category) {
+            foreach ($request->category as $key => $category) {
                 $objCategory = new Category();
                 $objCategory->category_type = $category['type'];
                 $objCategory->category_subtype = $category['subtype'];
                 $objCategory->event_id = $intEventkey;
                 $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
-                foreach ($category['fee'] as $key => $arrfees) {
+                foreach ($category['fee'] as $arrfees) {
                     $objTicket = new Ticket();
                     $objTicket->category_id = $objCategory->id;
                     $objTicket->name = $key;
@@ -132,7 +134,7 @@ class EventController extends Controller
         $objEvent = Events::where('id', $id)->first();
         $objOrganisation = Organisation::where('id', $objEvent->org_id)->first();
 
-        return view('admin.events.edit', ['objEvent' => $objEvent, 'objOrganisation' => $objOrganisation]);
+        return view('admin.events.edit', ['objEvent' => $objEvent, 'arrObjOrganisation' => $objOrganisation]);
     }
 
     public function setPaymentStatus($id)
@@ -145,18 +147,86 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
+
+        DB::beginTransaction();
         $objEvent = Events::where('id', $id)->first();
         $objEvent->name = $request->name;
         $objEvent->description = $request->description;
+        //        $objEvent->registration_start_date = $request->register_start_date;
         $objEvent->registration_end_date = $request->register_expire_date;
         $objEvent->event_date = $request->eventdate;
+        $objEvent->event_status = $request->event_status;
         $objEvent->venue = $request->venue;
-        $objEvent->organiser_name = $request->orgname;
-        $objEvent->organiser_contact_number = $request->org_contact_no;
-        $objEvent->organiser_address = $request->org_address;
-        if ($request->hasFile('banner')) {
-            $objEvent->banner = $request->file('banner')->store('banner');
+        $objEvent->org_id = $request->organisation;
+        $objEvent->banner = $request->file('banner')->store('banner');
+        $objEvent->save();
+        if ($request->has('transstart')) {
+            $objEvent->transstart = json_encode($request->transstart);
+            foreach ($request->transstart as $transstart) {
+                $objTransstart = new Transstart();
+                $objTransstart->location = $transstart['location'];
+                $objTransstart->price = $transstart['fee'];
+                $objTransstart->event_id = $objEvent->id;
+                $objTransstart->save();
+            }
         }
+        if ($request->has('transend')) {
+            $objEvent->transend = json_encode($request->transend);
+            foreach ($request->transend as $transend) {
+                $objTransend = new Transend();
+                $objTransend->location = $transend['location'];
+                $objTransend->price = $transend['fee'];
+                $objTransend->event_id = $objEvent->id;
+                $objTransend->save();
+            }
+        }
+        if ($request->has('accomodation')) {
+            $objEvent->accommodation = json_encode($request->accomodation);
+            foreach ($request->accomodation as $accomodation) {
+                $objAccommodation = new Accomodation();
+                $objAccommodation->name = $accomodation['name'];
+                $objAccommodation->price = $accomodation['fee'];
+                $objAccommodation->event_id = $objEvent->id;
+                $objAccommodation->save();
+            }
+        }
+        if ($request->has('racekit')) {
+            $objEvent->racekit = $request->racekit;
+        }
+        if ($request->has('bus_fee')) {
+            $objEvent->bus_reservation_amount = $request->bus_fee;
+        }
+        $objEvent->save();
+        $intEventkey = $objEvent->getKey();
+        if ($request->has('category')) {
+            foreach ($request->category as $category) {
+                $objCategory = new Category();
+                $objCategory->category_type = $category['type'];
+                $objCategory->category_subtype = $category['subtype'];
+                $objCategory->event_id = $intEventkey;
+                $objCategory->fee = json_encode($category['fee']);
+                $objCategory->save();
+                foreach ($category['fee'] as $key => $arrfees) {
+                    $objTicket = new Ticket();
+                    $objTicket->category_id = $objCategory->id;
+                    $objTicket->name = $key;
+                    $objTicket->fee = $arrfees['fee'];
+                    $objTicket->quantity = $arrfees['quantity'];
+                    $objTicket->start_date = $arrfees['start_date'];
+                    $objTicket->end_date = $arrfees['end_date'];
+                    $objTicket->save();
+                    if ('early' == $objTicket->name) {
+                        $objEvent->registration_start_date = $objTicket->start_date;
+                        $objEvent->save();
+                    }
+                    if ('late' == $objTicket->name) {
+                        $objEvent->registration_end_date = $objTicket->end_date;
+                        $objEvent->save();
+                    }
+                }
+            }
+        }
+        DB::commit();
         $objEvent->save();
 
         return redirect('admin/events')->with('success', 'Events Updated Successfully.');

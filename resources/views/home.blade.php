@@ -230,7 +230,7 @@
             <div class="form">
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
-                <form action="" method="post" role="form" class="contactForm">
+                <form action="/contact-us" method="post" role="form" class="contactForm">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"

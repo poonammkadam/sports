@@ -49,6 +49,39 @@
                                     </textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Registration End
+                                    Date</label>
+                                <div class="col-md-4">
+                                    <input required type="datetime-local" class="form-control" id="register_expire_date"
+                                           name="register_expire_date" placeholder="">
+                                </div>
+
+                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Event Date</label>
+                                <div class="col-md-4">
+                                    <input required type="datetime-local" class="form-control" id="eventdate"
+                                           name="eventdate" placeholder="">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="venue" class="col-md-2 col-form-label text-md-right">Venue</label>
+                                <div class="col-md-4">
+                                    <input required id="venue" type="text" class="form-control" name="venue"
+                                           autocomplete="venue" autofocus>
+                                </div>
+                                <label for="org" class="col-md-2 col-form-label text-md-right">Select
+                                    Organisation</label>
+                                <div class="col-md-4">
+                                    <select id="org" class="form-control custom-select" name="organisation">
+                                        <option selected>Open this select menu</option>
+                                        @foreach($arrObjOrganisation as $objOrg)
+                                            <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
                             <label class="col-md-2 col-form-label text-md-right" for="add">Add Event Type</label>
                             <button type="button" name="add" id="add" class="btn  btn-outline-dark"><i
@@ -190,39 +223,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Registration End
-                                    Date</label>
-                                <div class="col-md-4">
-                                    <input required type="datetime-local" class="form-control" id="register_expire_date"
-                                           name="register_expire_date" placeholder="">
-                                </div>
-
-                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Event Date</label>
-                                <div class="col-md-4">
-                                    <input required type="datetime-local" class="form-control" id="eventdate"
-                                           name="eventdate" placeholder="">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="venue" class="col-md-2 col-form-label text-md-right">Venue</label>
-                                <div class="col-md-4">
-                                    <input required id="venue" type="text" class="form-control" name="venue"
-                                           autocomplete="venue" autofocus>
-                                </div>
-                                <label for="org" class="col-md-2 col-form-label text-md-right">Select
-                                    Organisation</label>
-                                <div class="col-md-4">
-                                    <select id="org" class="form-control custom-select" name="organisation">
-                                        <option selected>Open this select menu</option>
-                                        @foreach($arrObjOrganisation as $objOrg)
-                                            <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <button type="button" name="add" id="add_start_transportation"
                                     class="btn  btn-outline-dark"><i

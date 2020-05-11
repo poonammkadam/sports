@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('ADMIN_EMAIL', 'admin@razkyhub.com'),
 
     /*
     |--------------------------------------------------------------------------
