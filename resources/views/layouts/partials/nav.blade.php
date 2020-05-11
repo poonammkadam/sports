@@ -95,7 +95,7 @@
                             {{ Auth::user()->name }} <span class="caret" style="color: red"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right navbarDropdown" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{url('/logout')}}"
                             >
                                 {{ __('Logout') }}
@@ -107,3 +107,8 @@
         </nav><!-- #nav-menu-container -->
     </div>
 </header><!-- #header -->
+<script>
+    $(document).on('click', '#navbarDropdown', function () {
+        $('.navbarDropdown').addClass('show');
+    });
+</script>
