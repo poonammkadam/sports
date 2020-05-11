@@ -27,7 +27,7 @@
                             </div>
                         @endif
                         <form method="POST" enctype="multipart/form-data" autocomplete="off"
-                              action="{{url('admin/events/store')}}">
+                              action="{{url('admin/events/edit/'.$objEvent->id)}}">
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">

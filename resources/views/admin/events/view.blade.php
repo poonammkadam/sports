@@ -22,19 +22,19 @@
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Name:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->organisation->name}}</div>
+                            {{--                            <div class="col-7">{{$objEvent->organisation->name}}</div>--}}
                         </div>
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Contact No:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->organisation->contact_no}}</div>
+                            {{--                            <div class="col-7">{{$objEvent->organisation->contact_no}}</div>--}}
                         </div>
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Address:</b></div>
                             <div class="col-1"></div>
-                            <div class="col-7">{{$objEvent->organisation->address}}</div>
+                            {{--                            <div class="col-7">{{$objEvent->organisation->address}}</div>--}}
                         </div>
 
                         <div class="row m-2">

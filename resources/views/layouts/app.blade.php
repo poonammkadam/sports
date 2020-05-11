@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
-    <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     {{--    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">--}}
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -50,8 +50,8 @@
 @include('layouts.partials.footer-scripts')
 </body>
 <!-- JavaScript Libraries -->
-<script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('lib/jquery/jquery-migrate.min.js')}}"></script>
+{{--<script src="{{asset('lib/jquery/jquery.min.js')}}"></script>--}}
+{{--<script src="{{asset('lib/jquery/jquery-migrate.min.js')}}"></script>--}}
 <script src="{{asset('lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('lib/superfish/hoverIntent.js')}}"></script>
