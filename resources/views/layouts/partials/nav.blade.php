@@ -91,11 +91,12 @@
 
                     <li class="nav-item dropdown">
                         <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
-                           id="navbarDropdown" role="button" v-pre>
+                           id="navbarDropdown" role="button">
                             {{ Auth::user()->name }} <span class="caret" style="color: red"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right navbarDropdown" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" style="background: rgba(6, 12, 34, 0.98);"
+                             aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{url('/logout')}}"
                             >
                                 {{ __('Logout') }}
@@ -107,8 +108,3 @@
         </nav><!-- #nav-menu-container -->
     </div>
 </header><!-- #header -->
-<script>
-    $(document).on('click', '#navbarDropdown', function () {
-        $('.navbarDropdown').addClass('show');
-    });
-</script>

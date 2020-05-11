@@ -4,7 +4,7 @@ function getCollapsibleItem() {
         '   <div class="panel-heading collapsible-item-heading" role="tab" id="headingCollapbsible">' +
         '       <h4 class="panel-title collapsible-item-title">' +
         '           <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="glyphicon glyphicon-chevron-down">&nbsp;</span></a>' +
-        '           <a class="collapsed collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
+        '           <span class="glyphicon glyphicon-chevron-down text-white">&nbsp;</span> <a class="collapsed collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
         '       </h4>' +
         '   </div>' +
         '   <div id="collapseCollapbsible" class="panel-collapse collapse collapsible-item-collapse" role="tabpanel" aria-labelledby="headingCollapbsible">' +
@@ -42,7 +42,7 @@ CKEDITOR.plugins.add('collapsibleItem', {
             init: function () {
                 //called when widget instance is created
                 var accordionid = "";
-                if(editor.elementPath() != null) {
+                if (editor.elementPath() != null) {
                     var parents = editor.elementPath().elements;
                     for (i = 0; i < parents.length; i++) {
                         if (parents[i].hasClass('accordion-list-group')) {
@@ -51,10 +51,10 @@ CKEDITOR.plugins.add('collapsibleItem', {
                         }
                     }
                 }
-                if(accordionid == ""){
+                if (accordionid == "") {
                     var parents = this.element.getParents();
-                    for(i = 0 ; i < parents.length ; i++){
-                        if(parents[i].hasClass('accordion-list-group')){
+                    for (i = 0; i < parents.length; i++) {
+                        if (parents[i].hasClass('accordion-list-group')) {
                             accordionid = parents[i].getId();
                             break;
                         }
@@ -80,7 +80,7 @@ CKEDITOR.plugins.add('collapsibleItem', {
                 itemIconLink.setAttribute('href', newLink);
                 itemIconLink.setAttribute('data-cke-saved-href', newLink);
 
-                if(this.data.accordionId != "") {
+                if (this.data.accordionId != "") {
                     this.element.find('.collapsible-item-title-link').$[0].setAttribute('data-parent', "#" + this.data.accordionId);
                     this.element.find('.collapsible-item-title-link-icon').$[0].setAttribute('data-parent', "#" + this.data.accordionId);
                 } else {
