@@ -32,9 +32,9 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Bootstrap CSS File -->
-{{--    <link href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">--}}
-{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">--}}
-<!-- Libraries CSS Files -->
+    {{--    <link href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- Libraries CSS Files -->
     <link href="{{asset('lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('lib/venobox/venobox.css')}}" rel="stylesheet">
