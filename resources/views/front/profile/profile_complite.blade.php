@@ -10,8 +10,8 @@
                 @endif
                 <h1>You have already register your profile...</h1>
                 <p> You can update your profile data here..</p>
-                <a class="btn btn-info" href="{{url('/update_changes')}}">Update Profile</a> <a class="btn btn-info"
-                                                                                                href="/events">Events</a>
+                <a class="btn btn-info" href="{{url('/profile/edit')}}">Edit Profile</a> <a class="btn btn-info"
+                                                                                            href="/events">Events</a>
             </div>
         </div>
     </div>

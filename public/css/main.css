@@ -161,7 +161,8 @@ h6 {
 }
 
 .bg-red {
-    background: #fa4251;
+    /*background: #fa4251;*/
+    background: url('/images/login_back.jpeg') top left/cover no-repeat;
 }
 
 /* ==========================================================================
