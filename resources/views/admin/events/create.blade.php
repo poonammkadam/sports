@@ -131,13 +131,13 @@
                                             <label for="category_fee0">Early Bird Ticket Start Date</label><input
                                                 type="date" required id="category_fee0"
                                                 name="category[0][fee][early][start_date]"
-                                                class="form-control item_category">
+                                                class="form-control item_category catergory-early-ticket-start-date">
                                         </div>
                                         <div class="col-md-3">
                                             <label for="category_fee0">Early Bird Ticket End Date</label><input
                                                 type="date" required id="category_fee0"
                                                 name="category[0][fee][early][end_date]"
-                                                class="form-control item_category">
+                                                class="form-control item_category catergory-early-ticket-end-date">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -166,7 +166,7 @@
                                             <label for="category_fee0">General Ticket Start Date</label><input
                                                 type="date" required id="category_fee0"
                                                 name="category[0][fee][normal][start_date]"
-                                                class="form-control item_category">
+                                                class="form-control item_category catergory-general-ticket-start-date">
                                         </div>
                                         <div class="col-md-3">
                                             <label for="category_fee0">General Ticket End Date</label>
@@ -174,7 +174,7 @@
                                                    required
                                                    id="category_fee0"
                                                    name="category[0][fee][normal][end_date]"
-                                                   class="form-control item_category">
+                                                   class="form-control item_category catergory-general-ticket-end-date">
                                         </div>
 
                                     </div>
@@ -207,7 +207,7 @@
                                                    required
                                                    id="category_fee0"
                                                    name="category[0][fee][late][start_date]"
-                                                   class="form-control item_category">
+                                                   class="form-control item_category catergory-late-ticket-start-date">
                                         </div>
 
                                         <div class="col-md-3">
@@ -216,7 +216,7 @@
                                                    required
                                                    id="category_fee0"
                                                    name="category[0][fee][late][end_date]"
-                                                   class="form-control item_category">
+                                                   class="form-control item_category catergory-late-ticket-end-date">
                                         </div>
 
                                     </div>
@@ -304,13 +304,13 @@
         $(document).ready(function () {
             var intIndex = 0
             $(document).on('click', '#add', function () {
-                let earlyStartDateValue = $('input[category[0][fee][early][start_date]]').value()
-                let normalStartDateValue = $('input[category[0][fee][normal][start_date]]').value()
-                let lateStartDateValue = $('input[category[0][fee][late][start_date]]').value()
-                let earlyEndDateValue = $('input[category[0][fee][early][end_date]]').value()
-                let normalEndDateValue = $('input[category[0][fee][normal][end_date]]').value()
-                let lateEndDateValue = $('input[category[0][fee][late][end_date]]').value()
-                intIndex = intIndex + 1
+                let earlyStartDateValue = $('.catergory-early-ticket-start-date').val();
+                let normalStartDateValue = $('.catergory-general-ticket-start-date').val();
+                let lateStartDateValue = $('.catergory-late-ticket-start-date').val();
+                let earlyEndDateValue = $('.catergory-early-ticket-end-date').val();
+                let normalEndDateValue = $('.catergory-general-ticket-end-date').val();
+                let lateEndDateValue = $('.catergory-late-ticket-end-date').val();
+                intIndex = intIndex + 1;
                 var html = '<div class="addedSection"><h3>Category' + intIndex + '</h3>';
                 html += '<div class="row"><div class="col-md-6"><div  class="form-group"><label for="category_type' + intIndex + '">Category</label> <input type="text" required id="category_type' + intIndex + '" name="category[' + intIndex + '][type]" class="form-control item_category"></div></div>';
                 html += '<div class="col-md-6"><div  class="form-group"><label for="category_subtype' + intIndex + '">Sub-Category</label><input required type="text" id="category_subtype' + intIndex + '" name="category[' + intIndex + '][subtype]" class="form-control item_category"></div></div></div>';
