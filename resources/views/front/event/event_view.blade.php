@@ -48,6 +48,27 @@
             $('[aria-labelledby="' + ariaId + '"]').toggleClass('show');
         })
     </script>
+    <style>
+        .collapsible-item-collapse img {
+            max-width: 80%;
+        }
 
+        .panel-heading {
+            border: none;
+            padding: 15px;
+            background: #0b1126;
+            color: #fff;
+        }
+
+        .panel {
+            margin: 0px;
+            border: 0px
+        }
+
+        .panel-default > .panel-heading {
+            background: #0b1126 !important;
+            color: #fff !important;
+        }
+    </style>
 
 @endsection

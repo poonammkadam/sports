@@ -291,11 +291,17 @@
                                                        id="{{'category_fee'.$key}}"
                                                        name="{{'category['.$key.'][fee][late][end_date]'}}"
                                                        class="form-control item_category"
+                                                       @if($key != 0) disabled @endif
                                                        value="{{$objLateTicket->end_date}}"
                                                 >
                                             </div>
                                         </div>
                                         {{--                                        //end late ticket--}}
+                                        <div class="form-group">
+                                            <button type="button" name="remove" class="btn btn-danger btn-xs remove">
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

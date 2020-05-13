@@ -147,7 +147,6 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
-
         DB::beginTransaction();
         $objEvent = Events::where('id', $id)->first();
         $objEvent->name = $request->name;
@@ -162,8 +161,15 @@ class EventController extends Controller
         $objEvent->save();
         if ($request->has('transstart')) {
             $objEvent->transstart = json_encode($request->transstart);
+            $intOldTransstartId = $objEvent->start->pluck('id')->toArray();
+            $intTransstartId = collect($request->transstart)->pluck('id')->toArray();
+            $diffId = array_diff($intOldTransstartId, $intTransstartId);
+            if (count($diffId) > 0) {
+                $arrObjTransstart = Transstart::wherIn('id', $diffId)->get();
+                $arrObjTransstart->delete();
+            }
             foreach ($request->transstart as $transstart) {
-                $objTransstart = new Transstart();
+                $objTransstart = Transstart::where('id', $transstart['id'])->first();
                 $objTransstart->location = $transstart['location'];
                 $objTransstart->price = $transstart['fee'];
                 $objTransstart->event_id = $objEvent->id;
@@ -172,8 +178,15 @@ class EventController extends Controller
         }
         if ($request->has('transend')) {
             $objEvent->transend = json_encode($request->transend);
+            $intOldTransEndId = $objEvent->end->pluck('id')->toArray();
+            $intTransEndId = collect($request->transend)->pluck('id')->toArray();
+            $diffId = array_diff($intOldTransEndId, $intTransEndId);
+            if (count($diffId) > 0) {
+                $arrObjTransEnd = Transend::wherIn('id', $diffId)->get();
+                $arrObjTransEnd->delete();
+            }
             foreach ($request->transend as $transend) {
-                $objTransend = new Transend();
+                $objTransend = Transend::where('id', $transend['id'])->first();
                 $objTransend->location = $transend['location'];
                 $objTransend->price = $transend['fee'];
                 $objTransend->event_id = $objEvent->id;
@@ -182,8 +195,15 @@ class EventController extends Controller
         }
         if ($request->has('accomodation')) {
             $objEvent->accommodation = json_encode($request->accomodation);
+            $intOldAccomId = $objEvent->accom->pluck('id')->toArray();
+            $intAccomId = collect($request->accomodation)->pluck('id')->toArray();
+            $diffId = array_diff($intOldAccomId, $intAccomId);
+            if (count($diffId) > 0) {
+                $arrObjAccomodation = Accomodation::wherIn('id', $diffId)->get();
+                $arrObjAccomodation->delete();
+            }
             foreach ($request->accomodation as $accomodation) {
-                $objAccommodation = new Accomodation();
+                $objAccommodation = Accomodation::where('id', $accomodation['id'])->first();
                 $objAccommodation->name = $accomodation['name'];
                 $objAccommodation->price = $accomodation['fee'];
                 $objAccommodation->event_id = $objEvent->id;
@@ -199,15 +219,24 @@ class EventController extends Controller
         $objEvent->save();
         $intEventkey = $objEvent->getKey();
         if ($request->has('category')) {
+            $intOldCategoryId = $objEvent->category->pluck('id')->toArray();
+            $intCategoryId = collect($request->category)->pluck('id')->toArray();
+            $diffId = array_diff($intOldCategoryId, $intCategoryId);
+            if (count($diffId) > 0) {
+                $arrObjCategory = Category::wherIn('id', $diffId)->get();
+                $arrObjCategory->ticket->delete();
+                $arrObjCategory->delete();
+            }
+
             foreach ($request->category as $category) {
-                $objCategory = new Category();
+                $objCategory = Category::where('id', $category['id'])->first();
                 $objCategory->category_type = $category['type'];
                 $objCategory->category_subtype = $category['subtype'];
                 $objCategory->event_id = $intEventkey;
                 $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
                 foreach ($category['fee'] as $key => $arrfees) {
-                    $objTicket = new Ticket();
+                    $objTicket = Ticket::where('id', $arrfees['id'])->first();
                     $objTicket->category_id = $objCategory->id;
                     $objTicket->name = $key;
                     $objTicket->fee = $arrfees['fee'];
