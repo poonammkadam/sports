@@ -90,7 +90,7 @@
                                 @foreach($objEvent->category as $key=>$category)
                                     <div class="addedSection">
 
-                                        <h3>Category Default</h3>
+                                        <h3>Category Default{{$key}}</h3>
                                         <div class="row">
                                             <input type="hidden" required
                                                    id="{{'category_id'.$key}}"
@@ -160,19 +160,21 @@
                                                 >
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">Early Bird Ticket Start
+                                                <label for="{{'category_start_date'.$key}}">Early Bird Ticket Start
                                                     Date</label><input
-                                                    type="date" required id="{{'category_fee'.$key}}"
+                                                    type="date" required id="{{'category_start_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][early][start_date]'}}"
+                                                    @if($key != 0) disabled @endif
                                                     class="form-control item_category catergory-early-ticket-start-date"
                                                     value="{{$objEarlyTicket->start_date}}"
                                                 >
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">Early Bird Ticket End
+                                                <label for="{{'category_end_date'.$key}}">Early Bird Ticket End
                                                     Date</label><input
-                                                    type="date" required id="{{'category_fee'.$key}}"
+                                                    type="date" required id="{{'category_end_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][early][end_date]'}}"
+                                                    @if($key != 0) disabled @endif
                                                     class="form-control item_category catergory-early-ticket-end-date"
                                                     value="{{$objEarlyTicket->end_date}}"
                                                 >
@@ -216,19 +218,22 @@
                                                 >
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">General Ticket Start
+                                                <label for="{{'category_start_date'.$key}}">General Ticket Start
                                                     Date</label><input
-                                                    type="date" required id="{{'category_fee'.$key}}"
+                                                    type="date" required id="{{'category_start_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][normal][start_date]'}}"
+                                                    @if($key != 0) disabled @endif
                                                     class="form-control item_category catergory-general-ticket-start-date"
                                                     value="{{$objNormalTicket->start_date}}"
                                                 >
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">General Ticket End Date</label>
+                                                <label for="{{'category_end_date'.$key}}">General Ticket End
+                                                    Date</label>
                                                 <input type="date"
                                                        required
-                                                       id="{{'category_fee'.$key}}"
+                                                       id="{{'category_end_date'.$key}}"
+                                                       @if($key != 0) disabled @endif
                                                        name="{{'category['.$key.'][fee][normal][end_date]'}}"
                                                        class="form-control item_category catergory-general-ticket-end-date"
                                                        value="{{$objNormalTicket->end_date}}"
@@ -274,21 +279,23 @@
                                                 >
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">Late Ticket Start Date</label>
+                                                <label for="{{'category_start_date'.$key}}">Late Ticket Start
+                                                    Date</label>
                                                 <input type="date"
                                                        required
-                                                       id="{{'category_fee'.$key}}"
+                                                       id="{{'category_start_date'.$key}}"
                                                        name="{{'category['.$key.'][fee][late][start_date]'}}"
+                                                       @if($key != 0) disabled @endif
                                                        class="form-control item_category catergory-late-ticket-start-date"
                                                        value="{{$objLateTicket->start_date}}"
                                                 >
                                             </div>
 
                                             <div class="col-md-3">
-                                                <label for="{{'category_fee'.$key}}">Late Ticket End Date</label>
+                                                <label for="{{'category_end_date'.$key}}">Late Ticket End Date</label>
                                                 <input type="date"
                                                        required
-                                                       id="{{'category_fee'.$key}}"
+                                                       id="{{'category_end_date'.$key}}"
                                                        name="{{'category['.$key.'][fee][late][end_date]'}}"
                                                        class="form-control item_category catergory-late-ticket-end-date"
                                                        @if($key != 0) disabled @endif
@@ -297,11 +304,11 @@
                                             </div>
                                         </div>
                                         {{--                                        //end late ticket--}}
-                                        <div class="form-group">
-                                            <button type="button" name="remove" class="btn btn-danger btn-xs remove">
-                                                Remove
-                                            </button>
-                                        </div>
+                                        {{--                                        <div class="form-group">--}}
+                                        {{--                                            <button type="button" name="remove" class="btn btn-danger btn-xs remove">--}}
+                                        {{--                                                Remove--}}
+                                        {{--                                            </button>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                 @endforeach
                             </div>
@@ -344,11 +351,11 @@
                                                         ></div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="button" name="remove"
-                                                        class="btn btn-danger btn-xs remove">Remove
-                                                </button>
-                                            </div>
+                                            {{--                                            <div class="form-group">--}}
+                                            {{--                                                <button type="button" name="remove"--}}
+                                            {{--                                                        class="btn btn-danger btn-xs remove">Remove--}}
+                                            {{--                                                </button>--}}
+                                            {{--                                            </div>--}}
                                         </div>
                                     @endforeach
                                 </div>
@@ -394,12 +401,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="button" name="remove"
-                                                        class="btn btn-danger btn-xs remove">
-                                                    Remove
-                                                </button>
-                                            </div>
+                                            {{--                                            <div class="form-group">--}}
+                                            {{--                                                <button type="button" name="remove"--}}
+                                            {{--                                                        class="btn btn-danger btn-xs remove">--}}
+                                            {{--                                                    Remove--}}
+                                            {{--                                                </button>--}}
+                                            {{--                                            </div>--}}
                                         </div>
                                     @endforeach
                                 </div>
@@ -444,12 +451,12 @@
                                                         ></div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="button" name="remove"
-                                                        class="btn btn-danger btn-xs remove">
-                                                    Remove
-                                                </button>
-                                            </div>
+                                            {{--                                            <div class="form-group">--}}
+                                            {{--                                                <button type="button" name="remove"--}}
+                                            {{--                                                        class="btn btn-danger btn-xs remove">--}}
+                                            {{--                                                    Remove--}}
+                                            {{--                                                </button>--}}
+                                            {{--                                            </div>--}}
                                         </div>
                                     @endforeach
                                 </div>
@@ -502,7 +509,48 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var intIndex = 0
+            let earlyStartDateValue = $('.catergory-early-ticket-start-date').val();
+            let normalStartDateValue = $('.catergory-general-ticket-start-date').val();
+            let lateStartDateValue = $('.catergory-late-ticket-start-date').val();
+            let earlyEndDateValue = $('.catergory-early-ticket-end-date').val();
+            let normalEndDateValue = $('.catergory-general-ticket-end-date').val();
+            let lateEndDateValue = $('.catergory-late-ticket-end-date').val();
+            $(document).on('change', '.catergory-early-ticket-start-date', (event) => {
+                $(".catergory-early-ticket-start-date").each(function (item) {
+                    $('.catergory-early-ticket-start-date').val(event.target.value)
+                });
+            })
+
+            $(document).on('change', '.catergory-general-ticket-start-date', (event) => {
+                $(".catergory-general-ticket-start-date").each(function (item) {
+                    $('.catergory-general-ticket-start-date').val(event.target.value)
+                });
+            })
+
+            $(document).on('change', '.catergory-late-ticket-start-date', (event) => {
+                $(".catergory-late-ticket-start-date").each(function (item) {
+                    $('.catergory-late-ticket-start-date').val(event.target.value)
+                });
+            })
+
+            $(document).on('change', '.catergory-early-ticket-end-date', (event) => {
+                $(".catergory-early-ticket-end-date").each(function (item) {
+                    $('.catergory-early-ticket-end-date').val(event.target.value)
+                });
+            })
+
+            $(document).on('change', '.catergory-general-ticket-end-date', (event) => {
+                $(".catergory-general-ticket-end-date").each(function (item) {
+                    $('.catergory-general-ticket-end-date').val(event.target.value)
+                });
+            })
+
+            $(document).on('change', '.catergory-late-ticket-end-date', (event) => {
+                $(".catergory-late-ticket-end-date").each(function (item) {
+                    $('.catergory-late-ticket-end-date').val(event.target.value)
+                });
+            })
+            intIndex = 0
             $(document).on('click', '#add', function () {
                 let earlyStartDateValue = $('.catergory-early-ticket-start-date').val();
                 let normalStartDateValue = $('.catergory-general-ticket-start-date').val();
