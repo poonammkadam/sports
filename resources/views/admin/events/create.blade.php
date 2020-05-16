@@ -31,7 +31,7 @@
                             @csrf
                             <input type="hidden" name="field" value="admin">
                             <div class="form-group row">
-                                <label for="name" class="col-md-2 col-form-label text-md-right">Event title</label>
+                                <label for="name" class="col-md-2 col-form-label text-right">Event title</label>
 
                                 <div class="col-md-10">
                                     <input id="name" required type="text" class="form-control " name="name" value=""
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="description" class="col-md-2 col-form-label text-md-right">Event
+                                <label for="description" class="col-md-2 col-form-label text-right">Event
                                     Description</label>
 
                                 <div class="col-md-10">
@@ -50,14 +50,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Registration End
-                                    Date</label>
+                                <label for="event_status" class="col-md-2 col-form-label text-right  event-form-input">Event
+                                    Status</label>
                                 <div class="col-md-4">
-                                    <input required type="datetime-local" class="form-control" id="register_expire_date"
-                                           name="register_expire_date" placeholder="">
+                                    <select id="event_status" class="form-control  custom-select"
+                                            name="event_status">
+                                        <option selected>Open this select menu</option>
+                                        <option value="Open">Open</option>
+                                        <option value="Closed">Closed</option>
+                                        <option value="Postponed">Postponed</option>
+                                    </select>
                                 </div>
 
-                                <label for="eventdate" class="col-md-2 col-form-label text-md-right">Event Date</label>
+
+                                <label for="eventdate" class="col-md-2 col-form-label text-right">Event Date</label>
                                 <div class="col-md-4">
                                     <input required type="datetime-local" class="form-control" id="eventdate"
                                            name="eventdate" placeholder="">
@@ -66,12 +72,12 @@
 
 
                             <div class="form-group row">
-                                <label for="venue" class="col-md-2 col-form-label text-md-right">Venue</label>
+                                <label for="venue" class="col-md-2 col-form-label text-right">Venue</label>
                                 <div class="col-md-4">
                                     <input required id="venue" type="text" class="form-control" name="venue"
                                            autocomplete="venue" autofocus>
                                 </div>
-                                <label for="org" class="col-md-2 col-form-label text-md-right">Select
+                                <label for="org" class="col-md-2 col-form-label text-right">Select
                                     Organisation</label>
                                 <div class="col-md-4">
                                     <select id="org" class="form-control custom-select" name="organisation">
@@ -83,9 +89,7 @@
                                 </div>
                             </div>
 
-                            <label class="col-md-2 col-form-label text-md-right" for="add">Add Event Type</label>
-                            <button type="button" name="add" id="add" class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
+
                             <div id="dynamic_field">
                                 <div class="addedSection">
                                     <h3>Category Default</h3>
@@ -218,45 +222,58 @@
                                                    name="category[0][fee][late][end_date]"
                                                    class="form-control item_category catergory-late-ticket-end-date">
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
-
-                            <button type="button" name="add" id="add_start_transportation"
-                                    class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="add_start_transportation" class="col-md-2 col-form-label text-md-right">Enter
-                                    Pickup Location </label>
+                                <label class="col-md-2 col-form-label text-right" for="add">Add Event Type</label>
+                                <button type="button" name="add" id="add" class="btn  btn-outline-dark"><i
+                                        class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+
+                            <div class="form-group row">
+
                                 <div id="add_start_transportation_fields">
                                 </div>
                             </div>
 
-                            <button type="button" name="add" id="add_end_transportation"
-                                    class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="add_end_transportation" class="col-md-2 col-form-label text-md-right">Enter
-                                    Drop Location After Event</label>
+                                <label for="add_start_transportation" class="col-md-2 col-form-label text-right">Enter
+                                    Pickup Location </label>
+                                <button type="button" name="add" id="add_start_transportation"
+                                        class="btn  btn-outline-dark"><i
+                                        class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
 
+
+                            <div class="form-group row">
                                 <div id="add_end_transportation_field">
                                 </div>
                             </div>
-
-                            <button type="button" name="add" id="add_accomodation"
-                                    class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
                             <div class="form-group row">
-                                <label for="add_accomodation" class="col-md-2 col-form-label text-md-right">Add
-                                    Accomodation</label>
+                                <label for="add_end_transportation" class="col-md-2 col-form-label text-right">Enter
+                                    Drop Location After Event</label>
+                                <button type="button" name="add" id="add_end_transportation"
+                                        class="btn  btn-outline-dark"><i
+                                        class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
 
+
+                            <div class="form-group row">
                                 <div id="add_accomodation_field">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="description" class="col-md-2 col-form-label text-md-right">Enter Racekit
+                                <label for="add_accomodation" class="col-md-2 col-form-label text-right">Add
+                                    Accomodation</label>
+                                <button type="button" name="add" id="add_accomodation"
+                                        class="btn  btn-outline-dark"><i
+                                        class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="description" class="col-md-2 col-form-label text-right">Enter Racekit
                                     Amount (optional)</label>
                                 <div class="addedSection">
                                     <div class="col-md-6">
@@ -269,18 +286,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group evet-form-list">
-                                <label for="event_status" class="event-form-input">Event Status</label>
-                                <select id="event_status" class="form-control custom-select" name="event_status">
-                                    <option selected>Open this select menu</option>
-                                    <option value="Open">Open</option>
-                                    <option value="Closed">Closed</option>
-                                    <option value="Postponed">Postponed</option>
-                                </select>
-                            </div>
 
                             <div class="form-group row">
-                                <label for="banner" class="col-md-2 col-form-label text-md-right">Upload Banner</label>
+                                <label for="banner" class="col-md-2 col-form-label text-right">Upload Banner</label>
                                 <div class="col-md-10">
                                     <input required id="banner" type="file" class="" name="banner">
                                 </div>
@@ -376,6 +384,7 @@
                 $(this).closest('.addedSection').remove();
             });
         })
+
         CKEDITOR.replace('description', {
             filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
