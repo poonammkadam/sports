@@ -99,7 +99,7 @@
                              aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{url('/logout')}}"
                             >
-                                {{ __('Logout') }}
+                                {{ __('Logout') }} <i class="fas fa-power-off"></i>
                             </a>
                         </div>
                     </li>

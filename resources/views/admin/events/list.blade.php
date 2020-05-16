@@ -5,7 +5,10 @@
             <h3 class="card-title">Events</h3>
         </div>
         <div align="left">
-            <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New</a>
+            <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New
+                <i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a href="{{url('admin/event/results/upload')}}"
+               class="btn btn-primary m-1">Resulte <i class="fa fa-upload" aria-hidden="true"></i></a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -61,15 +64,22 @@
                                             {{$objEvents->event_date}}
                                         </td>
                                         <td>
-                                            <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
-                                               class="btn btn-primary m-1">Edit</a>
                                             <a href="{{url('admin/events/view/'.$objEvents->id)}}"
-                                               class="btn btn-primary m-1">View</a>
+                                               class="btn btn-info"
+                                               title="View Event"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <a href="{{url('admin/events/edit/'.$objEvents->id)}}"
+                                               class="btn btn-success"
+                                               title="Edit Event"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{url('admin/events/delete',$objEvents->id)}}"
+                                               class="btn btn-danger" title="Delete Event"><i
+                                                    class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <tr> No Records found </tr>
+                                <tr> No Records found</tr>
                             @endif
                             </tbody>
                         </table>

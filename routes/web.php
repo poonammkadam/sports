@@ -44,6 +44,8 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => [ 'a
     Route::get('/resulte/edit/{id}', 'EventController@getResulte');
     Route::post('/resulte/upload/{id}', 'EventController@postResulte');
     Route::get('/user/event/category/{id}', 'EventController@getUserCategory');
+    Route::get('/event/results/upload', 'EventController@getResultsList');
+    Route::post('/event/results/upload', 'EventController@postResultsList');
     Route::get('/setting', 'SiteSettingController@create');
 });
 Route::group([ 'namespace' => 'User' ], function() {
