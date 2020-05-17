@@ -161,7 +161,7 @@
                                                     Date</label><input
                                                     type="date" required id="{{'category_start_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][early][start_date]'}}"
-                                                    @if($key != 0) disabled @endif
+                                                    @if($key != 0) readonly @endif
                                                     class="form-control item_category catergory-early-ticket-start-date"
                                                     value="{{$objEarlyTicket->start_date}}"
                                                 >
@@ -171,7 +171,7 @@
                                                     Date</label><input
                                                     type="date" required id="{{'category_end_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][early][end_date]'}}"
-                                                    @if($key != 0) disabled @endif
+                                                    @if($key != 0) readonly @endif
                                                     class="form-control item_category catergory-early-ticket-end-date"
                                                     value="{{$objEarlyTicket->end_date}}"
                                                 >
@@ -219,7 +219,7 @@
                                                     Date</label><input
                                                     type="date" required id="{{'category_start_date'.$key}}"
                                                     name="{{'category['.$key.'][fee][normal][start_date]'}}"
-                                                    @if($key != 0) disabled @endif
+                                                    @if($key != 0) readonly @endif
                                                     class="form-control item_category catergory-general-ticket-start-date"
                                                     value="{{$objNormalTicket->start_date}}"
                                                 >
@@ -230,7 +230,7 @@
                                                 <input type="date"
                                                        required
                                                        id="{{'category_end_date'.$key}}"
-                                                       @if($key != 0) disabled @endif
+                                                       @if($key != 0) readonly @endif
                                                        name="{{'category['.$key.'][fee][normal][end_date]'}}"
                                                        class="form-control item_category catergory-general-ticket-end-date"
                                                        value="{{$objNormalTicket->end_date}}"
@@ -282,7 +282,7 @@
                                                        required
                                                        id="{{'category_start_date'.$key}}"
                                                        name="{{'category['.$key.'][fee][late][start_date]'}}"
-                                                       @if($key != 0) disabled @endif
+                                                       @if($key != 0) readonly @endif
                                                        class="form-control item_category catergory-late-ticket-start-date"
                                                        value="{{$objLateTicket->start_date}}"
                                                 >
@@ -295,7 +295,7 @@
                                                        id="{{'category_end_date'.$key}}"
                                                        name="{{'category['.$key.'][fee][late][end_date]'}}"
                                                        class="form-control item_category catergory-late-ticket-end-date"
-                                                       @if($key != 0) disabled @endif
+                                                       @if($key != 0) readonly @endif
                                                        value="{{$objLateTicket->end_date}}"
                                                 >
                                             </div>
@@ -421,13 +421,8 @@
                                         class="fa fa-plus" aria-hidden="true"></i></button>
                             </div>
 
-                            <button type="button" name="add" id="add_accomodation"
-                                    class="btn  btn-outline-dark"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
-                            <div class="form-group row">
-                                <label for="add_accomodation" class="col-md-2 col-form-label text-md-right">Add
-                                    Accomodation</label>
 
+                            <div class="form-group row">
                                 <div id="add_accomodation_field">
                                     @foreach($objEvent->accom as $intAccom=>$objAccom)
                                         <div class="addedSection"><h3>Add Accomodation</h3>
@@ -469,6 +464,14 @@
                                         </div>
                                     @endforeach
                                 </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="add_accomodation" class="col-md-2 col-form-label text-md-right">Add
+                                    Accomodation</label>
+                                <button type="button" name="add" id="add_accomodation"
+                                        class="btn  btn-outline-dark"><i
+                                        class="fa fa-plus" aria-hidden="true"></i></button>
                             </div>
                             <div class="form-group row">
                                 <label for="add_end_transportation" class="col-md-2 col-form-label text-md-right">Enter
@@ -586,20 +589,20 @@
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][fee]" class="form-control item_category"></div></div></div>';
                 html += '<input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][early][name]" class="form-control item_category" placeholder="Category fee..." value="early">\n'
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][quantity]" class="form-control item_category"></div></div>';
-                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket Start Date</label><input type="date" disabled value="' + earlyStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][start_date]" class="form-control catergory-early-ticket-start-date item_category"></div></div>';
-                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket End Date</label><input type="date" disabled value="' + earlyEndDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][end_date]" class="form-control catergory-early-ticket-end-date item_category"></div></div></div>';
+                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket Start Date</label><input type="date" readonly value="' + earlyStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][start_date]" class="form-control catergory-early-ticket-start-date item_category"></div></div>';
+                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Early Bird Ticket End Date</label><input type="date" readonly value="' + earlyEndDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][early][end_date]" class="form-control catergory-early-ticket-end-date item_category"></div></div></div>';
 
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][fee]" class="form-control item_category"></div></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][quantity]" class="form-control item_category"></div></div>';
                 html += '<input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][normal][name]" class="form-control item_category" placeholder="Category fee..." value="normal">\n'
-                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" disabled value="' + normalStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][start_date]" class="form-control catergory-general-ticket-start-date item_category"></div></div>';
-                html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">General Ticket End Date</label><input type="date" value="' + normalEndDateValue + '" disabled required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][end_date]" class="form-control catergory-general-ticket-end-date item_category"></div> </div>'
+                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" readonly value="' + normalStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][start_date]" class="form-control catergory-general-ticket-start-date item_category"></div></div>';
+                html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">General Ticket End Date</label><input type="date" value="' + normalEndDateValue + '" readonly required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][normal][end_date]" class="form-control catergory-general-ticket-end-date item_category"></div> </div>'
 
                 html += '<div class="row"><div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Late Fee</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][fee]" class="form-control item_category"></div></div></div>';
                 html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">Late Ticket Quantity</label><input type="number" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][quantity]" class="form-control item_category"></div></div>';
                 html += '<input type="hidden" required  id="category_fee_name' + intIndex + '" name="category[' + intIndex + '][fee][late][name]" class="form-control item_category" placeholder="Category fee..." value="late">\n'
-                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" disabled  value="' + lateStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][start_date]" class="form-control catergory-late-ticket-start-date item_category"></div></div>';
-                html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">Late Ticket End Date</label><input type="date" value="' + lateEndDateValue + '" disabled required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][end_date]" class="form-control catergory-late-ticket-end-date item_category"></div></div>'
+                html += '<div class="col-md-3"><div  class="form-group"><label for="category_fee' + intIndex + '">General Ticket Start Date</label><input type="date" readonly  value="' + lateStartDateValue + '" required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][start_date]" class="form-control catergory-late-ticket-start-date item_category"></div></div>';
+                html += '<div class="col-md-3"> <label for="category_fee' + intIndex + '">Late Ticket End Date</label><input type="date" value="' + lateEndDateValue + '" readonly required  id="category_fee' + intIndex + '" name="category[' + intIndex + '][fee][late][end_date]" class="form-control catergory-late-ticket-end-date item_category"></div></div>'
 
 
                 html += '<div class="form-group"><button type="button" name="remove" class="btn btn-danger btn-xs remove">Remove</button></div></div>';

@@ -1,12 +1,33 @@
 @extends('layouts.app')
 @section('content')
     <section id="intro">
-        <div class="intro-container wow fadeIn">
-            <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>
-            <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"
-               data-autoplay="true"></a>
-            <a href="#about" class="about-btn scrollto">About The Event</a>
+        {{--        <div class="intro-container wow fadeIn">--}}
+        {{--            <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>--}}
+        {{--            <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>--}}
+        {{--            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"--}}
+        {{--               data-autoplay="true"></a>--}}
+        {{--            <a href="#about" class="about-btn scrollto">About The Event</a>--}}
+        {{--        </div>--}}
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="1500">
+                    <img src="/images/img_1589051768.jpg" class="d-block w-100 h-100" alt="...">
+                </div>
+                <div class="carousel-item" data-interval="1500">
+                    <img src="/images/race1.jpeg" class="d-block w-100 h-100" alt="...">
+                </div>
+                <div class="carousel-item" data-interval="1500">
+                    <img src="/images/race2.jpeg" class="d-block w-100 h-100" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </section>
 
@@ -20,24 +41,26 @@
                 </div>
 
                 <div class="row">
-
-
                     @foreach($arrObjUpcomingEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
-                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <img src="{{$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                 <div class="details">
                                     <h3>{{$objEvent->name}}</h3>
                                     <h4 class="text-white  mb-0"><i
                                             class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                     </h4>
                                     <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
+
                                 </div>
+                                <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
                             </div>
                         </div>
-                    @endforeach
+
+
                 </div>
+                @endforeach
+            </div>
             </div>
         </section>
     @endif
@@ -54,15 +77,15 @@
                     @foreach($arrObjCurrentEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
-                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <img src="{{$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                 <div class="details">
                                     <h3>{{$objEvent->name}}</h3>
                                     <h4 class="text-white  mb-0"><i
                                             class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                     </h4>
                                     <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
                                 </div>
+                                <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
                             </div>
                         </div>
                     @endforeach
@@ -86,15 +109,15 @@
                     @foreach($arrObjPastEvents as $objEvent)
                         <div class="col-lg-4 col-md-6">
                             <div class="speaker">
-                                <img src="{{'public/'.$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
+                                <img src="{{$objEvent->banner}}" alt="Speaker 1" class="img-fluid">
                                 <div class="details">
                                     <h3>{{$objEvent->name}}</h3>
                                     <h4 class="text-white  mb-0"><i
                                             class="fa fa-map-marker mr-1">{{$objEvent->venue}}</i>
                                     </h4>
                                     <p>{{  date('l j F Y', strtotime($objEvent->registration_end_date))}}</p>
-                                    <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
                                 </div>
+                                <a href="{{'event/'.$objEvent->id}}" class="stretched-link"></a>
                             </div>
                         </div>
                     @endforeach
@@ -261,5 +284,4 @@
 
         </div>
     </section>
-
 @endsection

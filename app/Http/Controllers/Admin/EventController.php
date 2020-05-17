@@ -11,8 +11,10 @@ use App\Http\Model\Organisation;
 use App\Ticket;
 use App\Transend;
 use App\Transstart;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -43,9 +45,9 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        //        $this->validate($request, [
-        //            'banner' => 'dimensions:min_width=500,max_width=1500,min_height=500,max_height=1500',
-        //        ]);
+        $this->validate($request, [
+            'banner' => 'dimensions:min_width=500,min_height=500,',
+        ]);
         DB::beginTransaction();
         $objEvent              = new Events();
         $objEvent->name        = $request->name;
@@ -125,6 +127,10 @@ class EventController extends Controller
             }
         }
         DB::commit();
+        Mail::send('emails.welcome', $objEvent, function($message) {
+            $message->from(config(), config('app.name'));
+            $message->to('foo@example.com')->cc('bar@example.com');
+        });
 
         return redirect('admin/events')->with('success', 'Events Created Successfully.');
     }
@@ -148,6 +154,9 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
+        $this->validate($request, [
+            'banner' => 'dimensions:min_width=500,min_height=500,',
+        ]);
         DB::beginTransaction();
         $objEvent              = Events::where('id', $id)->first();
         $objEvent->name        = $request->name;
@@ -256,7 +265,15 @@ class EventController extends Controller
             }
         }
         DB::commit();
-        $objEvent->save();
+        $arrObjUser = User::all();
+        foreach ($arrObjUser as $user) {
+            if (!$user->isOrganiser()) {
+                Mail::queue('mail.newevent', [ 'objEvent' => $objEvent, 'user' => $user ], function($message, $user) {
+                    $message->from(config('mail.from.address'), config('app.name'));
+                    $message->to($user->email);
+                });
+            }
+        }
 
         return redirect('admin/events')->with('success', 'Events Updated Successfully.');
     }
