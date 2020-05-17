@@ -6,7 +6,7 @@
         </div>
         <div class="">
             <div class="banner text-center">
-                <img src="{{'/public/'.$objEvent->banner}}" style="max-height:300px" class="w-100">
+                <img src="{{$objEvent->banner}}" style="max-height:300px" class="w-100">
             </div>
         </div>
 
@@ -15,7 +15,7 @@
             @if(auth()->check() && !auth()->user()->isOrganiser())
                 @if( date('Y-m-d', strtotime($objEvent->registration_start_date)) <= date('Y-m-d') && date('Y-m-d', strtotime($objEvent->registration_end_date)) >= date('Y-m-d'))
                     <a href="{{url('/event/register').'/'.$objEvent->id}}"
-                       class="btn btn-outline-danger btn-lg">Register</a>
+                       class="btn btn-primary btn-lg">Register</a>
 
                 @elseif(date('Y-m-d', strtotime($objEvent->registration_end_date)) < date('Y-m-d'))
                     <div class="title section-header text-center">

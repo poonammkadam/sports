@@ -15,7 +15,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ url('admin/setting/store') }}">
+                    <form method="POST" action="{{ url('admin/setting/store'.$objSetting->id) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -24,7 +24,7 @@
 
                             <div class="col-md-10">
                                    <textarea id="terms" class="form-control" name="terms"
-                                   >
+                                   >{{$objSetting->terms}}
                                     </textarea>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
 
                             <div class="col-md-10">
                                    <textarea id="policy" class="form-control" name="policy"
-                                   >
+                                   >{{$objSetting->policy}}
                                     </textarea>
                             </div>
                         </div>

@@ -15,7 +15,7 @@
                     <ul>
                         <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
                         {{--                        <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>--}}
-                        <li><i class="fa fa-angle-right"></i> <a href="{{url('/services')}}">Services</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="{{url('/about-us')}}">About us</a></li>
                         <li><i class=" fa fa-angle-right"></i> <a href="{{url('/terms')}}">Terms of service</a></li>
                         <li><i class="fa fa-angle-right"></i> <a href="{{url('/privacy')}}">Privacy policy</a></li>
                     </ul>

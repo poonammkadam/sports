@@ -1,4 +1,3 @@
-<html>
 @component('mail::message')
     Hi Admin,
 
@@ -11,4 +10,4 @@
     Thanks,
     {{ config('app.name') }}
 @endcomponent
-</html>
+
