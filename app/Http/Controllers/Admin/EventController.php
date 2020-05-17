@@ -43,9 +43,9 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'banner' => 'dimensions:min_width=500,max_width=1500,min_height=500,max_height=1500',
-        ]);
+        //        $this->validate($request, [
+        //            'banner' => 'dimensions:min_width=500,max_width=1500,min_height=500,max_height=1500',
+        //        ]);
         DB::beginTransaction();
         $objEvent              = new Events();
         $objEvent->name        = $request->name;
@@ -299,9 +299,25 @@ class EventController extends Controller
     public function deleteEvent($id)
     {
         $objEvent = Events::where('id', $id)->first();
+        $category = Category::where('event_id', $id)->get();
+        foreach ($category as $row) {
+            foreach ($row->ticket as $r) {
+                $r->delete();
+            }
+            $row->delete();
+        }
+        foreach ($objEvent->start as $r) {
+            $r->delete();
+        }
+        foreach ($objEvent->end as $r) {
+            $r->delete();
+        }
+        foreach ($objEvent->accom as $r) {
+            $r->delete();
+        }
         $objEvent->delete();
 
-        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
+        return redirect('admin/events')->with('message', 'Resulte Upload Successfully.');
     }
 }
 

@@ -4,9 +4,9 @@
         <div class="card-header">
             <h3 class="card-title">Users</h3>
         </div>
-    
+
         <!-- /.card-header -->
-         <div class="card-body">
+        <div class="card-body">
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -23,7 +23,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 160px;">User ID
+                                    style="width: 50px;">User ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 207px;">
@@ -43,9 +43,9 @@
                             </thead>
                             <tbody>
 
-                                @if($arrObjUsers->count() > 0)
-                                     @foreach($arrObjUsers as $objProfile)
-                                     <tr role="row" class="odd">
+                            @if($arrObjUsers->count() > 0)
+                                @foreach($arrObjUsers as $objProfile)
+                                    <tr role="row" class="odd">
                                         <td class="sorting_1">{{$objProfile->id}}</td>
                                         <td>
                                             {{$objProfile->user->name}}
@@ -53,18 +53,22 @@
 
                                         <td>
                                             {{$objProfile->user->email}}
-                                         </td>
+                                        </td>
 
                                         <td>
-                                            <a href="{{url('admin/user/edit/'.$objProfile->id)}}"  class="btn m-1 btn-primary">Edit</a>
-                                            <a href="{{url('admin/user/events/'.$objProfile->id)}}"  class="btn m-1 btn-primary"> Events</a>
+                                            <a href="{{url('admin/user/edit/'.$objProfile->id)}}"
+                                               class="btn m-1 btn-primary">Edit</a>
+                                            <a href="{{url('admin/user/events/'.$objProfile->id)}}"
+                                               class="btn m-1 btn-primary"> Events</a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
                             @else
-                                <tr> <td>No Records found</td> </tr>
+                                <tr>
+                                    <td>No Records found</td>
+                                </tr>
                             @endif
-                           </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>

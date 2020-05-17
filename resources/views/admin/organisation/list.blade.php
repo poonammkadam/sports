@@ -25,7 +25,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 160px;">Organisation ID
+                                    style="width: 50px;">Organisation ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 100px;">
@@ -63,7 +63,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr> No Records found </tr>
+                                <tr> No Records found</tr>
                             @endif
                             </tbody>
                         </table>
