@@ -7,8 +7,7 @@
         <div align="left">
             <a href="{{ url('admin/events/create') }}" class="btn btn-info">Add New
                 <i class="fa fa-plus" aria-hidden="true"></i></a>
-            <a href="{{url('admin/event/results/upload')}}"
-               class="btn btn-primary m-1">Resulte <i class="fa fa-upload" aria-hidden="true"></i></a>
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -46,6 +45,10 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
                                     Action
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
+                                    Resulte Upload
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,6 +78,11 @@
                                             <a href="{{url('admin/events/delete',$objEvents->id)}}"
                                                class="btn btn-danger" title="Delete Event"><i
                                                     class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="{{url('admin/event/results/upload',$objEvents->id)}}"
+                                               title="Upload" class="btn btn-primary m-1"><i class="fa fa-upload"
+                                                                                             aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

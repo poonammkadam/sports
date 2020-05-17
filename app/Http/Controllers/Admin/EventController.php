@@ -300,14 +300,28 @@ class EventController extends Controller
         return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
     }
 
-    public function getResultsList()
+    public function getResultsList($id)
     {
-        return view('admin.events.results_upload');
+        $objEvent = Events::where('id', $id)->first();
+
+        return view('admin.events.results_upload', [ 'objEvent' => $objEvent ]);
     }
 
     public function postResultsList(Request $request)
     {
-        //        dd($request->all());
+        $objEvent             = Events::where('id', $request->id)->first();
+        $objEvent->result_url = $request->url;
+        $objEvent->save();
+
+        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
+    }
+
+    public function deleteEvent($id)
+    {
+        $objEvent = Events::where('id', $id)->first();
+        $objEvent->delete();
+
+        return redirect('admin/events')->with('success', 'Resulte Upload Successfully.');
     }
 }
 

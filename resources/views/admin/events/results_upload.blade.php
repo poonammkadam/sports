@@ -19,27 +19,11 @@
                         <form method="POST" enctype="multipart/form-data" autocomplete="off"
                               action="{{url('admin/event/results/upload')}}">
                             @csrf
-                            <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label text-md-right">Results Name</label>
-                                <div class="col-md-6">
-                                    <input id="title" required type="text" class="form-control " name="title"
-                                           autocomplete="title" autofocus>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="resulte" class="col-md-4 col-form-label text-md-right">Upload Result
-                                    File</label>
-                                <div class="col-md-6">
-                                    <i class="fa fa-folder-open" aria-hidden="true"></i> <input id="resulte" type="file"
-                                                                                                class="" name="file">
-                                </div>
-                            </div>
-                            <label for="or" class="col-md-4 col-form-label text-md-right">OR</label>
+                            <input type="hidden" name="id" value="{{$objEvent->id}}">
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Enter Result Url
                                     <i class="fa fa-link" aria-hidden="true"></i></label>
                                 <div class="col-md-6">
-
                                     <input id="url" type="text" class="form-control " name="url" autocomplete="url"
                                            autofocus>
                                 </div>
