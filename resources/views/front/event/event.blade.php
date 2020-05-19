@@ -223,7 +223,13 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="form-group">
+                                <input class="form-check-input" required type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    I have read and accept the terms of <a href="/data-policy">aqrace Personal Data
+                                        Policy *</a>
+                                </label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

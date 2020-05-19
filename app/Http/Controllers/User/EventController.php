@@ -20,20 +20,13 @@ class EventController extends Controller
         $objEvent = Events::where('id', $id)->first();
         ($objEvent->eventParticipants->load('category', 'profile'));
 
-        return view('front.event.event_view', ['objEvent' => $objEvent, 'objOrganisation' => $objOrganisation]);
+        return view('front.event.event_view', ['objEvent' => $objEvent]);
     }
 
     public function getAllResults()
     {
-        $endpoint = "https://www.racetecresults.com/StartPage.aspx";
-        $client = new Client();
-        $response = $client->request('GET', $endpoint, [
-            'query' => ['CId' => '20110'],
-        ]);
-        $body = $response->getBody()->getContents();
-        $statusCode = $response->getStatusCode();;
-
-        return view('front.results.results', ['body' => $body]);
+        $objEvent = Events::whereNotNull('result_url')->get();
+        return view('front.results.results', ['objEvent' => $objEvent]);
     }
 
     public function getFromResult()

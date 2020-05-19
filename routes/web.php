@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('auth/logout', 'Auth\AuthController@logout');
-Route::get('/registration', function() {
+Route::get('/registration', function () {
     return view('layouts.forms.registation');
 });
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => [ 'auth' ] ], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'UserController@index');
     Route::get('/user', 'UserController@index');
     Route::get('/user/create', 'UserController@create');
@@ -49,7 +49,7 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => [ 'a
     Route::get('/events/delete/{id}', 'EventController@deleteEvent');
     Route::get('/setting', 'SiteSettingController@create');
 });
-Route::group([ 'namespace' => 'User' ], function() {
+Route::group(['namespace' => 'User'], function () {
     Route::get('/registration', 'UserController@getRegister');
     Route::get('/profile/edit', 'UserController@getUpdateProfile');
     Route::Post('/profile/edit', 'UserController@postUpdateProfile');
@@ -74,16 +74,16 @@ Route::group([ 'namespace' => 'User' ], function() {
     Route::get('/StartPage.aspx', 'EventController@getFromResult');
     Route::get('/results.aspx', 'EventController@getResult');
     Route::get('/Stats.aspx', 'EventController@getStats');
-    Route::get('/logout', function() {
+    Route::get('/logout', function () {
         Auth::logout();
 
         return redirect('/login');
     });
-    Route::get('/thankyou', function() {
+    Route::get('/thankyou', function () {
         return view('thankyou');
     });
 });
-Route::group([ 'namespace' => 'User', 'prefix' => 'organisation', ], function() {
+Route::group(['namespace' => 'User', 'prefix' => 'organisation',], function () {
     Route::get('/', 'OrganisationController@getRequestForm');
     Route::get('/myorganisation', 'OrganisationController@show');
     Route::get('/organisation/view', 'OrganisationController@show');
@@ -92,6 +92,7 @@ Route::group([ 'namespace' => 'User', 'prefix' => 'organisation', ], function() 
 });
 Route::get('/privacy', 'Controller@privacy');
 Route::get('/about-us', 'Controller@about');
+Route::get('/data-policy', 'Controller@dataPolicy');
 Route::get('/terms', 'Controller@terms');
 Route::get('contact-us', 'ContactUSController@contactUS');
-Route::post('contact-us', [ 'as' => 'contactus.store', 'uses' => 'ContactUSController@contactUSPost' ]);
+Route::post('contact-us', ['as' => 'contactus.store', 'uses' => 'ContactUSController@contactUSPost']);
