@@ -28,6 +28,7 @@ use App\MerchantSuite\URLDirectory;
 use App\Notifications\RegisterConfirmation;
 use App\Transend;
 use App\Transstart;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -90,7 +91,7 @@ class UserController extends Controller
         auth()->user()->registration_status = true;
         auth()->user()->save();
 
-        return redirect('profile_update')->with('message', 'Your Profile Created successfully.!');
+        return redirect('myprofile')->with('message', 'Your Profile Created successfully.!');
     }
 
     public function eventList()
@@ -208,19 +209,20 @@ class UserController extends Controller
     public function makePayment($arrMixExtraData)
     {
         URLDirectory::setBaseURL("reserved", "https://www.merchantsuite.com/api/v3");
-        $credentials = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456", Mode::UAT);
-        $txn               = new Transaction();
-        $cardDetails       = new CardDetails();
-        $order             = new Order();
-        $shippingAddress   = new OrderAddress();
-        $billingAddress    = new OrderAddress();
-        $address           = new Address();
-        $customer          = new Customer();
-        $personalDetails   = new PersonalDetails();
-        $contactDetails    = new ContactDetails();
-        $order_item_1      = new OrderItem();
-        $order_recipient_1 = new OrderRecipient();
-        $fraudScreening    = new FraudScreeningRequest();
+        $credentials         = new Credentials(env('MERCAHNTSUIT_USERNAME'), env('EBpu185\/#HArq0-'), "MS123456",
+            Mode::UAT);
+        $txn                 = new Transaction();
+        $cardDetails         = new CardDetails();
+        $order               = new Order();
+        $shippingAddress     = new OrderAddress();
+        $billingAddress      = new OrderAddress();
+        $address             = new Address();
+        $customer            = new Customer();
+        $personalDetails     = new PersonalDetails();
+        $contactDetails      = new ContactDetails();
+        $order_item_1        = new OrderItem();
+        $order_recipient_1   = new OrderRecipient();
+        $fraudScreening      = new FraudScreeningRequest();
         $statementDescriptor = new StatementDescriptor();
         $txn->setAction(Actions::Payment);
         $txn->setCredentials($credentials);
@@ -332,8 +334,25 @@ class UserController extends Controller
         return view('front.profile.profile_edit', [ 'objProfile' => $objProfile ]);
     }
 
-    public function postUpdateProfile()
+    public function postUpdateProfile(Request $request)
     {
+        $objProfile                    = Profile::where('id', $request->id)->first();
+        $objUser                       = User::where('id', $objProfile->user_id)->first();
+        $objUser->name                 = $request->local_name;
+        $objUser->email                = $request->email;
+        $objProfile->first_name        = $request->first_name;
+        $objProfile->last_name         = $request->last_name;
+        $objProfile->gender            = $request->gender;
+        $objProfile->date_of_birth     = $request->dob;
+        $objProfile->country           = $request->nationality;
+        $objProfile->local_id          = $request->local_id;
+        $objProfile->passport          = $request->passport_no;
+        $objProfile->address           = $request->address;
+        $objProfile->country           = $request->country;
+        $objProfile->mobile_no_primary = $request->mobile_no;
+        $objProfile->t_shirt_size      = $request->t_shirt_size;
+        $objProfile->save();
 
+        return redirect('myprofile')->with('msg', 'Your Profile is updated');
     }
 }

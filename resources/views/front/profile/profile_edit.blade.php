@@ -14,8 +14,9 @@
             <div class="text-left">
                 <h2>Basic Information</h2>
             </div>
-            <form method="POST" autocomplete="off" action="/profile/update">
+            <form method="POST" autocomplete="off" action="/profile/edit">
                 @csrf
+                <input type="hidden" value="{{$objProfile->id}}" name="id">
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputEmail4">Email</label>
@@ -60,17 +61,17 @@
                         <br>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" required type="radio" name="gender" id="inlineRadio1"
-                                   value="male">
+                                   value="male" {{ $objProfile->gender=='male' ?'checked':''}}>
                             <label class="form-check-label ml-0" for="inlineRadio1">Male</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" required type="radio" name="gender" id="inlineRadio2"
-                                   value="female">
+                                   value="female" {{ $objProfile->gender=='female' ?'checked':''}}>
                             <label class="form-check-label ml-0" for="inlineRadio2">Female</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" required type="radio" name="gender" id="inlineRadio3"
-                                   value="others">
+                                   value="others" {{ $objProfile->gender=='others' ?'checked':''}}>
                             <label class="form-check-label ml-0" for="inlineRadio3">other</label>
                         </div>
                     </div>
@@ -79,11 +80,10 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputAddress">Nationality</label>
-                        <select class="form-control custom-select" name="nationality"
-                                value="{{$objProfile->country}}">
-                            <option selected>Open this select menu</option>
+                        <select class="form-control custom-select" name="nationality">
                             @foreach($arrCountries as $objCountries)
-                                <option value="{{$objCountries}}">{{$objCountries}}</option>
+                                <option
+                                    value="{{$objCountries}}" {{ $objProfile->country==$objCountries ? 'selected':''}}>{{$objCountries}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -98,14 +98,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="tshirt">T-shirt size</label>
-                        <select id="tshirt" class="form-control custom-select" name="t_shirt_size"
-                                value="{{$objProfile->t_shirt_size}}">
-                            <option selected>Open this select menu</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
+                        <select id="tshirt" class="form-control custom-select" name="t_shirt_size">
+                            <option value="XS" {{ $objProfile->t_shirt_size=='XS' ?'selected':''}}>XS
+                            </option>
+                            <option value="S" {{ $objProfile->t_shirt_size=='S' ? 'selected':''}}>S</option>
+                            <option value="M" {{ $objProfile->t_shirt_size=='M' ? 'selected':''}}>M</option>
+                            <option value="L" {{ $objProfile->t_shirt_size=='L' ? 'selected':''}}>L</option>
+                            <option value="XL" {{ $objProfile->t_shirt_size=='XL' ? 'selected':''}}>XL</option>
                         </select>
                     </div>
                     <div class="col-md-2"></div>

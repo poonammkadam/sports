@@ -4,6 +4,11 @@
         <h5 class="card-header">
         </h5>
         <div class="card-body">
+            @if (session('alert'))
+                <div class="alert alert-info">
+                    {{ session('alert') }}
+                </div>
+            @endif
             <div class="section-header">
                 <h2>{{$objProfile->name}}</h2>
                 <p>{{$objProfile->email}}</p>
@@ -27,6 +32,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+                <a href="/profile/edit" class="btn btn-danger">Click To Update Profile</a>
             </div>
         </div>
     </div>
