@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/events/store', 'EventController@store');
     Route::get('/events/edit/{id}', 'EventController@edit');
     Route::get('/events/view/{id}', 'EventController@view');
+    Route::get('/events/participants/view/{id}', 'EventController@participantView');
     Route::get('/events/paid/{id}', 'EventController@setPaymentStatus');
     Route::post('/events/edit/{id}', 'EventController@update');
     Route::get('/resulte/edit/{id}', 'EventController@getResulte');
@@ -62,6 +63,7 @@ Route::group(['namespace' => 'User'], function () {
     Route::post('/event/register', 'UserController@eventStore');
     Route::post('/event/register/store', 'UserController@eventStore');
     Route::get('/event/{id}/{org}', 'EventController@getOrgShow');
+    Route::get('/events/participants/view/{id}', 'EventController@participantView');
     Route::get('/event/{id}', 'EventController@getShow');
     Route::get('/org/participants/list/{id}/{catid}', 'EventController@getOrgPartiList');
     Route::post('/profile/update', 'UserController@update');

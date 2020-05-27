@@ -79,10 +79,12 @@
                                                 style="width: 100px;">
                                                 Payment Type
                                             </th>
-                                            {{--                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"--}}
-                                            {{--                                                aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">--}}
-                                            {{--                                                Upload result--}}
-                                            {{--                                            </th>--}}
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1"
+                                                aria-label="CSS grade: activate to sort column ascending"
+                                                style="width: 95px;">
+                                                Action
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -124,6 +126,12 @@
                                                         @else
                                                             <span>Offline</span>
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                    <td>
+                                                        <a class="btn btn-info"
+                                                           href="{{url('/events/participants/view/'.$objParticipants->id)}}">View</a>
+                                                    </td>
                                                     </td>
                                                     {{--                                                    <td>--}}
                                                     {{--                                                        ----}}

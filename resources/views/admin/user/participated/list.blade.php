@@ -2,7 +2,8 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Events Participated by {{$objUserProfile->first_name}}{{$objUserProfile->last_name}}</h3>
+            <h3 class="card-title">Events Participated
+                by {{$objUserProfile->first_name}}{{$objUserProfile->last_name}}</h3>
         </div>
 
         <!-- /.card-header -->
@@ -12,11 +13,11 @@
                     {{ session()->get('message') }}
                 </div>
             @endif
-                @if(session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">
                     <div class="col-sm-12">
@@ -34,10 +35,10 @@
                                     Event Name
                                 </th>
 
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 207px;">
-                                    Event Description
-                                </th>
+                                {{--                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"--}}
+                                {{--                                    aria-label="Browser: activate to sort column ascending" style="width: 207px;">--}}
+                                {{--                                    Event Description--}}
+                                {{--                                </th>--}}
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
@@ -57,7 +58,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 95px;">
-                                  Upload Resulte
+                                    Upload Resulte
                                 </th>
 
                             </tr>
@@ -73,9 +74,9 @@
                                             {{$objEvent->category->events->name}}
                                         </td>
 
-                                        <td>
-                                            {{$objEvent->category->events->description}}
-                                        </td>
+                                        {{--                                        <td>--}}
+                                        {{--                                            {{$objEvent->category->events->description}}--}}
+                                        {{--                                        </td>--}}
 
                                         <td>
                                             {{$objEvent->category->events->organisation->name}}
@@ -91,24 +92,26 @@
 
                                         <td>
                                             @if($objEvent->payment_status == 1)
-                                            <a href="#" class="btn btn-success m-1 disabled">Paid</a>
+                                                <a href="#" class="btn btn-success m-1 disabled">Paid</a>
                                             @else
                                                 <a href="{{url('admin/events/paid/'.$objEvent->id)}}"
-                                               class="btn btn-danger m-1">Unpaid</a>
+                                                   class="btn btn-danger m-1">Unpaid</a>
                                             @endif
                                         </td>
                                         <td>
                                             @if(!$objEvent->result_status)
-                                                <a href="{{url('/admin/resulte/edit/'.$objEvent->id)}}" class="btn btn-success m-1 " >Upload</a>
+                                                <a href="{{url('/admin/resulte/edit/'.$objEvent->id)}}"
+                                                   class="btn btn-success m-1 ">Upload</a>
 
                                             @else
-                                                <a class="btn btn-info disabled" title="Resulte already upload" href="#">Already Uploaded</a>
+                                                <a class="btn btn-info disabled" title="Resulte already upload"
+                                                   href="#">Already Uploaded</a>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <tr> No Records found </tr>
+                                <tr> No Records found</tr>
                             @endif
                             </tbody>
                         </table>

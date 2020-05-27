@@ -29,6 +29,12 @@ class EventController extends Controller
         return view('front.results.results', ['objEvent' => $objEvent]);
     }
 
+    public function participantView($id)
+    {
+        $objParticipants = EventParticipants::where('id', $id)->first();
+        return view('front.organisation.participants.view', ['objParticipants' => $objParticipants]);
+    }
+
     public function getFromResult()
     {
         $endpoint = "https://www.racetecresults.com/StartPage.aspx";

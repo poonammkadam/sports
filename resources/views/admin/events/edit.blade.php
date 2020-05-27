@@ -70,16 +70,15 @@
                                 </div>
                                 <label for="org" class="col-md-2 col-form-label text-md-right">Select
                                     Organisation</label>
-                                {{--                                <div class="col-md-4">--}}
-                                {{--                                    @dd($arrObjOrganisation)--}}
-                                {{--                                    <select id="org" class="form-control custom-select" name="organisation">--}}
-
-                                {{--                                        <option selected>Open this select menu</option>--}}
-                                {{--                                        @foreach($arrObjOrganisation as $objOrg)--}}
-                                {{--                                            <option value="{{$objOrg->id}}">{{$objOrg->name}}</option>--}}
-                                {{--                                        @endforeach--}}
-                                {{--                                    </select>--}}
-                                {{--                                </div>--}}
+                                <div class="col-md-4">
+                                    <select id="org" class="form-control custom-select" name="organisation">
+                                        <option selected>Open this select menu</option>
+                                        @foreach($arrObjOrganisation as $objOrg)
+                                            <option
+                                                value="{{$objOrg->id}}" {{ $objEvent->org_id==$objOrg->id? 'selected':''}}>{{$objOrg->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
 

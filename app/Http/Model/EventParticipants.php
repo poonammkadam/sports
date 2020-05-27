@@ -3,6 +3,7 @@
 namespace App\Http\Model;
 
 use App\Accomodation;
+use App\Ticket;
 use App\Transend;
 use App\Transstart;
 use Illuminate\Database\Eloquent\Model;
@@ -39,5 +40,10 @@ class EventParticipants extends Model
     public function getend()
     {
         return $this->hasOne(new Transend(), 'id', 'transends');
+    }
+
+    public function ticket()
+    {
+        return $this->hasOne(new Ticket(), 'id', 'ticket_id');
     }
 }

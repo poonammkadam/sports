@@ -13,30 +13,31 @@
                             <div class="col-7">{{$objEvent->name}}</div>
                         </div>
 
-                        <div class="row m-2">
-                            <div class="col-4"><b> Event Description:</b></div>
-                            <div class="col-1"></div>
-                            <div class="col-7">{!! $objEvent->description !!}</div>
-                        </div>
+                        {{--                        <div class="row m-2">--}}
+                        {{--                            <div class="col-4"><b> Event Description:</b></div>--}}
+                        {{--                            <div class="col-1"></div>--}}
+                        {{--                            <div class="col-7">{!! $objEvent->description !!}</div>--}}
+                        {{--                        </div>--}}
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Name:</b></div>
                             <div class="col-1"></div>
-                            {{--                            <div class="col-7">{{$objEvent->organisation->name}}</div>--}}
+                            <div class="col-7">{{$objEvent->organisation->name}}</div>
                         </div>
 
                         <div class="row m-2">
                             <div class="col-4"><b> Organiser Contact No:</b></div>
                             <div class="col-1"></div>
-                            {{--                            <div class="col-7">{{$objEvent->organisation->contact_no}}</div>--}}
+                            <div class="col-7">{{$objEvent->organisation->contact_no}}</div>
                         </div>
 
-                        <div class="row m-2">
-                            <div class="col-4"><b> Organiser Address:</b></div>
-                            <div class="col-1"></div>
-                            {{--                            <div class="col-7">{{$objEvent->organisation->address}}</div>--}}
-                        </div>
-
+                        @if($objEvent->organisation->address)
+                            <div class="row m-2">
+                                <div class="col-4"><b> Organiser Address:</b></div>
+                                <div class="col-1"></div>
+                                <div class="col-7">{{$objEvent->organisation->address}}</div>
+                            </div>
+                        @endif
                         <div class="row m-2">
                             <div class="col-4"><b> Event Venue:</b></div>
                             <div class="col-1"></div>
@@ -127,7 +128,7 @@
                                                 colspan="1"
                                                 aria-label="Browser: activate to sort column ascending"
                                                 style="width: 100px;">
-                                                View Reciept
+                                                View
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1"
@@ -178,12 +179,8 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if($objParticipants->receipt)
-                                                            <a target="_blank"
-                                                               href="{{url('public/'.$objParticipants->receipt )}}">View</a>
-                                                        @else
-                                                            --
-                                                        @endif
+                                                        <a class="btn btn-info"
+                                                           href="{{url('/admin/events/participants/view/'.$objParticipants->id)}}">View</a>
                                                     </td>
                                                     <td>
                                                         @if(!$objParticipants->result_status)
