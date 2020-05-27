@@ -15,7 +15,7 @@ class Controller extends BaseController
     public function privacy()
     {
         $objSetting = siteSetting::where('id', 1)->first();
-        return view('privacy', ['privacy' => $objSetting->privacy]);
+        return view('privacy', ['privacy' => $objSetting->policy]);
     }
 
     public function terms()

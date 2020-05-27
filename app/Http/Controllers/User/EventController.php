@@ -25,7 +25,7 @@ class EventController extends Controller
 
     public function getAllResults()
     {
-        $objEvent = Events::whereNotNull('result_url')->get();
+        $objEvent = Events::whereNotNull('result_url')->orderBy('id', 'desc')->paginate(12);;
         return view('front.results.results', ['objEvent' => $objEvent]);
     }
 

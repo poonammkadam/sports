@@ -67,7 +67,7 @@
 
 <link rel="stylesheet" href="{{asset('intl-tel-input-master/build/css/intlTelInput.css')}}">
 
-<script src="{{asset('intl-tel-input-master/build/js/intlTelInput-jquery.js')}}"></script>
+{{--<script src="{{asset('intl-tel-input-master/build/js/intlTelInput-jquery.js')}}"></script>--}}
 
 <!-- page script -->
 <script>

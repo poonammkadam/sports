@@ -25,18 +25,24 @@ class SiteSettingController extends Controller
      */
     public function create()
     {
-        return view('admin.setting.create');
+        $objSetting = siteSetting::where('id', 1)->first();
+        return view('admin.setting.create', ['objSetting' => $objSetting]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $objSetting = siteSetting::where('id', 1)->first();
+        $objSetting->terms = $request->terms;
+        $objSetting->policy = $request->policy;
+        $objSetting->about_us = $request->about_us;
+        $objSetting->save();
+        return redirect('/setting')->with('alert', 'Site Setting Updated successfully.!');
     }
 
     /**

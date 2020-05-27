@@ -73,6 +73,5 @@ class UserController extends Controller
 
         return redirect('profile_update')->with('alert', 'Your Profile Created successfully.!');
 
-        return view('admin.user.edit');
     }
 }

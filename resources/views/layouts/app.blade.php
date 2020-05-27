@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-    <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -32,14 +32,14 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Bootstrap CSS File -->
-    {{--    <link href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">--}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <!-- Libraries CSS Files -->
+{{--    <link href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">--}}
+{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">--}}
+
+<!-- Libraries CSS Files -->
     <link href="{{asset('lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('lib/venobox/venobox.css')}}" rel="stylesheet">
     <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-
     <!-- Main Stylesheet File -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 </head>
@@ -60,7 +60,14 @@
 <script src="{{asset('lib/wow/wow.min.js')}}"></script>
 <script src="{{asset('lib/venobox/venobox.min.js')}}"></script>
 <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
-<script>$('#navbarDropdown').dropdown('toggle')</script>
+
+<script>
+    $(document).on('click', '#navbarDropdown', () => {
+        $('#navbarDropdown').dropdown('toggle')
+    })
+
+
+</script>
 <!-- Google Fonts -->
 <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"

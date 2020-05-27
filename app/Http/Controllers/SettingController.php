@@ -33,7 +33,7 @@ class SettingController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -42,7 +42,7 @@ class SettingController extends Controller
         $objSetting->policy = $request->policy;
         $objSetting->about_us = $request->about_us;
         $objSetting->save();
-        redirect('/setting')->with('message', 'Site Setting Updated Successfully');
+        return redirect('/setting')->with('message', 'Site Setting Updated Successfully');
     }
 
     /**

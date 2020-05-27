@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/event/results/upload', 'EventController@postResultsList');
     Route::get('/events/delete/{id}', 'EventController@deleteEvent');
     Route::get('/setting', 'SiteSettingController@create');
+    Route::get('/setting/store', 'SiteSettingController@store');
 });
 Route::group(['namespace' => 'User'], function () {
     Route::get('/registration', 'UserController@getRegister');

@@ -6,7 +6,7 @@
         </div>
         <div class="">
             <div class="banner text-center">
-                <img src="{{$objEvent->banner}}" style="max-height:300px" class="w-100">
+                <img src="/{{$objEvent->banner}}" style="max-height:500px" class="w-100">
             </div>
         </div>
 
