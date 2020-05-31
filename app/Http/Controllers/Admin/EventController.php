@@ -14,7 +14,6 @@ use App\Transstart;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -106,7 +105,7 @@ class EventController extends Controller
                 $objCategory->event_id = $intEventkey;
                 $objCategory->fee = json_encode($category['fee']);
                 $objCategory->save();
-                foreach ($category['fee'] as $arrfees) {
+                foreach ($category['fee'] as $key => $arrfees) {
                     $objTicket = new Ticket();
                     $objTicket->category_id = $objCategory->id;
                     $objTicket->name = $key;
@@ -127,10 +126,10 @@ class EventController extends Controller
             }
         }
         DB::commit();
-        Mail::send('emails.welcome', $objEvent, function ($message) {
-            $message->from(config(), config('app.name'));
-            $message->to('foo@example.com')->cc('bar@example.com');
-        });
+//        Mail::send('emails.welcome', $objEvent, function ($message) {
+//            $message->from(config(), config('app.name'));
+//            $message->to('foo@example.com')->cc('bar@example.com');
+//        });
 
         return redirect('admin/events')->with('success', 'Events Created Successfully.');
     }
@@ -365,7 +364,7 @@ class EventController extends Controller
         }
         $objEvent->delete();
 
-        return redirect('admin/events')->with('message', 'Resulte Upload Successfully.');
+        return redirect('admin/events')->with('message', 'Result deleted Successfully.');
     }
 }
 
