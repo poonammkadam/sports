@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Events View</div>
+                    <div class="card-header"><h2>Events View</h2></div>
 
                     <div class="card-body">
                         <div class="row m-2">

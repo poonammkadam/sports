@@ -472,13 +472,6 @@
                                         class="btn  btn-outline-dark"><i
                                         class="fa fa-plus" aria-hidden="true"></i></button>
                             </div>
-                            <div class="form-group row">
-                                <label for="add_end_transportation" class="col-md-2 col-form-label text-md-right">Enter
-                                    Drop Location After Event</label>
-                                <button type="button" name="add" id="add_end_transportation"
-                                        class="btn  btn-outline-dark"><i
-                                        class="fa fa-plus" aria-hidden="true"></i></button>
-                            </div>
 
 
                             <div class="form-group row">

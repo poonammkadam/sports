@@ -71,8 +71,8 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="inputAddress">Nationality</label>
-                        <select class="form-control custom-select" name="nationality">
+                        <label for="nationality">Nationality</label>
+                        <select class="form-control custom-select" id="nationality" name="nationality">
                             <option selected>Open this select menu</option>
                             @foreach($arrCountries as $objCountries)
                                 <option value="{{$objCountries}}">{{$objCountries}}</option>

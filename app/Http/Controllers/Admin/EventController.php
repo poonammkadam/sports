@@ -182,11 +182,19 @@ class EventController extends Controller
             $intTransstartId = collect($request->transstart)->pluck('id')->toArray();
             $diffId = array_diff($intOldTransstartId, $intTransstartId);
             if (count($diffId) > 0) {
-                $arrObjTransstart = Transstart::wherIn('id', $diffId)->get();
-                $arrObjTransstart->delete();
+                $arrObjTransstart = Transstart::whereIn('id', $diffId)->get();
+
+                foreach ($arrObjTransstart as $start) {
+                    $start->delete();
+                }
+
             }
             foreach ($request->transstart as $transstart) {
-                $objTransstart = Transstart::where('id', $transstart['id'])->first();
+                if (isset($transstart['id'])) {
+                    $objTransstart = Transstart::where('id', $transstart['id'])->first();
+                } else {
+                    $objTransstart = new Transstart();
+                }
                 $objTransstart->location = $transstart['location'];
                 $objTransstart->price = $transstart['fee'];
                 $objTransstart->event_id = $objEvent->id;
@@ -199,11 +207,19 @@ class EventController extends Controller
             $intTransEndId = collect($request->transend)->pluck('id')->toArray();
             $diffId = array_diff($intOldTransEndId, $intTransEndId);
             if (count($diffId) > 0) {
-                $arrObjTransEnd = Transend::wherIn('id', $diffId)->get();
-                $arrObjTransEnd->delete();
+                $arrObjTransEnd = Transend::whereIn('id', $diffId)->get();
+                foreach ($arrObjTransEnd as $trans) {
+                    $trans->delete();
+                }
+
             }
             foreach ($request->transend as $transend) {
-                $objTransend = Transend::where('id', $transend['id'])->first();
+                if (isset($transend['id'])) {
+                    $objTransend = Transend::where('id', $transend['id'])->first();
+                } else {
+                    $objTransend = new Transend();
+                }
+
                 $objTransend->location = $transend['location'];
                 $objTransend->price = $transend['fee'];
                 $objTransend->event_id = $objEvent->id;
@@ -216,11 +232,18 @@ class EventController extends Controller
             $intAccomId = collect($request->accomodation)->pluck('id')->toArray();
             $diffId = array_diff($intOldAccomId, $intAccomId);
             if (count($diffId) > 0) {
-                $arrObjAccomodation = Accomodation::wherIn('id', $diffId)->get();
-                $arrObjAccomodation->delete();
+                $arrObjAccomodation = Accomodation::whereIn('id', $diffId)->get();
+                foreach ($arrObjAccomodation as $accom) {
+                    $accom->delete();
+                }
+
             }
             foreach ($request->accomodation as $accomodation) {
-                $objAccommodation = Accomodation::where('id', $accomodation['id'])->first();
+                if (isset($accomodation['id'])) {
+                    $objAccommodation = Accomodation::where('id', $accomodation['id'])->first();
+                } else {
+                    $objAccommodation = new Accomodation();
+                }
                 $objAccommodation->name = $accomodation['name'];
                 $objAccommodation->price = $accomodation['fee'];
                 $objAccommodation->event_id = $objEvent->id;
@@ -240,12 +263,20 @@ class EventController extends Controller
             $intCategoryId = collect($request->category)->pluck('id')->toArray();
             $diffId = array_diff($intOldCategoryId, $intCategoryId);
             if (count($diffId) > 0) {
-                $arrObjCategory = Category::wherIn('id', $diffId)->get();
-                $arrObjCategory->ticket->delete();
-                $arrObjCategory->delete();
+                $arrObjCategory = Category::whereIn('id', $diffId)->get();
+                foreach ($arrObjCategory as $cat) {
+                    $cat->ticket->delete();
+                    $cat->delete();
+                }
+
             }
             foreach ($request->category as $category) {
-                $objCategory = Category::where('id', $category['id'])->first();
+                if (isset($category['id'])) {
+                    $objCategory = Category::where('id', $category['id'])->first();
+                } else {
+                    $objCategory = new Category();
+                }
+
                 $objCategory->category_type = $category['type'];
                 $objCategory->category_subtype = $category['subtype'];
                 $objCategory->event_id = $intEventkey;
@@ -273,14 +304,7 @@ class EventController extends Controller
         }
         DB::commit();
         $arrObjUser = User::all();
-        foreach ($arrObjUser as $user) {
-            if (!$user->isOrganiser()) {
-                Mail::queue('mail.newevent', ['objEvent' => $objEvent, 'user' => $user], function ($message, $user) {
-                    $message->from(config('mail.from.address'), config('app.name'));
-                    $message->to($user->email);
-                });
-            }
-        }
+
 
         return redirect('admin/events')->with('success', 'Events Updated Successfully.');
     }
