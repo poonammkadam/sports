@@ -12,7 +12,7 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
         "khsing/world": "^0.8.0",
-        "laravel/framework": "6.0.*",
+        "laravel/framework": "6.18.*",
         "laravel/tinker": "^2.0",
         "nategood/httpful": "0.2.2",
         "pragmarx/countries": "^0.7.0"
